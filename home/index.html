@@ -2,45 +2,36 @@
 <html>
 
 <head>
-  <title>Socket.IO chat</title>
+  <title>Interactive Conference</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
+  <!-- Librairi Material Theming -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+  <script defer src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 </head>
 
 <body>
   <ul id="messages"></ul>
 
-  <form action="">
-    <input class="input" id="user" autocomplete="off" />
-    <input class="input" id="m" autocomplete="off" />
-    <input type="button" id="envoyer" value="envoyer">
-    <input type = "submit" id = "btnSearch" value = "Search" onclick = "return doSomething();"
-/>
+  <form action="#">
+    <div class="">
+      <input id="user" class="" type="text" autocomplete="off">
+      <label class="" for="user">Username</label>
+    </div>
+
+    <div class="inputMsg mdl-textfield mdl-js-textfield">
+      <input id="m" class="" type="text" autocomplete="off">
+      <label class="" for="m">Message</label>
+    </div>
+    <button class="foo-button mdc-button" type="button" id="envoyer">Envoyer</button>
   </form>
 
+  <!-- socket.io -->
   <script src="/socket.io/socket.io.js"></script>
+  <!-- Jquery Integration-->
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-
-  <script>
-    $(function() {
-      var socket = io();
-
-      $('#envoyer').on('click',function () {
-        socket.emit('chat message', $('#user').val()+': '+$('#m').val());
-        $('#m').val('');
-        return false;
-      });
-
-      socket.on('chat message', function(msg) {
-        $('#messages').append($('<li>').text(msg));
-      });
-
-      /*
-      socket.on('send-nickname', function(nickname) {
-        socket.emit('send-nickname', $('#user').val);
-      });*/
-
-    });
-  </script>
+  <!-- Script JS coté client-->
+  <script src="clientScript.js"></script>
 </body>
 
 </html>
