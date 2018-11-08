@@ -3,22 +3,86 @@
 
 <head>
   <title>Interactive Conference</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
   <!-- Librairi Material Theming -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
   <script defer src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <!-- Notre CSS -->
+  <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
-  <ul id="messages"></ul>
+  <div class="mdc-tab-bar" id="tabBar" role="tablist" aria-label="Navigation">
+    <div class="mdc-tab-scroller">
+      <div class="mdc-tab-scroller__scroll-area mdc-tab-scroller__scroll-area--scroll">
+        <div class="mdc-tab-scroller__scroll-content">
 
-  <form action="#">
-    <div class="inputMsg mdl-textfield mdl-js-textfield">
-      <input id="m" class="" type="text" autocomplete="off">
-      <label class="" for="m">Message</label>
+          <button class="mdc-tab mdc-tab--active" id="activeOnglet1" onclick="openCity(event, 'recent')">
+          <span class="mdc-tab__content">
+            <span class="mdc-tab__icon material-icons">access_time</span>
+            <span class="mdc-tab__text-label">Recents</span>
+          </span>
+          <span id="activeOnglet1Underline" class="mdc-tab-indicator mdc-tab-indicator--active">
+            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+          </span>
+          <span class="mdc-tab__ripple"></span>
+        </button>
+
+          <button class="mdc-tab" role="tab" id="activeOnglet2" onclick="openCity(event, 'topvote')">
+          <span id="ongletColor" class="mdc-tab__content">
+            <span class="mdc-tab__icon material-icons">favorite</span>
+            <span class="mdc-tab__text-label">Top Vote</span>
+          </span>
+          <span id="activeOnglet2Underline" class="mdc-tab-indicator">
+            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+          </span>
+          <span class="mdc-tab__ripple"></span>
+        </button>
+
+          <button class="mdc-tab" role="tab" id="activeOnglet3" onclick="openCity(event, 'repondu')">
+        <span id="ongletColor" class="mdc-tab__content">
+          <span class="mdc-tab__icon material-icons">check_circle</span>
+          <span class="mdc-tab__text-label">Répondu</span>
+        </span>
+        <span id="activeOnglet3Underline" class="mdc-tab-indicator">
+          <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+        </span>
+        <span class="mdc-tab__ripple"></span>
+      </button>
+
+        </div>
+      </div>
     </div>
-    <button class="foo-button mdc-button" type="button" id="envoyer">Envoyer</button>
+  </div>
+
+  <div id="recent" class="tabcontent active">
+
+    <ul id="messages"></ul>
+  </div>
+
+  <div id="topvote" class="tabcontent">
+    <h1 style="text-align: center; margin-top: 200px;">Ici s'affichera les topvotes</h1>
+  </div>
+
+  <div id="repondu" class="tabcontent">
+    <h1 style="text-align: center; margin-top: 200px;">Ici s'affichera les messages répondus</h1>
+  </div>
+
+  <form class="chatBar" action="#">
+    <div class="inputMsg mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+      <input id="m" class="mdc-text-field__input" type="text">
+      <label class="mdc-floating-label" for="m">Message</label>
+      <div class="mdc-notched-outline">
+        <svg>
+      <path class="mdc-notched-outline__path"/>
+    </svg>
+      </div>
+      <div class="mdc-notched-outline__idle"></div>
+    </div>
+
+    <button class="buttonSend mdc-fab mdc-fab--mini" type="button" id="envoyer" aria-label="Favorite">
+      <span class="mdc-fab__icon material-icons">send</span>
+  </button>
   </form>
 
   <!-- socket.io -->

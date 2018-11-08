@@ -7,14 +7,23 @@
 body {
   font: 13px Helvetica, Arial;
 }
-form {
-  padding: 3px;
+.chatBar {
   position: fixed;
+  text-align: center;
   bottom: 0;
   width: 100%;
-  display: inline-block;
+  padding: 1%;
 }
-form .inputMsg {
+
+.chatBar button{
+  background-color: #64b5f6;
+}
+
+.tabcontent{
+  display: none;
+}
+
+.chatBar .inputMsg {
   width: 50%;
 }
 
