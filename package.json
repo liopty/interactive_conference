@@ -4,8 +4,11 @@
   "version": "0.1.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.univ-nantes.fr/E174399P/interactive-conference"
   },
   "keywords": [],
   "author": "",
@@ -13,18 +16,5 @@
   "dependencies": {
     "express": "^4.16.4",
     "socket.io": "^2.1.1"
-  },
-  "engines": {
-    "node": "8.10.0"
-  },
-
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/liopty/interactive_conference.git"
-  },
-  "bugs": {
-    "url": "https://github.com/liopty/interactive_conference/issues"
-  },
-  "homepage": "https://github.com/liopty/interactive_conference#readme"
+  }
 }

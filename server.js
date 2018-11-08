@@ -5,7 +5,7 @@ const express = require("express");
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const port = 3000;
+const port = 5000;
 
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
 app.use('/', express.static('home'));
