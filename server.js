@@ -6,6 +6,7 @@ const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000
+ent = require('ent'), // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP)
 
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
 app.use('/', express.static('home'));
@@ -17,6 +18,15 @@ http.listen(PORT, function(){
 });
 
 io.on('connection', function(socket){
+
+// Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
+  socket.on('nouveau_client', function(pseudo) {
+          pseudo = ent.encode(pseudo);
+          socket.pseudo = pseudo;
+          socket.broadcast.emit('nouveau_client', pseudo);
+
+      });
+
   //Ecrit dans la console lorsqu'un utilisateur se connecte
   console.log("un utilisateur s'est connecté");
 
@@ -27,10 +37,12 @@ io.on('connection', function(socket){
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
-  socket.on('chat message', function(msg){
+  socket.on('chat message', function(message){
     //Ecrit dans la console le msg
-    console.log(msg);
-    //Emet le msg de l'evenement "chat message" en broadcast (pas sur)
-    io.emit('chat message', msg);
+    console.log(message);
+    // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personnes
+    message = ent.encode(message);
+    socket.broadcast.emit('message', {pseudo: socket.pseudo, message: message});
   });
+
 });
