@@ -13,7 +13,7 @@ app.use('/', express.static('home'));
 //Lancer le serveur http et écoute les connection sur le port indiqué
 http.listen(PORT, function(){
 // Ecrit dans la console sur quel port le serveur écoute
-  console.log('listening on *:' + port);
+  console.log('listening on *:' + PORT);
 });
 
 io.on('connection', function(socket){
