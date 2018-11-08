@@ -3,10 +3,10 @@
 // Connexion à socket.io
 var socket = io();
 
-// On demande le pseudo, on l'envoie au serveur et on l'affiche dans le titre
+// On demande le pseudo, on l'envoie au serveur
 var pseudo = prompt('Quel est votre pseudo ?');
 socket.emit('nouveau_client', pseudo);
-document.title = pseudo + ' - ' + document.title;
+document.title = pseudo + ' - ' + document.title; // met le pseudo dans l'onglet
 
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
