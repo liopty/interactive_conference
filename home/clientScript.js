@@ -1,19 +1,3 @@
-console.log("1");
-
-var uri = "mongodb://liopty:mdptmp@interactive-conferencebd-shard-00-00-vbsf2.gcp.mongodb.net:27017,interactive-conferencebd-shard-00-01-vbsf2.gcp.mongodb.net:27017,interactive-conferencebd-shard-00-02-vbsf2.gcp.mongodb.net:27017/test?ssl=true&replicaSet=interactive-conferenceBD-shard-0&authSource=admin&retryWrites=true";
-console.log("2");
-
-MongoClient.connect(uri, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("mydb");
-  dbo.createCollection("customers", function(err, res) {
-    if (err) throw err;
-    console.log("Collection created!");
-    db.close();
-  });
-});
-
-
 //Initialisations Material Components
 $(function() {
   mdc.autoInit();
