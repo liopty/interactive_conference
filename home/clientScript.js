@@ -23,7 +23,7 @@ $('#envoyer').on('click', function() {
   var message = $('#m').val();
   if (message != '') {
     socket.emit('chat message', message); // Transmet le message aux autres
-    insereMessage(pseudo, message); // Affiche le message aussi sur notre page
+    insereMessage(pseudo, message, "yes"); // Affiche le message aussi sur notre page
     $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
     var elem = document.getElementById('contentTabs');
     elem.scrollTop = elem.scrollHeight;
@@ -38,7 +38,7 @@ $(document).keypress(function(event) {
     var message = $('#m').val();
     if (message != '') {
       socket.emit('chat message', message); // Transmet le message aux autres
-      insereMessage(pseudo, message); // Affiche le message aussi sur notre page
+      insereMessage(pseudo, message, "yes"); // Affiche le message aussi sur notre page
       $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
       var elem = document.getElementById('contentTabs');
       elem.scrollTop = elem.scrollHeight;
@@ -48,8 +48,12 @@ $(document).keypress(function(event) {
 });
 
 // Ajoute un message dans la page
-function insereMessage(pseudo, message) {
-  $('#messages').append($('<li>').text(pseudo + " : " + message));
+function insereMessage(pseudo, message, mind) {
+  if(mind=="yes"){
+    $('#messages').append($('<div class="mindMsg">').text(pseudo + " : " + message));
+  }else{
+    $('#messages').append($('<div class="notMindMsg">').text(pseudo + " : " + message));
+  }
 }
 
 

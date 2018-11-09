@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>  
+  <meta charset="UTF-8">
+  <title>Interactive Conference</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <!-- Librairi Material Theming -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+  <script defer src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+</head>
+
+<body>    
+  <div id="name">
+    <button class="mdc-button mdc-button--raised">Interactive Conference</button>
+    <!-- <label class="mdc-floating-label" for="my-text-field-id">Interactive Conference</label>-->
+  </div>
+  
+  <!-- Joindre room avec un numéro --> 
+  
+  <form action="#">
+    <div>
+      <div class="pos-form">
+        <div class="mdc-text-field mdc-text-field--outlined"  data-mdc-auto-init="MDCTextField">
+          <input type="text" id="tf-outlined" class="mdc-text-field__input">
+          <label for="tf-outlined" class="mdc-floating-label">Numéro du salon</label>
+        <div class="mdc-notched-outline">
+        <svg>
+         <path class="mdc-notched-outline__path"/>
+        </svg>
+      </div>
+    <div class="mdc-notched-outline__idle"></div>
+  </div>
+    <div class="pos-form button-send">
+      <button class="mdc-fab mdc-fab--mini" aria-label="Favorite">
+      <span class="mdc-fab__icon material-icons" id="join-room">send</span>
+    </div>      
+  </div>
+    <div class="pos-button">
+      <button class="mdc-button supp cd-popup-trigger" id="color">Nouveau salon</button>
+    </div>
+  </form>
+  
+
+  <!-- Créer nouvelle room --> 
+
+  <div class="cd-popup">
+    <div class="cd-popup-container">     
+    <form action="#">
+      <div id="box-height">
+        <div class="pos-form2">
+          <div class="mdc-text-field mdc-text-field--outlined" id="box-name"  data-mdc-auto-init="MDCTextField">
+            <input type="text" id="tf-outlined" class="mdc-text-field__input">
+            <label for="tf-outlined" class="mdc-floating-label">Nom du salon</label>
+            <div class="mdc-notched-outline">
+            <svg>
+              <path class="mdc-notched-outline__path"/>
+            </svg>
+            </div>
+          <div class="mdc-notched-outline__idle"></div>
+          </div>
+            <div class="pos-form2 button-send2">
+            <button class="mdc-fab mdc-fab--mini" aria-label="Favorite">
+            <span class="mdc-fab__icon material-icons" id="new-room">send</span>
+          </div>      
+        </div>    
+      </form>     
+      <a href="#0" class="cd-popup-close img-replace"></a>
+    </div> <!-- cd-popup-container -->
+  </div> <!-- cd-popup -->
+
+
+
+  <!-- socket.io -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- Jquery Integration-->
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <!-- Script JS coté client-->
+  <script src="script.js"></script>
+</body>
+
+</html>

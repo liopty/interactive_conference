@@ -8,7 +8,7 @@ html, body {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -22,21 +22,60 @@ html, body {
 
 body {
   flex-direction: column;
+  text-align: center;
 }
 
 body,header,#messages li, .contentTabs {
     display: flex;
 }
 
-.contentTabs {
-  width: 50%;
-  margin-left: 25%;
-  overflow-y: auto;
-  margin-bottom: 100px;
+.header {
+  overflow: hidden;
+  background-color: #fafafa;
 }
 
-.contentTabs div{
-  width: 500px;
+.header a {
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.header-right {
+  float: right;
+}
+
+.header-right a{
+  display: inline-block;
+  padding: 20px;
+}
+
+.header-left {
+  float: left;
+}
+
+.header-left a{
+  display: inline-block;
+  padding: 20px;
+  font-size: 22px;
+}
+
+.header-left .logo{
+  
+}
+
+.mdc-tab{
+  background-color: #fafafa;
+  border-bottom: solid 1px grey;
+}
+
+.contentTabs {
+  width: 700px;
+  overflow-y: auto;
+  margin-bottom: 100px;
+  margin-left: -webkit-calc(50% - 335px);
+  margin-left: -moz-calc(50% - 335px);
+  margin-left: calc(50% - 335px);
 }
 
 .tabcontent {
@@ -49,20 +88,43 @@ body,header,#messages li, .contentTabs {
 }
 
 #messages {
-  list-style-type: none;
-  text-align: left;
-  flex:1;
-  position: relative;
-  margin: 0;
-  padding: 0;
+padding-top: 10px;
+ width: 700px;
 }
 
-#messages li {
-  margin: 15px;
+#messages .notMindMsg {
+  display: inline-block;
+  overflow-x: hidden;
   text-align: left;
-  border-radius: 15px;
-  padding: 5px 10px;
-  background: #eee;
+  margin-bottom: 2px;
+	clear: both;
+	padding: 7px 13px;
+  max-width: 400px;
+	font-size: 12px;
+	border-radius: 15px;
+	line-height: 1.4;
+  float: right;
+	background-color: #1998e6;
+	color: #fff;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+#messages .mindMsg{
+  display: inline-block;
+  overflow-x: hidden;
+  max-width: 400px;
+	margin-bottom: 2px;
+	clear: both;
+  text-align: right;
+	padding: 7px 13px;
+	font-size: 12px;
+	border-radius: 15px;
+	line-height: 1.4;
+  float: left;
+	background-color: #ddd;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
 }
 
 .chatBar {
@@ -74,10 +136,11 @@ body,header,#messages li, .contentTabs {
 }
 
 .chatBar button {
+  width: 24px;
+  margin: 3px;
   background-color: #64b5f6;
 }
 
 .chatBar .inputMsg {
-  width: 47%;
-  margin-left: 25%;
+  width: 670px;
 }
