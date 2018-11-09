@@ -1,4 +1,8 @@
+
 var ID = 0;
+/*var lesVotes = new Dict({a: 1}, function (key) {
+    return "default: " + key;
+});*/
 
 //Initialisations Material Components
 $(function() {
@@ -53,28 +57,43 @@ function insereMessage(pseudo, message, mind) {
   var buttonDOWNID = "btnDOWN" + ID;
   var msgID = "msg" + ID;
 
-  var g = document.createElement('div');
+  //Création d'un div avec le pseudo, le message et un ID
+  var text = document.createElement('div');
   var content = document.createTextNode(pseudo + " : " + message);
-  g.appendChild(content);
-  g.id = msgID;
+  text.appendChild(content);
+  text.id = msgID;
 
-
+  //Création du bouton UP avec un text, un id et une class
   var btnUP = document.createElement("BUTTON");
   var textUP = document.createTextNode("Up");
   btnUP.appendChild(textUP);
   btnUP.id = buttonUPID;
+  btnUP.className = "vote";
 
+  //Création du bouton DOWN avec un text, un id et une class
   var btnDOWN = document.createElement("BUTTON");
   var textDOWN = document.createTextNode("Down");
   btnDOWN.appendChild(textDOWN);
   btnDOWN.id = buttonDOWNID;
+  btnDOWN.className = "vote";
+
 
   if(mind=="yes"){
-    $('#messages').append($('<div class="mindMsg">').append(g),$('<div class="mindBtn">').append(btnUP,btnDOWN));
+    $('#messages').append($('<div class="mindMsg">').append(text),$('<div class="mindBtn">').append(btnUP,btnDOWN));
   } else{
     $('#messages').append($('<div class="notMindMsg">').text(pseudo + " : " + message),$('<div class="notMindBtn">').append(btnUP,btnDOWN));
   }
 }
+
+$('#envoyer').on('click', function() {
+  envoieMessage();
+});
+
+//Ajout d'un event listener sur les bouton qui ont pour class : vote
+$(document).on("click", ".vote", function(){
+  alert (this.id);
+
+});
 
 
 //Gestion des onglets
