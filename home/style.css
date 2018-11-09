@@ -1,40 +1,83 @@
-* {
+html, body {
   margin: 0;
+  height: 100%;
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
+  font: 13px Helvetica, Arial;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 10px;
 }
 
 body {
-  font: 13px Helvetica, Arial;
-}
-.chatBar {
-  position: fixed;
-  text-align: center;
-  bottom: 0;
-  width: 100%;
-  padding: 1%;
+  flex-direction: column;
 }
 
-.chatBar button{
-  background-color: #64b5f6;
+body,header,#messages li, .contentTabs {
+    display: flex;
 }
 
-.tabcontent{
+.contentTabs {
+  width: 50%;
+  margin-left: 25%;
+  overflow-y: auto;
+  margin-bottom: 100px;
+}
+
+.contentTabs div{
+  width: 500px;
+}
+
+.tabcontent {
   display: none;
 }
 
-.chatBar .inputMsg {
-  width: 50%;
+.tabcontent h1 {
+  text-align: center;
+  margin-top: 200px;
 }
 
 #messages {
   list-style-type: none;
+  text-align: left;
+  flex:1;
+  position: relative;
   margin: 0;
   padding: 0;
 }
+
 #messages li {
+  margin: 15px;
+  text-align: left;
+  border-radius: 15px;
   padding: 5px 10px;
-}
-#messages li:nth-child(odd) {
   background: #eee;
+}
+
+.chatBar {
+  flex: 1;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  padding-bottom: 1%;
+}
+
+.chatBar button {
+  background-color: #64b5f6;
+}
+
+.chatBar .inputMsg {
+  width: 47%;
+  margin-left: 25%;
 }

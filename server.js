@@ -7,6 +7,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000
 ent = require('ent'), // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP)
+//var MongoClient = require('mongodb').MongoClient;
+
 
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
 app.use('/', express.static('home'));
@@ -16,6 +18,20 @@ http.listen(PORT, function(){
 // Ecrit dans la console sur quel port le serveur écoute
   console.log('listening on *:' + PORT);
 });
+
+/*
+var uri = "mongodb://liopty:mdptmp@interactive-conferencebd-shard-00-00-vbsf2.gcp.mongodb.net:27017,interactive-conferencebd-shard-00-01-vbsf2.gcp.mongodb.net:27017,interactive-conferencebd-shard-00-02-vbsf2.gcp.mongodb.net:27017/test?ssl=true&replicaSet=interactive-conferenceBD-shard-0&authSource=admin&retryWrites=true";
+
+MongoClient.connect(uri, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.createCollection("customers", function(err, res) {
+    if (err) throw err;
+    console.log("Collection created!");
+    db.close();
+  });
+});
+*/
 
 io.on('connection', function(socket){
 

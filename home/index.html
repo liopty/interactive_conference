@@ -49,26 +49,28 @@
         </span>
         <span class="mdc-tab__ripple"></span>
       </button>
-
         </div>
       </div>
     </div>
   </div>
 
-  <div id="recent" class="tabcontent active">
-
-    <ul id="messages"></ul>
+  <div id="contentTabs" class="contentTabs">
+    <!--CONTENU DE L'ONGLET 1 -->
+    <div id="recent" class="tabcontent active">
+      <ul id="messages"></ul>
+    </div>
+    <!--CONTENU DE L'ONGLET 2 -->
+    <div id="topvote" class="tabcontent">
+      <h1>Ici s'affichera les topvotes</h1>
+    </div>
+    <!--CONTENU DE L'ONGLET 3 -->
+    <div id="repondu" class="tabcontent">
+      <h1>Ici s'affichera les messages répondus</h1>
+    </div>
   </div>
 
-  <div id="topvote" class="tabcontent">
-    <h1 style="text-align: center; margin-top: 200px;">Ici s'affichera les topvotes</h1>
-  </div>
-
-  <div id="repondu" class="tabcontent">
-    <h1 style="text-align: center; margin-top: 200px;">Ici s'affichera les messages répondus</h1>
-  </div>
-
-  <form class="chatBar" action="#">
+  <!-- TEXT + BUTTON SEND -->
+  <div class="chatBar" action="">
     <div class="inputMsg mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
       <input id="m" class="mdc-text-field__input" type="text">
       <label class="mdc-floating-label" for="m">Message</label>
@@ -80,10 +82,10 @@
       <div class="mdc-notched-outline__idle"></div>
     </div>
 
-    <button class="buttonSend mdc-fab mdc-fab--mini" type="button" id="envoyer" aria-label="Favorite">
+    <button class="buttonSend mdc-fab mdc-fab--mini" id="envoyer">
       <span class="mdc-fab__icon material-icons">send</span>
   </button>
-  </form>
+  </div>
 
   <!-- socket.io -->
   <script src="/socket.io/socket.io.js"></script>
