@@ -1,3 +1,5 @@
+var ID = 0;
+
 //Initialisations Material Components
 $(function() {
   mdc.autoInit();
@@ -18,8 +20,8 @@ socket.on('message', function(data) {
   elem.scrollTop = elem.scrollHeight;
 })
 
-// Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
-$('#envoyer').on('click', function() {
+//on transmet le message et on l'affiche sur la page
+function envoieMessage(){
   var message = $('#m').val();
   if (message != '') {
     socket.emit('chat message', message); // Transmet le message aux autres
@@ -29,30 +31,48 @@ $('#envoyer').on('click', function() {
     elem.scrollTop = elem.scrollHeight;
     return false; // Permet de bloquer l'envoi "classique" du formulaire
   }
+}
+
+// Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
+$('#envoyer').on('click', function() {
+  envoieMessage();
 });
 
 //Appuyer sur entrer envoi le message
 $(document).keypress(function(event) {
   var keycode = (event.keyCode ? event.keyCode : event.which);
   if (keycode == '13') {
-    var message = $('#m').val();
-    if (message != '') {
-      socket.emit('chat message', message); // Transmet le message aux autres
-      insereMessage(pseudo, message, "yes"); // Affiche le message aussi sur notre page
-      $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
-      var elem = document.getElementById('contentTabs');
-      elem.scrollTop = elem.scrollHeight;
-      return false; // Permet de bloquer l'envoi "classique" du formulaire
+    envoieMessage();
     }
-  }
 });
 
 // Ajoute un message dans la page
 function insereMessage(pseudo, message, mind) {
+  ID += 1;
+  var buttonUPID = "btnUP" + ID;
+  var buttonDOWNID = "btnDOWN" + ID;
+  var msgID = "msg" + ID;
+
+  var g = document.createElement('div');
+  var content = document.createTextNode(pseudo + " : " + message);
+  g.appendChild(content);
+  g.id = msgID;
+
+
+  var btnUP = document.createElement("BUTTON");
+  var textUP = document.createTextNode("Up");
+  btnUP.appendChild(textUP);
+  btnUP.id = buttonUPID;
+
+  var btnDOWN = document.createElement("BUTTON");
+  var textDOWN = document.createTextNode("Down");
+  btnDOWN.appendChild(textDOWN);
+  btnDOWN.id = buttonDOWNID;
+
   if(mind=="yes"){
-    $('#messages').append($('<div class="mindMsg">').text(pseudo + " : " + message));
-  }else{
-    $('#messages').append($('<div class="notMindMsg">').text(pseudo + " : " + message));
+    $('#messages').append($('<div class="mindMsg">').append(g),$('<div class="mindBtn">').append(btnUP,btnDOWN));
+  } else{
+    $('#messages').append($('<div class="notMindMsg">').text(pseudo + " : " + message),$('<div class="notMindBtn">').append(btnUP,btnDOWN));
   }
 }
 

@@ -61,7 +61,7 @@ body,header,#messages li, .contentTabs {
 }
 
 .header-left .logo{
-  
+
 }
 
 .mdc-tab{
@@ -92,7 +92,7 @@ padding-top: 10px;
  width: 700px;
 }
 
-#messages .notMindMsg {
+#messages .mindMsg {
   display: inline-block;
   overflow-x: hidden;
   text-align: left;
@@ -110,7 +110,7 @@ padding-top: 10px;
 	border-top-right-radius: 5px;
 }
 
-#messages .mindMsg{
+#messages .notMindMsg{
   display: inline-block;
   overflow-x: hidden;
   max-width: 400px;
@@ -144,3 +144,35 @@ padding-top: 10px;
 .chatBar .inputMsg {
   width: 670px;
 }
+
+#messages .mindBtn {
+  display: inline-block;
+  overflow-x: hidden;
+  text-align: left;
+  margin-bottom: 2px;
+	clear: both;
+	padding: 7px 13px;
+  max-width: 400px;
+	font-size: 12px;
+	border-radius: 15px;
+	line-height: 1.4;
+  float: right;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+#messages .notMindBtn {
+    display: inline-block;
+    overflow-x: hidden;
+    max-width: 400px;
+  	margin-bottom: 2px;
+  	clear: both;
+    text-align: right;
+  	padding: 7px 13px;
+  	font-size: 12px;
+  	border-radius: 15px;
+  	line-height: 1.4;
+    float: left;
+  	border-bottom-left-radius: 5px;
+  	border-top-left-radius: 5px;
+  }

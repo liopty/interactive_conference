@@ -5,8 +5,8 @@ const express = require("express");
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const PORT = process.env.PORT || 5000
-ent = require('ent'), // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP)
+const PORT = process.env.PORT || 5000;
+ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP)
 
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
 app.use('/', express.static('home'));
