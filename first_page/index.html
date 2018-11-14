@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr">
-<head>  
+<head>
   <meta charset="UTF-8">
   <title>Interactive Conference</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
@@ -10,42 +10,42 @@
   <script defer src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 </head>
 
-<body>    
+<body>
   <div id="name">
     <button class="mdc-button mdc-button--raised">Interactive Conference</button>
     <!-- <label class="mdc-floating-label" for="my-text-field-id">Interactive Conference</label>-->
   </div>
-  
-  <!-- Joindre room avec un numéro --> 
-  
+
+  <!-- Joindre room avec un numéro -->
+
   <form action="#">
     <div>
       <div class="pos-form">
         <div class="mdc-text-field mdc-text-field--outlined"  data-mdc-auto-init="MDCTextField">
-          <input type="text" id="tf-outlined" class="mdc-text-field__input">
-          <label for="tf-outlined" class="mdc-floating-label">Numéro du salon</label>
+          <input type="text" id="tf-outlined num" class="mdc-text-field__input">
+          <label for="tf-outlined" class="mdc-floating-label" >Numéro du salon</label>
         <div class="mdc-notched-outline">
         <svg>
          <path class="mdc-notched-outline__path"/>
         </svg>
       </div>
-    <div class="mdc-notched-outline__idle"></div>
+    <div class="mdc-notched-outline__idle" id="box-border"></div>
   </div>
     <div class="pos-form button-send">
-      <button class="mdc-fab mdc-fab--mini" aria-label="Favorite">
-      <span class="mdc-fab__icon material-icons" id="join-room">send</span>
-    </div>      
+        <button class="mdc-fab mdc-fab--mini" id="join-room">
+        <span class="mdc-fab__icon material-icons">send</span>
+    </div>
   </div>
     <div class="pos-button">
       <button class="mdc-button supp cd-popup-trigger" id="color">Nouveau salon</button>
     </div>
   </form>
-  
 
-  <!-- Créer nouvelle room --> 
 
+  <!-- Créer nouvelle room -->
+<!--
   <div class="cd-popup">
-    <div class="cd-popup-container">     
+    <div class="cd-popup-container">
     <form action="#">
       <div id="box-height">
         <div class="pos-form2">
@@ -60,16 +60,15 @@
           <div class="mdc-notched-outline__idle"></div>
           </div>
             <div class="pos-form2 button-send2">
-            <button class="mdc-fab mdc-fab--mini" aria-label="Favorite">
-            <span class="mdc-fab__icon material-icons" id="new-room">send</span>
-          </div>      
-        </div>    
-      </form>     
+            <button class="mdc-fab mdc-fab--mini" id="new-room">
+            <span class="mdc-fab__icon material-icons">send</span>
+          </div>
+        </div>
+      </form>
       <a href="#0" class="cd-popup-close img-replace"></a>
-    </div> <!-- cd-popup-container -->
-  </div> <!-- cd-popup -->
-
-
+    </div>
+  </div>
+-->
 
   <!-- socket.io -->
   <script src="/socket.io/socket.io.js"></script>

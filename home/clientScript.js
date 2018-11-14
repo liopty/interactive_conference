@@ -1,8 +1,6 @@
 
 var ID = 0;
-/*var lesVotes = new Dict({a: 1}, function (key) {
-    return "default: " + key;
-});*/
+
 
 //Initialisations Material Components
 $(function() {
@@ -91,7 +89,8 @@ $('#envoyer').on('click', function() {
 
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
 $(document).on("click", ".vote", function(){
-  alert (this.id);
+  socket.emit("votes", pseudo, this.id);
+  alert (pseudo +" : "+ this.id);
 
 });
 

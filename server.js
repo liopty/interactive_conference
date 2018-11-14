@@ -8,6 +8,9 @@ const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP)
 
+//temporaire à supprimer quand la bd sera implémentée
+var Dict = require("collections/dict");
+var DicoDesVotes = new Dict();
 
 
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
@@ -42,8 +45,24 @@ io.on('connection', function(socket){
   socket.on('chat message', function(message){
     //Ecrit dans la console le msg
     console.log(message);
+
     // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personnes
     message = ent.encode(message);
     socket.broadcast.emit('message', {pseudo: socket.pseudo, message: message});
   });
+
+  //Sactive lors de l'appuie d'un bouton de vote
+  socket.on('votes', function(pseudo, btn) {
+
+                                                                             //temporaire, à remplacer quand la bd sera implémentée
+    DicoDesVotes.add(btn, pseudo);                                           //value,key
+    var tmp = DicoDesVotes.entries();                                        //
+    var tmp2 = DicoDesVotes.entries();                                       //
+    while (tmp.next().value != null) {                                       //
+      console.log("tmp = lesVotes.entries() : tmp : " + tmp2.next().value);  //
+    }                                                                        //
+
+    socket.broadcast.emit('votes', pseudo, btn);
+
+      });
 });

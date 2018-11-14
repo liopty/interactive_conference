@@ -16,17 +16,17 @@ body {
   margin-top: 5px;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Joindre une room avec un numéro 
+Joindre une room avec un numéro
 
 -------------------------------- */
 
-form { 
-  position: absolute; 
-  top: 50%; 
+form {
+  position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */  
+  transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
   padding: 2%;
   /*border: 1px solid white;*/
 }
@@ -51,12 +51,12 @@ form {
 }
 
 
-/* -------------------------------- 
+/* --------------------------------
 
-Créer une room avec un nom 
+Créer une room avec un nom
 
 -------------------------------- */
-
+/*
 .pos-form2 {
   display: flex;
   align-items: center;
@@ -67,18 +67,19 @@ Créer une room avec un nom
 }
 
 #box-name {
-width: 261px;  
+width: 261px;
 }
 
 #box-height {
   margin-top: 2%;
 }
-
-/* -------------------------------- 
+*/
+/* --------------------------------
 
 Modules - reusable parts of our design
 
 -------------------------------- */
+/*
 .img-replace {
   display: inline-block;
   overflow: hidden;
@@ -86,12 +87,13 @@ Modules - reusable parts of our design
   color: transparent;
   white-space: nowrap;
 }
-
-/* -------------------------------- 
+*/
+/* --------------------------------
 
 Popup nouvelle Room
 
 -------------------------------- */
+/*
 .cd-popup {
   position: fixed;
   left: 0;
@@ -127,7 +129,6 @@ Popup nouvelle Room
   -ms-transform: translateY(-40px);
   -o-transform: translateY(-40px);
   transform: translateY(-40px);
-  /* Force Hardware Acceleration in WebKit */
   -webkit-backface-visibility: hidden;
   -webkit-transition-property: -webkit-transform;
   -moz-transition-property: -moz-transform;
@@ -175,3 +176,4 @@ Popup nouvelle Room
   -o-transform: translateY(0);
   transform: translateY(0);
 }
+*/
