@@ -101,7 +101,7 @@ io.on('connection', function(socket){
 
   socket.on('leave_room', function(idRoom){
     console.log("la gamin");
-    socket.leave();
+    socket.leave(idRoom);
     console.log("Un utilisateur a quitté la room: "+idRoom);
   });
 
