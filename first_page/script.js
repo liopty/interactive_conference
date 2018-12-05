@@ -4,7 +4,7 @@ $(function() {
 });
 
 /* Popup Nouvelle Room */
-/*
+
 jQuery(document).ready(function($){
 	//open popup
 	$('.cd-popup-trigger').on('click', function(event){
@@ -26,7 +26,7 @@ jQuery(document).ready(function($){
 	    }
     });
 });
-*/
+
 
 /*
   Bouton connexion à un salon
@@ -34,19 +34,17 @@ jQuery(document).ready(function($){
   si oui on charge la page du salon,
   sinon on montre qu'il y a une erreur de numéro et on reste sur la page principal.
 */
-/*
-$('#join-room').on('click', function() {
-  var numero = $('#num').val();
 
-  if(numero != '') {
-    for (var i = 0; i < ; i++) {
-      if (numero == i) {
-        windows.location.href="";
-      }else {
-        var elmt = document.getElementById("box-border");
-        elmt.style.border-color = "red";
-      }
-    }
-  }
+function connexionSalon() {
+
+  document.location.href = '../home/index.html';
 }
+
+
+/*
+  Bouton création d'un salon
 */
+
+function nouveauSalon() {
+  document.location.href = '../home/index.html';
+}

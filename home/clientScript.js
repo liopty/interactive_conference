@@ -1,14 +1,36 @@
-
 var ID = 0;
-
+/*var lesVotes = new Dict({a: 1}, function (key) {
+    return "default: " + key;
+});*/
 
 //Initialisations Material Components
 $(function() {
   mdc.autoInit();
+  //const topAppBarElement = document.querySelector('.mdc-top-app-bar');
+  //const topAppBar = new mdc.topAppBar.MDCTopAppBar(topAppBarElement);
+  const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+
+  const topAppBar = mdc.topAppBar.MDCTopAppBar.attachTo(document.getElementById('app-bar'));
+  topAppBar.listen('MDCTopAppBar:nav', () => {
+    drawer.open = !drawer.open;
+  });
 });
 
 //Initialisation socket io
 var socket = io();
+var actualRoom = null;
+
+if (actualRoom == null) {
+  openPopup();
+}
+
+function openPopup() {
+  $('.cd-popup').addClass('is-visible');
+}
+
+function closePopup() {
+  $('.cd-popup').removeClass('is-visible');
+}
 
 // On demande le pseudo, on l'envoie au serveur
 var pseudo = prompt('Quel est votre pseudo ?');
@@ -23,10 +45,10 @@ socket.on('message', function(data) {
 })
 
 //on transmet le message et on l'affiche sur la page
-function envoieMessage(){
+function envoieMessage() {
   var message = $('#m').val();
   if (message != '') {
-    socket.emit('chat message', message); // Transmet le message aux autres
+    socket.emit('chat message', actualRoom, message); // Transmet le message aux autres
     insereMessage(pseudo, message, "yes"); // Affiche le message aussi sur notre page
     $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
     var elem = document.getElementById('contentTabs');
@@ -40,12 +62,46 @@ $('#envoyer').on('click', function() {
   envoieMessage();
 });
 
+$('#creer_room').on('click', function() {
+  socket.emit('creation_room');
+  socket.on('connectToRoom', function(data) {
+    //affiche sur le html l'id de la room
+    var element = document.getElementById('id01');
+    element.innerHTML = "You are in room no. " + data;
+    actualRoom = data;
+    closePopup();
+  })
+});
+
+// évènement click sur le bouton qui appel la fontion 'rejoindre_room'
+$('#rejoindre_room').on('click', function() {
+  var id = document.getElementById('r_room').value;
+  if (id != null) {
+    socket.emit('join_room', id);
+    socket.on('connectToRoom', function(data) {
+      var element = document.getElementById('id01');
+      element.innerHTML = "You are in room no. " + data;
+      actualRoom = data;
+      closePopup();
+    })
+  }
+});
+
+//évènement click sur le bouton qui appel la fontion 'quitter_room'
+$('#quitter_room').on('click', function() {
+  console.log("OUI");
+  socket.emit('leave_room', actualRoom);
+  var element = document.getElementById('id01');
+  element.innerHTML = "Accueil";
+  openPopup();
+});
+
 //Appuyer sur entrer envoi le message
 $(document).keypress(function(event) {
   var keycode = (event.keyCode ? event.keyCode : event.which);
   if (keycode == '13') {
     envoieMessage();
-    }
+  }
 });
 
 // Ajoute un message dans la page
@@ -76,10 +132,10 @@ function insereMessage(pseudo, message, mind) {
   btnDOWN.className = "vote";
 
 
-  if(mind=="yes"){
-    $('#messages').append($('<div class="mindMsg">').append(text),$('<div class="mindBtn">').append(btnUP,btnDOWN));
-  } else{
-    $('#messages').append($('<div class="notMindMsg">').text(pseudo + " : " + message),$('<div class="notMindBtn">').append(btnUP,btnDOWN));
+  if (mind == "yes") {
+    $('#messages').append($('<div class="mindMsg">').append(text), $('<div class="mindBtn">').append(btnUP, btnDOWN));
+  } else {
+    $('#messages').append($('<div class="notMindMsg">').text(pseudo + " : " + message), $('<div class="notMindBtn">').append(btnUP, btnDOWN));
   }
 }
 
@@ -88,11 +144,12 @@ $('#envoyer').on('click', function() {
 });
 
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
-$(document).on("click", ".vote", function(){
+$(document).on("click", ".vote", function() {
   socket.emit("votes", pseudo, this.id);
-  alert (pseudo +" : "+ this.id);
+  alert(pseudo + " : " + this.id);
 
 });
+
 
 
 //Gestion des onglets

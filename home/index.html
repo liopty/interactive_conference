@@ -12,22 +12,43 @@
 </head>
 
 <body>
-  <div class="header">
-    <div class="header-left">
-      <a href="#" class="material-icons">menu</a>
-      <a href="/" class="logo">Interactive Conference</a>
+  <aside class="mdc-drawer mdc-drawer--modal">
+    <div class="mdc-drawer__content">
+      <div class="mdc-list">
+        <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
+          <span class="mdc-list-item__text">Inbox</span>
+        </a>
+        <a class="mdc-list-item" href="#">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
+          <span class="mdc-list-item__text">Outgoing</span>
+        </a>
+        <a class="mdc-list-item" href="#">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
+          <span class="mdc-list-item__text">Drafts</span>
+        </a>
+      </div>
     </div>
-    <div class="header-right">
-      <a class="active" href="#">Rooms: #73298</a>
+  </aside>
+
+  <div class="mdc-drawer-scrim"></div>
+  <header class="mdc-top-app-bar" id="app-bar">
+    <div class="mdc-top-app-bar__row">
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
+        <span class="mdc-top-app-bar__title">Interactive Conference</span>
+      </section>
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+        <h1 id="id01">Accueil</h1>
+        <button id="quitter_room">Quitter</button>
+      </section>
     </div>
-  </div>
+    <div class="mdc-tab-bar" id="tabBar" role="tablist" aria-label="Navigation">
+      <div class="mdc-tab-scroller">
+        <div class="mdc-tab-scroller__scroll-area mdc-tab-scroller__scroll-area--scroll">
+          <div class="mdc-tab-scroller__scroll-content">
 
-  <div class="mdc-tab-bar" id="tabBar" role="tablist" aria-label="Navigation">
-    <div class="mdc-tab-scroller">
-      <div class="mdc-tab-scroller__scroll-area mdc-tab-scroller__scroll-area--scroll">
-        <div class="mdc-tab-scroller__scroll-content">
-
-          <button class="mdc-tab mdc-tab--active" id="activeOnglet1" onclick="openCity(event, 'recent')">
+            <button class="mdc-tab mdc-tab--active" id="activeOnglet1" onclick="openCity(event, 'recent')">
           <span class="mdc-tab__content">
             <span class="mdc-tab__icon material-icons">access_time</span>
             <span class="mdc-tab__text-label">Recents</span>
@@ -38,7 +59,7 @@
           <span class="mdc-tab__ripple"></span>
         </button>
 
-          <button class="mdc-tab" role="tab" id="activeOnglet2" onclick="openCity(event, 'topvote')">
+            <button class="mdc-tab" role="tab" id="activeOnglet2" onclick="openCity(event, 'topvote')">
           <span id="ongletColor" class="mdc-tab__content">
             <span class="mdc-tab__icon material-icons">favorite</span>
             <span class="mdc-tab__text-label">Top Vote</span>
@@ -49,7 +70,7 @@
           <span class="mdc-tab__ripple"></span>
         </button>
 
-          <button class="mdc-tab" role="tab" id="activeOnglet3" onclick="openCity(event, 'repondu')">
+        <button class="mdc-tab" role="tab" id="activeOnglet3" onclick="openCity(event, 'repondu')">
         <span id="ongletColor" class="mdc-tab__content">
           <span class="mdc-tab__icon material-icons">check_circle</span>
           <span class="mdc-tab__text-label">Répondu</span>
@@ -59,10 +80,11 @@
         </span>
         <span class="mdc-tab__ripple"></span>
       </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </header>
 
   <div id="contentTabs" class="contentTabs">
     <!--CONTENU DE L'ONGLET 1 -->
@@ -78,6 +100,7 @@
       <h1>Ici s'affichera les messages répondus</h1>
     </div>
   </div>
+
 
   <!-- TEXT + BUTTON SEND -->
   <div class="chatBar" action="">
@@ -95,6 +118,21 @@
     <button class="buttonSend mdc-fab mdc-fab--mini" id="envoyer">
       <span class="mdc-fab__icon material-icons">send</span>
   </button>
+
+  </div>
+
+  <!-- Créer nouvelle room -->
+  <div class="cd-popup">
+    <div class="cd-popup-container">
+      <div>
+        <input type="text" id="r_room">
+        <button id="rejoindre_room">Rejoindre</button>
+      </div>
+      <div class="pos-button">
+        <button class="buttoncreateroom" id="creer_room">Nouveau salon</button>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- socket.io -->
@@ -103,6 +141,7 @@
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <!-- Script JS coté client-->
   <script src="clientScript.js"></script>
+
 </body>
 
 </html>
