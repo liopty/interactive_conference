@@ -63,7 +63,6 @@ $('#envoyer').on('click', function() {
 });
 
 $('#creer_room').on('click', function() {
-  console.log("test");
   socket.emit('creation_room');
   socket.on('connectToRoom', function(data) {
     //affiche sur le html l'id de la room
