@@ -1,4 +1,3 @@
-
 /* Nombre d'utilisateur dans la room*/
 var nb_utilisateur = "...";
 var nb_msg = "...";
@@ -13,7 +12,3 @@ window.onload = function() {
 	document.getElementById("nb_thumb_down").innerHTML = nb_thumb_down;	
 	document.getElementById("temps").innerHTML = "Le salon est ouvert depuis " + tps_salon;	
 }
-
-
-
-

@@ -1,4 +1,25 @@
 /* Section stats */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#back {
+  position: fixed;
+  margin-left: 1%;
+  margin-top: -3.5%;
+  text-decoration: none;
+  color: black;
+}
+
+#back a {
+  text-decoration: none;
+  color: black;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
 
 section {
   margin-top: 5%;
@@ -25,11 +46,11 @@ section {
 
 /* Card 1 */
 
-#nb_users { 
+#nb_users {
   text-align: center;
   letter-spacing: 2px;
   margin-top: 17%;
-  font-size: 25px;  
+  font-size: 25px;
 }
 
 /* Card 2 */
@@ -38,13 +59,13 @@ section {
   text-align: center;
   letter-spacing: 2px;
   margin-top: 17%;
-  font-size: 25px;  
+  font-size: 25px;
 }
 
 /* Card 3 */
 
 .pos {
-  font-size: 25px;  
+  font-size: 25px;
 }
 
 .thumb_up {
@@ -55,8 +76,8 @@ section {
   color: red;
 }
 
-.material-icons.md-48 { 
-  font-size: 48px; 
+.material-icons.md-48 {
+  font-size: 48px;
 }
 
 #text_vote {
@@ -72,7 +93,7 @@ section {
 
 .container2 {
   text-align: right;
-  margin-top: 18%;  
+  margin-top: 18%;
   margin-right: 27%;
 }
 
@@ -82,5 +103,5 @@ section {
   text-align: center;
   letter-spacing: 2px;
   margin-top: 17%;
-  font-size: 25px;  
+  font-size: 25px;
 }
