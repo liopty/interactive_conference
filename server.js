@@ -7,23 +7,13 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP)
-/*
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
 
-//-----connection et insertion de 1 message avec mongoDB--//
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("mydb");
-  var myobj = { texte: "ceci est un message", date: "date du jour" };
-  dbo.collection("messages").insertOne(myobj, function(err, res) {
-    if (err) throw err;
-    console.log("1 message insérré");
-    db.close();
-  });
-});
-*/
-//----------------Fin-----------------------------------//
+//Database Connexion
+var pg = require(‘pg’);
+var connectionString = "postgres://hwmsrznprgcjnb:40e7c40a8c086fe667d7c0cc69b671e5af8eb9dc7f34ad71b119e9e3b7761742@ec2-79-125-26-222.eu-west-1.compute.amazonaws.com/ip:5432/d1ki3t8nlgp6kg";
+var pgClient = new pg.Client(connectionString);
+pgClient.connect();
+var query = pgClient.query("CREATE TABLE Utilisateurs;");
 
 
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
