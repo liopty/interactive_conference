@@ -9,7 +9,7 @@ const client = new Client({
 
 client.connect();
 
-client.query("CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL)", (err, res) => {
+client.query("CREATE OR REPLACE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL)", (err, res) => {
   if (err) throw err;
   for (let row of res.rows) {
     console.log(JSON.stringify(row));
