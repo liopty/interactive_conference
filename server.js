@@ -6,7 +6,7 @@ const client = new Client({
   connectionString: 'postgres://hwmsrznprgcjnb:40e7c40a8c086fe667d7c0cc69b671e5af8eb9dc7f34ad71b119e9e3b7761742@ec2-79-125-26-222.eu-west-1.compute.amazonaws.com:5432/d1ki3t8nlgp6kg',
   ssl: true,
 });
-
+/*
 client.connect();
 
 client.query("CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL)", (err, res) => {
@@ -16,6 +16,7 @@ client.query("CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL)", (err, res) => 
   }
   client.end();
 });
+*/
 
 const express = require("express");
 const app = require('express')();
