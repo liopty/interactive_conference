@@ -8,9 +8,14 @@ const client = new Client({
 });
 
 client.connect();
-client.query("CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL)");
-client.end();
 
+client.query("CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL)", (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
+  }
+  client.end();
+});
 
 const express = require("express");
 const app = require('express')();
