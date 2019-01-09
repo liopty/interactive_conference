@@ -35,6 +35,12 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     console.log('listening on *:' + PORT);
   });
 
+  //auto ping
+  setInterval(function() {
+    http.get("https://interactive-conference2018.herokuapp.com");
+    console.log("test");
+  }, 300);
+
   var roomno=[];
 
   io.on('connection', function(socket){
