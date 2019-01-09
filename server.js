@@ -1,5 +1,6 @@
 //Qu'est ce qu'un websocket ?
 //Le protocole WebSocket vise à développer un canal de communication full-duplex sur un socket TCP pour les navigateurs et les serveurs web.
+/*
 const { Client } = require('pg');
 
 const client = new Client({
@@ -9,14 +10,14 @@ const client = new Client({
 
 client.connect();
 
-client.query("CREATE OR REPLACE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL)", (err, res) => {
+client.query("CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL)", (err, res) => {
   if (err) throw err;
   for (let row of res.rows) {
     console.log(JSON.stringify(row));
   }
   client.end();
 });
-
+*/
 
 const express = require("express");
 const app = require('express')();
