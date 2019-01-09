@@ -89,7 +89,6 @@ $('#rejoindre_room').on('click', function() {
 
 //évènement click sur le bouton qui appel la fontion 'quitter_room'
 $('#quitter_room').on('click', function() {
-  console.log("OUI");
   socket.emit('leave_room', actualRoom);
   var element = document.getElementById('id01');
   element.innerHTML = "Accueil";

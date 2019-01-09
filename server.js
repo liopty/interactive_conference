@@ -4,18 +4,18 @@
 const { Client } = require('pg');
 
 const client = new Client({
-  connectionString: 'postgres://hwmsrznprgcjnb:40e7c40a8c086fe667d7c0cc69b671e5af8eb9dc7f34ad71b119e9e3b7761742@ec2-79-125-26-222.eu-west-1.compute.amazonaws.com:5432/d1ki3t8nlgp6kg',
-  ssl: true,
+connectionString: 'postgres://hwmsrznprgcjnb:40e7c40a8c086fe667d7c0cc69b671e5af8eb9dc7f34ad71b119e9e3b7761742@ec2-79-125-26-222.eu-west-1.compute.amazonaws.com:5432/d1ki3t8nlgp6kg',
+ssl: true,
 });
 
 client.connect();
 
 client.query("CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL)", (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  client.end();
+if (err) throw err;
+for (let row of res.rows) {
+console.log(JSON.stringify(row));
+}
+client.end();
 });
 */
 
@@ -26,27 +26,27 @@ const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
-//Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
-app.use('/', express.static('home'));
+  //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
+  app.use('/', express.static('home'));
 
-//Lancer le serveur http et écoute les connection sur le port indiqué
-http.listen(PORT, function(){
-// Ecrit dans la console sur quel port le serveur écoute
-  console.log('listening on *:' + PORT);
-});
+  //Lancer le serveur http et écoute les connection sur le port indiqué
+  http.listen(PORT, function(){
+    // Ecrit dans la console sur quel port le serveur écoute
+    console.log('listening on *:' + PORT);
+  });
 
-var roomno=[];
+  var roomno=[];
 
-io.on('connection', function(socket){
-  socket.on('creation_room', function() {// aleeeed  : alors ça marche sauf que ça ce relance pas tout seul, à voi pour l'optimisation
+  io.on('connection', function(socket){
+    socket.on('creation_room', function() {// aleeeed  : alors ça marche sauf que ça ce relance pas tout seul, à voi pour l'optimisation
     var tempoId;
     var check = false;
     while(check!=true){
       var tempo = (Math.floor(Math.random() * 1000)+1);// +1 parce que il y a un problème avec l'id: 0 quand on veut rejoindre
-          if (!roomno.includes(tempo)) {
-            check=true;
-            tempoId=tempo;
-          }
+      if (!roomno.includes(tempo)) {
+        check=true;
+        tempoId=tempo;
+      }
     }
     roomno.push(tempoId);
     socket.join(tempoId);
@@ -73,13 +73,13 @@ io.on('connection', function(socket){
 
   });
 
-// Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
+  // Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
   socket.on('nouveau_client', function(pseudo) {
-          pseudo = ent.encode(pseudo);
-          socket.pseudo = pseudo;
-          socket.broadcast.emit('nouveau_client', pseudo);
+    pseudo = ent.encode(pseudo);
+    socket.pseudo = pseudo;
+    socket.broadcast.emit('nouveau_client', pseudo);
 
-      });
+  });
 
   //Ecrit dans la console lorsqu'un utilisateur se connecte
   console.log("un utilisateur s'est connecté");
@@ -100,14 +100,13 @@ io.on('connection', function(socket){
   });
 
   socket.on('leave_room', function(idRoom){
-    console.log("la gamin");
     socket.leave(idRoom);
     console.log("Un utilisateur a quitté la room: "+idRoom);
   });
 
   //Sactive lors de l'appuie d'un bouton de vote
   socket.on('votes', function(pseudo, btn) {
-                                                                           //temporaire, à remplacer quand la bd sera implémentée
+    //temporaire, à remplacer quand la bd sera implémentée
     DicoDesVotes.add(btn, pseudo);                                           //value,key
     var tmp = DicoDesVotes.entries();                                        //
     var tmp2 = DicoDesVotes.entries();                                       //
@@ -117,6 +116,6 @@ io.on('connection', function(socket){
 
     socket.broadcast.emit('votes', pseudo, btn);
 
-      });
+  });
 
 });
