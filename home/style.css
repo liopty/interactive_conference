@@ -15,13 +15,37 @@ html, body {
     background: #FFFFFF;
 }
 
+/* --------------------------------
+
+Joindre une room / Créer une room
+
+-------------------------------- */
+
+#name {
+  position: absolute;
+  top: 0%;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+#connexion {
+  background-color: white;
+  position: absolute;
+  z-index: 5;
+}
+
+.form {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+  padding: 2%;
+  /*border: 1px solid white;*/
+}
+
 .pos-form {
   display: flex;
   align-items: center;
-}
-
-.button-send {
-  padding-left: 8px;
 }
 
 .pos-button {
@@ -30,35 +54,8 @@ html, body {
   padding-top: 5px;
 }
 
-.pos-form2 {
-  display: flex;
-  align-items: center;
-}
-
-.button-send2 {
-  padding-left: 8px;
-}
-
-#box-name {
-width: 261px;
-}
-
-#box-height {
-  margin-top: 2%;
-}
-
-/* --------------------------------
-
-Modules - reusable parts of our design
-
--------------------------------- */
-
-.img-replace {
-  display: inline-block;
-  overflow: hidden;
-  text-indent: 100%;
-  color: transparent;
-  white-space: nowrap;
+.color {
+  color: red;
 }
 
 /* --------------------------------
@@ -150,6 +147,13 @@ Popup nouvelle Room
   transform: translateY(0);
 }
 
+/* ---------------------------
+
+              Main
+
+---------------------------- */
+
+
 ::-webkit-scrollbar-thumb {
     background: purple;
     border-radius: 10px;
@@ -195,10 +199,6 @@ body,header,#messages li, .contentTabs {
   font-size: 22px;
 }
 
-.header-left .logo{
-
-}
-
 .mdc-tab{
   background-color: #fafafa;
   border-bottom: solid 1px grey;
@@ -229,6 +229,13 @@ body,header,#messages li, .contentTabs {
 .tabcontent h1 {
   text-align: center;
   margin-top: 200px;
+}
+
+.mdc-top-app-bar__title {
+  user-select: none;
+  -webkit-user-select: none; // For Webkit
+  -khtml-user-select: none;
+  -moz-user-select: none; // For Mozilla
 }
 
 #messages {
@@ -280,8 +287,6 @@ body,header,#messages li, .contentTabs {
 }
 
 .chatBar button {
-  width: 24px;
-  margin: 3px;
   background-color: #64b5f6;
 }
 
