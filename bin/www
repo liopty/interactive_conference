@@ -31,7 +31,7 @@ app.set('port', PORT);
 
 var server = http.createServer(app);
 //Socket IO
-var socketIO = require('public/javascripts/socketIO');
+var socketIO = require('../public/javascripts/socketIO');
 var io = socketIO.io;
 io.attach(server);
 
