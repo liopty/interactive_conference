@@ -24,13 +24,13 @@ client.query("CREATE TABLE message (content text, id_user int REFERENCES appuser
 if (err) throw err;
 client.end();
 });
-*/
+
 
 client.query("CREATE TABLE vote (id_user int REFERENCES appuser (id_user), id_message int REFERENCES message (id_message), vote int, PRIMARY KEY (id_user, id_message));", (err, res) => {
 if (err) throw err;
 client.end();
 });
-
+*/
 
 var app = require('../app');
 // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
