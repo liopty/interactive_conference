@@ -24,6 +24,13 @@ if (actualRoom == null) {
   openPopup();
 }
 
+function openPopup() {
+  $('.cd-popup').addClass('is-visible');
+}
+
+function closePopup() {
+  $('.cd-popup').removeClass('is-visible');
+}
 
 // On demande le pseudo, on l'envoie au serveur
 var pseudo = prompt('Quel est votre pseudo ?');
