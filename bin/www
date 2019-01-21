@@ -31,7 +31,7 @@ app.set('port', PORT);
 
 var server = http.createServer(app);
 //Socket IO
-var socketIO = require('../public/javascripts/socketIO');
+var socketIO = require('public/javascripts/socketIO');
 var io = socketIO.io;
 io.attach(server);
 
@@ -105,7 +105,6 @@ io.on('connection', function(socket){
     if(message!=null){
       message = ent.encode(message);
     }
-    console.log(socket.pseudo);
     socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message});
   });
 
