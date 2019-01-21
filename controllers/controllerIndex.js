@@ -30,7 +30,7 @@ $('#creer_room').on('click', function() {
   socket.on('connectToRoom', function(data) {
     //affiche sur le html l'id de la room
     document.cookie = "room="+data;
-    actualRoom = data;
+    actualRoom = lireCookie("room");
     window.location.pathname = '/chat';
   })
 });
@@ -43,8 +43,23 @@ $('#rejoindre_room').on('click', function() {
     socket.on('connectToRoom', function(data) {
       //affiche sur le html l'id de la room
       document.cookie = "room="+data;
-      actualRoom = data;
+      actualRoom = lireCookie("room");
       window.location.pathname = '/chat';
     })
   }
 });
+
+function lireCookie(nom) {
+  var nom2 = nom + "=";
+  var arrCookies = document.cookie.split(';');
+  for(var i=0;i < arrCookies.length;i++) {
+    var a = arrCookies[i];
+    while (a.charAt(0)==' ') {
+      a = a.substring(1,a.length);
+    }
+    if (a.indexOf(nom2) == 0) {
+      return a.substring(nom2.length,a.length);
+    }
+  }
+  return null;
+}
