@@ -20,7 +20,7 @@ if (err) throw err;
 client.end();
 });
 */
-client.query("CREATE TABLE message (content text, id_user int REFERENCES appuser (id_user), id_message int, answered bool, comment int, quizz jsonb, );", (err, res) => {
+client.query("CREATE TABLE message (content text, id_user int REFERENCES appuser (id_user), id_message int PRIMARY KEY NOT NULL, answered bool, comment int, quizz jsonb);", (err, res) => {
 if (err) throw err;
 client.end();
 });
