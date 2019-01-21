@@ -1,24 +1,26 @@
 //Qu'est ce qu'un websocket ?
 //Le protocole WebSocket vise à développer un canal de communication full-duplex sur un socket TCP pour les navigateurs et les serveurs web.
 
-/*
 const { Client } = require('pg');
+
 const client = new Client({
 connectionString: 'postgres://ozbctqqchiljth:5f22d877c8494e181c8a357c31fe010526b8794c23d13a55e0b9898d1e425bcb@ec2-46-137-121-216.eu-west-1.compute.amazonaws.com:5432/d7gccoqn0007v3',
 ssl: true,
 });
 
-client.connect();
 
-client.query("CREATE TABLE COMPANY(ID INT PRIMARY KEY NOT NULL)", (err, res) => {
+client.connect();
+/*
+client.query("CREATE TABLE room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
 if (err) throw err;
-for (let row of res.rows) {
-console.log(JSON.stringify(row));
-}
+client.end();
+});
+
+client.query("CREATE TABLE appuser (id_user INT PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room));", (err, res) => {
+if (err) throw err;
 client.end();
 });
 */
-
 const express = require("express");
 const app = require('express')();
 const http = require('http').Server(app);
@@ -35,12 +37,6 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     console.log('listening on *:' + PORT);
   });
 
-  /*auto ping
-  setInterval(function() {
-    http.get("http://interactive-conference2018.herokuapp.com");
-    console.log("test");
-  }, 300);
-*/
   var roomno=[];
 
   io.on('connection', function(socket){
