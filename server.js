@@ -10,6 +10,7 @@ client.connect();
 client.query("CREATE TABLE room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
 if (err) throw err;
 client.end();
+//
 });
 
 client.query("CREATE TABLE appuser (id_user INT PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room));", (err, res) => {
