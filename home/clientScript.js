@@ -24,13 +24,6 @@ if (actualRoom == null) {
   openPopup();
 }
 
-function openPopup() {
-  $('.cd-popup').addClass('is-visible');
-}
-
-function closePopup() {
-  $('.cd-popup').removeClass('is-visible');
-}
 
 // On demande le pseudo, on l'envoie au serveur
 var pseudo = prompt('Quel est votre pseudo ?');
@@ -48,7 +41,7 @@ socket.on('message', function(data) {
 function envoieMessage() {
   var message = $('#m').val();
   if (message != '') {
-    socket.emit('chat message', actualRoom, message); // Transmet le message aux autres
+    socket.emit('chat_message', actualRoom, message); // Transmet le message aux autres
     insereMessage(pseudo, message, "yes"); // Affiche le message aussi sur notre page
     $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
     var elem = document.getElementById('contentTabs');

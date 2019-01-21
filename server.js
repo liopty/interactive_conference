@@ -1,13 +1,9 @@
-//Qu'est ce qu'un websocket ?
-//Le protocole WebSocket vise à développer un canal de communication full-duplex sur un socket TCP pour les navigateurs et les serveurs web.
-
+//Connexion à la base de donnée POSTGRESQL
 const { Client } = require('pg');
-
 const client = new Client({
-connectionString: 'postgres://ozbctqqchiljth:5f22d877c8494e181c8a357c31fe010526b8794c23d13a55e0b9898d1e425bcb@ec2-46-137-121-216.eu-west-1.compute.amazonaws.com:5432/d7gccoqn0007v3',
-ssl: true,
+  connectionString: 'postgres://ozbctqqchiljth:5f22d877c8494e181c8a357c31fe010526b8794c23d13a55e0b9898d1e425bcb@ec2-46-137-121-216.eu-west-1.compute.amazonaws.com:5432/d7gccoqn0007v3',
+  ssl: true,
 });
-
 
 client.connect();
 /*
@@ -20,12 +16,8 @@ client.query("CREATE TABLE appuser (id_user INT PRIMARY KEY NOT NULL, username t
 if (err) throw err;
 client.end();
 });
-
-
-//test
-
-
 */
+
 const express = require("express");
 const app = require('express')();
 const http = require('http').Server(app);
@@ -45,11 +37,11 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   var roomno=[];
 
   io.on('connection', function(socket){
-    socket.on('creation_room', function() {// aleeeed  : alors ça marche sauf que ça ce relance pas tout seul, à voi pour l'optimisation
+    socket.on('creation_room', function() {
     var tempoId;
     var check = false;
     while(check!=true){
-      var tempo = (Math.floor(Math.random() * 1000)+1);// +1 parce que il y a un problème avec l'id: 0 quand on veut rejoindre
+      var tempo = (Math.floor(Math.random() * 1000)+1);
       if (!roomno.includes(tempo)) {
         check=true;
         tempoId=tempo;
@@ -71,11 +63,11 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
       }
     }
     if(check) {
-      console.log("join une room");
+      console.log("Un utilisateur a rejoint la room: "+id);
       socket.join(id)
       io.sockets.in(id).emit('connectToRoom', id);
     } else {
-      console.log("pas de room avec cette id");
+      console.log("Aucune room n'existe avec cet ID");
     }
 
   });
@@ -87,7 +79,6 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     }
     socket.pseudo = pseudo;
     socket.broadcast.emit('nouveau_client', pseudo);
-
   });
 
   //Ecrit dans la console lorsqu'un utilisateur se connecte
@@ -100,9 +91,9 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
-  socket.on('chat message', function(id, message){
+  socket.on('chat_message', function(id, message){
     //Ecrit dans la console le msg
-    console.log(id+": "+message);
+    console.log("(Room: "+id+") "+message);
     // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personne
     if(message!=null){
       message = ent.encode(message);
@@ -118,15 +109,12 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   //Sactive lors de l'appuie d'un bouton de vote
   socket.on('votes', function(pseudo, btn) {
     //temporaire, à remplacer quand la bd sera implémentée
-    DicoDesVotes.add(btn, pseudo);                                           //value,key
-    var tmp = DicoDesVotes.entries();                                        //
-    var tmp2 = DicoDesVotes.entries();                                       //
-    while (tmp.next().value != null) {                                       //
-      console.log("tmp = lesVotes.entries() : tmp : " + tmp2.next().value);  //
-    }                                                                        //
-
+    DicoDesVotes.add(btn, pseudo);
+    var tmp = DicoDesVotes.entries();
+    var tmp2 = DicoDesVotes.entries();
+    while (tmp.next().value != null) {
+      console.log("tmp = lesVotes.entries() : tmp : " + tmp2.next().value);
+    }
     socket.broadcast.emit('votes', pseudo, btn);
-
   });
-
 });
