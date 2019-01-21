@@ -18,7 +18,7 @@ $(function() {
 
 //Initialisation socket io
 var socket = io();
-var actualRoom = null;
+var actualRoom = lireCookie("room");
 
 // On demande le pseudo, on l'envoie au serveur
 var pseudo = lireCookie("username");
