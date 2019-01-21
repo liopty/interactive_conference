@@ -118,21 +118,21 @@ function insereMessage(pseudo, message, mind) {
 
   //Création du bouton UP avec un text, un id et une class
   var btnUP = document.createElement("BUTTON");
-  var textUP = document.createTextNode("Up");
+  var textUP = document.createTextNode("👍");
   btnUP.appendChild(textUP);
   btnUP.id = buttonUPID;
-  btnUP.className = "vote";
+  btnUP.className = "vote upvote";
 
   //Création du bouton DOWN avec un text, un id et une class
   var btnDOWN = document.createElement("BUTTON");
-  var textDOWN = document.createTextNode("Down");
+  var textDOWN = document.createTextNode("👎");
   btnDOWN.appendChild(textDOWN);
   btnDOWN.id = buttonDOWNID;
   btnDOWN.className = "vote";
 
 
   if (mind == "yes") {
-    $('#messages').append($('<div class="mindMsg">').append(text), $('<div class="mindBtn">').append(btnUP, btnDOWN));
+    $('#messages').append($('<div class="mindMsg">').append(text, btnUP, btnDOWN));
   } else {
     $('#messages').append($('<div class="notMindMsg">').text(pseudo + " : " + message), $('<div class="notMindBtn">').append(btnUP, btnDOWN));
   }

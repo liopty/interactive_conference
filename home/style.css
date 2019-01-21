@@ -325,3 +325,19 @@ body,header,#messages li, .contentTabs {
   	border-bottom-left-radius: 5px;
   	border-top-left-radius: 5px;
   }
+
+  .mindMsg div{
+    display: inline-block;
+  }
+
+.vote{
+  display: inline-block;
+  background-color: transparent;
+  color: white;
+  border: none;
+  margin: 0;
+}
+
+.upvote{
+  margin-left: 20px;
+}
