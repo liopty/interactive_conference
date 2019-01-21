@@ -1,29 +1,42 @@
-* {
+html, body {
   margin: 0;
+  height: 100%;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
+  overflow: hidden;
   font: 13px Helvetica, Arial;
 }
 
-/* Titre */
+::-webkit-scrollbar {
+    width: 5px;
+}
 
-#name {
-  margin-left: 5px;
-  margin-top: 5px;
+::-webkit-scrollbar-track {
+    background: #FFFFFF;
 }
 
 /* --------------------------------
 
-Joindre une room avec un numéro
+Joindre une room / Créer une room
 
 -------------------------------- */
 
-form {
+#name {
   position: absolute;
-  top: 50%;
+  top: 0%;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+#connexion {
+  background-color: white;
+  position: absolute;
+  z-index: 5;
+}
+
+.form {
+  position: absolute;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
   padding: 2%;
@@ -35,56 +48,14 @@ form {
   align-items: center;
 }
 
-.button-send {
-  padding-left: 8px;
-}
-
 .pos-button {
   width: 260px;
   text-align: center;
   padding-top: 5px;
 }
 
-#color {
+.color {
   color: red;
-}
-
-
-/* --------------------------------
-
-Créer une room avec un nom
-
--------------------------------- */
-
-.pos-form2 {
-  display: flex;
-  align-items: center;
-}
-
-.button-send2 {
-  padding-left: 8px;
-}
-
-#box-name {
-width: 261px;
-}
-
-#box-height {
-  margin-top: 2%;
-}
-
-/* --------------------------------
-
-Modules - reusable parts of our design
-
--------------------------------- */
-
-.img-replace {
-  display: inline-block;
-  overflow: hidden;
-  text-indent: 100%;
-  color: transparent;
-  white-space: nowrap;
 }
 
 /* --------------------------------
@@ -96,7 +67,7 @@ Popup nouvelle Room
 .cd-popup {
   position: fixed;
   left: 0;
-  top: 0;
+  padding-top: 350px;
   height: 100%;
   width: 100%;
   background-color: white;
@@ -175,3 +146,182 @@ Popup nouvelle Room
   -o-transform: translateY(0);
   transform: translateY(0);
 }
+
+/* ---------------------------
+
+              Main
+
+---------------------------- */
+
+
+::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 10px;
+}
+
+body {
+  flex-direction: column;
+  text-align: center;
+}
+
+body,header,#messages li, .contentTabs {
+    display: flex;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #fafafa;
+}
+
+.header a {
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.header-right {
+  float: right;
+}
+
+.header-right a{
+  display: inline-block;
+  padding: 20px;
+}
+
+.header-left {
+  float: left;
+}
+
+.header-left a{
+  display: inline-block;
+  padding: 20px;
+  font-size: 22px;
+}
+
+.mdc-tab{
+  background-color: #fafafa;
+  border-bottom: solid 1px grey;
+}
+
+.mdc-top-app-bar{
+  color: black;
+  background-color: #fafafa;
+}
+
+.mdc-top-app-bar .material-icons{
+  color: black;
+}
+
+.contentTabs {
+  width: 700px;
+  overflow-y: auto;
+  margin-bottom: 100px;
+  margin-left: -webkit-calc(50% - 335px);
+  margin-left: -moz-calc(50% - 335px);
+  margin-left: calc(50% - 335px);
+}
+
+.tabcontent {
+  display: none;
+}
+
+.tabcontent h1 {
+  text-align: center;
+  margin-top: 200px;
+}
+
+.mdc-top-app-bar__title {
+  user-select: none;
+  -webkit-user-select: none; // For Webkit
+  -khtml-user-select: none;
+  -moz-user-select: none; // For Mozilla
+}
+
+#messages {
+  padding-top: 150px;
+  width: 700px;
+}
+
+#messages .mindMsg {
+  display: inline-block;
+  overflow-x: hidden;
+  text-align: left;
+  margin-bottom: 2px;
+	clear: both;
+	padding: 7px 13px;
+  max-width: 400px;
+	font-size: 12px;
+	border-radius: 15px;
+	line-height: 1.4;
+  float: right;
+	background-color: #1998e6;
+	color: #fff;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+#messages .notMindMsg{
+  display: inline-block;
+  overflow-x: hidden;
+  max-width: 400px;
+	margin-bottom: 2px;
+	clear: both;
+  text-align: right;
+	padding: 7px 13px;
+	font-size: 12px;
+	border-radius: 15px;
+	line-height: 1.4;
+  float: left;
+	background-color: #ddd;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+.chatBar {
+  flex: 1;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  padding-bottom: 1%;
+}
+
+.chatBar button {
+  background-color: #64b5f6;
+}
+
+.chatBar .inputMsg {
+  width: 670px;
+}
+
+#messages .mindBtn {
+  display: inline-block;
+  overflow-x: hidden;
+  text-align: left;
+  margin-bottom: 2px;
+	clear: both;
+	padding: 7px 13px;
+  max-width: 400px;
+	font-size: 12px;
+	border-radius: 15px;
+	line-height: 1.4;
+  float: right;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+#messages .notMindBtn {
+    display: inline-block;
+    overflow-x: hidden;
+    max-width: 400px;
+  	margin-bottom: 2px;
+  	clear: both;
+    text-align: right;
+  	padding: 7px 13px;
+  	font-size: 12px;
+  	border-radius: 15px;
+  	line-height: 1.4;
+    float: left;
+  	border-bottom-left-radius: 5px;
+  	border-top-left-radius: 5px;
+  }

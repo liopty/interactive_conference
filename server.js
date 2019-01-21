@@ -20,6 +20,11 @@ client.query("CREATE TABLE appuser (id_user INT PRIMARY KEY NOT NULL, username t
 if (err) throw err;
 client.end();
 });
+
+
+//test
+
+
 */
 const express = require("express");
 const app = require('express')();

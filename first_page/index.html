@@ -1,81 +1,159 @@
 <!doctype html>
-<html lang="fr">
+<html>
+
 <head>
-  <meta charset="UTF-8">
   <title>Interactive Conference</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
   <!-- Librairi Material Theming -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
   <script defer src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <!-- Notre CSS -->
+  <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
-  <div id="name">
-    <button class="mdc-button mdc-button--raised">Interactive Conference</button>
-    <!-- <label class="mdc-floating-label" for="my-text-field-id">Interactive Conference</label>-->
-  </div>
-
-  <!-- Joindre room avec un numéro -->
-
-  <form action="#">
-    <div>
-      <div class="pos-form">
-        <div class="mdc-text-field mdc-text-field--outlined"  data-mdc-auto-init="MDCTextField">
-          <input type="text" id="tf-outlined num" class="mdc-text-field__input">
-          <label for="tf-outlined" class="mdc-floating-label" >Numéro du salon</label>
-        <div class="mdc-notched-outline">
-        <svg>
-         <path class="mdc-notched-outline__path"/>
-        </svg>
-      </div>
-    <div class="mdc-notched-outline__idle" id="box-border"></div>
-  </div>
-    <div class="pos-form button-send">
-        <button class="mdc-fab mdc-fab--mini" id="join-room">
-        <span class="mdc-fab__icon material-icons">send</span>
+  <section id="connexion" class="cd-popup">
+    <div id="name">
+        <button class="mdc-button mdc-button--raised">Interactive Conference</button>
     </div>
-  </div>
-    <div class="pos-button">
-      <button class="mdc-button supp cd-popup-trigger" id="color">Nouveau salon</button>
-    </div>
-  </form>
 
-
-  <!-- Créer nouvelle room -->
-<!--
-  <div class="cd-popup">
-    <div class="cd-popup-container">
-    <form action="#">
-      <div id="box-height">
-        <div class="pos-form2">
-          <div class="mdc-text-field mdc-text-field--outlined" id="box-name"  data-mdc-auto-init="MDCTextField">
-            <input type="text" id="tf-outlined" class="mdc-text-field__input">
-            <label for="tf-outlined" class="mdc-floating-label">Nom du salon</label>
-            <div class="mdc-notched-outline">
-            <svg>
-              <path class="mdc-notched-outline__path"/>
-            </svg>
+    <div class="mdc-card form">
+      <div >
+        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+          <input type="text" id="r_room" class="mdc-text-field__input">
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <label for="tf-outlined" class="mdc-floating-label">Numéro du salon</label>
             </div>
-          <div class="mdc-notched-outline__idle"></div>
-          </div>
-            <div class="pos-form2 button-send2">
-            <button class="mdc-fab mdc-fab--mini" id="new-room">
-            <span class="mdc-fab__icon material-icons">send</span>
+            <div class="mdc-notched-outline__trailing"></div>
           </div>
         </div>
-      </form>
-      <a href="#0" class="cd-popup-close img-replace"></a>
+        <button class="buttonSend mdc-fab mdc-fab--mini" id="rejoindre_room">
+          <span class="mdc-fab__icon material-icons">send</span>
+        </button>
+      </div>
+      <div class="pos-button">
+        <button type="button" class="mdc-button cd-popup-trigger color" id="creer_room">Nouveau salon</button>
+      </div>
     </div>
-  </div>
--->
+  </section>
+
+  <section>
+      <aside class="mdc-drawer mdc-drawer--modal">
+          <div class="mdc-drawer__content">
+            <div class="mdc-list">
+              <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_back</i>
+                <span class="mdc-list-item__text"></span>
+              </a>
+              <a class="mdc-list-item" href="">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">poll</i>
+                <span class="mdc-list-item__text">Statistiques</span>
+              </a>
+              <a class="mdc-list-item" href="#"> <!--id="quitter_room"--->
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">clear</i>
+                <span class="mdc-list-item__text">Déconnexion</span>
+              </a>
+            </div>
+          </div>
+      </aside>
+
+    <div class="mdc-drawer-scrim"></div>
+    <header class="mdc-top-app-bar" id="app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
+          <span class="mdc-top-app-bar__title">Interactive Conference</span>
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+          <h1 id="id01">Accueil</h1>
+          <button id="quitter_room">Quitter</button>
+        </section>
+      </div>
+      <div class="mdc-tab-bar" id="tabBar" role="tablist" aria-label="Navigation">
+        <div class="mdc-tab-scroller">
+          <div class="mdc-tab-scroller__scroll-area mdc-tab-scroller__scroll-area--scroll">
+            <div class="mdc-tab-scroller__scroll-content">
+
+              <button class="mdc-tab mdc-tab--active" id="activeOnglet1" onclick="openCity(event, 'recent')">
+            <span class="mdc-tab__content">
+              <span class="mdc-tab__icon material-icons">access_time</span>
+              <span class="mdc-tab__text-label">Recents</span>
+            </span>
+            <span id="activeOnglet1Underline" class="mdc-tab-indicator mdc-tab-indicator--active">
+              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+            </span>
+            <span class="mdc-tab__ripple"></span>
+          </button>
+
+              <button class="mdc-tab" role="tab" id="activeOnglet2" onclick="openCity(event, 'topvote')">
+            <span id="ongletColor" class="mdc-tab__content">
+              <span class="mdc-tab__icon material-icons">favorite</span>
+              <span class="mdc-tab__text-label">Top Vote</span>
+            </span>
+            <span id="activeOnglet2Underline" class="mdc-tab-indicator">
+              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+            </span>
+            <span class="mdc-tab__ripple"></span>
+          </button>
+
+          <button class="mdc-tab" role="tab" id="activeOnglet3" onclick="openCity(event, 'repondu')">
+          <span id="ongletColor" class="mdc-tab__content">
+            <span class="mdc-tab__icon material-icons">check_circle</span>
+            <span class="mdc-tab__text-label">Répondu</span>
+          </span>
+          <span id="activeOnglet3Underline" class="mdc-tab-indicator">
+            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+          </span>
+          <span class="mdc-tab__ripple"></span>
+        </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div id="contentTabs" class="contentTabs">
+      <!--CONTENU DE L'ONGLET 1 -->
+      <div id="recent" class="tabcontent active">
+        <div id="messages"></div>
+      </div>
+      <!--CONTENU DE L'ONGLET 2 -->
+      <div id="topvote" class="tabcontent">
+        <h1>Ici s'affichera les topvotes</h1>
+      </div>
+      <!--CONTENU DE L'ONGLET 3 -->
+      <div id="repondu" class="tabcontent">
+        <h1>Ici s'affichera les messages répondus</h1>
+      </div>
+    </div>
+
+    <!-- TEXT + BUTTON SEND -->
+    <div class="chatBar" action="">
+      <div class="inputMsg mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input id="m" type="text" id="tf-outlined" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+            <label for="tf-outlined" class="mdc-floating-label">Message</label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+        </div>
+      </div>
+      <button class="buttonSend mdc-fab mdc-fab--mini" id="envoyer">
+        <span class="mdc-fab__icon material-icons">send</span>
+      </button>
+    </div>
+  </section>
 
   <!-- socket.io -->
   <script src="/socket.io/socket.io.js"></script>
   <!-- Jquery Integration-->
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <!-- Script JS coté client-->
-  <script src="script.js"></script>
+  <script src="clientScript.js"></script>
+
 </body>
 
 </html>
