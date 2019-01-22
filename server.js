@@ -8,12 +8,13 @@ const client = new Client({
 client.connect();
 /*(code, title, did, date_prod, kind)
     VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama');*/
+/*
 client.query("INSERT INTO room VALUES (5000,FALSE);", (err, res) => {
 if (err) throw err;
 console.log(res);
 client.end();
 });
-
+*/
 client.query("SELECET * FROM room;", (err, res) => {
 if (err) throw err;
 console.log(res);
