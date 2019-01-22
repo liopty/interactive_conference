@@ -1,13 +1,13 @@
 //Connexion à la base de donnée POSTGRESQL
-const { Client } = require('pg');
+/* const { Client } = require('pg');
 const client = new Client({
   connectionString: 'postgres://ozbctqqchiljth:5f22d877c8494e181c8a357c31fe010526b8794c23d13a55e0b9898d1e425bcb@ec2-46-137-121-216.eu-west-1.compute.amazonaws.com:5432/d7gccoqn0007v3',
   ssl: true,
 });
 
 client.connect();
-/*(code, title, did, date_prod, kind)
-    VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama');*/
+(code, title, did, date_prod, kind)
+    VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama');
 
 client.query("INSERT INTO room VALUES (7000,FALSE);", (err, res) => {
 if (err) throw err;
@@ -18,7 +18,7 @@ client.query("SELECT * FROM room;", (err, res) => {
 if (err) throw err;
 console.log(res);
 });
-
+*/
 
 const express = require("express");
 const app = require('express')();
