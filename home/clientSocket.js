@@ -10,6 +10,9 @@ var socket = io();
 var actualRoom = null;
 var pseudo = null;
 
+
+//--------ROOMS -----------------------//
+
 //Si l'utilisateur n'est pas dans une room actuellement, on lui montre la page pour en rejoindre ou en creer une
 if (actualRoom == null) {
   openPopup();
@@ -22,6 +25,55 @@ function openPopup() {
 function closePopup() {
   $('.cd-popup').removeClass('is-visible');
 }
+
+$('#creer_room').on('click', function() {
+  socket.emit('creation_room');
+  socket.on('connectToRoom', function(roomID) {
+    //affiche sur le html l'id de la room
+    var element = document.getElementById('id01');
+    actualRoom = roomID;
+    element.innerHTML = "Room n°" + actualRoom;
+    userConnected();
+    closePopup();
+  })
+});
+
+function userConnected(){
+  pseudo = $('#pseudo_room').val();
+  if (pseudo==null || pseudo==""){
+    pseudo = "Anonyme";
+  }
+  socket.emit('nouveau_client', pseudo);
+  document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
+}
+
+// évènement click sur le bouton qui appel la fontion 'rejoindre_room'
+$('#rejoindre_room').on('click', function() {
+  var id = document.getElementById('r_room').value;
+  if (id != null) {
+    socket.emit('join_room', id);
+    socket.on('connectToRoom', function(data) {
+      var element = document.getElementById('id01');
+      element.innerHTML = "You are in room no. " + data;
+      actualRoom = data;
+      userConnected();
+      closePopup();
+    })
+  }
+});
+
+//évènement click sur le bouton qui appel la fontion 'quitter_room'
+$('#quitter_room').on('click', function() {
+  socket.emit('leave_room', actualRoom);
+  var element = document.getElementById('id01');
+  element.innerHTML = "Accueil";
+  openPopup();
+});
+//-------------------------------//
+
+
+
+//--------MESSAGES -----------------------//
 
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
@@ -46,50 +98,6 @@ function envoieMessage() {
 // Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
 $('#envoyer').on('click', function() {
   envoieMessage();
-});
-
-$('#creer_room').on('click', function() {
-  socket.emit('creation_room');
-  socket.on('connectToRoom', function(data) {
-    //affiche sur le html l'id de la room
-    var element = document.getElementById('id01');
-    element.innerHTML = "You are in room no. " + data;
-    actualRoom = data;
-    userConnected();
-    closePopup();
-  })
-});
-
-function userConnected(){
-  pseudo = $('#pseudo_room').val();
-  if (pseudo==null || pseudo==""){
-    pseudo = "Anonyme";
-  }
-  socket.emit('nouveau_client', pseudo);
-  document.title = pseudo + ' - ' + document.title; // met le pseudo dans l'onglet
-}
-
-// évènement click sur le bouton qui appel la fontion 'rejoindre_room'
-$('#rejoindre_room').on('click', function() {
-  var id = document.getElementById('r_room').value;
-  if (id != null) {
-    socket.emit('join_room', id);
-    socket.on('connectToRoom', function(data) {
-      var element = document.getElementById('id01');
-      element.innerHTML = "You are in room no. " + data;
-      actualRoom = data;
-      userConnected();
-      closePopup();
-    })
-  }
-});
-
-//évènement click sur le bouton qui appel la fontion 'quitter_room'
-$('#quitter_room').on('click', function() {
-  socket.emit('leave_room', actualRoom);
-  var element = document.getElementById('id01');
-  element.innerHTML = "Accueil";
-  openPopup();
 });
 
 //Appuyer sur entrer envoi le message
@@ -139,5 +147,5 @@ function insereMessage(pseudo, message, mind) {
 $(document).on("click", ".vote", function() {
   socket.emit("votes", pseudo, this.id);
   alert(pseudo + " : " + this.id);
-
 });
+//-------------------------------//
