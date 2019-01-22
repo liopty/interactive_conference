@@ -9,7 +9,7 @@ var socket = io();
 //variables temporaires concernant l'utilisateur et la room dans laquelle il se trouve
 var actualRoom = null;
 var pseudo = null;
-var idIntoDB;
+var idIntoDB = null;
 
 
 //--------ROOMS -----------------------//
@@ -37,7 +37,9 @@ $('#creer_room').on('click', function() {
     element.innerHTML = "Room n°" + actualRoom;
     document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
     closePopup();
-    idIntoDB = userId;
+    if(idIntoDB === null){
+      idIntoDB = userId;
+    }
   })
 });
 
