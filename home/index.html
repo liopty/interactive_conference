@@ -18,26 +18,50 @@
     </div>
 
     <div class="mdc-card form">
-      <div >
-        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
-          <input type="text" id="r_room" class="mdc-text-field__input">
-          <div class="mdc-notched-outline">
-            <div class="mdc-notched-outline__leading"></div>
-            <div class="mdc-notched-outline__notch">
-              <label for="tf-outlined" class="mdc-floating-label">Numéro du salon</label>
+      <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">                                  <!-- TextBox Pseudo-->
+                <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+                    <input type="text" id="pseudo_room" class="mdc-text-field__input">
+                    <div class="mdc-notched-outline">
+                      <div class="mdc-notched-outline__leading"></div>
+                      <div class="mdc-notched-outline__notch">
+                        <label for="tf-outlined" class="mdc-floating-label">Pseudo</label>
+                      </div>
+                      <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                  </div>
             </div>
-            <div class="mdc-notched-outline__trailing"></div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 column-join">
+              <div class="mdc-layout-grid__inner">
+                  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">                            <!-- TextBox Numéro du Salon-->
+                    <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+                        <input type="text" id="r_room" class="mdc-text-field__input">
+                        <div class="mdc-notched-outline">
+                          <div class="mdc-notched-outline__leading"></div>
+                          <div class="mdc-notched-outline__notch">
+                            <label for="tf-outlined" class="mdc-floating-label">Numéro du salon</label>
+                          </div>
+                          <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                      </div>                
+                  </div>
+                  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">                            <!-- Boutton Rejoindre salon-->
+                    <button class="mdc-button mdc-button--raised" id="rejoindre_room">
+                      <span class="mdc-button__label">Rejoindre un salon</span>
+                    </button>
+                  </div>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle column-join">   <!-- Boutton Nouveau Pseudo-->
+                <button class="mdc-button mdc-button--raised" id="creer_room">
+                    <span class="mdc-button__label">Nouveau salon</span>
+                  </button>
+            </div>
           </div>
-        </div>
-        <button class="buttonSend mdc-fab mdc-fab--mini" id="rejoindre_room">
-          <span class="mdc-fab__icon material-icons">send</span>
-        </button>
-      </div>
-      <div class="pos-button">
-        <button type="button" class="mdc-button cd-popup-trigger color" id="creer_room">Nouveau salon</button>
-      </div>
-    </div>
-  </section>
+      </div>  
+  </div>
+</section>
 
   <section>
       <aside class="mdc-drawer mdc-drawer--modal">

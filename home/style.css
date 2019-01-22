@@ -40,7 +40,6 @@ Joindre une room / Créer une room
   left: 50%;
   transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
   padding: 2%;
-  /*border: 1px solid white;*/
 }
 
 .pos-form {
@@ -54,8 +53,19 @@ Joindre une room / Créer une room
   padding-top: 5px;
 }
 
-.color {
-  color: red;
+.column-join {
+  margin-top: 10%;
+}
+
+#rejoindre_room {
+  background-color: #4D6D9A;
+  width: 70%;
+}
+
+#creer_room {
+  height: 11em;
+  width: 65%;
+  background-color: #4D6D9A;
 }
 
 /* --------------------------------
