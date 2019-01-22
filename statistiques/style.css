@@ -1,0 +1,107 @@
+/* Section stats */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#back {
+  position: fixed;
+  margin-left: 1%;
+  margin-top: -3.5%;
+  text-decoration: none;
+  color: black;
+}
+
+#back a {
+  text-decoration: none;
+  color: black;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+section {
+  margin-top: 5%;
+}
+
+.my-card {
+  height: 250px;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  -moz-user-select: none; /* Firefox */
+  -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+  -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+  user-select: none; /* Propriété standard */
+}
+
+.card2, .card3, .card4 {
+  margin-top: 5%;
+}
+
+.card4 {
+  margin-bottom: 4%;
+}
+
+/* Card 1 */
+
+#nb_users {
+  text-align: center;
+  letter-spacing: 2px;
+  margin-top: 17%;
+  font-size: 25px;
+}
+
+/* Card 2 */
+
+#messages {
+  text-align: center;
+  letter-spacing: 2px;
+  margin-top: 17%;
+  font-size: 25px;
+}
+
+/* Card 3 */
+
+.pos {
+  font-size: 25px;
+}
+
+.thumb_up {
+  color: green;
+}
+
+.thumb_down {
+  color: red;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+#text_vote {
+  text-align: center;
+  font-size: 25px;
+  margin-top: 5%;
+}
+
+.container1 {
+  margin-left: 27%;
+  margin-top: 18%;
+}
+
+.container2 {
+  text-align: right;
+  margin-top: 18%;
+  margin-right: 27%;
+}
+
+/* Card 4 */
+
+#temps {
+  text-align: center;
+  letter-spacing: 2px;
+  margin-top: 17%;
+  font-size: 25px;
+}
