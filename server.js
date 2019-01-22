@@ -64,7 +64,7 @@ var test,test2;
 client.query("SELECT * FROM room;", (err, res) => {
 if (err) throw err;
 test = res;
-test2 = res.send(result.rows);
+test2 = res.send(res.rows);
 console.log(res);
 
 });
