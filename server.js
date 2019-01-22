@@ -15,7 +15,7 @@ console.log(res);
 client.end();
 });
 */
-client.query("SELECET * FROM room;", (err, res) => {
+client.query("SELECT * FROM room;", (err, res) => {
 if (err) throw err;
 console.log(res);
 client.end();
