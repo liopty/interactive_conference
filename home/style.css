@@ -375,11 +375,6 @@ body,header,#messages li, .contentTabs {
     display: none;
   }
   .upvote{
-<<<<<<< HEAD
-  margin-left: 20px;
-}
-=======
     margin-left: 20px;
   }
 }
->>>>>>> baaf10082a555dfa81421ffb4c7ac90a230b274c
