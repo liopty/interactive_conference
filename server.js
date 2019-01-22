@@ -66,7 +66,7 @@ var test2, test;
 client.query("SELECT * FROM room;", (err, res) => {
 if (err) throw err;
 test2 = res.rows;
-test = res.rows.id_room;
+test = res.rows[0].id_room;
 console.log(res);
 
 });
