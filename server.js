@@ -99,6 +99,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     var tempoId;
     var check = false;
     while(check!=true){
+      setInterval(
       var tempo = (Math.floor(Math.random() * 1000)+1);
       console.log(tempo);
 
@@ -111,12 +112,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
         console.log("DISPO "+res.rows.length);
       }
       });
-
-      if (!roomno.includes(tempo)) {
-        check=true;
-        tempoId=tempo;
-      }
-
+    , 3000);
     }
     roomno.push(tempoId);
     socket.join(tempoId);
