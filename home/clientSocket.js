@@ -27,13 +27,14 @@ function closePopup() {
 }
 
 $('#creer_room').on('click', function() {
-  socket.emit('creation_room');
+  userConnected();
+  socket.emit('creation_room', pseudo);
   socket.on('connectToRoom', function(roomID) {
     //affiche sur le html l'id de la room
     var element = document.getElementById('id01');
     actualRoom = roomID;
     element.innerHTML = "Room n°" + actualRoom;
-    userConnected();
+
     closePopup();
   })
 });
@@ -50,13 +51,13 @@ function userConnected(){
 // évènement click sur le bouton qui appel la fontion 'rejoindre_room'
 $('#rejoindre_room').on('click', function() {
   var id = document.getElementById('r_room').value;
+  userConnected();
   if (id != null) {
-    socket.emit('join_room', id);
+    socket.emit('join_room', id, pseudo);
     socket.on('connectToRoom', function(data) {
       var element = document.getElementById('id01');
       element.innerHTML = "You are in room no. " + data;
       actualRoom = data;
-      userConnected();
       closePopup();
     })
   }
@@ -116,7 +117,7 @@ function insereMessage(pseudo, message, mind) {
   var msgID = "msg" + ID;
 
   //Création d'un div avec le pseudo, le message et un ID
-  var text = document.createElement('div');
+  var text = document.ateElement('div');
   var content = document.createTextNode(pseudo + " : " + message);
   text.appendChild(content);
   text.id = msgID;
