@@ -108,7 +108,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     roomno.push(tempoId);
     socket.join(tempoId);
 
-    client.query("INSERT INTO room VALUES (2,FALSE);", (err, res) => {
+    client.query("INSERT INTO room VALUES (953,FALSE);", (err, res) => {
     if (err) throw err;
     console.log(res);
     });
