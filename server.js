@@ -67,7 +67,7 @@ test = res;
 console.log(res);
 
 });
-setInterval(function(){ console.log("test : " +test); }, 3000);
+setTimeout(function(){ console.log("test : " +test+"test.result : " + test.result); }, 3000);
 
 
 const express = require("express");
