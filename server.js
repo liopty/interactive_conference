@@ -177,11 +177,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     if(message!=null){
       message = ent.encode(message);
     }
-    client.query('SELECT id_user FROM AppUser WHERE ',(err, res) => {
-    if (err) throw err;
-    console.log(res);
-    });
-
+    
     client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
     if (err) throw err;
     console.log(res);
