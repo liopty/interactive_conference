@@ -26,7 +26,7 @@ Joindre une room / Créer une room
   top: 0%;
   margin-left: 5px;
   margin-top: 5px;
-  background-color: #00887A;
+  background-color: #8860D0;  /* couleur vert #00887A */
   font-size: 0.875rem;
   letter-spacing: 0.089em;
   text-transform: uppercase;
@@ -53,7 +53,7 @@ Joindre une room / Créer une room
 }
 
 #rejoindre_room {
-  background-color: #77A6F7;  /* couleur bleu foncé #4D6D9A, bleu clair #77A6F7*/
+  background-color: #5680E9;  /* couleur bleu foncé #4D6D9A, bleu clair #77A6F7*/
   width: 16em;
   margin-top: 6%;
 }
@@ -61,7 +61,7 @@ Joindre une room / Créer une room
 #creer_room {
   height: 10em;
   width: 16em;
-  background-color: #77A6F7;
+  background-color: #5680E9;
 }
 
 .mdc-card {
@@ -230,7 +230,7 @@ body {
   text-align: center;
 }
 
-body,header,#messages li, .contentTabs {
+body,header,#messages li, #contentTabs {
     display: flex;
 }
 
@@ -265,6 +265,30 @@ body,header,#messages li, .contentTabs {
   font-size: 22px;
 }
 
+.mdc-tab-indicator>.mdc-tab-indicator__content--underline {
+  background-color: #84CEEB;
+}
+
+#corps_chat aside .mdc-drawer__content {
+  font-size: 1.1em;
+  text-transform: uppercase;
+}
+
+#corps_chat {
+  margin: 0;
+  height: 100%;
+  padding: 0;
+}
+
+#id01 {
+  font-size: 1.1em;
+  letter-spacing: 0.089em;
+  text-transform: uppercase;
+  padding-top: 1.2%;
+  padding-bottom: 1.2%;
+  background-color: #8860D0;
+}
+
 .mdc-tab{
   background-color: #fafafa;
   border-bottom: solid 1px grey;
@@ -279,12 +303,13 @@ body,header,#messages li, .contentTabs {
   color: black;
 }
 
-.contentTabs {
+#contentTabs {                          
   width: 70%;
   overflow-y: auto;
   margin-bottom: 100px;
   margin-left: auto;
   margin-right: auto;
+  max-height: 89%;
   /*margin-left: -webkit-calc(50% - 335px);
   margin-left: -moz-calc(50% - 335px);
   margin-left: calc(50% - 335px);*/
@@ -359,8 +384,14 @@ body,header,#messages li, .contentTabs {
   padding-bottom: 1%;
 }
 
+.chatBar .mdc-fab {
+  position: absolute;
+  margin-top: 0.5%;
+  margin-left: 0.5%;
+}
+
 .chatBar button {
-  background-color: #64b5f6;
+  background-color: #5680E9;
 }
 
 .chatBar .inputMsg {
@@ -411,10 +442,9 @@ body,header,#messages li, .contentTabs {
   margin: 0;
 }
 
-
 @media screen and (max-width: 600px)
 {
-  .contentTabs{
+  #contentTabs{
     width: 100%;
   }
   .mdc-tab__text-label{
