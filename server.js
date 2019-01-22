@@ -6,18 +6,19 @@ const client = new Client({
 });
 
 client.connect();
-/*
-client.query("CREATE TABLE room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
+/*(code, title, did, date_prod, kind)
+    VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama');*/
+client.query("INSERT INTO room VALUES (5000,FALSE);", (err, res) => {
 if (err) throw err;
+console.log(res);
 client.end();
-//
 });
 
-client.query("CREATE TABLE appuser (id_user INT PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room));", (err, res) => {
+client.query("SELECET * FROM room;", (err, res) => {
 if (err) throw err;
+console.log(res);
 client.end();
 });
-*/
 
 const express = require("express");
 const app = require('express')();
