@@ -61,15 +61,17 @@ console.log(res);
 });
 */
 
-var test2;
+var test2, test;
+
 client.query("SELECT * FROM room;", (err, res) => {
 if (err) throw err;
 test2 = res.rows;
+test = res.rows.id_room;
 console.log(res);
 
 });
 setTimeout(function(){ console.log(Object.values(test2)); }, 2000);
-setTimeout(function(){ console.log(test2.id_room); }, 2000);
+setTimeout(function(){ console.log(test); }, 2000);
 
 
 
