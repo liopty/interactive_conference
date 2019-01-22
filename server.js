@@ -6,9 +6,9 @@ const client = new Client({
 });
 
 client.connect();
+/*
 client.query("CREATE TABLE room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
 if (err) throw err;
-//
 });
 client.query("CREATE TABLE appuser (id_user SERIAL PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room));", (err, res) => {
 if (err) throw err;
@@ -45,7 +45,8 @@ client.query("SELECT * FROM room;", (err, res) => {
 if (err) throw err;
 console.log(res);
 
-});client.query("SELECT * FROM AppUser;", (err, res) => {
+});
+client.query("SELECT * FROM AppUser;", (err, res) => {
 if (err) throw err;
 console.log(res);
 });
@@ -58,10 +59,16 @@ client.query("SELECT * FROM vote;", (err, res) => {
 if (err) throw err;
 console.log(res);
 });
+*/
+var test;
+client.query("SELECT * FROM room;", (err, res) => {
+if (err) throw err;
+test = res;
+console.log(res);
 
+});
 
-
-
+console.log("test : " +test+ "test.result : "+test.result+"test.result.rows : " + test.result.rows);
 
 const express = require("express");
 const app = require('express')();
