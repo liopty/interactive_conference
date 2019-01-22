@@ -30,7 +30,7 @@ function closePopup() {
 $('#creer_room').on('click', function() {
   userConnected();
   socket.emit('creation_room', pseudo);
-  socket.on('connectToRoom', function(roomID, userId) {
+  socket.on('CreatorConnectToRoom', function(roomID, userId) {
     //affiche sur le html l'id de la room
     var element = document.getElementById('id01');
     actualRoom = roomID;
