@@ -96,6 +96,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   var roomno=[];
 
   io.on('connection', function(socket){
+
     socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
@@ -118,9 +119,13 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     console.log("Creation d'une room ID: "+tempoId);
     io.sockets.in(tempoId).emit('connectToRoom', tempoId);
 
-    client.query(insertTableAppUser, [pseudo, tempoId, 0], (err, res) => {
+    client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
     if (err) throw err;
     console.log(res);
+    });
+    client.query("SELECT * FROM AppUser;", (err, res) => {
+    if (err) throw err;
+    console.log(res.rows);
     });
   });
 
