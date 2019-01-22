@@ -100,6 +100,12 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     var check = false;
     while(check!=true){
       var tempo = (Math.floor(Math.random() * 1000)+1);
+
+      client.query('SELECT id_room FROM room WHERE id_room = $1;',[9999] , (err, res) => {
+      if (err) throw err;
+      console.log(res);
+      });
+
       if (!roomno.includes(tempo)) {
         check=true;
         tempoId=tempo;
@@ -108,15 +114,10 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     roomno.push(tempoId);
     socket.join(tempoId);
 
-  
+    //insertion du tuple (id_room,anonyme) dans la TABLE room lors de la creation d'une room
     client.query(insertTableRoom, [tempoId, false], (err, res) => {
     if (err) throw err;
     console.log(res);
-    });
-
-    client.query("SELECT * FROM room;", (err, res) => {
-    if (err) throw err;
-    console.log(res.rows);
     });
 
     console.log("Creation d'une room ID: "+tempoId);
