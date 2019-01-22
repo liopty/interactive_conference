@@ -234,12 +234,14 @@ body,header,#messages li, .contentTabs {
 }
 
 .contentTabs {
-  width: 700px;
+  width: 70%;
   overflow-y: auto;
   margin-bottom: 100px;
-  margin-left: -webkit-calc(50% - 335px);
+  margin-left: auto;
+  margin-right: auto;
+  /*margin-left: -webkit-calc(50% - 335px);
   margin-left: -moz-calc(50% - 335px);
-  margin-left: calc(50% - 335px);
+  margin-left: calc(50% - 335px);*/
 }
 
 .tabcontent {
@@ -257,10 +259,12 @@ body,header,#messages li, .contentTabs {
   -khtml-user-select: none;
   -moz-user-select: none; /* For Mozilla */
 }
-
+#recent{
+  width: 100%;
+}
 #messages {
   padding-top: 150px;
-  width: 700px;
+  width: 100%;
 }
 
 #messages .mindMsg {
@@ -361,6 +365,9 @@ body,header,#messages li, .contentTabs {
 
 @media screen and (max-width: 600px)
 {
+  .contentTabs{
+    width: 100%;
+  }
   .mdc-tab__text-label{
     display: none;
   }
