@@ -104,6 +104,9 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
       client.query('SELECT id_room FROM room WHERE id_room = $1;',[9999] , (err, res) => {
       if (err) throw err;
       console.log(res);
+      if(res.rows == ""){
+        console.log("TRUUUUUUEEUEUEUUEUEU");
+      }
       });
 
       if (!roomno.includes(tempo)) {
