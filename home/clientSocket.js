@@ -37,7 +37,7 @@ $('#creer_room').on('click', function() {
     element.innerHTML = "Room n°" + actualRoom;
     document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
     closePopup();
-    if(idIntoDB === null){
+    if(idIntoDB === null && actualRoom !== null){
       idIntoDB = userId;
     }
   })
@@ -58,7 +58,7 @@ $('#rejoindre_room').on('click', function() {
   if (id != null) {
     socket.emit('join_room', id, pseudo);
     socket.on('connectToRoom', function(data,userId) {
-      if(idIntoDB === null){
+      if(idIntoDB === null && actualRoom !== null){
         idIntoDB = userId;
       }
       var element = document.getElementById('id01');
@@ -73,6 +73,7 @@ $('#rejoindre_room').on('click', function() {
 //évènement click sur le bouton qui appel la fontion 'quitter_room'
 $('#quitter_room').on('click', function() {
   socket.emit('leave_room', actualRoom);
+  actualRoom = null;
   var element = document.getElementById('id01');
   element.innerHTML = "Accueil";
   openPopup();
