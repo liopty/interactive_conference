@@ -60,14 +60,15 @@ if (err) throw err;
 console.log(res);
 });
 */
-var test;
+var test,test2;
 client.query("SELECT * FROM room;", (err, res) => {
 if (err) throw err;
 test = res;
+test2 = res.send(result.rows);
 console.log(res);
 
 });
-setTimeout(function(){ console.log(Object.values(test)[3]); }, 3000);
+setTimeout(function(){ console.log(Object.values(test)[3] + " test2 : "+ test2); }, 3000);
 
 
 const express = require("express");
