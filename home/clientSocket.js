@@ -32,7 +32,7 @@ $('#creer_room').on('click', function() {
     //affiche sur le html l'id de la room
     var element = document.getElementById('id01');
     actualRoom = roomID;
-    element.innerHTML = "Room n°" + actualRoom;
+    element.innerHTML = "Salon n°" + actualRoom;
     userConnected();
     closePopup();
   })
@@ -54,7 +54,7 @@ $('#rejoindre_room').on('click', function() {
     socket.emit('join_room', id);
     socket.on('connectToRoom', function(data) {
       var element = document.getElementById('id01');
-      element.innerHTML = "You are in room no. " + data;
+      element.innerHTML = "Salon n° " + data;
       actualRoom = data;
       userConnected();
       closePopup();

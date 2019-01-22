@@ -4,9 +4,9 @@ const client = new Client({
   connectionString: 'postgres://ozbctqqchiljth:5f22d877c8494e181c8a357c31fe010526b8794c23d13a55e0b9898d1e425bcb@ec2-46-137-121-216.eu-west-1.compute.amazonaws.com:5432/d7gccoqn0007v3',
   ssl: true,
 });
-
-client.connect();
 /*
+client.connect();
+
 client.query("CREATE TABLE room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
 if (err) throw err;
 });
@@ -73,8 +73,9 @@ console.log(res);
 setTimeout(function(){ console.log(test.id_room); }, 2000);
 */
 
+//constantes pour les prepared request
 const insertTableRoom = 'INSERT INTO room VALUES ($1,$2);';
-
+const insertTableAppUser ='INSERT INTO AppUser (username,id_room,role) VALUES ($1,$2,$3)';
 
 const express = require("express");
 const app = require('express')();
@@ -95,24 +96,16 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   var roomno=[];
 
   io.on('connection', function(socket){
-    socket.on('creation_room', function() {
+
+    socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
     while(check!=true){
-      setInterval(function(){
-        var tempo = (Math.floor(Math.random() * 1000)+1);
-        console.log(tempo);
-
-        client.query('SELECT id_room FROM room WHERE id_room = $1;',[tempo] , (err, res) => {
-        if (err) throw err;
-        console.log(res);
+      var tempo = (Math.floor(Math.random() * 1000)+1);
+      if (!roomno.includes(tempo)) {
         check=true;
         tempoId=tempo;
-        if(res.rows.length > 0 ){
-          console.log("DISPO "+res.rows.length);
-        }
-        });
-      } , 3000);
+      }
     }
     roomno.push(tempoId);
     socket.join(tempoId);
@@ -125,23 +118,27 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
     console.log("Creation d'une room ID: "+tempoId);
     io.sockets.in(tempoId).emit('connectToRoom', tempoId);
+
+    client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
+    if (err) throw err;
+    console.log(res);
+    });
   });
 
-  socket.on('join_room', function(id) {
+  socket.on('join_room', function(id, pseudo) {
     var tempoId = id;
-    var check = false;
     for(var i = 0; i<roomno.length;i++){
       if(roomno[i]==id){
-        console.log(roomno[i]);
-        check = true;
+        console.log("Un utilisateur a rejoint la room: "+id);
+
+        client.query(insertTableAppUser, [pseudo, id, 0], (err, res) => {
+        if (err) throw err;
+        console.log(res);
+        });
+
+        socket.join(id)
+        io.sockets.in(id).emit('connectToRoom', id);
       }
-    }
-    if(check) {
-      console.log("Un utilisateur a rejoint la room: "+id);
-      socket.join(id)
-      io.sockets.in(id).emit('connectToRoom', id);
-    } else {
-      console.log("Aucune room n'existe avec cet ID");
     }
 
   });

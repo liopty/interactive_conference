@@ -59,7 +59,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="corps_chat">
       <aside class="mdc-drawer mdc-drawer--modal">
           <div class="mdc-drawer__content">
             <div class="mdc-list">
@@ -67,13 +67,13 @@
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_back</i>
                 <span class="mdc-list-item__text"></span>
               </a>
-              <a class="mdc-list-item" href="">
+              <a class="mdc-list-item" href="#" id="statistique">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">poll</i>
                 <span class="mdc-list-item__text">Statistiques</span>
               </a>
-              <a class="mdc-list-item" href="#"> <!--id="quitter_room"--->
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">clear</i>
-                <span class="mdc-list-item__text">Déconnexion</span>
+              <a class="mdc-list-item" href="#" id="quitter_room">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true" >clear</i>
+                <span class="mdc-list-item__text">Quitter</span>
               </a>
             </div>
           </div>
@@ -87,8 +87,7 @@
           <span class="mdc-top-app-bar__title">Interactive Conference</span>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-          <h1 id="id01">Accueil</h1>
-          <button id="quitter_room">Quitter</button>
+          <div class="mdc-card" id="id01"></div>
         </section>
       </div>
       <div class="mdc-tab-bar" id="tabBar" role="tablist" aria-label="Navigation">
@@ -134,7 +133,7 @@
       </div>
     </header>
 
-    <div id="contentTabs" class="contentTabs">
+    <div id="contentTabs">
       <!--CONTENU DE L'ONGLET 1 -->
       <div id="recent" class="tabcontent active">
         <div id="messages"></div>
@@ -161,7 +160,7 @@
           <div class="mdc-notched-outline__trailing"></div>
         </div>
       </div>
-      <button class="buttonSend mdc-fab mdc-fab--mini" id="envoyer">
+      <button class="mdc-fab mdc-fab--mini" id="envoyer">
         <span class="mdc-fab__icon material-icons">send</span>
       </button>
     </div>
