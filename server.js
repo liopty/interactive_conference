@@ -123,10 +123,6 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     if (err) throw err;
     console.log(res);
     });
-    client.query("SELECT * FROM AppUser;", (err, res) => {
-    if (err) throw err;
-    console.log(res.rows);
-    });
   });
 
   socket.on('join_room', function(id, pseudo) {

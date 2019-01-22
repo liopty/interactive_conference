@@ -34,7 +34,7 @@ $('#creer_room').on('click', function() {
     var element = document.getElementById('id01');
     actualRoom = roomID;
     element.innerHTML = "Room n°" + actualRoom;
-
+    document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
     closePopup();
   })
 });
@@ -45,7 +45,6 @@ function userConnected(){
     pseudo = "Anonyme";
   }
   socket.emit('nouveau_client', pseudo);
-  document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
 }
 
 // évènement click sur le bouton qui appel la fontion 'rejoindre_room'
@@ -58,6 +57,7 @@ $('#rejoindre_room').on('click', function() {
       var element = document.getElementById('id01');
       element.innerHTML = "You are in room no. " + data;
       actualRoom = data;
+      document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
       closePopup();
     })
   }
@@ -78,6 +78,7 @@ $('#quitter_room').on('click', function() {
 
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
+  console.log("JE PASSSSSSSSSSSSSSSSSSSE");
   insereMessage(data.pseudo, data.message);
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
