@@ -19,7 +19,6 @@ if (err) throw err;
 console.log(res);
 });
 
-client.end();
 
 const express = require("express");
 const app = require('express')();
