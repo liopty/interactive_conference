@@ -67,7 +67,7 @@ test = res;
 console.log(res);
 
 });
-setTimeout(function(){ console.log(Object.values(test)); }, 3000);
+setTimeout(function(){ console.log(Object.values(test)[4]); }, 3000);
 
 
 const express = require("express");
