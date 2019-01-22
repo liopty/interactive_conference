@@ -76,6 +76,7 @@ setTimeout(function(){ console.log(test.id_room); }, 2000);
 //constantes pour les prepared request
 const insertTableRoom = 'INSERT INTO room VALUES ($1,$2);';
 const insertTableAppUser ='INSERT INTO AppUser (username,id_room,role) VALUES ($1,$2,$3)';
+const insertTableMessage = 'INSERT INTO message (content, id_room, id_user, answered, comment,quizz) VALUES ($1,$2,$3,$4,$5,$6);';
 
 const express = require("express");
 const app = require('express')();
@@ -119,9 +120,16 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     console.log("Creation d'une room ID: "+tempoId);
     io.sockets.in(tempoId).emit('connectToRoom', tempoId);
 
+
     client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
     if (err) throw err;
     console.log(res);
+    });
+
+    client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
+    if (err) throw err;
+    io.sockets.in(tempoId).emit('connectToRoom', tempoId, res.rows[0].id_user);
+    console.log(res.rows);
     });
   });
 
@@ -160,16 +168,32 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   socket.on('disconnect', function(){
     //Ecrit dans la console lorsqu'un utilisateur se déconnecte
     console.log("un utilisateur s'est déconnecté");
+
+    //temporaire pour tester ce qu'il y a dans la bd
+    client.query("SELECT * FROM AppUser;", (err, res) => {
+    if (err) throw err;
+    console.log(res.rows);
+    });
+    client.query("SELECT * FROM message;", (err, res) => {
+    if (err) throw err;
+    console.log(res.rows);
+    });
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
-  socket.on('chat_message', function(id, message){
+  socket.on('chat_message', function(id, message, userId){
     //Ecrit dans la console le msg
     console.log("(Room: "+id+") "+message);
     // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personne
     if(message!=null){
       message = ent.encode(message);
     }
+
+    client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
+    if (err) throw err;
+    console.log(res);
+    });
+
     socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message});
   });
 

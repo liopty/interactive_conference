@@ -9,6 +9,7 @@ var socket = io();
 //variables temporaires concernant l'utilisateur et la room dans laquelle il se trouve
 var actualRoom = null;
 var pseudo = null;
+var idIntoDB;
 
 
 //--------ROOMS -----------------------//
@@ -27,14 +28,17 @@ function closePopup() {
 }
 
 $('#creer_room').on('click', function() {
-  socket.emit('creation_room');
-  socket.on('connectToRoom', function(roomID) {
+  userConnected();
+  socket.emit('creation_room', pseudo);
+  socket.on('connectToRoom', function(roomID, userId) {
     //affiche sur le html l'id de la room
     var element = document.getElementById('id01');
     actualRoom = roomID;
     element.innerHTML = "Salon n°" + actualRoom;
     userConnected();
+    document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
     closePopup();
+    idIntoDB = userId;
   })
 });
 
@@ -44,19 +48,20 @@ function userConnected(){
     pseudo = "Anonyme";
   }
   socket.emit('nouveau_client', pseudo);
-  document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
 }
 
 // évènement click sur le bouton qui appel la fontion 'rejoindre_room'
 $('#rejoindre_room').on('click', function() {
   var id = document.getElementById('r_room').value;
+  userConnected();
   if (id != null) {
-    socket.emit('join_room', id);
-    socket.on('connectToRoom', function(data) {
+    socket.emit('join_room', id, pseudo);
+    socket.on('connectToRoom', function(data,userId) {
+      idIntoDB = userId;
       var element = document.getElementById('id01');
       element.innerHTML = "Salon n° " + data;
       actualRoom = data;
-      userConnected();
+      document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
       closePopup();
     })
   }
@@ -86,7 +91,7 @@ socket.on('message', function(data) {
 function envoieMessage() {
   var message = $('#m').val();
   if (message != '') {
-    socket.emit('chat_message', actualRoom, message); // Transmet le message aux autres
+    socket.emit('chat_message', actualRoom, message, idIntoDB); // Transmet le message aux autres
     insereMessage(pseudo, message, "yes"); // Affiche le message aussi sur notre page
     $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
     var elem = document.getElementById('contentTabs');
