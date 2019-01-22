@@ -68,7 +68,7 @@ test2 = res.rows;
 console.log(res);
 
 });
-setTimeout(function(){ console.log(Object.values(test)[3] + " test2 : "+ test2); }, 3000);
+setTimeout(function(){ console.log(Object.values(test)[3] + " test2 : "+ Object.values(test2)); }, 3000);
 
 
 const express = require("express");
