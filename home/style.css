@@ -252,6 +252,9 @@ body,header,#messages li, .contentTabs {
   text-align: center;
   margin-top: 200px;
 }
+#topvote,#repondu{
+    width: 100%;
+}
 
 .mdc-top-app-bar__title {
   user-select: none;

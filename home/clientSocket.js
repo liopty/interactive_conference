@@ -32,7 +32,7 @@ $('#creer_room').on('click', function() {
     //affiche sur le html l'id de la room
     var element = document.getElementById('id01');
     actualRoom = roomID;
-    element.innerHTML = "You are in room no. " + actualRoom;
+    element.innerHTML = "Room n°" + actualRoom;
     userConnected();
     closePopup();
   })
