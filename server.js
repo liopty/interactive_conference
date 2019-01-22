@@ -75,6 +75,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
   // Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
   socket.on('nouveau_client', function(pseudo) {
+    console.log("pseudo:::::"+pseudo);
     if(pseudo!=null){
       pseudo = ent.encode(pseudo);
     }
