@@ -118,7 +118,7 @@ function insereMessage(pseudo, message, mind) {
   var msgID = "msg" + ID;
 
   //Création d'un div avec le pseudo, le message et un ID
-  var text = document.ateElement('div');
+  var text = document.createElement('div');
   var content = document.createTextNode(pseudo + " : " + message);
   text.appendChild(content);
   text.id = msgID;
