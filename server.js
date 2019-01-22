@@ -67,8 +67,8 @@ test = res;
 console.log(res);
 
 });
+setInterval(function(){ console.log("test : " +test); }, 3000);
 
-console.log("test : " +test);
 
 const express = require("express");
 const app = require('express')();
