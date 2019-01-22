@@ -108,8 +108,8 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     roomno.push(tempoId);
     socket.join(tempoId);
 
-    values = [tempoId, false];
-    client.query(insertTableRoom, values, (err, res) => {
+  
+    client.query(insertTableRoom, [tempoId, false], (err, res) => {
     if (err) throw err;
     console.log(res);
     });
