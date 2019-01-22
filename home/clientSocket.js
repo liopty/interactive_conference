@@ -1,6 +1,6 @@
 var ID = 0;
 /*var lesVotes = new Dict({a: 1}, function (key) {
-    return "default: " + key;
+return "default: " + key;
 });*/
 
 //Initialisation socket io
@@ -62,6 +62,9 @@ $('#creer_room').on('click', function() {
 
 function userConnected(){
   pseudo = $('#pseudo_room').val();
+  if (pseudo==null || pseudo==""){
+    pseudo = "Anonyme";
+  }
   socket.emit('nouveau_client', pseudo);
   document.title = pseudo + ' - ' + document.title; // met le pseudo dans l'onglet
 }
