@@ -61,20 +61,19 @@ console.log(res);
 });
 */
 
-var test2, test;
+/*
+var test;
 
 client.query("SELECT * FROM room;", (err, res) => {
 if (err) throw err;
-test2 = res.rows;
 test = res.rows[0];
 console.log(res);
-
 });
-setTimeout(function(){ console.log(Object.values(test2)); }, 2000);
+
 setTimeout(function(){ console.log(test.id_room); }, 2000);
+*/
 
-
-
+const insertTableRoom = 'INSERT INTO room VALUES ($1,$2);';
 
 
 const express = require("express");
@@ -108,6 +107,17 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     }
     roomno.push(tempoId);
     socket.join(tempoId);
+
+    client.query(insertTableRoom, [tempoId, FALSE], (err, res) => {
+    if (err) throw err;
+    console.log(res);
+    });
+
+    client.query("SELECT * FROM room;", (err, res) => {
+    if (err) throw err;
+    console.log(res.row[0]);
+    });
+
     console.log("Creation d'une room ID: "+tempoId);
     io.sockets.in(tempoId).emit('connectToRoom', tempoId);
   });
