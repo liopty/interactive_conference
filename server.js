@@ -100,7 +100,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     var check = false;
     while(check!=true){
       var tempo = (Math.floor(Math.random() * 1000)+1);
-
+      console.log(tempo);
       client.query('SELECT id_room FROM room WHERE id_room = $1;',[tempo] , (err, res) => {
       if (err) throw err;
       console.log(res);
@@ -110,6 +110,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
         tempoId=tempo;
       }
       });
+
     }
     roomno.push(tempoId);
     socket.join(tempoId);
