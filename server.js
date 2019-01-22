@@ -74,11 +74,11 @@ setTimeout(function(){ console.log(test.id_room); }, 2000);
 */
 
 
-client.query("TRUNCATE message", (err, res) => {
+client.query("TRUNCATE vote", (err, res) => {
 if (err) throw err;
 console.log(res);
 });
-client.query("TRUNCATE room", (err, res) => {
+client.query("TRUNCATE message", (err, res) => {
 if (err) throw err;
 console.log(res);
 });
@@ -86,7 +86,7 @@ client.query("TRUNCATE AppUser", (err, res) => {
 if (err) throw err;
 console.log(res);
 });
-client.query("TRUNCATE vote", (err, res) => {
+client.query("TRUNCATE room", (err, res) => {
 if (err) throw err;
 console.log(res);
 });
