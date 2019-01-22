@@ -74,6 +74,7 @@ $('#rejoindre_room').on('click', function() {
 $('#quitter_room').on('click', function() {
   socket.emit('leave_room', actualRoom);
   actualRoom = null;
+  idIntoDB = null;
   var element = document.getElementById('id01');
   element.innerHTML = "Accueil";
   openPopup();
