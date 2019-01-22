@@ -68,6 +68,16 @@ Joindre une room / Créer une room
   background-color: #77A6F7;
 }
 
+@media screen and (max-witdth:800px) {
+  #creer_room {
+    height: 3em;
+    width: 65%;
+    background-color: black;
+  }
+}
+
+
+
 /* --------------------------------
 
 Popup nouvelle Room
@@ -243,9 +253,9 @@ body,header,#messages li, .contentTabs {
 
 .mdc-top-app-bar__title {
   user-select: none;
-  -webkit-user-select: none; // For Webkit
+  -webkit-user-select: none; /* For Webkit */
   -khtml-user-select: none;
-  -moz-user-select: none; // For Mozilla
+  -moz-user-select: none; /* For Mozilla */
 }
 
 #messages {
@@ -357,7 +367,7 @@ body,header,#messages li, .contentTabs {
   .mdc-top-app-bar__title{
     display: none;
   }
-
-.upvote{
-  margin-left: 20px;
+  .upvote{
+    margin-left: 20px;
+  }
 }
