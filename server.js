@@ -167,6 +167,16 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   socket.on('disconnect', function(){
     //Ecrit dans la console lorsqu'un utilisateur se déconnecte
     console.log("un utilisateur s'est déconnecté");
+
+    //temporaire pour tester ce qu'il y a dans la bd
+    client.query("SELECT * FROM AppUser;", (err, res) => {
+    if (err) throw err;
+    console.log(res.rows);
+    });
+    client.query("SELECT * FROM message;", (err, res) => {
+    if (err) throw err;
+    console.log(res.rows);
+    });
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
@@ -177,7 +187,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     if(message!=null){
       message = ent.encode(message);
     }
-    
+
     client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
     if (err) throw err;
     console.log(res);

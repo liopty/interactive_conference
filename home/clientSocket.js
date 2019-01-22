@@ -55,7 +55,8 @@ $('#rejoindre_room').on('click', function() {
   userConnected();
   if (id != null) {
     socket.emit('join_room', id, pseudo);
-    socket.on('connectToRoom', function(data) {
+    socket.on('connectToRoom', function(data,userId) {
+      idIntoDB = userId;
       var element = document.getElementById('id01');
       element.innerHTML = "You are in room no. " + data;
       actualRoom = data;
