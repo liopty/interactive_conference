@@ -107,15 +107,15 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     }
     roomno.push(tempoId);
     socket.join(tempoId);
-
-    client.query("INSERT INTO room VALUES (953,FALSE);", (err, res) => {
+    values = [id, FALSE];
+    client.query(insertTableRoom, values, (err, res) => {
     if (err) throw err;
     console.log(res);
     });
 
     client.query("SELECT * FROM room;", (err, res) => {
     if (err) throw err;
-    console.log(res.rows[0]);
+    console.log(res.rows);
     });
 
     console.log("Creation d'une room ID: "+tempoId);
