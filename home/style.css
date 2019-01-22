@@ -58,14 +58,14 @@ Joindre une room / Créer une room
 }
 
 #rejoindre_room {
-  background-color: #4D6D9A;
+  background-color: #77A6F7;  /* couleur bleu foncé #4D6D9A*/
   width: 70%;
 }
 
 #creer_room {
   height: 11em;
   width: 65%;
-  background-color: #4D6D9A;
+  background-color: #77A6F7;
 }
 
 /* --------------------------------
