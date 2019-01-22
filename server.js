@@ -73,6 +73,25 @@ console.log(res);
 setTimeout(function(){ console.log(test.id_room); }, 2000);
 */
 
+
+client.query("TRUNCATE message", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+client.query("TRUNCATE room", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+client.query("TRUNCATE AppUser", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+client.query("TRUNCATE vote", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+
+
 //constantes pour les prepared request
 const insertTableRoom = 'INSERT INTO room VALUES ($1,$2);';
 const insertTableAppUser ='INSERT INTO AppUser (username,id_room,role) VALUES ($1,$2,$3)';
@@ -125,7 +144,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     console.log(res);
     });
 
-    client.query("SELECT id_user FROM AppUser ORDER BY DESC LIMIT 1", (err, res) => {
+    client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
     if (err) throw err;
     io.sockets.in(tempoId).emit('connectToRoom', tempoId, res.rows[0].id_user);
     console.log(res.rows);
