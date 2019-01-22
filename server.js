@@ -115,7 +115,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
     client.query("SELECT * FROM room;", (err, res) => {
     if (err) throw err;
-    console.log(res.row[0]);
+    console.log(res.rows[0]);
     });
 
     console.log("Creation d'une room ID: "+tempoId);
