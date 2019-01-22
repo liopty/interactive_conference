@@ -68,7 +68,7 @@ console.log(res);
 
 });
 
-console.log("test : " +test+ "test.result : "+test.result+"test.result.rows : " + test.result.rows);
+console.log("test : " +test);
 
 const express = require("express");
 const app = require('express')();
