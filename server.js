@@ -6,26 +6,6 @@ const client = new Client({
 });
 
 client.connect();
-/*(code, title, did, date_prod, kind)
-    VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama');*/
-/*
-client.query("INSERT INTO room VALUES (7000,FALSE);", (err, res) => {
-if (err) throw err;
-console.log(res);
-});
-*/
-/*
-client.query("INSERT INTO AppUser VALUES ('VieuxMan',);", (err, res) => {
-if (err) throw err;
-console.log(res);
-});
-
-client.query("SELECT * FROM room;", (err, res) => {
-if (err) throw err;
-console.log(res);
-});
-*/
-
 client.query("CREATE TABLE room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
 if (err) throw err;
 //
@@ -33,12 +13,54 @@ if (err) throw err;
 client.query("CREATE TABLE appuser (id_user SERIAL PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room));", (err, res) => {
 if (err) throw err;
 });
-client.query("CREATE TABLE message (content text, id_user int REFERENCES appuser (id_user), id_message SERIAL PRIMARY KEY NOT NULL, answered bool, comment int, quizz jsonb);", (err, res) => {
+client.query("CREATE TABLE message (content text, id_room int REFERENCES room (id_room), id_user int REFERENCES appuser (id_user), id_message SERIAL PRIMARY KEY NOT NULL, answered bool, comment int, quizz jsonb);", (err, res) => {
 if (err) throw err;
 });
 client.query("CREATE TABLE vote (id_user int REFERENCES appuser (id_user), id_message int REFERENCES message (id_message), vote int, PRIMARY KEY (id_user, id_message));", (err, res) => {
 if (err) throw err;
 });
+
+client.query("INSERT INTO room VALUES (7000,FALSE);", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+
+
+client.query("INSERT INTO AppUser (username, id_room, role) VALUES ('VieuxMan',7000,0);", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+
+client.query("INSERT INTO message (content, id_room, id_user, answered) VALUES ('SALUT',7000,1,FALSE);", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+
+client.query("INSERT INTO vote VALUES (1,1,1);", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+
+client.query("SELECT * FROM room;", (err, res) => {
+if (err) throw err;
+console.log(res);
+
+});client.query("SELECT * FROM AppUser;", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+client.query("SELECT * FROM message;", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+
+client.query("SELECT * FROM vote;", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+
+
+
 
 
 const express = require("express");
