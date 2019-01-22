@@ -60,7 +60,8 @@ if (err) throw err;
 console.log(res);
 });
 */
-var test,test2;
+var test;
+var test2;
 client.query("SELECT * FROM room;", (err, res) => {
 if (err) throw err;
 test = res;
@@ -68,7 +69,9 @@ test2 = res.rows;
 console.log(res);
 
 });
-setTimeout(function(){ console.log(Object.values(test)[3] + " test2 : "+ Object.values(test2)); }, 3000);
+setTimeout(function(){ console.log(Object.values(test)[3]); }, 2000);
+setTimeout(function(){ console.log(Object.values(test2)); }, 2000);
+
 
 
 const express = require("express");
