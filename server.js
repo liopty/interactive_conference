@@ -127,6 +127,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
     client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
     if (err) throw err;
+
     io.sockets.in(tempoId).emit('connectToRoom', tempoId, res.rows[0].id_user);
     console.log(res.rows);
     });
@@ -144,7 +145,13 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
         });
 
         socket.join(id)
-        io.sockets.in(id).emit('connectToRoom', id);
+        client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
+        if (err) throw err;
+
+        io.sockets.in(id).emit('connectToRoom', id, res.rows[0].id_user);
+        console.log(res.rows);
+        });
+
       }
     }
 
