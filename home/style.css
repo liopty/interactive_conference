@@ -58,15 +58,25 @@ Joindre une room / Créer une room
 }
 
 #rejoindre_room {
-  background-color: #4D6D9A;
+  background-color: #77A6F7;  /* couleur bleu foncé #4D6D9A*/
   width: 70%;
 }
 
 #creer_room {
   height: 11em;
   width: 65%;
-  background-color: #4D6D9A;
+  background-color: #77A6F7;
 }
+
+@media screen and (max-witdth:800px) {
+  #creer_room {
+    height: 3em;
+    width: 65%;
+    background-color: black;
+  }
+}
+
+
 
 /* --------------------------------
 
@@ -245,9 +255,9 @@ body,header,#messages li, .contentTabs {
 
 .mdc-top-app-bar__title {
   user-select: none;
-  -webkit-user-select: none; // For Webkit
+  -webkit-user-select: none; /* For Webkit */
   -khtml-user-select: none;
-  -moz-user-select: none; // For Mozilla
+  -moz-user-select: none; /* For Mozilla */
 }
 #recent{
   width: 100%;
@@ -365,5 +375,11 @@ body,header,#messages li, .contentTabs {
     display: none;
   }
   .upvote{
+<<<<<<< HEAD
   margin-left: 20px;
 }
+=======
+    margin-left: 20px;
+  }
+}
+>>>>>>> baaf10082a555dfa81421ffb4c7ac90a230b274c
