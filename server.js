@@ -73,19 +73,6 @@ console.log(res);
 setTimeout(function(){ console.log(test.id_room); }, 2000);
 */
 
-client.query("CREATE TABLE room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
-if (err) throw err;
-});
-client.query("CREATE TABLE appuser (id_user SERIAL PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room));", (err, res) => {
-if (err) throw err;
-});
-client.query("CREATE TABLE message (content text, id_room int REFERENCES room (id_room), id_user int REFERENCES appuser (id_user), id_message SERIAL PRIMARY KEY NOT NULL, answered bool, comment int, quizz jsonb);", (err, res) => {
-if (err) throw err;
-});
-client.query("CREATE TABLE vote (id_user int REFERENCES appuser (id_user), id_message int REFERENCES message (id_message), vote int, PRIMARY KEY (id_user, id_message));", (err, res) => {
-if (err) throw err;
-});
-
 //constantes pour les prepared request
 const insertTableRoom = 'INSERT INTO room VALUES ($1,$2);';
 const insertTableAppUser ='INSERT INTO AppUser (username,id_room,role) VALUES ($1,$2,$3)';
