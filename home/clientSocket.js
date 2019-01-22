@@ -9,6 +9,7 @@ var socket = io();
 //variables temporaires concernant l'utilisateur et la room dans laquelle il se trouve
 var actualRoom = null;
 var pseudo = null;
+var idIntoDB;
 
 
 //--------ROOMS -----------------------//
@@ -29,13 +30,14 @@ function closePopup() {
 $('#creer_room').on('click', function() {
   userConnected();
   socket.emit('creation_room', pseudo);
-  socket.on('connectToRoom', function(roomID) {
+  socket.on('connectToRoom', function(roomID, userId) {
     //affiche sur le html l'id de la room
     var element = document.getElementById('id01');
     actualRoom = roomID;
     element.innerHTML = "Room n°" + actualRoom;
     document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
     closePopup();
+    idIntoDB = userId;
   })
 });
 
@@ -78,7 +80,6 @@ $('#quitter_room').on('click', function() {
 
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
-  console.log("JE PASSSSSSSSSSSSSSSSSSSE");
   insereMessage(data.pseudo, data.message);
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
@@ -88,7 +89,7 @@ socket.on('message', function(data) {
 function envoieMessage() {
   var message = $('#m').val();
   if (message != '') {
-    socket.emit('chat_message', actualRoom, message); // Transmet le message aux autres
+    socket.emit('chat_message', actualRoom, message, idIntoDB); // Transmet le message aux autres
     insereMessage(pseudo, message, "yes"); // Affiche le message aussi sur notre page
     $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
     var elem = document.getElementById('contentTabs');
