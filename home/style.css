@@ -301,7 +301,7 @@ body,header,#messages li, .contentTabs {
 }
 
 .chatBar .inputMsg {
-  width: 670px;
+  width: 70%;
 }
 
 #messages .mindBtn {
@@ -347,6 +347,16 @@ body,header,#messages li, .contentTabs {
   border: none;
   margin: 0;
 }
+
+
+@media screen and (max-width: 600px)
+{
+  .mdc-tab__text-label{
+    display: none;
+  }
+  .mdc-top-app-bar__title{
+    display: none;
+  }
 
 .upvote{
   margin-left: 20px;
