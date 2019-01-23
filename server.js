@@ -188,7 +188,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     }
     client.query("SELECT username, content FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [id], (err, res) => {
       if (err) throw err;
-      console.log(res);
+      console.log(res.rows);
 
       res.rows.forEach(function(elem){
       socket.emit('message', {pseudo: elem.username, message: elem.content});
@@ -217,15 +217,6 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     //Ecrit dans la console lorsqu'un utilisateur se déconnecte
     console.log("un utilisateur s'est déconnecté");
 
-    //temporaire pour tester ce qu'il y a dans la bd
-  /*  client.query("SELECT * FROM AppUser;", (err, res) => {
-    if (err) throw err;
-    console.log(res.rows);
-    });
-    client.query("SELECT * FROM message;", (err, res) => {
-    if (err) throw err;
-    console.log(res.rows);
-  });*/
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction

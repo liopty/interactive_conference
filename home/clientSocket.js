@@ -1,7 +1,5 @@
 var ID = 0;
-/*var lesVotes = new Dict({a: 1}, function (key) {
-return "default: " + key;
-});*/
+
 
 //Initialisation socket io
 var socket = io();
@@ -89,7 +87,7 @@ $('#quitter_room').on('click', function() {
 
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
-  insereMessage(data.pseudo, data.message);
+  insereMessage(data.pseudo, data.message, "no");
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
 })
