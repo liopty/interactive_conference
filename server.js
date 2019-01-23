@@ -181,13 +181,12 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
         if (err) throw err;
 
         io.sockets.in(id).emit('connectToRoom', id, res.rows[0].id_user);
-        console.log("id : "+id+ " send to : "+res.rows[0].id_user);
         console.log(res.rows);
         });
 
       }
     }
-    client.query("SELECT id_user, content FROM message WHERE id_room=$1 ORDER by id_message ASC", id, (err, res) => {
+    client.query("SELECT id_user, content FROM message WHERE id_room=$1 ORDER by id_message ASC", [id], (err, res) => {
       if (err) throw err;
       console.log(res);
       res.rows.forEach(function(elem){
