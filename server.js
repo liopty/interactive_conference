@@ -173,7 +173,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
         client.query(insertTableAppUser, [pseudo, id, 0], (err, res) => {
         if (err) throw err;
-        //console.log(res);
+        console.log(res);
         });
 
         socket.join(id);
@@ -182,7 +182,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
         io.sockets.in(id).emit('connectToRoom', id, res.rows[0].id_user);
         console.log("id : "+id+ " send to : "+res.rows[0].id_user);
-        //console.log(res.rows);
+        console.log(res.rows);
         });
 
       }
@@ -208,14 +208,14 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     console.log("un utilisateur s'est déconnecté");
 
     //temporaire pour tester ce qu'il y a dans la bd
-    client.query("SELECT * FROM AppUser;", (err, res) => {
+  /*  client.query("SELECT * FROM AppUser;", (err, res) => {
     if (err) throw err;
     console.log(res.rows);
     });
     client.query("SELECT * FROM message;", (err, res) => {
     if (err) throw err;
     console.log(res.rows);
-  });
+  });*/
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
