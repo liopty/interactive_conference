@@ -85,6 +85,27 @@ const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
+
+  client.query("DELETE FROM vote;", (err, res) => {
+  if (err) throw err;
+  console.log(res);
+  });
+  client.query("DELETE FROM message;", (err, res) => {
+  if (err) throw err;
+  console.log(res);
+  });
+  client.query("DELETE FROM AppUser;", (err, res) => {
+  if (err) throw err;
+  console.log(res);
+  });
+  client.query("DELETE FROM room;", (err, res) => {
+  if (err) throw err;
+  console.log(res);
+  });
+
+
+
+
   //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
   app.use('/', express.static('home'));
 
