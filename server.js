@@ -121,7 +121,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   client.query("SELECT id_room FROM room;", (err, res) => {
   if (err) throw err;
   console.log(res);
-  res.forEach(function(element) {
+  res.rows.forEach(function(element) {
   console.log(element);
   });
   });
