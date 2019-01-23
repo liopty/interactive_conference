@@ -118,6 +118,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   });
 
   var roomno=[];
+  //actualise le tableau roonno a chaque lancement du serveur grâce à la base de données
   client.query("SELECT id_room FROM room;", (err, res) => {
     if (err) throw err;
     console.log(res);
