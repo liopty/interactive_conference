@@ -58,7 +58,7 @@ $('#rejoindre_room').on('click', function() {
   if (id != null) {
     socket.emit('join_room', id, pseudo);
     socket.on('connectToRoom', function(data,userId) {
-      if(idIntoDB === null && actualRoom !== null){
+      if(idIntoDB === null && actualRoom === null){
         idIntoDB = userId;
       }
       var element = document.getElementById('id01');
