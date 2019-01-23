@@ -149,7 +149,7 @@ function insereMessage(pseudo, message, mind) {
   if (mind == "yes") {
     $('#messages').append($('<div class="mindMsg">').append(text, btnUP, btnDOWN));
   } else {
-    $('#messages').append($('<div class="notMindMsg">').text(pseudo + " : " + message), $('<div class="notMindBtn">').append(btnUP, btnDOWN));
+    $('#messages').append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
   }
 }
 
