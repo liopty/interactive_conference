@@ -155,7 +155,7 @@ function insereMessage(pseudo, message, mind) {
 
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
 $(document).on("click", ".vote", function() {
-  socket.emit("votes", pseudo, this.id);
-  alert(pseudo + " : " + this.id);
+  //socket.emit("votes", idIntoDB, this.id);
+  //alert(idIntoDB + " : " + this.id);
 });
 //-------------------------------//

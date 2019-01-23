@@ -242,14 +242,9 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   });
 
   //Sactive lors de l'appuie d'un bouton de vote
-  socket.on('votes', function(pseudo, btn) {
+  /*socket.on('votes', function(userId, btnId) {
     //temporaire, à remplacer quand la bd sera implémentée
-    DicoDesVotes.add(btn, pseudo);
-    var tmp = DicoDesVotes.entries();
-    var tmp2 = DicoDesVotes.entries();
-    while (tmp.next().value != null) {
-      console.log("tmp = lesVotes.entries() : tmp : " + tmp2.next().value);
-    }
+
     socket.broadcast.emit('votes', pseudo, btn);
-  });
+  });*/
 });
