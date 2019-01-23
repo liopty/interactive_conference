@@ -86,6 +86,8 @@ const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
 
+//POUR VIDER LES TABLES DE LA BD
+/*
   client.query("DELETE FROM vote;", (err, res) => {
   if (err) throw err;
   console.log(res);
@@ -102,7 +104,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   if (err) throw err;
   console.log(res);
   });
-
+*/
 
 
 
