@@ -186,6 +186,16 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
       }
     }
+    client.query("SELECT user_id, content FROM message WHERE id_room=$1 ORDER by id_message ASC", id, (err, res) => {
+      if (err) throw err;
+      console.log(res);
+      res.rows.forEach(function(elem){
+      socket.emit('message', {pseudo: elem.user_id, message: elem.content});
+
+      });
+    });
+
+
 
   });
 
