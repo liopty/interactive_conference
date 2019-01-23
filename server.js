@@ -122,7 +122,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   if (err) throw err;
   console.log(res);
   res.rows.forEach(function(element) {
-  console.log(element);
+  console.log(element.id_room);
   });
   });
 
