@@ -62,7 +62,7 @@ $('#rejoindre_room').on('click', function() {
         idIntoDB = userId;
       }
       var element = document.getElementById('id01');
-      element.innerHTML = "You are in room no. " + data;
+      element.innerHTML = "Room n°" + data;
       actualRoom = data;
       document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
       closePopup();
