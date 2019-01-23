@@ -144,7 +144,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
         //console.log(res);
         });
 
-        socket.join(id)
+        socket.join(id);
         client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
         if (err) throw err;
 
