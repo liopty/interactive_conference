@@ -95,12 +95,12 @@ Joindre une room / Créer une room
   margin-bottom: 3%;
 }
 
-@media screen and (max-width: 1000px) {  
+@media screen and (max-width: 1000px) {
   #creer_room {
     height: 3em;
   }
 
-  .wrapper {    
+  .wrapper {
     display: grid;
     width: 45%;
     grid-template-columns: repeat(1, 1fr);
@@ -109,15 +109,15 @@ Joindre une room / Créer une room
                          "b"
                          "c";
   }
-  
+
   .one {
     grid-area: a;
   }
-  
+
   .two {
     grid-area: b;
   }
-  
+
   .three {
     grid-area: c;
     margin-top: 5%;
@@ -303,7 +303,7 @@ body,header,#messages li, #contentTabs {
   color: black;
 }
 
-#contentTabs {                          
+#contentTabs {
   width: 70%;
   overflow-y: auto;
   margin-bottom: 100px;
@@ -344,7 +344,7 @@ body,header,#messages li, #contentTabs {
 #messages .mindMsg {
   display: inline-block;
   overflow-x: hidden;
-  text-align: left;
+  text-align: justify;
   margin-bottom: 2px;
 	clear: both;
 	padding: 7px 13px;
@@ -365,7 +365,7 @@ body,header,#messages li, #contentTabs {
   max-width: 400px;
 	margin-bottom: 2px;
 	clear: both;
-  text-align: right;
+  text-align: justify;
 	padding: 7px 13px;
 	font-size: 12px;
 	border-radius: 15px;
