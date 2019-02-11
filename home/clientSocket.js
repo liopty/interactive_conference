@@ -122,8 +122,8 @@ $(document).keypress(function(event) {
 
 // Ajoute un message dans la page
 function insereMessage(pseudo, message,idMessage, mind) {
-  var buttonUPID = "btnUP" + idMessage;
-  var buttonDOWNID = "btnDOWN" + idMessage;
+  var buttonUPID = "UP" + idMessage;
+  var buttonDOWNID = "DOWN" + idMessage;
   var msgID = "msg" + idMessage;
 
   //Création d'un div avec le pseudo, le message et un ID
