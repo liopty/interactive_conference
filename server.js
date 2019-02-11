@@ -186,12 +186,12 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
       }
     }
-    client.query("SELECT username, content FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [id], (err, res) => {
+    client.query("SELECT username, content, id_message FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [id], (err, res) => {
       if (err) throw err;
       console.log(res.rows);
 
       res.rows.forEach(function(elem){
-      socket.emit('message', {pseudo: elem.username, message: elem.content});
+      socket.emit('message', {pseudo: elem.username, message: elem.content, elem.id_message});
 
       });
     });
