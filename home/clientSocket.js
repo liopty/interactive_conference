@@ -77,6 +77,8 @@ $('#quitter_room').on('click', function() {
   idIntoDB = null;
   var element = document.getElementById('id01');
   element.innerHTML = "Accueil";
+  var d = document.getElementById("modal");
+  d.className += " mdc-drawer--closing";
   openPopup();
 });
 //-------------------------------//
