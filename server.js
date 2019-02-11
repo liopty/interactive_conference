@@ -191,7 +191,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
       console.log(res.rows);
 
       res.rows.forEach(function(elem){
-      socket.emit('message', {pseudo: elem.username, message: elem.content, elem.id_message});
+      socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message});
 
       });
     });
