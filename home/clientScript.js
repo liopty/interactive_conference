@@ -9,9 +9,8 @@ $(function() {
     drawer.open = !drawer.open;
   });
   const list = mdc.list.MDCList.attachTo(document.querySelector('.mdc-list'));
-  list.wrapFocus = true;
   list.addEventListener('click', (event) => {
-    mainContentEl.querySelector('input, button').focus();
+    drawer.open = !drawer.open;
   });
 });
 
