@@ -230,10 +230,16 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
     client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
     if (err) throw err;
-    console.log(res);
+      console.log(res);
+    client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res2) => {
+      if (err) throw err;
+        console.log(res.rows);
+      socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message});
     });
 
-    socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message});
+    });
+
+
   });
 
   socket.on('leave_room', function(idRoom){
