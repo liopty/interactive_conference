@@ -132,19 +132,22 @@ function insereMessage(pseudo, message,idMessage, mind) {
   text.appendChild(content);
   text.id = msgID;
 
-  //Création du bouton UP avec un text, un id et une class
-  var btnUP = document.createElement("BUTTON");
-  var textUP = document.createTextNode("👍");
-  btnUP.appendChild(textUP);
-  btnUP.id = buttonUPID;
-  btnUP.className = "vote upvote";
+  if(idMessage !== null){
+    //Création du bouton UP avec un text, un id et une class
+    var btnUP = document.createElement("BUTTON");
+    var textUP = document.createTextNode("👍");
+    btnUP.appendChild(textUP);
+    btnUP.id = buttonUPID;
+    btnUP.className = "vote upvote";
 
-  //Création du bouton DOWN avec un text, un id et une class
-  var btnDOWN = document.createElement("BUTTON");
-  var textDOWN = document.createTextNode("👎");
-  btnDOWN.appendChild(textDOWN);
-  btnDOWN.id = buttonDOWNID;
-  btnDOWN.className = "vote";
+    //Création du bouton DOWN avec un text, un id et une class
+    var btnDOWN = document.createElement("BUTTON");
+    var textDOWN = document.createTextNode("👎");
+    btnDOWN.appendChild(textDOWN);
+    btnDOWN.id = buttonDOWNID;
+    btnDOWN.className = "vote";
+  }
+
 
 
   if (mind == "yes") {
