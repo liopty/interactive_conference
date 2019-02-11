@@ -97,7 +97,7 @@ function envoieMessage() {
   var message = $('#m').val();
   if (message != '') {
     socket.emit('chat_message', actualRoom, message, idIntoDB); // Transmet le message aux autres
-    insereMessage(pseudo, message, data.idMessage, "yes"); // Affiche le message aussi sur notre page
+    insereMessage(pseudo, message,null, "yes"); // Affiche le message aussi sur notre page
     $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
     var elem = document.getElementById('contentTabs');
     elem.scrollTop = elem.scrollHeight;
