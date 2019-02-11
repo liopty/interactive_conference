@@ -265,10 +265,6 @@ body,header,#messages li, #contentTabs {
   font-size: 22px;
 }
 
-.mdc-tab-indicator>.mdc-tab-indicator__content--underline {
-  background-color: #84CEEB;
-}
-
 #corps_chat aside .mdc-drawer__content {
   font-size: 1.1em;
   text-transform: uppercase;
