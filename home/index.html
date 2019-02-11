@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 <head>
   <title>Interactive Conference</title>
   <!-- Librairi Material Theming -->
@@ -13,14 +12,14 @@
 </head>
 
 <body>
-  <section id="connexion" class="cd-popup">
-    <div class="mdc-card" id="name">
+  <section id="connexion" class="cd-popup"> <!-- Page connexion -->
+    <div class="mdc-card" id="name"> <!-- Nom du site -->
         <p>Interactive Conference</p>
     </div>
 
-    <div class="wrapper mdc-card form screen_connexion">
-      <div class="one">
-        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+    <div class="wrapper mdc-card form screen_connexion"> <!-- Groupement pour nouveau salon et rejoindre salon -->
+      <div class="one"> <!-- Zone de text pour donner son nom d'utilisateur ou rester anonyme -->
+        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField"> 
           <input type="text" id="pseudo_room" class="mdc-text-field__input" maxlength="15">
           <div class="mdc-notched-outline">
             <div class="mdc-notched-outline__leading"></div>
@@ -34,9 +33,11 @@
           <p>*par défaut anonyme</p>
         </div>
       </div>
-      <div class="two">
+      <div class="two"> <!-- rejoindre salon existant -->
         <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
-          <input type="number" id="r_room" class="mdc-text-field__input" step="1" min="1" max="1000" >
+          <input type="text" id="r_room" class="mdc-text-field__input" maxlength="4" onKeypress="
+            if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+            if(event.which < 45 || event.which > 57) return false;">
           <div class="mdc-notched-outline">
             <div class="mdc-notched-outline__leading"></div>
             <div class="mdc-notched-outline__notch">
@@ -51,7 +52,7 @@
           </button>
         </div>
       </div>
-      <div class="three">
+      <div class="three"> <!-- créer nouveau salon -->
         <button class="mdc-button mdc-button--raised" id="creer_room">
           <span class="mdc-button__label">Nouveau salon</span>
         </button>
@@ -59,19 +60,19 @@
     </div>
   </section>
 
-  <section id="corps_chat">
-      <aside class="mdc-drawer mdc-drawer--modal" id="modal">
+  <section id="corps_chat"> <!-- Page du salon -->
+      <aside class="mdc-drawer mdc-drawer--modal" id="modal"> <!-- tiroir sur le coté gauche du site -->
           <div class="mdc-drawer__content">
             <div class="mdc-list">
-              <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_back</i>
+              <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true"> <!-- pour sortir du tiroir -->
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_back</i> 
                 <span class="mdc-list-item__text"></span>
               </a>
-              <a class="mdc-list-item" href="#" id="statistique">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">poll</i>
+              <a class="mdc-list-item" href="#" id="statistique"> <!-- pour accéder à la page statistique (nom implémentée)-->
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">poll</i> 
                 <span class="mdc-list-item__text">Statistiques</span>
               </a>
-              <a class="mdc-list-item" href="#" id="quitter_room">
+              <a class="mdc-list-item" href="#" id="quitter_room"> <!-- pour quitter le salon -->
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true" >clear</i>
                 <span class="mdc-list-item__text">Quitter</span>
               </a>
@@ -79,61 +80,58 @@
           </div>
       </aside>
 
-    <div class="mdc-drawer-scrim"></div>
-    <header class="mdc-top-app-bar" id="app-bar">
+    <div class="mdc-drawer-scrim"></div> 
+    <header class="mdc-top-app-bar" id="app-bar"> <!-- header de la page-->
       <div class="mdc-top-app-bar__row">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"> <!-- titre du site -->
           <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
-          <span class="mdc-top-app-bar__title">Interactive Conference</span>
+          <span class="mdc-top-app-bar__title">Interactive Conference</span> 
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
           <div class="mdc-card" id="id01"></div>
         </section>
       </div>
-      <div class="mdc-tab-bar" id="tabBar" role="tablist" aria-label="Navigation">
+      <div class="mdc-tab-bar" id="tabBar" role="tablist" aria-label="Navigation"> <!-- le tchat est divisé en 3 onglets-->
         <div class="mdc-tab-scroller">
           <div class="mdc-tab-scroller__scroll-area mdc-tab-scroller__scroll-area--scroll">
             <div class="mdc-tab-scroller__scroll-content">
-
-              <button class="mdc-tab mdc-tab--active" id="activeOnglet1" onclick="openCity(event, 'recent')">
-            <span class="mdc-tab__content">
-              <span class="mdc-tab__icon material-icons">access_time</span>
-              <span class="mdc-tab__text-label">Recents</span>
-            </span>
-            <span id="activeOnglet1Underline" class="mdc-tab-indicator mdc-tab-indicator--active">
-              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-            </span>
-            <span class="mdc-tab__ripple"></span>
-          </button>
-
-              <button class="mdc-tab" role="tab" id="activeOnglet2" onclick="openCity(event, 'topvote')">
-            <span id="ongletColor" class="mdc-tab__content">
-              <span class="mdc-tab__icon material-icons">favorite</span>
-              <span class="mdc-tab__text-label">Top Vote</span>
-            </span>
-            <span id="activeOnglet2Underline" class="mdc-tab-indicator">
-              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-            </span>
-            <span class="mdc-tab__ripple"></span>
-          </button>
-
-          <button class="mdc-tab" role="tab" id="activeOnglet3" onclick="openCity(event, 'repondu')">
-          <span id="ongletColor" class="mdc-tab__content">
-            <span class="mdc-tab__icon material-icons">check_circle</span>
-            <span class="mdc-tab__text-label">Répondu</span>
-          </span>
-          <span id="activeOnglet3Underline" class="mdc-tab-indicator">
-            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-          </span>
-          <span class="mdc-tab__ripple"></span>
-        </button>
+              <button class="mdc-tab mdc-tab--active" id="activeOnglet1" onclick="openCity(event, 'recent')"> <!-- Onglet des messages récents-->
+                <span class="mdc-tab__content">
+                  <span class="mdc-tab__icon material-icons">access_time</span>
+                  <span class="mdc-tab__text-label">Recents</span>
+                </span>
+                <span id="activeOnglet1Underline" class="mdc-tab-indicator mdc-tab-indicator--active">
+                  <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+              </button>
+              <button class="mdc-tab" role="tab" id="activeOnglet2" onclick="openCity(event, 'topvote')"> <!-- Onglet des messages avec le plus de vote-->
+                <span id="ongletColor" class="mdc-tab__content">
+                  <span class="mdc-tab__icon material-icons">favorite</span>
+                  <span class="mdc-tab__text-label">Top Vote</span>
+                </span>
+                <span id="activeOnglet2Underline" class="mdc-tab-indicator">
+                  <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+              </button>              
+              <button class="mdc-tab" role="tab" id="activeOnglet3" onclick="openCity(event, 'repondu')"> <!-- Onglet des messages répondu -->
+                <span id="ongletColor" class="mdc-tab__content">
+                  <span class="mdc-tab__icon material-icons">check_circle</span>
+                  <span class="mdc-tab__text-label">Répondu</span>
+                </span>
+                <span id="activeOnglet3Underline" class="mdc-tab-indicator">
+                  <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <div id="contentTabs">
+    <div id="contentTabs"> <!-- Les 3 onglets -->
       <!--CONTENU DE L'ONGLET 1 -->
       <div id="recent" class="tabcontent active">
         <div id="messages"></div>
@@ -149,7 +147,7 @@
     </div>
 
     <!-- TEXT + BUTTON SEND -->
-    <div class="chatBar" action="">
+    <div class="chatBar" action=""> <!-- zone de text pour écrire les messages-->
       <div class="inputMsg mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
         <input id="m" type="text" id="tf-outlined" class="mdc-text-field__input">
         <div class="mdc-notched-outline">
@@ -160,7 +158,7 @@
           <div class="mdc-notched-outline__trailing"></div>
         </div>
       </div>
-      <button class="mdc-fab mdc-fab--mini" id="envoyer">
+      <button class="mdc-fab mdc-fab--mini" id="envoyer"> <!-- pour envoyer les messages -->
         <span class="mdc-fab__icon material-icons">send</span>
       </button>
     </div>
@@ -174,7 +172,5 @@
   <script src="clientSocket.js"></script>
   <!-- Script JS coté client-->
   <script src="clientScript.js"></script>
-
 </body>
-
 </html>
