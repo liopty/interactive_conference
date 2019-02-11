@@ -243,7 +243,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
   //Sactive lors de l'appuie d'un bouton de vote
   /*socket.on('votes', function(userId, btnId) {
-    //temporaire, à remplacer quand la bd sera implémentée
+
 
     socket.broadcast.emit('votes', pseudo, btn);
   });*/
