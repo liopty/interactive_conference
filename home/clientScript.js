@@ -8,6 +8,8 @@ $(function() {
   topAppBar.listen('MDCTopAppBar:nav', () => {
     drawer.open = !drawer.open;
   });
+  const list = MDCList.attachTo(document.querySelector('.mdc-list'));
+  list.wrapFocus = true;
 });
 
 //Gestion des onglets
