@@ -77,6 +77,8 @@ $('#quitter_room').on('click', function() {
   idIntoDB = null;
   var element = document.getElementById('id01');
   element.innerHTML = "Accueil";
+  var d = document.getElementById("modal");
+  d.className += " mdc-drawer--closing";
   openPopup();
 });
 //-------------------------------//
@@ -87,7 +89,7 @@ $('#quitter_room').on('click', function() {
 
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
-  insereMessage(data.pseudo, data.message, "no");
+  insereMessage(data.pseudo, data.message,data.idMessage, "no");
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
 })
@@ -97,7 +99,7 @@ function envoieMessage() {
   var message = $('#m').val();
   if (message != '') {
     socket.emit('chat_message', actualRoom, message, idIntoDB); // Transmet le message aux autres
-    insereMessage(pseudo, message, "yes"); // Affiche le message aussi sur notre page
+    insereMessage(pseudo, message,null, "yes"); // Affiche le message aussi sur notre page
     $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
     var elem = document.getElementById('contentTabs');
     elem.scrollTop = elem.scrollHeight;
@@ -119,11 +121,10 @@ $(document).keypress(function(event) {
 });
 
 // Ajoute un message dans la page
-function insereMessage(pseudo, message, mind) {
-  ID += 1;
-  var buttonUPID = "btnUP" + ID;
-  var buttonDOWNID = "btnDOWN" + ID;
-  var msgID = "msg" + ID;
+function insereMessage(pseudo, message,idMessage, mind) {
+  var buttonUPID = "btnUP" + idMessage;
+  var buttonDOWNID = "btnDOWN" + idMessage;
+  var msgID = "msg" + idMessage;
 
   //Création d'un div avec le pseudo, le message et un ID
   var text = document.createElement('div');
@@ -156,6 +157,6 @@ function insereMessage(pseudo, message, mind) {
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
 $(document).on("click", ".vote", function() {
   //socket.emit("votes", idIntoDB, this.id);
-  //alert(idIntoDB + " : " + this.id);
+  alert(idIntoDB + " : " + this.id);
 });
 //-------------------------------//
