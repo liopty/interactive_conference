@@ -77,7 +77,6 @@ $('#quitter_room').on('click', function() {
   idIntoDB = null;
   var element = document.getElementById('id01');
   element.innerHTML = "Accueil";
-  drawer.open = !drawer.open;
   openPopup();
 });
 //-------------------------------//
