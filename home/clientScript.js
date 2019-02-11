@@ -10,6 +10,9 @@ $(function() {
   });
   const list = MDCList.attachTo(document.querySelector('.mdc-list'));
   list.wrapFocus = true;
+  list.addEventListener('click', (event) => {
+    mainContentEl.querySelector('input, button').focus();
+  });
 });
 
 //Gestion des onglets
