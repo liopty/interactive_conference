@@ -101,13 +101,15 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
   // define a route to download a file
   app.get('/download',(req, res) => {
-    console.log('oui');
+    externalize();
+    res.download('./logs/externalize.csv', 'externalize.csv');
+  });
+
+  function externalize(){
     csvWriter.writeRecords(logs).then(() => {
       console.log('Logs enregistrés dans le fichier "externalize.csv"');
     });
-
-    res.download('./logs/externalize.csv', 'externalize.csv');
-  });
+  }
 
   //POUR VIDER LES TABLES DE LA BD
   /*
