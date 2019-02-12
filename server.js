@@ -259,7 +259,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
       vote = 1;
     }
     const promise1 = new Promise(function(resolve, reject) {
-      client.query('SELECT (id_user,id_message) FROM room;', (err, res) => {
+      client.query('SELECT (id_user,id_message) FROM vote;', (err, res) => {
         if (err) {
           throw err;
           reject("false");
