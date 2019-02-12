@@ -242,7 +242,7 @@ io.on('connection', function(socket){
 
   //Permet de quitter le salon
   socket.on('leave_room', function(idRoom){
-    socket.leave(idRoom);
+    socket.leave(idRoom); //Enlève le client de la liste du salon dans lequel il se trouve
     console.log("Un utilisateur a quitté la room: "+idRoom);
   });
 
@@ -261,10 +261,10 @@ io.on('connection', function(socket){
           throw err;
           reject("false");
         }
-          console.log("val requete idU,idM : "+res[0]);
-          console.log("res.rows[0].vote !== null : "+res[0] !== null);
-          console.log("val res.rows[0].vote !== [] : "+res[0] !== []);
-          console.log("val res.rows[0].vote !== {} : "+res[0] !== {});
+          console.log("val requete idU,idM : "+res.rows[0].vote);
+          console.log("res.rows[0].vote !== null : "+res.rows[0].vote !== null);
+          console.log("val res.rows[0].vote !== [] : "+res.rows[0].vote !== []);
+          console.log("val res.rows[0].vote !== {} : "+res.rows[0].vote !== {});
 
           if (res.rows !== null) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
