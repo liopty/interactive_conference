@@ -249,9 +249,13 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   });
 
   //Sactive lors de l'appuie d'un bouton de vote
-  /*socket.on('votes', function(userId, btnId) {
-
-
-    socket.broadcast.emit('votes', pseudo, btn);
-  });*/
+  socket.on('votes', function(userId, btnId) {
+    if (btnId.startsWith("DOWN")) {
+      btnId = btnId.split("DOWN");
+    } else {
+      btnId = btnId.split("UP");
+    }
+    console.log(btnId);
+    //socket.broadcast.emit('votes', pseudo, btn);
+  });
 });
