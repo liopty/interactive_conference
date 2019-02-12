@@ -265,17 +265,22 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
           reject("false");
         }
           console.log(res.rows);
-          console.log(res.rows[0]);
+          if (res.rows !== []) {
+            client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]]), (err, res2) => {
+              if (err) throw err;
+              console.log(res2);
+            });
+          }
           resolve("true");
         });
     });
 
     promise1.then(function(val) {
       console.log(val);
-    /*  client.query(insertTableVote, [userId, btnId[1], vote], (err, res) => {
-      if (err) throw err;
-      console.log(res);
-      });*/
+      client.query(insertTableVote, [userId, btnId[1], vote], (err, res) => {
+        if (err) throw err;
+        console.log(res);
+      });
     });
 
 
