@@ -151,8 +151,7 @@ io.on('connection', function(socket){
     });
 
     console.log("Creation d'une room ID: "+tempoId);
-
-
+    
     client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
       if (err) throw err;
       console.log(res);
@@ -160,7 +159,6 @@ io.on('connection', function(socket){
 
     client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
       if (err) throw err;
-
       io.sockets.in(tempoId).emit('connectToRoom', tempoId, res.rows[0].id_user);
       console.log(res.rows);
     });
@@ -171,12 +169,10 @@ io.on('connection', function(socket){
     for(var i = 0; i<roomno.length;i++){
       if(roomno[i]==id){
         console.log("Un utilisateur a rejoint la room: "+id);
-
         client.query(insertTableAppUser, [pseudo, id, 0], (err, res) => {
           if (err) throw err;
           console.log(res);
         });
-
         socket.join(id);
         client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
           if (err) throw err;
@@ -190,15 +186,10 @@ io.on('connection', function(socket){
     client.query("SELECT username, content, id_message FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [id], (err, res) => {
       if (err) throw err;
       console.log(res.rows);
-
       res.rows.forEach(function(elem){
         socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message});
-
       });
     });
-
-
-
   });
 
   // Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
@@ -282,7 +273,7 @@ io.on('connection', function(socket){
         console.log(res);
       });
     });
-    
+
     //socket.broadcast.emit('votes', pseudo, btn);
   });
 });
