@@ -73,6 +73,22 @@ console.log(res);
 setTimeout(function(){ console.log(test.id_room); }, 2000);
 */
 
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const csvWriter = createCsvWriter({
+    path: 'logs/externalize.csv',
+    header: [
+        {id: 'timestamp', title: 'TIMESTAMP'},
+        {id: 'flag', title: 'FLAG'},
+        {id: 'psd', title: 'PSEUDO'},
+        {id: 'msg', title: 'MESSAGE'}
+    ]
+});
+
+const logs = [{timestamp: Math.round(new Date().getTime()/1000),  flag: 'server', msg: 'Lancement du serveur'}];
+csvWriter.writeRecords(logs).then(() => {
+  console.log('Logs enregistrés dans le fichier "externalize.csv"');
+});
+
 //constantes pour les prepared request
 const insertTableRoom = 'INSERT INTO room VALUES ($1,$2);';
 const insertTableAppUser ='INSERT INTO AppUser (username,id_room,role) VALUES ($1,$2,$3)';
@@ -86,6 +102,10 @@ const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
+  // define a route to download a file
+  app.get('/download',(req, res) => {
+    //res.download('./logs/externalize.csv', 'externalize.csv');
+  });
 
   //POUR VIDER LES TABLES DE LA BD
   /*
@@ -131,18 +151,21 @@ client.query("SELECT id_room FROM room;", (err, res) => {
 
 io.on('connection', function(socket){
 
+  //Permet de créer un nouveau salon
   socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
+    // Créer un nouvel identifiant aléatoire entre 1 et 1000 pour le salon
     while(check!=true){
       var tempo = (Math.floor(Math.random() * 1000)+1);
+      // on vérifie que l'identifiant n'existe pas déjà
       if (!roomno.includes(tempo)) {
         check=true;
         tempoId=tempo;
       }
     }
-    roomno.push(tempoId);
-    socket.join(tempoId);
+    roomno.push(tempoId); // Ajoute dans le tableau de salons le nouvel identifiant
+    socket.join(tempoId); // Ajoute le client à la liste du salon crée
 
     //insertion du tuple (id_room,anonyme) dans la TABLE room lors de la creation d'une room
     client.query(insertTableRoom, [tempoId, false], (err, res) => {
@@ -159,13 +182,16 @@ io.on('connection', function(socket){
 
     client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
       if (err) throw err;
+      // lance un évenement côté client pour actualiser son affichage
       io.sockets.in(tempoId).emit('connectToRoom', tempoId, res.rows[0].id_user);
       console.log(res.rows);
     });
   });
 
+  //Permet de rejoindre un salon existant
   socket.on('join_room', function(id, pseudo) {
     var tempoId = id;
+    // on vérifie que le salon existe bien
     for(var i = 0; i<roomno.length;i++){
       if(roomno[i]==id){
         console.log("Un utilisateur a rejoint la room: "+id);
@@ -234,8 +260,9 @@ io.on('connection', function(socket){
 
   });
 
+  //Permet de quitter le salon
   socket.on('leave_room', function(idRoom){
-    socket.leave(idRoom);
+    socket.leave(idRoom); //Enlève le client de la liste du salon dans lequel il se trouve
     console.log("Un utilisateur a quitté la room: "+idRoom);
   });
 
@@ -254,8 +281,16 @@ io.on('connection', function(socket){
           throw err;
           reject("false");
         }
-        //si le resultat de la requete n'est pas nul
-          if (res.rows[0] !== undefined) {
+
+          console.log("val requete idU,idM : "+res.rows[0].vote);
+          console.log("res.rows[0].vote !== null : "+res.rows[0].vote !== null);
+          console.log("val res.rows[0].vote !== [] : "+res.rows[0].vote !== []);
+          console.log("val res.rows[0].vote !== {} : "+res.rows[0].vote !== {});
+
+          console.log("val requete idU,idM : "+res[0]);
+          console.log("res.rows[0] !== undefined : "+res[0] !== undefined);
+
+          if (res[0] !== undefined) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
               if (err) throw err;
               console.log(res2);
