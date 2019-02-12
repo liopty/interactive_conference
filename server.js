@@ -255,11 +255,9 @@ io.on('connection', function(socket){
           reject("false");
         }
           console.log("val requete idU,idM : "+res[0]);
-          console.log("res.rows[0].vote !== null : "+res[0] !== null);
-          console.log("val res.rows[0].vote !== [] : "+res[0] !== []);
-          console.log("val res.rows[0].vote !== {} : "+res[0] !== {});
+          console.log("res.rows[0] !== undefined : "+res[0] !== undefined);
 
-          if (res.rows !== null) {
+          if (res[0] !== undefined) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
               if (err) throw err;
               console.log(res2);
