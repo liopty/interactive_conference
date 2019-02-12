@@ -266,7 +266,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
         }
           console.log(res.rows);
           if (res.rows !== []) {
-            client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]]), (err, res2) => {
+            client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
               if (err) throw err;
               console.log(res2);
             });
