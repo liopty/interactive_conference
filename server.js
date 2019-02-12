@@ -236,9 +236,9 @@ io.on('connection', function(socket){
         console.log(res);
         resolve("true");
       });
-    }).then(function(val)){
+    }).then(function(val){
       //"vote" de façon tmp le tps de test le reste
       socket.broadcast.emit('AfficherVote', btnId[1], vote);
-    }
+    });
   });
 });
