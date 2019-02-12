@@ -105,10 +105,8 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     csvWriter.writeRecords(logs).then(() => {
       console.log('Logs enregistrés dans le fichier "externalize.csv"');
     });
-    var file = req.params.file;
-    var fileLocation = path.join('./logs',file);
-    console.log(fileLocation);
-    res.download(fileLocation, file);
+
+    res.download('logs/externalize.csv', 'externalize.csv');
   });
 
   //POUR VIDER LES TABLES DE LA BD
