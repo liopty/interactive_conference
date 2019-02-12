@@ -257,7 +257,7 @@ io.on('connection', function(socket){
           console.log("val requete idU,idM : "+res.rows);
           console.log("res.rows !== null : "+res.rows !== null);
           console.log("val res.rows !== [] : "+res.rows !== []);
-          console.log("val res.rows !== {} : "+res.rows !== {};      
+          console.log("val res.rows !== {} : "+res.rows !== {});      
 
           if (res.rows !== null) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
