@@ -94,7 +94,7 @@ socket.on('message', function(data) {
   insereMessage(data.pseudo, data.message,data.idMessage, "no");
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
-});
+})
 
 //on transmet le message et on l'affiche sur la page
 function envoieMessage() {
@@ -124,34 +124,27 @@ $(document).keypress(function(event) {
 
 // Ajoute un message dans la page
 function insereMessage(pseudo, message,idMessage, mind) {
-  let buttonUPID = "UP_" + idMessage;
-  let buttonDOWNID = "DOWN_" + idMessage;
-  let msgID = "msg" + idMessage;
-  let voteID = "vote_" + idMessage;
+  var buttonUPID = "UP_" + idMessage;
+  var buttonDOWNID = "DOWN_" + idMessage;
+  var msgID = "msg" + idMessage;
 
   //Création d'un div avec le pseudo, le message et un ID
-  let text = document.createElement('div');
-  let content = document.createTextNode(pseudo + " : " + message);
+  var text = document.createElement('div');
+  var content = document.createTextNode(pseudo + " : " + message);
   text.appendChild(content);
   text.id = msgID;
 
-/*let para = document.createElement("P");
-  let t = document.createTextNode("");
-  para.appendChild(t);
-  para.id = voteID;
-  text.appendChild(para);*/
-
   if(idMessage !== null){
     //Création du bouton UP avec un text, un id et une class
-    let btnUP = document.createElement("BUTTON");
-    let textUP = document.createTextNode("👍");
+    var btnUP = document.createElement("BUTTON");
+    var textUP = document.createTextNode("👍");
     btnUP.appendChild(textUP);
     btnUP.id = buttonUPID;
     btnUP.className = "vote upvote";
 
     //Création du bouton DOWN avec un text, un id et une class
-    let btnDOWN = document.createElement("BUTTON");
-    let textDOWN = document.createTextNode("👎");
+    var btnDOWN = document.createElement("BUTTON");
+    var textDOWN = document.createTextNode("👎");
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
@@ -169,9 +162,6 @@ function insereMessage(pseudo, message,idMessage, mind) {
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
 $(document).on("click", ".vote", function() {
   socket.emit("votes", idIntoDB, this.id);
+  //alert(idIntoDB + " : " + this.id);
 });
-
-socket.on('AfficherVote', function(msgId, voteValue) {
-  let elem = document.getElementById('vote_'+msgId);
-  elem.innerHTML(voteValue);
-});
+//-------------------------------//
