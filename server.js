@@ -147,7 +147,7 @@ io.on('connection', function(socket){
     csvWriter.writeRecords(logs).then(() => {
       console.log('Logs enregistrés dans le fichier "externalize.csv"');
     });
-  })
+  });
 
   //Permet de créer un nouveau salon
   socket.on('creation_room', function(pseudo) {
