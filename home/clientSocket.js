@@ -135,11 +135,11 @@ function insereMessage(pseudo, message,idMessage, mind) {
   text.appendChild(content);
   text.id = msgID;
 
-  let para = document.createElement("P");
+/*let para = document.createElement("P");
   let t = document.createTextNode("");
   para.appendChild(t);
   para.id = voteID;
-  text.appendChild(para);
+  text.appendChild(para);*/
 
   if(idMessage !== null){
     //Création du bouton UP avec un text, un id et une class

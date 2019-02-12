@@ -240,5 +240,11 @@ io.on('connection', function(socket){
       //"vote" de façon tmp le tps de test le reste
       socket.broadcast.emit('AfficherVote', btnId[1], vote);
     });
+
   });
+
+
+
+
+
 });
