@@ -36,19 +36,19 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
 setInterval(function () {
   client.query("SELECT * FROM room;", (err, res) => {
-    console.log(res.rows);
+    console.log("ROOM : "+res.rows);
   });
   client.query("SELECT * FROM appuser;", (err, res) => {
-    console.log(res.rows);
+    console.log("USER : "+res.rows);
   });
   client.query("SELECT * FROM message;", (err, res) => {
-    console.log(res.rows);
+    console.log("MESSAGE : "+res.rows);
   });
   client.query("SELECT * FROM vote;", (err, res) => {
-    console.log(res.rows);
+    console.log("VOTE : "+res.rows);
   });
 
-}, 1000);
+}, 10000);
 
   //POUR VIDER LES TABLES DE LA BD
   /*
@@ -200,6 +200,10 @@ io.on('connection', function(socket){
   socket.on('leave_room', function(idRoom){
     socket.leave(idRoom);
     console.log("Un utilisateur a quitté la room: "+idRoom);
+    client.query("DELETE FROM room WHERE id_room=$1",[idRoom], (err, res2) => {
+      if (err) throw err;
+      console.log(res2.rows);
+    });
   });
 
   //Sactive lors de l'appuie d'un bouton de vote
