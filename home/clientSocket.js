@@ -127,6 +127,7 @@ function insereMessage(pseudo, message,idMessage, mind) {
   var buttonUPID = "UP_" + idMessage;
   var buttonDOWNID = "DOWN_" + idMessage;
   var msgID = "msg_" + idMessage;
+  var voteID ="vote_"+idMessage;
 
   //Création d'un div avec le pseudo, le message et un ID
   var text = document.createElement('div');
@@ -134,10 +135,11 @@ function insereMessage(pseudo, message,idMessage, mind) {
   text.appendChild(content);
   text.id = msgID;
 
-  var para = document.createElement("P");                       // Create a <p> element
-  var t = document.createTextNode("This is a paragraph.");      // Create a text node
-  para.appendChild(t);                                          // Append the text to <p>
+  var para = document.createElement("P");
+  var t = document.createTextNode("");
+  para.appendChild(t);
   text.appendChild(para);
+  para.id = voteID;
 
   if(idMessage !== null){
     //Création du bouton UP avec un text, un id et une class
@@ -165,8 +167,8 @@ function insereMessage(pseudo, message,idMessage, mind) {
 }
 
 socket.on('AfficherVote', function(msgId, voteValue) {
-  /*let elem = document.getElementById('vote_'+msgId);
-  elem.innerHTML(voteValue);*/
+  let elem = document.getElementById('vote_'+msgId);
+  elem.innerHTML(voteValue);
 });
 
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
