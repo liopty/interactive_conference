@@ -234,9 +234,11 @@ io.on('connection', function(socket){
       client.query(insertTableVote, [userId, btnId[1], vote], (err, res) => {
         if (err) throw err;
         console.log(res);
+        resolve("true");
       });
-    });
-
-    //socket.broadcast.emit('votes', pseudo, btn);
+    }).then(function(val)){
+      //"vote" de façon tmp le tps de test le reste
+      socket.broadcast.emit('AfficherVote', btnId[1], vote);
+    }
   });
 });
