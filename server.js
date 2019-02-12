@@ -48,7 +48,7 @@ setInterval(function () {
     console.log("VOTE : "+res.rows);
   });
 
-}, 10000);
+}, 86400000);
 
   //POUR VIDER LES TABLES DE LA BD
   /*
@@ -200,10 +200,6 @@ io.on('connection', function(socket){
   socket.on('leave_room', function(idRoom){
     socket.leave(idRoom);
     console.log("Un utilisateur a quitté la room: "+idRoom);
-    client.query("DELETE FROM room WHERE id_room=$1;",[idRoom], (err, res2) => {
-      if (err) throw err;
-      console.log(res2.rows);
-    });
   });
 
   //Sactive lors de l'appuie d'un bouton de vote
