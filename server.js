@@ -249,15 +249,15 @@ io.on('connection', function(socket){
       vote = 1;
     }
     const promise1 = new Promise(function(resolve, reject) {
-      client.query('SELECT (id_user,id_message) FROM vote;', (err, res) => {
+      client.query('SELECT vote FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res) => {
         if (err) {
           throw err;
           reject("false");
         }
-          console.log("val requete idU,idM : "+res.rows[0]);
-          console.log("res.rows[0] !== null : "+res.rows[0] !== null);
-          console.log("val res.rows[0] !== [] : "+res.rows[0] !== []);
-          console.log("val res.rows[0] !== {} : "+res.rows[0] !== {});
+          console.log("val requete idU,idM : "+res.rows[0].vote);
+          console.log("res.rows[0].vote !== null : "+res.rows[0].vote !== null);
+          console.log("val res.rows[0].vote !== [] : "+res.rows[0].vote !== []);
+          console.log("val res.rows[0].vote !== {} : "+res.rows[0].vote !== {});
 
           if (res.rows !== null) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
