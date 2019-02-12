@@ -1,7 +1,7 @@
 //Connexion à la base de donnée POSTGRESQL
 const { Client } = require('pg');
 const client = new Client({
-  connectionString: 'postgres://etkwjaoexqkwmq:2754f201df86138b0165acd82f257c04e18d0fdef1114bf574b690f827e94310@ec2-54-228-224-37.eu-west-1.compute.amazonaws.com:5432/d2tuuaoos6ikd5',
+  connectionString: 'postgres://cthedeimvkuhno:1df531b4487c8829aca49c497eaba86d68f030a9025331c905fd66f98df00610@ec2-79-125-4-96.eu-west-1.compute.amazonaws.com:5432/d1hti0tcnlaid1',
   ssl: true,
 });
 
