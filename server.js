@@ -254,13 +254,8 @@ io.on('connection', function(socket){
           throw err;
           reject("false");
         }
-          console.log("res[0] : "+res[0]);
-          console.log("res[1] : "+res[0]);
-          console.log("res : "+res);
-          console.log("res.rows : "+res.rows);
-          console.log("res.rows[0] : "+res.rows[0]);
-
-          if (true) {
+        //si le resultat de la requete n'est pas nul
+          if (res.rows[0] !== undefined) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
               if (err) throw err;
               console.log(res2);
