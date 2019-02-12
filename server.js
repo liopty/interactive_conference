@@ -200,7 +200,7 @@ io.on('connection', function(socket){
   socket.on('leave_room', function(idRoom){
     socket.leave(idRoom);
     console.log("Un utilisateur a quitté la room: "+idRoom);
-    client.query("DELETE FROM room WHERE id_room=$1",[idRoom], (err, res2) => {
+    client.query("DELETE FROM room CASCADE WHERE id_room=$1",[idRoom], (err, res2) => {
       if (err) throw err;
       console.log(res2.rows);
     });
