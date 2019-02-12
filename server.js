@@ -223,9 +223,9 @@ io.on('connection', function(socket){
             if(res.rows[0].vote === vote){
               reject("false");
             }
-          } else {
-            resolve("true");
           }
+          resolve("true");
+
 
         });
     });
