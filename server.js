@@ -34,21 +34,11 @@ const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
-setInterval(function () {
-  client.query("SELECT * FROM room;", (err, res) => {
-    console.log("ROOM : "+res.rows);
-  });
-  client.query("SELECT * FROM appuser;", (err, res) => {
-    console.log("USER : "+res.rows);
-  });
-  client.query("SELECT * FROM message;", (err, res) => {
-    console.log("MESSAGE : "+res.rows);
-  });
-  client.query("SELECT * FROM vote;", (err, res) => {
-    console.log("VOTE : "+res.rows);
-  });
+//S'exécute toutes les 24h, supprime les room de plus de 24h
+/*setInterval(function () {
 
 }, 86400000);
+*/
 
   //POUR VIDER LES TABLES DE LA BD
   /*
@@ -70,7 +60,14 @@ console.log(res);
 });
 */
 
-
+setInterval(function () {
+  client.query("SELECT * FROM vote;",(err,res)=>{
+    if (err) throw err;
+    res.rows.forEach(function (element) {
+      console.log(element);
+    });
+  });
+}, 5000);
 
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
 app.use('/', express.static('home'));
@@ -223,8 +220,13 @@ io.on('connection', function(socket){
               if (err) throw err;
               console.log(res2);
             });
+            if(res.rows[0].vote === vote){
+              reject("false");
+            }
+          } else {
+            resolve("true");
           }
-          resolve("true");
+
         });
     });
 
