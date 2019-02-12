@@ -100,7 +100,7 @@ const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
   // define a route to download a file
-  http.get('/download',(req, res) => {
+  app.get('/download',(req, res) => {
     csvWriter.writeRecords(logs).then(() => {
       console.log('Logs enregistrés dans le fichier "externalize.csv"');
     });
