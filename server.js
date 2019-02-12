@@ -77,6 +77,7 @@ setTimeout(function(){ console.log(test.id_room); }, 2000);
 const insertTableRoom = 'INSERT INTO room VALUES ($1,$2);';
 const insertTableAppUser ='INSERT INTO AppUser (username,id_room,role) VALUES ($1,$2,$3)';
 const insertTableMessage = 'INSERT INTO message (content, id_room, id_user, answered, comment,quizz) VALUES ($1,$2,$3,$4,$5,$6);';
+const insertTableVote ='INSERT INTO vote VALUES ($1,$2,$3)';
 
 const express = require("express");
 const app = require('express')();
@@ -251,12 +252,34 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
   //Sactive lors de l'appuie d'un bouton de vote
   socket.on('votes', function(userId, btnId) {
     btnId = btnId.split("_");
+    let vote;
     if (btnId[0] === "DOWN") {
-      console.log("DOWN");
+      vote = -1;
     } else {
-      console.log("UP");
+      vote = 1;
     }
-    console.log(btnId);
+    const promise1 = new Promise(function(resolve, reject) {
+      client.query('SELECT (id_user,id_message) FROM room;', (err, res) => {
+        if (err) {
+          throw err;
+          reject("false");
+        }
+          console.log(res.rows);
+          console.log(res.rows[0]);
+          resolve("true");
+        });
+    });
+
+    promise1.then(function(val) {
+      console.log(val);
+    /*  client.query(insertTableVote, [userId, btnId[1], vote], (err, res) => {
+      if (err) throw err;
+      console.log(res);
+      });*/
+    });
+
+
+
     //socket.broadcast.emit('votes', pseudo, btn);
   });
 });
