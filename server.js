@@ -8,16 +8,16 @@ const client = new Client({
 client.connect();
 
 client.query("CREATE TABLE IF NOT EXISTS room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
-if (err) throw err;
+  if (err) throw err;
 });
 client.query("CREATE TABLE IF NOT EXISTS appuser (id_user SERIAL PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room));", (err, res) => {
-if (err) throw err;
+  if (err) throw err;
 });
 client.query("CREATE TABLE IF NOT EXISTS message (content text, id_room int REFERENCES room (id_room), id_user int REFERENCES appuser (id_user), id_message SERIAL PRIMARY KEY NOT NULL, answered bool, comment int, quizz jsonb);", (err, res) => {
-if (err) throw err;
+  if (err) throw err;
 });
 client.query("CREATE TABLE IF NOT EXISTS vote (id_user int REFERENCES appuser (id_user), id_message int REFERENCES message (id_message), vote int, PRIMARY KEY (id_user, id_message));", (err, res) => {
-if (err) throw err;
+  if (err) throw err;
 });
 /*
 client.query("INSERT INTO room VALUES (7000,FALSE);", (err, res) => {
@@ -87,51 +87,51 @@ const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
 
-//POUR VIDER LES TABLES DE LA BD
-/*
+  //POUR VIDER LES TABLES DE LA BD
+  /*
   client.query("DELETE FROM vote;", (err, res) => {
   if (err) throw err;
   console.log(res);
-  });
-  client.query("DELETE FROM message;", (err, res) => {
-  if (err) throw err;
-  console.log(res);
-  });
-  client.query("DELETE FROM AppUser;", (err, res) => {
-  if (err) throw err;
-  console.log(res);
-  });
-  client.query("DELETE FROM room;", (err, res) => {
-  if (err) throw err;
-  console.log(res);
-  });
+});
+client.query("DELETE FROM message;", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+client.query("DELETE FROM AppUser;", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
+client.query("DELETE FROM room;", (err, res) => {
+if (err) throw err;
+console.log(res);
+});
 */
 
 
 
-  //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
-  app.use('/', express.static('home'));
+//Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
+app.use('/', express.static('home'));
 
-  //Lancer le serveur http et écoute les connection sur le port indiqué
-  http.listen(PORT, function(){
-    // Ecrit dans la console sur quel port le serveur écoute
-    console.log('listening on *:' + PORT);
+//Lancer le serveur http et écoute les connection sur le port indiqué
+http.listen(PORT, function(){
+  // Ecrit dans la console sur quel port le serveur écoute
+  console.log('listening on *:' + PORT);
+});
+
+var roomno=[];
+//actualise le tableau roonno a chaque lancement du serveur grâce à la base de données
+client.query("SELECT id_room FROM room;", (err, res) => {
+  if (err) throw err;
+  console.log(res);
+  res.rows.forEach(function(element) {
+    roomno.push(element.id_room);
   });
-
-  var roomno=[];
-  //actualise le tableau roonno a chaque lancement du serveur grâce à la base de données
-  client.query("SELECT id_room FROM room;", (err, res) => {
-    if (err) throw err;
-    console.log(res);
-    res.rows.forEach(function(element) {
-      roomno.push(element.id_room);
-    });
-  });
+});
 
 
-  io.on('connection', function(socket){
+io.on('connection', function(socket){
 
-    socket.on('creation_room', function(pseudo) {
+  socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
     while(check!=true){
@@ -146,23 +146,21 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
     //insertion du tuple (id_room,anonyme) dans la TABLE room lors de la creation d'une room
     client.query(insertTableRoom, [tempoId, false], (err, res) => {
-    if (err) throw err;
-    console.log(res);
+      if (err) throw err;
+      console.log(res);
     });
 
     console.log("Creation d'une room ID: "+tempoId);
-
-
+    
     client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
-    if (err) throw err;
-    console.log(res);
+      if (err) throw err;
+      console.log(res);
     });
 
     client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
-    if (err) throw err;
-
-    io.sockets.in(tempoId).emit('connectToRoom', tempoId, res.rows[0].id_user);
-    console.log(res.rows);
+      if (err) throw err;
+      io.sockets.in(tempoId).emit('connectToRoom', tempoId, res.rows[0].id_user);
+      console.log(res.rows);
     });
   });
 
@@ -171,18 +169,16 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     for(var i = 0; i<roomno.length;i++){
       if(roomno[i]==id){
         console.log("Un utilisateur a rejoint la room: "+id);
-
         client.query(insertTableAppUser, [pseudo, id, 0], (err, res) => {
-        if (err) throw err;
-        console.log(res);
+          if (err) throw err;
+          console.log(res);
         });
-
         socket.join(id);
         client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
-        if (err) throw err;
+          if (err) throw err;
 
-        io.sockets.in(id).emit('connectToRoom', id, res.rows[0].id_user);
-        console.log(res.rows);
+          io.sockets.in(id).emit('connectToRoom', id, res.rows[0].id_user);
+          console.log(res.rows);
         });
 
       }
@@ -190,15 +186,10 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     client.query("SELECT username, content, id_message FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [id], (err, res) => {
       if (err) throw err;
       console.log(res.rows);
-
       res.rows.forEach(function(elem){
-      socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message});
-
+        socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message});
       });
     });
-
-
-
   });
 
   // Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
@@ -230,14 +221,14 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     }
 
     client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
-    if (err) throw err;
-      console.log(res);
-    client.query("SELECT id_message FROM Message ORDER BY id_message DESC LIMIT 1", (err, res2) => {
       if (err) throw err;
+      console.log(res);
+      client.query("SELECT id_message FROM Message ORDER BY id_message DESC LIMIT 1", (err, res2) => {
+        if (err) throw err;
         console.log(res2.rows);
-      console.log(res2.rows[0]);
-      socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message});
-    });
+        console.log(res2.rows[0]);
+        socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message});
+      });
 
     });
 
@@ -264,6 +255,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
           throw err;
           reject("false");
         }
+<<<<<<< HEAD
           console.log(res.rows);
           if (res.rows !== null) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
@@ -273,6 +265,17 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
           }
           resolve("true");
         });
+=======
+        console.log(res.rows);
+        if (res.rows !== []) {
+          client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
+            if (err) throw err;
+            console.log(res2);
+          });
+        }
+        resolve("true");
+      });
+>>>>>>> 39a9740e6836a4c36091bf72d175d36b38f204c8
     });
 
     promise1.then(function(val) {
@@ -281,8 +284,6 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
         console.log(res);
       });
     });
-
-
 
     //socket.broadcast.emit('votes', pseudo, btn);
   });
