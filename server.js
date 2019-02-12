@@ -151,7 +151,7 @@ io.on('connection', function(socket){
     });
 
     console.log("Creation d'une room ID: "+tempoId);
-    
+
     client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
       if (err) throw err;
       console.log(res);
@@ -255,7 +255,6 @@ io.on('connection', function(socket){
           throw err;
           reject("false");
         }
-<<<<<<< HEAD
           console.log(res.rows);
           if (res.rows !== null) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
@@ -265,17 +264,6 @@ io.on('connection', function(socket){
           }
           resolve("true");
         });
-=======
-        console.log(res.rows);
-        if (res.rows !== []) {
-          client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
-            if (err) throw err;
-            console.log(res2);
-          });
-        }
-        resolve("true");
-      });
->>>>>>> 39a9740e6836a4c36091bf72d175d36b38f204c8
     });
 
     promise1.then(function(val) {
