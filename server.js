@@ -225,31 +225,19 @@ io.on('connection', function(socket){
             }
           }
           resolve("true");
+
+
         });
     });
 
-    const promise2 = new Promise(function(resolve, reject) {
-    client.query(insertTableVote, [userId, btnId[1], vote], (err, res) => {
-      if (err) {
-        throw err;
-        reject("false");
-      }
-      console.log(res);
-      resolve("true");
-    });
-  });
     promise1.then(function(val) {
-      promise2.then(function(val){
+      client.query(insertTableVote, [userId, btnId[1], vote], (err, res) => {
+        if (err) throw err;
+        console.log(res);
         //"vote" de façon tmp le tps de test le reste
         socket.broadcast.emit('AfficherVote', btnId[1], vote);
       });
+    })
+
   });
-
-
-  });
-
-
-
-
-
 });
