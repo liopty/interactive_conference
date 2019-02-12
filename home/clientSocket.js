@@ -1,7 +1,5 @@
 var ID = 0;
 
-socket.emit('download_logs');
-
 //Initialisation socket io
 var socket = io();
 
