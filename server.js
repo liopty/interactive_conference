@@ -149,6 +149,7 @@ client.query("SELECT id_room FROM room;", (err, res) => {
   });
 });
 
+
 io.on('connection', function(socket){
 
   //Permet de créer un nouveau salon
@@ -174,8 +175,6 @@ io.on('connection', function(socket){
     });
 
     console.log("Creation d'une room ID: "+tempoId);
-    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'server', msg: 'Creation d\'une room ID: '+tempoId});
-
 
     client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
       if (err) throw err;
@@ -184,7 +183,7 @@ io.on('connection', function(socket){
 
     client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
       if (err) throw err;
-      // lance un évenement côté client pour actualiser l'affichage
+      // lance un évenement côté client pour actualiser son affichage
       io.sockets.in(tempoId).emit('connectToRoom', tempoId, res.rows[0].id_user);
       console.log(res.rows);
     });
@@ -197,8 +196,6 @@ io.on('connection', function(socket){
     for(var i = 0; i<roomno.length;i++){
       if(roomno[i]==id){
         console.log("Un utilisateur a rejoint la room: "+id);
-        logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'room', msg: 'Un utilisateur a rejoint la room: '+id});
-
         client.query(insertTableAppUser, [pseudo, id, 0], (err, res) => {
           if (err) throw err;
           console.log(res);
@@ -233,22 +230,18 @@ io.on('connection', function(socket){
 
   //Ecrit dans la console lorsqu'un utilisateur se connecte
   console.log("un utilisateur s'est connecté");
-  logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'connexion', msg: 'Un utilisateur s\'est connecté'});
-
 
   //Lors de l'evenement "disconnect", le socket lance la fonction
   socket.on('disconnect', function(){
     //Ecrit dans la console lorsqu'un utilisateur se déconnecte
     console.log("un utilisateur s'est déconnecté");
-    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'deconnexion', msg: 'Un utilisateur s\'est déconnecté'});
+
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
   socket.on('chat_message', function(id, message, userId){
     //Ecrit dans la console le msg
     console.log("(Room: "+id+") "+message);
-    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'room', msg: '(Room '+id+')'+message});
-
     // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personne
     if(message!=null){
       message = ent.encode(message);
@@ -262,15 +255,16 @@ io.on('connection', function(socket){
         console.log(res2.rows);
         socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message});
       });
+
     });
+
+
   });
 
   //Permet de quitter le salon
   socket.on('leave_room', function(idRoom){
     socket.leave(idRoom); //Enlève le client de la liste du salon dans lequel il se trouve
     console.log("Un utilisateur a quitté la room: "+idRoom);
-    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'room', msg: 'Un utilisateur a quitté la room'});
-
   });
 
   //Sactive lors de l'appuie d'un bouton de vote
@@ -288,8 +282,16 @@ io.on('connection', function(socket){
           throw err;
           reject("false");
         }
-        //si le resultat de la requete n'est pas nul
-          if (res.rows[0] !== undefined) {
+
+          console.log("val requete idU,idM : "+res.rows[0].vote);
+          console.log("res.rows[0].vote !== null : "+res.rows[0].vote !== null);
+          console.log("val res.rows[0].vote !== [] : "+res.rows[0].vote !== []);
+          console.log("val res.rows[0].vote !== {} : "+res.rows[0].vote !== {});
+
+          console.log("val requete idU,idM : "+res[0]);
+          console.log("res.rows[0] !== undefined : "+res[0] !== undefined);
+
+          if (res[0] !== undefined) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
               if (err) throw err;
               console.log(res2);
@@ -305,6 +307,7 @@ io.on('connection', function(socket){
         console.log(res);
       });
     });
+
     //socket.broadcast.emit('votes', pseudo, btn);
   });
 });
