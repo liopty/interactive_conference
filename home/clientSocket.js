@@ -134,6 +134,9 @@ function insereMessage(pseudo, message,idMessage, mind) {
   text.appendChild(content);
   text.id = msgID;
 
+  let voteVal = document.createElement('P');
+  voteVal.innerHTML("TEST");
+  text.appendChild(voteVal);
 
 
   if(idMessage !== null){
@@ -162,7 +165,6 @@ function insereMessage(pseudo, message,idMessage, mind) {
 }
 
 socket.on('AfficherVote', function(msgId, voteValue) {
-  console.log(msgId+" "+voteValue);
   /*let elem = document.getElementById('vote_'+msgId);
   elem.innerHTML(voteValue);*/
 });
