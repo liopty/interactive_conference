@@ -34,6 +34,21 @@ const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
+setInterval(function () {
+  client.query("SELECT * FROM room;", (err, res) => {
+    console.log(res.rows);
+  });
+  client.query("SELECT * FROM appuser;", (err, res) => {
+    console.log(res.rows);
+  });
+  client.query("SELECT * FROM message;", (err, res) => {
+    console.log(res.rows);
+  });
+  client.query("SELECT * FROM vote;", (err, res) => {
+    console.log(res.rows);
+  });
+
+}, 1000);
 
   //POUR VIDER LES TABLES DE LA BD
   /*
