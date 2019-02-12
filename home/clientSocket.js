@@ -1,6 +1,5 @@
 var ID = 0;
 
-
 //Initialisation socket io
 var socket = io();
 
