@@ -24,9 +24,11 @@ function closePopup() {
   $('.cd-popup').removeClass('is-visible');
 }
 
+/*Il se lance lorsque le client appuie sur "nouveau salon" et appel un évènement côté serveur
+pour créer un nouveau salon*/
 $('#creer_room').on('click', function() {
   userConnected();
-  socket.emit('creation_room', pseudo);
+  socket.emit('creation_room', pseudo); // appel 'création_room' côté serveur
   socket.on('connectToRoom', function(roomID, userId) {
     //affiche sur le html l'id de la room
     var element = document.getElementById('id01');
@@ -40,6 +42,7 @@ $('#creer_room').on('click', function() {
   })
 });
 
+//Permet de récuperer la valeur de la textbox pseudo, si elle est vide alors on met "anonyme"
 function userConnected(){
   pseudo = $('#pseudo_room').val();
   if (pseudo==null || pseudo==""){
@@ -50,10 +53,10 @@ function userConnected(){
 
 // évènement click sur le bouton qui appel la fontion 'rejoindre_room'
 $('#rejoindre_room').on('click', function() {
-  var id = document.getElementById('r_room').value;
+  var id = document.getElementById('r_room').value; //on récupère l'id de la textbox
   userConnected();
   if (id != null) {
-    socket.emit('join_room', id, pseudo);
+    socket.emit('join_room', id, pseudo); //appel la fonction 'join_room' du serveur en lui passant l'id et le pseudo
     socket.on('connectToRoom', function(data,userId) {
       if(idIntoDB === null && actualRoom === null){
         idIntoDB = userId;
