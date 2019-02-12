@@ -85,6 +85,9 @@ const csvWriter = createCsvWriter({
 });
 
 const logs = [{timestamp: Math.round(new Date().getTime()/1000),  flag: 'server', msg: 'Lancement du serveur'}];
+csvWriter.writeRecords(logs).then(() => {
+  console.log('Logs enregistrés dans le fichier "externalize.csv"');
+});
 
 //constantes pour les prepared request
 const insertTableRoom = 'INSERT INTO room VALUES ($1,$2);';
@@ -104,12 +107,6 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     externalize();
     res.download('./logs/externalize.csv', 'externalize.csv');
   });
-
-  function externalize(){
-    csvWriter.writeRecords(logs).then(() => {
-      console.log('Logs enregistrés dans le fichier "externalize.csv"');
-    });
-  }
 
   //POUR VIDER LES TABLES DE LA BD
   /*
