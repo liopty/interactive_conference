@@ -231,21 +231,21 @@ io.on('connection', function(socket){
 
   //Ecrit dans la console lorsqu'un utilisateur se connecte
   console.log("un utilisateur s'est connecté");
-  logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'connexion', psd: pseudo, msg: 'Un utilisateur s\'est connecté'});
+  logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'connexion', msg: 'Un utilisateur s\'est connecté'});
 
 
   //Lors de l'evenement "disconnect", le socket lance la fonction
   socket.on('disconnect', function(){
     //Ecrit dans la console lorsqu'un utilisateur se déconnecte
     console.log("un utilisateur s'est déconnecté");
-    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'deconnexion', psd: pseudo, msg: 'Un utilisateur s\'est déconnecté'});
+    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'deconnexion', msg: 'Un utilisateur s\'est déconnecté'});
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
   socket.on('chat_message', function(id, message, userId){
     //Ecrit dans la console le msg
     console.log("(Room: "+id+") "+message);
-    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'room', psd: userId, msg: '(Room '+id+')'+message});
+    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'room', msg: '(Room '+id+')'+message});
 
     // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personne
     if(message!=null){
