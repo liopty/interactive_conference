@@ -235,6 +235,7 @@ io.on('connection', function(socket){
         if (err) throw err;
         console.log(res);
         //"vote" de façon tmp le tps de test le reste
+        console.log("envoie btnId[1], vote : "+btnId[1]+" "+ vote);
         socket.broadcast.emit('AfficherVote', btnId[1], vote);
       });
     })

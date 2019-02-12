@@ -136,7 +136,7 @@ function insereMessage(pseudo, message,idMessage, mind) {
   text.id = msgID;
 
   var para = document.createElement("P");
-  var t = document.createTextNode("");
+  var t = document.createTextNode("0");
   para.appendChild(t);
   text.appendChild(para);
   para.id = voteID;
@@ -167,8 +167,7 @@ function insereMessage(pseudo, message,idMessage, mind) {
 }
 
 socket.on('AfficherVote', function(msgId, voteValue) {
-  let elem = document.getElementById('vote_'+msgId);
-  elem.innerHTML(voteValue);
+  document.getElementById('vote_'+msgId).innerHTML(voteValue);
 });
 
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
