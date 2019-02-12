@@ -134,9 +134,9 @@ function insereMessage(pseudo, message,idMessage, mind) {
   text.appendChild(content);
   text.id = msgID;
 
-  let voteVal = document.createElement('P');
-  voteVal.innerHTML("TEST");
-  text.appendChild(voteVal);
+  var para = document.createElement("P");                       // Create a <p> element
+  var t = document.createTextNode("This is a paragraph.");      // Create a text node
+  para.appendChild(t);                                          // Append the text to <p>
 
 
   if(idMessage !== null){
