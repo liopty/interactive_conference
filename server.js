@@ -226,7 +226,6 @@ io.on('connection', function(socket){
       client.query("SELECT id_message FROM Message ORDER BY id_message DESC LIMIT 1", (err, res2) => {
         if (err) throw err;
         console.log(res2.rows);
-        console.log(res2.rows[0]);
         socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message});
       });
 
@@ -255,7 +254,11 @@ io.on('connection', function(socket){
           throw err;
           reject("false");
         }
-          console.log(res.rows);
+          console.log("val requete idU,idM : "+res.rows);
+          console.log("res.rows !== null : "+res.rows !== null);
+          console.log("val res.rows !== [] : "+res.rows !== []);
+          console.log("val res.rows !== {} : "+res.rows !== {};      
+
           if (res.rows !== null) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
               if (err) throw err;
