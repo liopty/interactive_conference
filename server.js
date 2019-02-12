@@ -250,10 +250,11 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
   //Sactive lors de l'appuie d'un bouton de vote
   socket.on('votes', function(userId, btnId) {
-    if (btnId.startsWith("DOWN")) {
-      btnId = btnId.split("DOWN");
+    btnId = btnId.split("_");
+    if (btnId[0] === "DOWN") {
+      console.log("DOWN");
     } else {
-      btnId = btnId.split("UP");
+      console.log("UP");
     }
     console.log(btnId);
     //socket.broadcast.emit('votes', pseudo, btn);
