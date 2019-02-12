@@ -99,6 +99,14 @@ const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
+  // define a route to download a file
+  app.get('/download',(req, res) => {
+    csvWriter.writeRecords(logs).then(() => {
+      console.log('Logs enregistrés dans le fichier "externalize.csv"');
+    });
+    var fileLocation = path.join('./logs','externalize.csv');
+    res.download(fileLocation, 'externalize.csv');
+  });
 
   //POUR VIDER LES TABLES DE LA BD
   /*
@@ -142,12 +150,6 @@ client.query("SELECT id_room FROM room;", (err, res) => {
 });
 
 io.on('connection', function(socket){
-
-  socket.on('download_logs', function(){
-    csvWriter.writeRecords(logs).then(() => {
-      console.log('Logs enregistrés dans le fichier "externalize.csv"');
-    });
-  });
 
   //Permet de créer un nouveau salon
   socket.on('creation_room', function(pseudo) {
