@@ -73,6 +73,19 @@ console.log(res);
 setTimeout(function(){ console.log(test.id_room); }, 2000);
 */
 
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const csvWriter = createCsvWriter({
+    path: 'logs/externalize.csv',
+    header: [
+        {id: 'timestamp', title: 'TIMESTAMP'},
+        {id: 'flag', title: 'FLAG'},
+        {id: 'psd', title: 'PSEUDO'},
+        {id: 'msg', title: 'MESSAGE'}
+    ]
+});
+
+const logs = [{timestamp: Math.round(new Date().getTime()/1000),  flag: 'server', msg: 'Lancement du serveur'}];
+
 //constantes pour les prepared request
 const insertTableRoom = 'INSERT INTO room VALUES ($1,$2);';
 const insertTableAppUser ='INSERT INTO AppUser (username,id_room,role) VALUES ($1,$2,$3)';
@@ -128,8 +141,13 @@ client.query("SELECT id_room FROM room;", (err, res) => {
   });
 });
 
-
 io.on('connection', function(socket){
+
+  socket.on('download_logs', function(){
+    csvWriter.writeRecords(logs).then(() => {
+      console.log('Logs enregistrés dans le fichier "externalize.csv"');
+    });
+  })
 
   //Permet de créer un nouveau salon
   socket.on('creation_room', function(pseudo) {
@@ -154,6 +172,8 @@ io.on('connection', function(socket){
     });
 
     console.log("Creation d'une room ID: "+tempoId);
+    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'server', msg: 'Creation d\'une room ID: '+tempoId});
+
 
     client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
       if (err) throw err;
@@ -175,6 +195,8 @@ io.on('connection', function(socket){
     for(var i = 0; i<roomno.length;i++){
       if(roomno[i]==id){
         console.log("Un utilisateur a rejoint la room: "+id);
+        logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'room', psd: pseudo, msg: 'Un utilisateur a rejoint la room: '+id});
+
         client.query(insertTableAppUser, [pseudo, id, 0], (err, res) => {
           if (err) throw err;
           console.log(res);
@@ -209,18 +231,22 @@ io.on('connection', function(socket){
 
   //Ecrit dans la console lorsqu'un utilisateur se connecte
   console.log("un utilisateur s'est connecté");
+  logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'connexion', psd: pseudo, msg: 'Un utilisateur s\'est connecté'});
+
 
   //Lors de l'evenement "disconnect", le socket lance la fonction
   socket.on('disconnect', function(){
     //Ecrit dans la console lorsqu'un utilisateur se déconnecte
     console.log("un utilisateur s'est déconnecté");
-
+    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'deconnexion', psd: pseudo, msg: 'Un utilisateur s\'est déconnecté'});
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
   socket.on('chat_message', function(id, message, userId){
     //Ecrit dans la console le msg
     console.log("(Room: "+id+") "+message);
+    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'room', psd: userId, msg: '(Room '+id+')'+message});
+
     // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personne
     if(message!=null){
       message = ent.encode(message);
@@ -234,16 +260,15 @@ io.on('connection', function(socket){
         console.log(res2.rows);
         socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message});
       });
-
     });
-
-
   });
 
   //Permet de quitter le salon
   socket.on('leave_room', function(idRoom){
     socket.leave(idRoom); //Enlève le client de la liste du salon dans lequel il se trouve
     console.log("Un utilisateur a quitté la room: "+idRoom);
+    logs.push({timestamp: Math.round(new Date().getTime()/1000),  flag: 'room', msg: 'Un utilisateur a quitté la room'});
+
   });
 
   //Sactive lors de l'appuie d'un bouton de vote
@@ -278,7 +303,6 @@ io.on('connection', function(socket){
         console.log(res);
       });
     });
-
     //socket.broadcast.emit('votes', pseudo, btn);
   });
 });
