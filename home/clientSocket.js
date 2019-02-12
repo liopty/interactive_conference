@@ -165,7 +165,7 @@ function insereMessage(pseudo, message,idMessage, mind) {
     $('#messages').append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
   }
 }
-
+// TODO: EN COUR
 socket.on('AfficherVote', function(msgId, voteValue) {
   document.getElementById('vote_'+msgId).innerHTML = voteValue;
 });
