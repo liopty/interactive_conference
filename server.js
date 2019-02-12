@@ -101,6 +101,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
   // define a route to download a file
   app.get('/download/:file(*)',(req, res) => {
+    console.log('oui');
     csvWriter.writeRecords(logs).then(() => {
       console.log('Logs enregistrés dans le fichier "externalize.csv"');
     });
