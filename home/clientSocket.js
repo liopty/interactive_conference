@@ -167,7 +167,7 @@ function insereMessage(pseudo, message,idMessage, mind) {
 }
 
 socket.on('AfficherVote', function(msgId, voteValue) {
-  document.getElementById("vote_"+msgId).innerHTML(voteValue);
+  document.getElementById("vote_2").innerHTML("test");
 });
 
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
