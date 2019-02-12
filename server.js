@@ -106,7 +106,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
       console.log('Logs enregistrés dans le fichier "externalize.csv"');
     });
 
-    res.download('./logs/README.txt', 'README.txt');
+    res.download('./logs/externalize.csv', 'externalize.csv');
   });
 
   //POUR VIDER LES TABLES DE LA BD
