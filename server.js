@@ -10,13 +10,13 @@ client.connect();
 client.query("CREATE TABLE IF NOT EXISTS room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
   if (err) throw err;
 });
-client.query("CREATE TABLE IF NOT EXISTS appuser (id_user SERIAL PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room));", (err, res) => {
+client.query("CREATE TABLE IF NOT EXISTS appuser (id_user SERIAL PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room) ON DELETE CASCADE);", (err, res) => {
   if (err) throw err;
 });
-client.query("CREATE TABLE IF NOT EXISTS message (content text, id_room int REFERENCES room (id_room), id_user int REFERENCES appuser (id_user), id_message SERIAL PRIMARY KEY NOT NULL, answered bool, comment int, quizz jsonb);", (err, res) => {
+client.query("CREATE TABLE IF NOT EXISTS message (content text, id_room int REFERENCES room (id_room) ON DELETE CASCADE, id_user int REFERENCES appuser (id_user) ON DELETE CASCADE, id_message SERIAL PRIMARY KEY NOT NULL, answered bool, comment int, quizz jsonb);", (err, res) => {
   if (err) throw err;
 });
-client.query("CREATE TABLE IF NOT EXISTS vote (id_user int REFERENCES appuser (id_user), id_message int REFERENCES message (id_message), vote int, PRIMARY KEY (id_user, id_message));", (err, res) => {
+client.query("CREATE TABLE IF NOT EXISTS vote (id_user int REFERENCES appuser (id_user) ON DELETE CASCADE, id_message int REFERENCES message (id_message) ON DELETE CASCADE, vote int, PRIMARY KEY (id_user, id_message));", (err, res) => {
   if (err) throw err;
 });
 /*
