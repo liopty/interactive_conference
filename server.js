@@ -131,18 +131,21 @@ client.query("SELECT id_room FROM room;", (err, res) => {
 
 io.on('connection', function(socket){
 
+  //Permet de créer un nouveau salon
   socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
+    // Créer un nouvel identifiant aléatoire entre 1 et 1000 pour le salon
     while(check!=true){
       var tempo = (Math.floor(Math.random() * 1000)+1);
+      // on vérifie que l'identifiant n'existe pas déjà
       if (!roomno.includes(tempo)) {
         check=true;
         tempoId=tempo;
       }
     }
-    roomno.push(tempoId);
-    socket.join(tempoId);
+    roomno.push(tempoId); // Ajoute dans le tableau de salons le nouvel identifiant
+    socket.join(tempoId); // Ajoute le client à la liste du salon crée
 
     //insertion du tuple (id_room,anonyme) dans la TABLE room lors de la creation d'une room
     client.query(insertTableRoom, [tempoId, false], (err, res) => {
@@ -159,13 +162,16 @@ io.on('connection', function(socket){
 
     client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
       if (err) throw err;
+      // lance un évenement côté client pour actualiser l'affichage
       io.sockets.in(tempoId).emit('connectToRoom', tempoId, res.rows[0].id_user);
       console.log(res.rows);
     });
   });
 
+  //Permet de rejoindre un salon existant
   socket.on('join_room', function(id, pseudo) {
     var tempoId = id;
+    // on vérifie que le salon existe bien
     for(var i = 0; i<roomno.length;i++){
       if(roomno[i]==id){
         console.log("Un utilisateur a rejoint la room: "+id);
@@ -234,6 +240,7 @@ io.on('connection', function(socket){
 
   });
 
+  //Permet de quitter le salon
   socket.on('leave_room', function(idRoom){
     socket.leave(idRoom);
     console.log("Un utilisateur a quitté la room: "+idRoom);
