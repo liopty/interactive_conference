@@ -225,8 +225,6 @@ io.on('connection', function(socket){
             }
           }
           resolve("true");
-
-
         });
     });
 
