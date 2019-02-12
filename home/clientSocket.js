@@ -126,13 +126,15 @@ $(document).keypress(function(event) {
 function insereMessage(pseudo, message,idMessage, mind) {
   var buttonUPID = "UP_" + idMessage;
   var buttonDOWNID = "DOWN_" + idMessage;
-  var msgID = "msg" + idMessage;
+  var msgID = "msg_" + idMessage;
 
   //Création d'un div avec le pseudo, le message et un ID
   var text = document.createElement('div');
   var content = document.createTextNode(pseudo + " : " + message);
   text.appendChild(content);
   text.id = msgID;
+
+
 
   if(idMessage !== null){
     //Création du bouton UP avec un text, un id et une class
@@ -158,6 +160,12 @@ function insereMessage(pseudo, message,idMessage, mind) {
     $('#messages').append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
   }
 }
+
+socket.on('AfficherVote', function(msgId, voteValue) {
+  console.log(msgId+" "+voteValue);
+  /*let elem = document.getElementById('vote_'+msgId);
+  elem.innerHTML(voteValue);*/
+});
 
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
 $(document).on("click", ".vote", function() {
