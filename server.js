@@ -265,7 +265,7 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
           reject("false");
         }
           console.log(res.rows);
-          if (res.rows !== []) {
+          if (res.rows !== null) {
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
               if (err) throw err;
               console.log(res2);
@@ -276,7 +276,6 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
     });
 
     promise1.then(function(val) {
-      console.log(val);
       client.query(insertTableVote, [userId, btnId[1], vote], (err, res) => {
         if (err) throw err;
         console.log(res);
