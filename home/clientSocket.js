@@ -137,7 +137,7 @@ function insereMessage(pseudo, message,idMessage, mind) {
   var para = document.createElement("P");                       // Create a <p> element
   var t = document.createTextNode("This is a paragraph.");      // Create a text node
   para.appendChild(t);                                          // Append the text to <p>
-
+  text.appendChild(para);
 
   if(idMessage !== null){
     //Création du bouton UP avec un text, un id et une class
