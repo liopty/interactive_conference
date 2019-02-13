@@ -96,7 +96,7 @@ app.get('/download',(req, res) => {
   csvWriter.writeRecords(logs).then(() => {
     console.log('Logs enregistrés dans le fichier "externalize.csv"');
   });
-  res.download('../logs/externalize.csv', 'externalize.csv');
+  res.download('./logs/externalize.csv', 'externalize.csv');
 });
 
 var roomno=[];
