@@ -216,12 +216,13 @@ $(document).on("click", ".vote", function() {
 
 $(document).on("click", "#activeOnglet2", function() {
   document.getElementById('chatBox').style.visibility='hidden';
-  soket.emit("AffichageTopVote", idIntoDB);
+  //soket.emit("AffichageTopVote", idIntoDB);
 });
-
+/*
 socket.on("topMessage", function(data) {
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages');
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
   })
 });
+*/
