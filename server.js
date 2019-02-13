@@ -316,10 +316,8 @@ io.on('connection', function(socket){
         if (err) throw err;
         console.log(res.rows);
         res.rows.forEach(function(elem){
-          console.log("ELEM AVAAAAANT : "+elem.vote);
           elem.vote = 0;
           messagesTab.push(elem);
-          console.log("ELEM APREEEES : "+elem.vote);
           client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res) => {
             if (err) throw err;
             console.log(res.rows);
@@ -328,15 +326,17 @@ io.on('connection', function(socket){
         });
 
       });
-      /*votesTab.forEach(function(element){
+      //pour tous les votes
+      votesTab.forEach(function(element){
+        //pour tous les msg de la room
         messagesTab.forEach(function(ele){
           if(element.id_message === ele.id_message){
-
+            ele.vote += element.vote;
           }
         });
-      });*/
-      console.log("messagesTab : "+messagesTab);
-      console.log("votesTab : "+votesTab);
+      });
+      console.log("messagesTab : "+messagesTab[0]);
+      console.log("votesTab : "+votesTab[0]);
       //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
 
 });
