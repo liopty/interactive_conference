@@ -67,7 +67,7 @@ setInterval(function () {
       console.log(element);
     });
   });
-}, 5000);
+}, 10000);
 
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
 app.use('/', express.static('home'));
@@ -221,6 +221,7 @@ io.on('connection', function(socket){
               console.log(res2);
             });
             if(res.rows[0].vote === vote){
+              actualiserVotes(btnId[1]);
               reject("false");
             }
           }
@@ -234,22 +235,23 @@ io.on('connection', function(socket){
       client.query(insertTableVote, [userId, btnId[1], vote], (err, res) => {
         if (err) throw err;
         console.log(res);
-
-        client.query("SELECT vote FROM vote WHERE id_message=$1;",[btnId[1]], (err, res) => {
-          if (err) throw err;
-          console.log(res);
-          let voteVal = 0;
-          res.rows.forEach(function(element) {
-            voteVal += element.vote;
-          });
-          console.log("voteVal "+voteVal);
-          socket.emit('AfficherVote', btnId[1], voteVal);
-          socket.broadcast.emit('AfficherVote', btnId[1], voteVal);
-        });
-
-
+        actualiserVotes(btnId[1]);
       });
     });
 
   });
 });
+
+function actualiserVotes(idmessage) {
+  client.query("SELECT vote FROM vote WHERE id_message=$1;",[idmessage], (err, res) => {
+    if (err) throw err;
+    console.log(res);
+    let voteVal = 0;
+    res.rows.forEach(function(element) {
+      voteVal += element.vote;
+    });
+    console.log("voteVal "+voteVal);
+    socket.emit('AfficherVote', idmessage, voteVal);
+    socket.broadcast.emit('AfficherVote', idmessage, voteVal);
+  });
+}
