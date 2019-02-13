@@ -230,7 +230,7 @@ body {
   text-align: center;
 }
 
-body,header,#messages li, #contentTabs {
+body,header,#messages li, #contentTabs, #sortedMessages li {
     display: flex;
 }
 
@@ -332,12 +332,12 @@ body,header,#messages li, #contentTabs {
 #recent{
   width: 100%;
 }
-#messages {
+#messages, #sortedMessages {
   padding-top: 150px;
   width: 100%;
 }
 
-#messages .mindMsg {
+#messages .mindMsg, #sortedMessages .mindMsg{
   display: inline-block;
   overflow-x: hidden;
   text-align: justify;
@@ -355,7 +355,7 @@ body,header,#messages li, #contentTabs {
 	border-top-right-radius: 5px;
 }
 
-#messages .notMindMsg{
+#messages .notMindMsg, #sortedMessages .notMindMsg{
   display: inline-block;
   overflow-x: hidden;
   max-width: 400px;
@@ -394,7 +394,7 @@ body,header,#messages li, #contentTabs {
   width: 70%;
 }
 
-#messages .mindBtn {
+#messages .mindBtn, #sortedMessages .mindBtn {
   display: inline-block;
   overflow-x: hidden;
   text-align: left;
@@ -410,7 +410,7 @@ body,header,#messages li, #contentTabs {
 	border-top-right-radius: 5px;
 }
 
-#messages .notMindBtn {
+#messages .notMindBtn, #sortedMessages .notMindBtn {
     display: inline-block;
     overflow-x: hidden;
     max-width: 400px;
@@ -478,24 +478,24 @@ body,header,#messages li, #contentTabs {
                        "c cc"
                        "d dd"
                        "e ee"
-                       "f f";                       
+                       "f f";
 }
 
 .q1 {
   grid-area: a;
-}  
+}
 .q2 {
   grid-area: b;
-}  
+}
 .q2-bis {
   grid-area: bb;
-}  
+}
 .q3 {
   grid-area: c;
 }
 .q3-bis {
   grid-area: cc;
-}  
+}
 .q4 {
   grid-area: d;
 }

@@ -298,7 +298,7 @@ io.on('connection', function(socket){
       console.log(res.rows);
       res.rows.forEach(function(elem){
         socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind:"no"});
-        //actualiserVotes(elem.id_message);
+        actualiserVotes(elem.id_message);
       });
   });
 
