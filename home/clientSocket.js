@@ -182,4 +182,11 @@ $(document).on("click", ".vote", function() {
   socket.emit("votes", idIntoDB, this.id);
   //alert(idIntoDB + " : " + this.id);
 });
+
 //-------------------------------//
+//            ONGLET 2
+//-------------------------------//
+
+$(document).on("click", "activeOnglet2", function() {
+  alert("onglet2");
+});
