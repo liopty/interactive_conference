@@ -69,6 +69,9 @@ console.log(res);
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
 app.use('/', express.static('home'));
 
+app.get('/statistiques',(req, res) => {
+  app.use('/', express.static('statistiques'));
+});
 //Lancer le serveur http et écoute les connection sur le port indiqué
 http.listen(PORT, function(){
   // Ecrit dans la console sur quel port le serveur écoute
@@ -128,7 +131,7 @@ io.on('connection', function(socket){
     });
 
     console.log("Creation d'une room ID: "+tempoId);
-    logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: 'server', msg: 'Création de room'});
+    logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: 'server', msg: 'Création du salon '+tempoId});
 
     client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
       if (err) throw err;
@@ -166,7 +169,7 @@ io.on('connection', function(socket){
       if (err) throw err;
       console.log(res.rows);
       res.rows.forEach(function(elem){
-        socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message});
+        socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
         actualiserVotes(elem.id_message);
       });
 
@@ -226,6 +229,7 @@ io.on('connection', function(socket){
   socket.on('leave_room', function(idRoom){
     socket.leave(idRoom);
     console.log("Un utilisateur a quitté la room: "+idRoom);
+    logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: 'server', msg: "Un utilisateur  a quitté le salon "+idRoom});
   });
 
   //Sactive lors de l'appuie d'un bouton de vote
@@ -284,5 +288,14 @@ io.on('connection', function(socket){
     });
   }
 
+  socket.on("AffichageTopVote", function(idUser){
+    client.query("SELECT username, content, id_message FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [id], (err, res) => {
+      if (err) throw err;
+      console.log(res.rows);
+      res.rows.forEach(function(elem){
+        socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind:"no"});
+        actualiserVotes(elem.id_message);
+      });
+  });
 
 });

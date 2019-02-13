@@ -148,7 +148,7 @@ $(document).keypress(function(event) {
 });
 
 // Ajoute un message dans la page
-function insereMessage(pseudo, message,idMessage, mind) {
+function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   var buttonUPID = "UP_" + idMessage;
   var buttonDOWNID = "DOWN_" + idMessage;
   var msgID = "msg_" + idMessage;
@@ -185,9 +185,9 @@ function insereMessage(pseudo, message,idMessage, mind) {
 
 
   if (mind == "yes") {
-    $('#messages').append($('<div class="mindMsg">').append(text, btnUP, btnDOWN));
+    $(div).append($('<div class="mindMsg">').append(text));
   } else {
-    $('#messages').append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
+    $(div).append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
   }
 }
 
@@ -216,4 +216,12 @@ $(document).on("click", ".vote", function() {
 
 $(document).on("click", "#activeOnglet2", function() {
   document.getElementById('chatBox').style.visibility='hidden';
+  soket.emit("AffichageTopVote", idIntoDB);
+});
+
+socket.on("topMessage", function(data) {
+  insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages');
+  var elem = document.getElementById('contentTabs');
+  elem.scrollTop = elem.scrollHeight;
+  })
 });
