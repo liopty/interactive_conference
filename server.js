@@ -73,6 +73,26 @@ http.listen(PORT, function(){
   console.log('listening on *:' + PORT);
 });
 
+// Téléchargement des logs
+app.get('/download',(req, res) => {
+  fs.unlinkSync('./logs/externalize.csv');
+  console.log('Construction du fichier ...');
+  const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+    const csvWriter = createCsvWriter({
+      path: 'logs/externalize.csv',
+      header: [
+        {id: 'timestamp', title: 'TIMESTAMP'},
+        {id: 'flag', title: 'FLAG'},
+        {id: 'psd', title: 'PSEUDO'},
+        {id: 'msg', title: 'MESSAGE'}
+      ]
+    });
+  csvWriter.writeRecords(logs).then(() => {
+    res.download('./logs/externalize.csv', 'externalize.csv');
+    console.log('... téléchargé');
+  });
+});
+
 var roomno=[];
 //actualise le tableau roonno a chaque lancement du serveur grâce à la base de données
 client.query("SELECT id_room FROM room;", (err, res) => {
