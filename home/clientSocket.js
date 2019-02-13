@@ -187,6 +187,6 @@ $(document).on("click", ".vote", function() {
 //            ONGLET 2
 //-------------------------------//
 
-$(document).on("click", "activeOnglet2", function() {
+$(document).on("click", "#activeOnglet2", function() {
   alert("onglet2");
 });
