@@ -182,8 +182,6 @@ function insereMessage(pseudo, message,idMessage, mind) {
     btnDOWN.className = "vote";
   }
 
-
-
   if (mind == "yes") {
     $('#messages').append($('<div class="mindMsg">').append(text, btnUP, btnDOWN));
   } else {
@@ -197,7 +195,6 @@ socket.on('AfficherVote', function(msgId, voteValue) {
   } catch (e) {
 
   }
-
 });
 
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
@@ -206,7 +203,129 @@ $(document).on("click", ".vote", function() {
   //alert(idIntoDB + " : " + this.id);
 });
 
-//-------- QUIZZ -----------------------//
+//------------------ QUIZZ -----------------------//
+
+// Quand on reçoit un message, on l'insère dans la page
+socket.on('message', function(data) {
+  insereQuizz(data.pseudo, data.message, data.idMessage, data.mind);
+  var elem = document.getElementById('contentTabs');
+  elem.scrollTop = elem.scrollHeight;
+})
+
+//on transmet le message et on l'affiche sur la page
+function envoieQuizz() {
+  var question = [$('#quizz-titre').val(), $('#quizz-propo1').val(), $('#quizz-propo2').val(), $('#quizz-propo3').val(), $('#quizz-propo4').val()];
+  
+  var question = { //Objet question + proposition + solution
+    titre: $('#quizz-titre').val(), 
+    proposition1 : $('#quizz-propo1').val(), 
+    solution1 : true,
+    proposition2 : $('#quizz-propo2').val(), 
+    solution2 : true,
+    proposition3 : $('#quizz-propo3').val(), 
+    solution3 : true,
+    proposition4 : $('#quizz-propo4').val(),
+    solution4 : true,
+  };
+  var myJSON = JSON.stringify(question); // JSON
+  
+  if (question.titre != '' & question.proposition1 != '' & question.proposition2 != '') {
+    socket.emit('chat_quizz', actualRoom, question, idIntoDB); // Transmet le message aux autres
+    $('#quizz-titre').val('').focus(); // Vide la zone de Chat et remet le focus dessus
+    $('#quizz-propo1').val('').focus();
+    $('#quizz-propo2').val('').focus();
+    $('#quizz-propo3').val('').focus();
+    $('#quizz-propo4').val('').focus();
+    return false; // Permet de bloquer l'envoi "classique" du formulaire
+  }
+}
+
+// Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
+$('#envoyer-quizz').on('click', function() {
+  envoieQuizz();
+  document.getElementById('card-quizz').style.display = "none";
+  document.getElementById('chatBox').style.display = "block";
+});
+
+
+// Ajoute un message dans la page
+function insereQuizz(titre, question, mind) {
+  var propo1, propo2, propo3, propo4;
+  var compteur1 = 0, compteur2 = 0, compteur3 = 0, compteur4 = 0; // Compteur de vote pour chaque choix
+
+  // var buttonUPID = "UP_" + idMessage;
+  // var buttonDOWNID = "DOWN_" + idMessage;
+  // var msgID = "msg_" + idMessage;
+  // var voteID ="vote_"+idMessage;
+
+  if(p1 != ''){
+    propo1 = '<button class="mdc-button" id="choixQuizz1"><span class="mdc-button__label"></span>' + question.proposition1 + '</span></button>' + " " + compteur1;
+  }
+  if(p2 != ''){
+    propo2 = '<button class="mdc-button" id="choixQuizz2"><span class="mdc-button__label"></span>' + question.proposition2 + '</span></button>' + " " + compteur2;
+  }
+  if(p3 != ''){
+    propo3 = '<button class="mdc-button" id="choixQuizz3"><span class="mdc-button__label"></span>' + question.proposition3 + '</span></button>' + " " + compteur3;
+  }else{
+    propo3 = '';
+  }
+  if(p4 != ''){
+    propo4 = '<button class="mdc-button" id="choixQuizz4"><span class="mdc-button__label"></span>' + question.proposition4 + '</span></button>' + " " + compteur4;
+  }else{
+    propo4 = '';
+  }
+  
+  var parent = "<div>" + "<p style='text-align:center; text-transform: uppercase; font-weight:bold;'>" + question.titre + "</p>" + propo1 + "<br>" + propo2 + "<br>" + propo3 + "<br>" + propo4 +  "</div>";
+
+  if (mind == "yes") {
+    $('#messages').append($('<div class="mindMsg">').append(parent));
+  } else {
+    $('#messages').append($('<div class="notMindMsg">').append(parent));
+  }
+}
+
+// socket.on('AfficherVote', function(msgId, voteValue) {
+//   try {
+//     document.getElementById('vote_'+msgId).innerHTML = voteValue;
+//   } catch (e) {
+
+//   }
+// });
+
+var q1 = false, q2 = false, q3 = false, q4 = false;
+
+$(document).on("click", "#choixQuizz1", function() {
+  if(!q1){
+    document.getElementById('choixQuizz1').style.backgroundColor = "white";
+    q1 = true;
+  }else{
+    document.getElementById('choixQuizz1').style.backgroundColor = "#1998e6";
+  }
+});
+$(document).on("click", "#choixQuizz2", function() {
+  if(!q2){
+    document.getElementById('choixQuizz2').style.backgroundColor = "white";
+    q2 = true;
+  }else{
+    document.getElementById('choixQuizz2').style.backgroundColor = "#1998e6";
+  }
+});
+$(document).on("click", "#choixQuizz3", function() {
+  if(!q3){
+    document.getElementById('choixQuizz3').style.backgroundColor = "white";
+    q3 = true;
+  }else{
+    document.getElementById('choixQuizz3').style.backgroundColor = "#1998e6";
+  }
+});
+$(document).on("click", "#choixQuizz4", function() {
+  if(!q4){
+    document.getElementById('choixQuizz4').style.backgroundColor = "white";
+    q4 = true;
+  }else{
+    document.getElementById('choixQuizz4').style.backgroundColor = "#1998e6";
+  }
+});
 
 
 

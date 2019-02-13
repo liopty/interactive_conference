@@ -20,7 +20,6 @@ client.query("CREATE TABLE IF NOT EXISTS vote (id_user int REFERENCES appuser (i
   if (err) throw err;
 });
 
-
 //constantes pour les prepared request
 const insertTableRoom = 'INSERT INTO room VALUES ($1,$2);';
 const insertTableAppUser ='INSERT INTO AppUser (username,id_room,role) VALUES ($1,$2,$3)';
@@ -199,7 +198,7 @@ io.on('connection', function(socket){
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
-  socket.on('chat_message', function(id, message, userId){
+  socket.on('chat_message', function(id, message, userId){  
     //Ecrit dans la console le msg
     console.log("(Room: "+id+") "+message);
     logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'message', psd: userId, msg: "(Room: "+id+") "+message});
@@ -218,11 +217,33 @@ io.on('connection', function(socket){
         socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "no"});
         socket.emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "yes"});
       });
-
     });
-
-
   });
+
+    //Lors de l'evenement "chat quizz", le socket lance la fonction
+    socket.emit('chat_quizz', function(id, question, userId){  
+      //Ecrit dans la console le msg
+      console.log("(Room: "+id+") "+ question.titre);
+      logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
+  
+      // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personne
+      if(question!=null){
+        question = ent.encode(question);
+      }
+  
+      // client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
+      //   if (err) throw err;
+      //   console.log(res);
+      //   client.query("SELECT id_message FROM Message ORDER BY id_message DESC LIMIT 1", (err, res2) => {
+      //     if (err) throw err;
+      //     console.log(res2.rows);
+      //     socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "no"});
+      //     socket.emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "yes"});
+      //   });
+      // });
+
+      client.query(insertTable)
+    });
 
   socket.on('leave_room', function(idRoom){
     socket.leave(idRoom);
