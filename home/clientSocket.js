@@ -217,7 +217,7 @@ $(document).on("click", ".vote", function() {
 
 $(document).on("click", "#activeOnglet2", function() {
   document.getElementById('chatBox').style.visibility='hidden';
-  socket.emit("AffichageTopVote", idIntoDB);
+  socket.emit("AffichageTopVote", idIntoDB, actualRoom);
 });
 
 socket.on('topMessage', function(data) {
