@@ -40,10 +40,9 @@ const logs = [{timestamp: Math.round(new Date().getTime()/1000), flag: 'admin', 
 //S'exécute toutes les 24h, supprime les room de plus de 24h
 /*setInterval(function () {
 //il faut rajouter je pense un champs dans room genre date création ?
-// on regarde salon par salon si il y en a un qui a duré trop longtemps
-//on le supprime
-// on faire un trigger qui se déclenche à chaque fois qu'une nouvelle room est ajouté
-
+// on fait un trigger qui se déclenche à chaque fois qu'une nouvelle room est ajouté
+CurrentTime = Math.round(new Date().getTime()/1000);
+//comparé CurrentTime avec le temps de cahque salon
 }, 86400000);
 */
 
