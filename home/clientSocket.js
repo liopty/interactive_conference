@@ -88,6 +88,7 @@ $('#quitter_room').on('click', function() {
   element.innerHTML = "Accueil";
   var d = document.getElementById("modal");
   d.className += " mdc-drawer--closing";
+  document.title = "Interactive Conference";
   openPopup();
 });
 
