@@ -188,5 +188,5 @@ $(document).on("click", ".vote", function() {
 //-------------------------------//
 
 $(document).on("click", "#activeOnglet2", function() {
-  document.getElementById('#m').innerHTML = "";
+  document.getElementById('chatBar').style.visibility='hidden';
 });
