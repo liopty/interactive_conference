@@ -46,7 +46,7 @@ $('#creer_room').on('click', function() {
     if(idIntoDB === null && actualRoom !== null){
       idIntoDB = userId;
     }
-  })
+  });
 });
 
 //Permet de récuperer la valeur de la textbox pseudo, si elle est vide alors on met "anonyme"
@@ -73,7 +73,7 @@ $('#rejoindre_room').on('click', function() {
       actualRoom = data;
       document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
       closePopup();
-    })
+    });
   }
 });
 
@@ -122,7 +122,7 @@ socket.on('message', function(data) {
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind);
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
-})
+});
 
 //on transmet le message et on l'affiche sur la page
 function envoieMessage() {
@@ -169,14 +169,14 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   if(mind !== "yes"){
     //Création du bouton UP avec un text, un id et une class
     var btnUP = document.createElement("BUTTON");
-    var textUP = document.createTextNode("⮝");//⯅ ❤ ✚ ➕ ☺
+    var textUP = document.createTextNode("➕");//⯅ ❤ ✚ ➕ ☺ ⮝
     btnUP.appendChild(textUP);
     btnUP.id = buttonUPID;
     btnUP.className = "vote upvote";
 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
-    var textDOWN = document.createTextNode("⮟");//⯆ ✖ ⚊ ➖ ☹
+    var textDOWN = document.createTextNode("➖");//⯆ ✖ ⚊ ⮟ ☹
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
@@ -219,7 +219,7 @@ $(document).on("click", "#activeOnglet2", function() {
   soket.emit("AffichageTopVote", idIntoDB);
 });
 
-socket.on("topMessage", function(data) {/*
+socket.on('topMessage', function(data) {/*
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages');
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
