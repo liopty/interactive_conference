@@ -114,7 +114,10 @@ io.on('connection', function(socket){
   socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
+<<<<<<< HEAD
+=======
     // On créer un nouvel identifiant unique entre 1 et 1000
+>>>>>>> a8d433736859b78469669743f8cba819892c76da
     while(check!=true){
       var tempo = (Math.floor(Math.random() * 1000)+1);
       if (!roomno.includes(tempo)) {
@@ -290,7 +293,7 @@ io.on('connection', function(socket){
   }
 
   socket.on("AffichageTopVote", function(idUser, idRoom){
-    client.query("SELECT username, content, id_message, vote  FROM message m, AppUser a, vote v WHERE m.id_user = a.id_user AND m.id_room=$1 AND v.id_message = m.id_message ORDER by id_message ASC", [idRoom], (err, res) => {
+    client.query("SELECT username, content, m.id_message, vote  FROM message m, AppUser a, vote v WHERE m.id_user = a.id_user AND m.id_room=$1 AND v.id_message = m.id_message ORDER by id_message ASC", [idRoom], (err, res) => {
         if (err) throw err;
         console.log(res.rows);
         res.rows.forEach(function(elem){
