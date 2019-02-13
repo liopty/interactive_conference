@@ -315,10 +315,8 @@ io.on('connection', function(socket){
     client.query("SELECT username, content, id_message  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
         if (err) throw err;
         console.log(res.rows);
-        messagesTab = res.rows;
         res.rows.forEach(function(elem){
-
-          //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
+          messagesTab.push(elem,vote:0);
           client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res) => {
             if (err) throw err;
             console.log(res.rows);
@@ -327,9 +325,17 @@ io.on('connection', function(socket){
         });
 
       });
+      /*votesTab.forEach(function(element){
+        messagesTab.forEach(function(ele){
+          if(element.id_message === ele.id_message){
 
+          }
+        });
+      });*/
       console.log("messagesTab : "+messagesTab);
       console.log("votesTab : "+votesTab);
+      //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
+
 });
 
 
