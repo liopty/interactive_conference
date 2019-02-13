@@ -36,10 +36,10 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 
 //S'exécute toutes les 24h, supprime les room de plus de 24h
 /*setInterval(function () {
-//ne faut il pas rajouter un champs dans room genre date création ?
+//il faut rajouter je pense un champs dans room genre date création ?
 // on regarde salon par salon si il y en a un qui a duré trop longtemps
 //on le supprime
-// faire un trigger
+// on faire un trigger qui se déclenche à chaque fois qu'une nouvelle room est ajouté
 
 }, 86400000);
 */
