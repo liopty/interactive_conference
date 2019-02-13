@@ -136,7 +136,7 @@ function insereMessage(pseudo, message,idMessage, mind) {
   text.id = msgID;
 
   console.log("1");
-  alert("1");
+
   var para = document.createElement("P");
   var t = document.createTextNode("0");
   para.appendChild(t);
