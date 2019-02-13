@@ -453,3 +453,61 @@ body,header,#messages li, #contentTabs {
     margin-left: 20px;
   }
 }
+
+/*-------------Quizz------------*/
+
+#quizz {
+  font-size: 1em;
+}
+
+.wrapper-quizz.form {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  padding: 2%;
+  transform: translate(-50%, -50%);
+}
+
+.wrapper-quizz {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(70px, auto);
+  grid-template-areas: "a a"
+                       "b bb"
+                       "c cc"
+                       "d dd"
+                       "e ee"
+                       "f f";                       
+}
+
+.q1 {
+  grid-area: a;
+}  
+.q2 {
+  grid-area: b;
+}  
+.q2-bis {
+  grid-area: bb;
+}  
+.q3 {
+  grid-area: c;
+}
+.q3-bis {
+  grid-area: cc;
+}  
+.q4 {
+  grid-area: d;
+}
+.q4-bis {
+  grid-area: dd;
+}
+.q5 {
+  grid-area: e;
+}
+.q5-bis {
+  grid-area: ee;
+}
+.q6 {
+  grid-area: f;
+}
