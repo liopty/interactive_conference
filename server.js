@@ -326,9 +326,9 @@ io.on('connection', function(socket){
             votesTab = res.rows;
           });
         });
-
+        resolve(votesTab, messagesTab);
       });
-      resolve(votesTab, messagesTab);
+
     });
     promise3.then(function(votesTab, messagesTab) {
       //pour tous les votes
