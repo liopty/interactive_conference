@@ -143,7 +143,7 @@ function insereMessage(pseudo, message,idMessage, mind) {
   text.appendChild(para);
   para.id = voteID;
 
-  if(idMessage !== null){
+  if(mind !== "yes"){
     //Création du bouton UP avec un text, un id et une class
     var btnUP = document.createElement("BUTTON");
     var textUP = document.createTextNode("👍");
