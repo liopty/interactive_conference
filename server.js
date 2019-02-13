@@ -327,6 +327,8 @@ io.on('connection', function(socket){
           });
         });
         resolve(votesTab, messagesTab);
+        console.log("messagesTab : "+messagesTab);
+        console.log("votesTab : "+votesTab);
       });
 
     });
@@ -343,8 +345,7 @@ io.on('connection', function(socket){
           }
         });
       });
-      console.log("messagesTab : "+messagesTab);
-      console.log("votesTab : "+votesTab);
+
     });
 
       //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
