@@ -310,6 +310,8 @@ io.on('connection', function(socket){
   }
 
   socket.on("AffichageTopVote", function(idUser, idRoom){
+    const promise3 = new Promise(function(resolve, reject) {
+
     let messagesTab = [];
     let votesTab = [];
     client.query("SELECT username, content, id_message  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
@@ -322,21 +324,25 @@ io.on('connection', function(socket){
             if (err) throw err;
             console.log(res.rows);
             votesTab = res.rows;
-            //pour tous les votes
-            votesTab.forEach(function(element){
-              //pour tous les msg de la room
-              messagesTab.forEach(function(ele){
-                if(element.id_message === ele.id_message){
-                  ele.vote += element.vote;
-                }
-              });
-            });
-            console.log("messagesTab : "+messagesTab);
-            console.log("votesTab : "+votesTab);
           });
         });
 
       });
+      resolve(true);
+    });
+    promise3.then(function(val) {
+      //pour tous les votes
+      votesTab.forEach(function(element){
+        //pour tous les msg de la room
+        messagesTab.forEach(function(ele){
+          if(element.id_message === ele.id_message){
+            ele.vote += element.vote;
+          }
+        });
+      });
+      console.log("messagesTab : "+messagesTab);
+      console.log("votesTab : "+votesTab);
+    });
 
       //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
 
