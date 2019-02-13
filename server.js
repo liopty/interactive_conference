@@ -316,10 +316,10 @@ io.on('connection', function(socket){
         if (err) throw err;
         console.log(res.rows);
         res.rows.forEach(function(elem){
-          console.log("ELEM AVAAAAANT : "+elem);
+          console.log("ELEM AVAAAAANT : "+elem.vote);
           elem.vote = 0;
           messagesTab.push(elem);
-          console.log("ELEM APREEEES : "+elem);
+          console.log("ELEM APREEEES : "+elem.vote);
           client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res) => {
             if (err) throw err;
             console.log(res.rows);
