@@ -242,7 +242,7 @@ io.on('connection', function(socket){
           res.rows.forEach(function(element) {
             voteVal += element.vote;
           });
-
+          console.log("voteVal "+voteVal);
           socket.emit('AfficherVote', btnId[1], voteVal);
           socket.broadcast.emit('AfficherVote', btnId[1], voteVal);
         });
