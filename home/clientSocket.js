@@ -85,6 +85,11 @@ $('#quitter_room').on('click', function() {
 });
 //-------------------------------//
 
+//évènement click sur le bouton 'sortirDuTiroir'
+$('#sortirDuTiroir').on('click', function() {
+  var d = document.getElementById("modal");
+  d.className += " mdc-drawer--closing";
+});
 
 
 //--------MESSAGES -----------------------//

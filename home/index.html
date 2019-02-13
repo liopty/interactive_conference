@@ -19,7 +19,7 @@
 
     <div class="wrapper mdc-card form screen_connexion"> <!-- Groupement pour nouveau salon et rejoindre salon -->
       <div class="one"> <!-- Zone de text pour donner son nom d'utilisateur ou rester anonyme -->
-        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField"> 
+        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
           <input type="text" id="pseudo_room" class="mdc-text-field__input" maxlength="15">
           <div class="mdc-notched-outline">
             <div class="mdc-notched-outline__leading"></div>
@@ -64,12 +64,12 @@
       <aside class="mdc-drawer mdc-drawer--modal" id="modal"> <!-- tiroir sur le coté gauche du site -->
           <div class="mdc-drawer__content">
             <div class="mdc-list">
-              <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true"> <!-- pour sortir du tiroir -->
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_back</i> 
+              <a class="mdc-list-item mdc-list-item--activated" href="#" id="sortirDuTiroir" aria-selected="true"> <!-- pour sortir du tiroir -->
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_back</i>
                 <span class="mdc-list-item__text"></span>
               </a>
               <a class="mdc-list-item" href="#" id="statistique"> <!-- pour accéder à la page statistique (nom implémentée)-->
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">poll</i> 
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">poll</i>
                 <span class="mdc-list-item__text">Statistiques</span>
               </a>
               <a class="mdc-list-item" href="#" id="quitter_room"> <!-- pour quitter le salon -->
@@ -80,12 +80,12 @@
           </div>
       </aside>
 
-    <div class="mdc-drawer-scrim"></div> 
+    <div class="mdc-drawer-scrim"></div>
     <header class="mdc-top-app-bar" id="app-bar"> <!-- header de la page-->
       <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"> <!-- titre du site -->
           <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
-          <span class="mdc-top-app-bar__title">Interactive Conference</span> 
+          <span class="mdc-top-app-bar__title">Interactive Conference</span>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
           <div class="mdc-card" id="id01"></div>
@@ -114,7 +114,7 @@
                   <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
                 </span>
                 <span class="mdc-tab__ripple"></span>
-              </button>              
+              </button>
               <button class="mdc-tab" role="tab" id="activeOnglet3" onclick="openCity(event, 'repondu')"> <!-- Onglet des messages répondu -->
                 <span id="ongletColor" class="mdc-tab__content">
                   <span class="mdc-tab__icon material-icons">check_circle</span>
