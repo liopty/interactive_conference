@@ -136,7 +136,6 @@ io.on('connection', function(socket){
         socket.join(id);
         client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
           if (err) throw err;
-
           io.sockets.in(id).emit('connectToRoom', id, res.rows[0].id_user);
           console.log(res.rows);
         });
@@ -148,7 +147,10 @@ io.on('connection', function(socket){
       console.log(res.rows);
       res.rows.forEach(function(elem){
         socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message});
+        actualiserVotes(elem.id_message);
       });
+
+
     });
   });
 
