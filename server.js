@@ -288,8 +288,8 @@ io.on('connection', function(socket){
     });
   }
 
-  socket.on("AffichageTopVote", function(idUser){
-    client.query("SELECT username, content, id_message FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [id], (err, res) => {
+  socket.on("AffichageTopVote", function(idUser, idRoom){
+    client.query("SELECT username, content, id_message FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
       if (err) throw err;
       console.log(res.rows);
       res.rows.forEach(function(elem){
