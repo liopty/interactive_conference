@@ -213,7 +213,7 @@ socket.on('quizz', function(data) {
   insereQuizz(data.question, data.mind);
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
-})
+})  
 
 //on transmet le message et on l'affiche sur la page
 function envoieQuizz() {

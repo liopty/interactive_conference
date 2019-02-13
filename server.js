@@ -229,10 +229,9 @@ io.on('connection', function(socket){
       console.log("(Room: "+id+") "+ question.titre);
       logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
   
-      // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personne
-      if(question!=null){
-        question = ent.encode(question);
-      }
+      // if(question!=null){
+      //   question = ent.encode(question);
+      // }
   
       // client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
       //   if (err) throw err;
