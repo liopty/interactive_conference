@@ -41,12 +41,12 @@ $('#creer_room').on('click', function() {
     var element = document.getElementById('id01');
     actualRoom = roomID;
     element.innerHTML = "Room n°" + actualRoom;
-    document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
+    document.title = "Room "+actualRoom + ' - ' + "Interactive Conference"; // met la room dans l'onglet
     closePopup();
     if(idIntoDB === null && actualRoom !== null){
       idIntoDB = userId;
     }
-  })
+  });
 });
 
 //Permet de récuperer la valeur de la textbox pseudo, si elle est vide alors on met "anonyme"
@@ -71,9 +71,9 @@ $('#rejoindre_room').on('click', function() {
       var element = document.getElementById('id01');
       element.innerHTML = "Room n°" + data;
       actualRoom = data;
-      document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
+      document.title = "Room "+actualRoom + ' - ' + "Interactive Conference"; // met la room dans l'onglet
       closePopup();
-    })
+    });
   }
 });
 
@@ -88,6 +88,7 @@ $('#quitter_room').on('click', function() {
   element.innerHTML = "Accueil";
   var d = document.getElementById("modal");
   d.className += " mdc-drawer--closing";
+  document.title = "Interactive Conference";
   openPopup();
 });
 
@@ -120,9 +121,8 @@ $('#sortirDuTiroir').on('click', function() {
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind);
-  var elem = document.getElementById('contentTabs');
-  elem.scrollTop = elem.scrollHeight;
-})
+
+});
 
 //on transmet le message et on l'affiche sur la page
 function envoieMessage() {
@@ -148,7 +148,7 @@ $(document).keypress(function(event) {
 });
 
 // Ajoute un message dans la page
-function insereMessage(pseudo, message,idMessage, mind) {
+function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   var buttonUPID = "UP_" + idMessage;
   var buttonDOWNID = "DOWN_" + idMessage;
   var msgID = "msg_" + idMessage;
@@ -169,24 +169,27 @@ function insereMessage(pseudo, message,idMessage, mind) {
   if(mind !== "yes"){
     //Création du bouton UP avec un text, un id et une class
     var btnUP = document.createElement("BUTTON");
-    var textUP = document.createTextNode("⮝");//⯅ ❤ ✚ ➕ ☺
+    var textUP = document.createTextNode("➕");//⯅ ❤ ✚ ➕ ☺ ⮝
     btnUP.appendChild(textUP);
     btnUP.id = buttonUPID;
     btnUP.className = "vote upvote";
 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
-    var textDOWN = document.createTextNode("⮟");//⯆ ✖ ⚊ ➖ ☹
+    var textDOWN = document.createTextNode("➖");//⯆ ✖ ⚊ ⮟ ☹
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
   }
 
   if (mind == "yes") {
-    $('#messages').append($('<div class="mindMsg">').append(text, btnUP, btnDOWN));
+    $(div).append($('<div class="mindMsg">').append(text));
   } else {
-    $('#messages').append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
+    $(div).append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
   }
+
+  let elem = document.getElementById('contentTabs');
+  elem.scrollTop = elem.scrollHeight;
 }
 
 socket.on('AfficherVote', function(msgId, voteValue) {
@@ -335,4 +338,10 @@ $(document).on("click", "#choixQuizz4", function() {
 
 $(document).on("click", "#activeOnglet2", function() {
   document.getElementById('chatBox').style.visibility='hidden';
+  socket.emit("AffichageTopVote", idIntoDB, actualRoom);
+});
+
+socket.on('topMessage', function(data) {
+  console.log("test");
+  insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages');
 });

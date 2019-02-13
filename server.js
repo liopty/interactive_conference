@@ -39,10 +39,9 @@ const logs = [{timestamp: Math.round(new Date().getTime()/1000), flag: 'admin', 
 //S'exécute toutes les 24h, supprime les room de plus de 24h
 /*setInterval(function () {
 //il faut rajouter je pense un champs dans room genre date création ?
-// on regarde salon par salon si il y en a un qui a duré trop longtemps
-//on le supprime
-// on faire un trigger qui se déclenche à chaque fois qu'une nouvelle room est ajouté
-
+// on fait un trigger qui se déclenche à chaque fois qu'une nouvelle room est ajouté
+CurrentTime = Math.round(new Date().getTime()/1000);
+//comparé CurrentTime avec le temps de cahque salon
 }, 86400000);
 */
 
@@ -69,6 +68,9 @@ console.log(res);
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
 app.use('/', express.static('home'));
 
+app.get('/statistiques',(req, res) => {
+  app.use('/', express.static('statistiques'));
+});
 //Lancer le serveur http et écoute les connection sur le port indiqué
 http.listen(PORT, function(){
   // Ecrit dans la console sur quel port le serveur écoute
@@ -111,6 +113,7 @@ io.on('connection', function(socket){
   socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
+    // On créer un nouvel identifiant unique entre 1 et 1000
     while(check!=true){
       var tempo = (Math.floor(Math.random() * 1000)+1);
       if (!roomno.includes(tempo)) {
@@ -128,7 +131,7 @@ io.on('connection', function(socket){
     });
 
     console.log("Creation d'une room ID: "+tempoId);
-    logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: 'server', msg: 'Création de room'});
+    logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: 'server', msg: 'Création du salon '+tempoId});
 
     client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
       if (err) throw err;
@@ -166,7 +169,7 @@ io.on('connection', function(socket){
       if (err) throw err;
       console.log(res.rows);
       res.rows.forEach(function(elem){
-        socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message});
+        socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
         actualiserVotes(elem.id_message);
       });
 
@@ -248,9 +251,10 @@ io.on('connection', function(socket){
   socket.on('leave_room', function(idRoom){
     socket.leave(idRoom);
     console.log("Un utilisateur a quitté la room: "+idRoom);
+    logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: 'server', msg: "Un utilisateur  a quitté le salon "+idRoom});
   });
 
-  //Sactive lors de l'appuie d'un bouton de vote
+  //S'active lors de l'appuie d'un bouton de vote
   socket.on('votes', function(userId, btnId) {
     btnId = btnId.split("_");
     let vote;
@@ -305,6 +309,21 @@ io.on('connection', function(socket){
       socket.broadcast.emit('AfficherVote', idmessage, voteVal);
     });
   }
+
+  socket.on("AffichageTopVote", function(idUser, idRoom){
+    client.query("SELECT username, content, m.id_message, vote  FROM message m, AppUser a, vote v WHERE m.id_user = a.id_user AND m.id_room=$1 AND v.id_message = m.id_message ORDER by id_message ASC", [idRoom], (err, res) => {
+        if (err) throw err;
+        console.log(res.rows);
+        res.rows.forEach(function(elem){
+          console.log(elem);
+        //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
+        });
+
+
+      });
+
+});
+
 
 
 });
