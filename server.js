@@ -114,10 +114,7 @@ io.on('connection', function(socket){
   socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
-<<<<<<< HEAD
-=======
     // On créer un nouvel identifiant unique entre 1 et 1000
->>>>>>> a8d433736859b78469669743f8cba819892c76da
     while(check!=true){
       var tempo = (Math.floor(Math.random() * 1000)+1);
       if (!roomno.includes(tempo)) {
