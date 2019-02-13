@@ -290,13 +290,15 @@ io.on('connection', function(socket){
 
   socket.on("AffichageTopVote", function(idUser, idRoom){
     client.query("SELECT username, content, id_message FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
-      if (err) throw err;
-      console.log(res.rows);
-      res.rows.forEach(function(elem){
-        socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind:"no"});
-        actualiserVotes(elem.id_message);
+        if (err) throw err;
+        console.log(res.rows);
+        res.rows.forEach(function(elem){
+          socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
+          actualiserVotes(elem.id_message);
+        });
+
+
       });
-  });
 
 });
 
