@@ -322,21 +322,22 @@ io.on('connection', function(socket){
             if (err) throw err;
             console.log(res.rows);
             votesTab = res.rows;
+            //pour tous les votes
+            votesTab.forEach(function(element){
+              //pour tous les msg de la room
+              messagesTab.forEach(function(ele){
+                if(element.id_message === ele.id_message){
+                  ele.vote += element.vote;
+                }
+              });
+            });
+            console.log("messagesTab : "+messagesTab);
+            console.log("votesTab : "+votesTab);
           });
         });
 
       });
-      //pour tous les votes
-      votesTab.forEach(function(element){
-        //pour tous les msg de la room
-        messagesTab.forEach(function(ele){
-          if(element.id_message === ele.id_message){
-            ele.vote += element.vote;
-          }
-        });
-      });
-      console.log("messagesTab : "+messagesTab[0]);
-      console.log("votesTab : "+votesTab[0]);
+
       //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
 
 });
