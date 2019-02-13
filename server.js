@@ -240,18 +240,20 @@ io.on('connection', function(socket){
     });
 
   });
-});
 
-function actualiserVotes(idmessage) {
-  client.query("SELECT vote FROM vote WHERE id_message=$1;",[idmessage], (err, res) => {
-    if (err) throw err;
-    console.log(res);
-    let voteVal = 0;
-    res.rows.forEach(function(element) {
-      voteVal += element.vote;
+  function actualiserVotes(idmessage) {
+    client.query("SELECT vote FROM vote WHERE id_message=$1;",[idmessage], (err, res) => {
+      if (err) throw err;
+      console.log(res);
+      let voteVal = 0;
+      res.rows.forEach(function(element) {
+        voteVal += element.vote;
+      });
+      console.log("voteVal "+voteVal);
+      socket.emit('AfficherVote', idmessage, voteVal);
+      socket.broadcast.emit('AfficherVote', idmessage, voteVal);
     });
-    console.log("voteVal "+voteVal);
-    socket.emit('AfficherVote', idmessage, voteVal);
-    socket.broadcast.emit('AfficherVote', idmessage, voteVal);
-  });
-}
+  }
+
+
+});
