@@ -13,7 +13,7 @@ var idIntoDB = null;
 //-------------------------------//
 
 $(document).on("click", "#activeOnglet1", function() {
-  document.getElementById('sendingBar').style.visibility='visible';
+  document.getElementById('chatBox').style.visibility='visible';
 });
 
 //--------ROOMS -----------------------//
@@ -90,6 +90,23 @@ $('#quitter_room').on('click', function() {
   d.className += " mdc-drawer--closing";
   openPopup();
 });
+
+//-------------- Quizz -----------------//
+
+$('#quizz').on('click', function() {
+  document.getElementById('card-quizz').style.display = "grid";
+  document.getElementById('chatBox').style.display = "none";
+});
+
+$(document).mouseup(function (e){  //Erreur a modifier
+  var container = $("#card-quizz");
+  if (container.has(e.target).length === 0){
+    //alert ("j'ai cliqué à l'extérieur de mon élément");
+    document.getElementById('chatBox').style.display = "block";
+    document.getElementById('card-quizz').style.display = "none";
+}
+});
+
 //-------------------------------//
 
 //évènement click sur le bouton 'sortirDuTiroir'
@@ -97,7 +114,6 @@ $('#sortirDuTiroir').on('click', function() {
   var d = document.getElementById("modal");
   d.className += " mdc-drawer--closing";
 });
-
 
 //--------MESSAGES -----------------------//
 
@@ -190,10 +206,14 @@ $(document).on("click", ".vote", function() {
   //alert(idIntoDB + " : " + this.id);
 });
 
+//-------- QUIZZ -----------------------//
+
+
+
 //-------------------------------//
 //            ONGLET 2
 //-------------------------------//
 
 $(document).on("click", "#activeOnglet2", function() {
-  document.getElementById('sendingBar').style.visibility='hidden';
+  document.getElementById('chatBox').style.visibility='hidden';
 });
