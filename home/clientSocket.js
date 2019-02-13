@@ -188,5 +188,5 @@ $(document).on("click", ".vote", function() {
 //-------------------------------//
 
 $(document).on("click", "#activeOnglet2", function() {
-  alert("onglet2");
+  document.getElementById('#m').innerHTML = "";
 });
