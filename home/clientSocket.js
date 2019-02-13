@@ -261,18 +261,18 @@ function insereQuizz(titre, question, mind) {
   // var msgID = "msg_" + idMessage;
   // var voteID ="vote_"+idMessage;
 
-  if(p1 != ''){
+  if(question.proposition1 != ''){
     propo1 = '<button class="mdc-button" id="choixQuizz1"><span class="mdc-button__label"></span>' + question.proposition1 + '</span></button>' + " " + compteur1;
   }
-  if(p2 != ''){
+  if(question.proposition2 != ''){
     propo2 = '<button class="mdc-button" id="choixQuizz2"><span class="mdc-button__label"></span>' + question.proposition2 + '</span></button>' + " " + compteur2;
   }
-  if(p3 != ''){
+  if(question.proposition3 != ''){
     propo3 = '<button class="mdc-button" id="choixQuizz3"><span class="mdc-button__label"></span>' + question.proposition3 + '</span></button>' + " " + compteur3;
   }else{
     propo3 = '';
   }
-  if(p4 != ''){
+  if(question.proposition4 != ''){
     propo4 = '<button class="mdc-button" id="choixQuizz4"><span class="mdc-button__label"></span>' + question.proposition4 + '</span></button>' + " " + compteur4;
   }else{
     propo4 = '';
