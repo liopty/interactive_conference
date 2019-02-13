@@ -146,8 +146,11 @@
       </div>
     </div>
 
-    <!-- TEXT + BUTTON SEND -->
-    <div class="chatBar" action=""> <!-- zone de text pour écrire les messages-->
+ <!-- TEXT + BUTTON SEND -->
+    <div class="chatBar" id="chatBox"> <!-- zone de text pour écrire les messages-->
+      <button class="mdc-button" id="quizz">
+        <span class="mdc-button__label">Quizz</span>
+      </button>
       <div class="inputMsg mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
         <input id="m" type="text" id="tf-outlined" class="mdc-text-field__input">
         <div class="mdc-notched-outline">
@@ -160,6 +163,111 @@
       </div>
       <button class="mdc-fab mdc-fab--mini" id="envoyer"> <!-- pour envoyer les messages -->
         <span class="mdc-fab__icon material-icons">send</span>
+      </button>
+    </div>    
+    
+    <!-- QUIZZ -->
+    <div class="mdc-card wrapper-quizz form " id="card-quizz">
+      <div class="mdc-text-field mdc-text-field--outlined q1" data-mdc-auto-init="MDCTextField"> 
+        <input type="text" id="quizz-titre" name="titre" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+            <label for="tf-outlined" class="mdc-floating-label">Titre de la question</label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+        </div>
+      </div>
+      <div class="mdc-text-field mdc-text-field--outlined q2" data-mdc-auto-init="MDCTextField"> 
+        <input type="text" id="quizz-propo1" name="proposition1" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+            <label for="tf-outlined" class="mdc-floating-label">Proposition 1</label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+        </div>
+      </div>
+      <div class="mdc-form-field q2-bis">
+        <div class="mdc-checkbox">
+          <input type="checkbox" name="check1" class="mdc-checkbox__native-control" id="checkbox-1"/>
+          <div class="mdc-checkbox__background">
+            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+              <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+            </svg>
+            <div class="mdc-checkbox__mixedmark"></div>
+          </div>
+        </div>
+        <label for="checkbox-1">Solution</label>
+      </div>
+      <div class="mdc-text-field mdc-text-field--outlined q3" data-mdc-auto-init="MDCTextField"> 
+        <input type="text" id="quizz-propo2" name="proposition2" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+            <label for="tf-outlined" class="mdc-floating-label">Proposition 2</label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+        </div>
+      </div>
+      <div class="mdc-form-field q3-bis">
+        <div class="mdc-checkbox">
+          <input type="checkbox" name="check2" class="mdc-checkbox__native-control"id="checkbox-1"/>
+          <div class="mdc-checkbox__background">
+            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+              <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+            </svg>
+            <div class="mdc-checkbox__mixedmark"></div>
+          </div>
+        </div>
+        <label for="checkbox-1">Solution</label>
+      </div>
+      <div class="mdc-text-field mdc-text-field--outlined q4" data-mdc-auto-init="MDCTextField"> 
+        <input type="text" id="quizz-propo3" name="proposition3" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+            <label for="tf-outlined" class="mdc-floating-label">Proposition 3</label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+        </div>
+      </div>
+      <div class="mdc-form-field q4-bis">
+        <div class="mdc-checkbox">
+          <input type="checkbox" name="check3" class="mdc-checkbox__native-control"id="checkbox-1"/>
+          <div class="mdc-checkbox__background">
+            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+              <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+            </svg>
+            <div class="mdc-checkbox__mixedmark"></div>
+          </div>
+        </div>
+        <label for="checkbox-1">Solution</label>
+      </div>
+      <div class="mdc-text-field mdc-text-field--outlined q5" data-mdc-auto-init="MDCTextField"> 
+        <input type="text" id="quizz-propo4" name="proposition4" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+            <label for="tf-outlined" class="mdc-floating-label">Proposition 4</label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+        </div>
+      </div>
+      <div class="mdc-form-field q5-bis">
+        <div class="mdc-checkbox">
+          <input type="checkbox" name="check4" class="mdc-checkbox__native-control"id="checkbox-1"/>
+          <div class="mdc-checkbox__background">
+            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+              <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+            </svg>
+            <div class="mdc-checkbox__mixedmark"></div>
+          </div>
+        </div>
+        <label for="checkbox-1">Solution</label>
+      </div>
+      <button class="mdc-button q6" id="envoyer-quizz">
+        <span class="mdc-button__label">Envoyer</span>
       </button>
     </div>
   </section>
