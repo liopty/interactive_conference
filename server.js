@@ -234,10 +234,19 @@ io.on('connection', function(socket){
       client.query(insertTableVote, [userId, btnId[1], vote], (err, res) => {
         if (err) throw err;
         console.log(res);
-        //"vote" de façon tmp le tps de test le reste
-        console.log("envoie btnId[1], vote : "+btnId[1]+" "+ vote);
-        socket.emit('AfficherVote', btnId[1], vote);
-        socket.broadcast.emit('AfficherVote', btnId[1], vote);
+
+        client.query("SELECT vote FROM vote WHERE id_message=$1;",[btnId[1]], (err, res) => {
+          if (err) throw err;
+          console.log(res);
+          let voteVal = 0;
+          res.rows.forEach(function(element) {
+            voteVal += element.vote;
+          });
+
+          socket.emit('AfficherVote', btnId[1], voteVal);
+          socket.broadcast.emit('AfficherVote', btnId[1], voteVal);
+        });
+
 
       });
     });
