@@ -114,7 +114,7 @@ io.on('connection', function(socket){
   socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
-    // On créer un nouvel identifiant unique
+    // On créer un nouvel identifiant unique entre 1 et 1000
     while(check!=true){
       var tempo = (Math.floor(Math.random() * 1000)+1);
       if (!roomno.includes(tempo)) {
@@ -236,7 +236,7 @@ io.on('connection', function(socket){
     logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: 'server', msg: "Un utilisateur  a quitté le salon "+idRoom});
   });
 
-  //Sactive lors de l'appuie d'un bouton de vote
+  //S'active lors de l'appuie d'un bouton de vote
   socket.on('votes', function(userId, btnId) {
     btnId = btnId.split("_");
     let vote;
