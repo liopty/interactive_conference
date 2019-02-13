@@ -32,6 +32,7 @@ const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
+var fs = require('fs');
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
 const logs = [{timestamp: Math.round(new Date().getTime()/1000),  flag: 'server', msg: 'Lancement du serveur'}];
