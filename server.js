@@ -91,18 +91,22 @@ client.query("SELECT id_room FROM room;", (err, res) => {
 
 io.on('connection', function(socket){
 
+  //Permet de créer un nouveau salon
   socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
+
+    //On crée un identifiant aléatoire compris entre 1 et 1000
     while(check!=true){
       var tempo = (Math.floor(Math.random() * 1000)+1);
+      //on vérifie si ce numéro n'existe pas déjà dans notre tableau
       if (!roomno.includes(tempo)) {
         check=true;
         tempoId=tempo;
       }
     }
-    roomno.push(tempoId);
-    socket.join(tempoId);
+    roomno.push(tempoId); //Ajoute dans le tableau de salon le nouvel identifiant crée
+    socket.join(tempoId); // Ajoute dans la liste du salon avec l'identifiant crée le client
 
     //insertion du tuple (id_room,anonyme) dans la TABLE room lors de la creation d'une room
     client.query(insertTableRoom, [tempoId, false], (err, res) => {
@@ -111,7 +115,7 @@ io.on('connection', function(socket){
     });
 
     console.log("Creation d'une room ID: "+tempoId);
-
+    // On insère dans notre AppUser le nom du créateur ainsi que l'identifiant du salon qu'il a crée (Créateur du salon= 1)
     client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
       if (err) throw err;
       console.log(res);
@@ -119,14 +123,16 @@ io.on('connection', function(socket){
 
     client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
       if (err) throw err;
+      // Appel une fonction côté client pour que celui-ci actualise son affichage
       io.sockets.in(tempoId).emit('connectToRoom', tempoId, res.rows[0].id_user);
       console.log(res.rows);
     });
   });
-
+  //Permet de rejoindre un salon existant
   socket.on('join_room', function(id, pseudo) {
     var tempoId = id;
     for(var i = 0; i<roomno.length;i++){
+      //on vérifie que l'identifiant du salon rentré existe bien
       if(roomno[i]==id){
         console.log("Un utilisateur a rejoint la room: "+id);
         client.query(insertTableAppUser, [pseudo, id, 0], (err, res) => {
@@ -147,10 +153,7 @@ io.on('connection', function(socket){
       console.log(res.rows);
       res.rows.forEach(function(elem){
         socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message});
-        actualiserVotes(elem.id_message);
       });
-
-
     });
   });
 
@@ -195,13 +198,13 @@ io.on('connection', function(socket){
 
 
   });
-
+  //Permet de quitter un salon
   socket.on('leave_room', function(idRoom){
-    socket.leave(idRoom);
+    socket.leave(idRoom); // Supprime le client de la liste du salon
     console.log("Un utilisateur a quitté la room: "+idRoom);
   });
 
-  //Sactive lors de l'appuie d'un bouton de vote
+  //S'active lors de l'appuie d'un bouton de vote
   socket.on('votes', function(userId, btnId) {
     btnId = btnId.split("_");
     let vote;
