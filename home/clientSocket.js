@@ -96,7 +96,7 @@ $('#sortirDuTiroir').on('click', function() {
 
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
-  insereMessage(data.pseudo, data.message,data.idMessage, "no");
+  insereMessage(data.pseudo, data.message,data.idMessage, data.mind);
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
 })
@@ -106,10 +106,7 @@ function envoieMessage() {
   var message = $('#m').val();
   if (message != '') {
     socket.emit('chat_message', actualRoom, message, idIntoDB); // Transmet le message aux autres
-    insereMessage(pseudo, message,null, "yes"); // Affiche le message aussi sur notre page
     $('#m').val('').focus(); // Vide la zone de Chat et remet le focus dessus
-    var elem = document.getElementById('contentTabs');
-    elem.scrollTop = elem.scrollHeight;
     return false; // Permet de bloquer l'envoi "classique" du formulaire
   }
 }
@@ -139,8 +136,6 @@ function insereMessage(pseudo, message,idMessage, mind) {
   var content = document.createTextNode(pseudo + " : " + message);
   text.appendChild(content);
   text.id = msgID;
-
-  console.log("1");
 
   var para = document.createElement("P");
   var t = document.createTextNode("0");
@@ -172,10 +167,14 @@ function insereMessage(pseudo, message,idMessage, mind) {
     $('#messages').append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
   }
 }
-// TODO: EN COUR
+
 socket.on('AfficherVote', function(msgId, voteValue) {
-  console.log("2");
-  document.getElementById('vote_'+msgId).innerHTML = voteValue;
+  try {
+    document.getElementById('vote_'+msgId).innerHTML = voteValue;
+  } catch (e) {
+
+  }
+
 });
 
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
