@@ -225,6 +225,4 @@ $(document).on("click", "#activeOnglet2", function() {
 socket.on('topMessage', function(data) {
   console.log("test");
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages');
-  var elem = document.getElementById('contentTabs');
-  elem.scrollTop = elem.scrollHeight;
 });
