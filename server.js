@@ -224,7 +224,7 @@ io.on('connection', function(socket){
   });
 
     //Lors de l'evenement "chat quizz", le socket lance la fonction
-    socket.emit('chat_quizz', function(id, question, userId){  
+    socket.on('chat_quizz', function(id, question, userId){  
       //Ecrit dans la console le msg
       console.log("(Room: "+id+") "+ question.titre);
       logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
@@ -241,7 +241,7 @@ io.on('connection', function(socket){
       //     if (err) throw err;
       //     console.log(res2.rows);
       //     socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "no"});
-      //     socket.emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "yes"});
+      //     socket.emit('quizz', {pseudo: socket.pseudo, idMessage: res2.rows[0].id_message, mind: "yes"});
       //   });
       // });
 

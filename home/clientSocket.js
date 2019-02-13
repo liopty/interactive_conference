@@ -209,8 +209,8 @@ $(document).on("click", ".vote", function() {
 //------------------ QUIZZ -----------------------//
 
 // Quand on reçoit un message, on l'insère dans la page
-socket.on('message', function(data) {
-  insereQuizz(data.pseudo, data.message, data.idMessage, data.mind);
+socket.on('quizz', function(data) {
+  insereQuizz(data.question, data.mind);
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
 })
@@ -230,7 +230,7 @@ function envoieQuizz() {
     proposition4 : $('#quizz-propo4').val(),
     solution4 : true,
   };
-  var myJSON = JSON.stringify(question); // JSON
+  //var myJSON = JSON.stringify(question); // JSON
   
   if (question.titre != '' & question.proposition1 != '' & question.proposition2 != '') {
     socket.emit('chat_quizz', actualRoom, question, idIntoDB); // Transmet le message aux autres
@@ -252,7 +252,7 @@ $('#envoyer-quizz').on('click', function() {
 
 
 // Ajoute un message dans la page
-function insereQuizz(titre, question, mind) {
+function insereQuizz(question, mind) {
   var propo1, propo2, propo3, propo4;
   var compteur1 = 0, compteur2 = 0, compteur3 = 0, compteur4 = 0; // Compteur de vote pour chaque choix
 
