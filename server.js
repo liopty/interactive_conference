@@ -34,6 +34,8 @@ const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
+const logs = [{timestamp: Math.round(new Date().getTime()/1000),  flag: 'server', msg: 'Lancement du serveur'}];
+
 //S'exécute toutes les 24h, supprime les room de plus de 24h
 /*setInterval(function () {
 //ne faut il pas rajouter un champs dans room genre date création ?
