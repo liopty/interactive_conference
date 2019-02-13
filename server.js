@@ -201,7 +201,7 @@ io.on('connection', function(socket){
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
-  socket.on('chat_message', function(id, message, userId){  
+  socket.on('chat_message', function(id, message, userId){
     //Ecrit dans la console le msg
     console.log("(Room: "+id+") "+message);
     logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'message', psd: userId, msg: "(Room: "+id+") "+message});
@@ -224,15 +224,15 @@ io.on('connection', function(socket){
   });
 
     //Lors de l'evenement "chat quizz", le socket lance la fonction
-    socket.on('chat_quizz', function(id, question, userId){  
+    socket.on('chat_quizz', function(id, question, userId){
       //Ecrit dans la console le msg
       console.log("(Room: "+id+") "+ question.titre);
       logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
-  
+
       // if(question!=null){
       //   question = ent.encode(question);
       // }
-  
+
       // client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
       //   if (err) throw err;
       //   console.log(res);
@@ -244,7 +244,7 @@ io.on('connection', function(socket){
       //   });
       // });
 
-      client.query(insertTable)
+
     });
 
   socket.on('leave_room', function(idRoom){
@@ -310,16 +310,31 @@ io.on('connection', function(socket){
   }
 
   socket.on("AffichageTopVote", function(idUser, idRoom){
-    client.query("SELECT username, content, m.id_message, vote  FROM message m, AppUser a, vote v WHERE m.id_user = a.id_user AND m.id_room=$1 AND v.id_message = m.id_message ORDER by id_message ASC", [idRoom], (err, res) => {
+    let messagesTab = [];
+    let votesTab = [];
+    client.query("SELECT username, content, id_message  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
         if (err) throw err;
         console.log(res.rows);
         res.rows.forEach(function(elem){
-          console.log(elem);
-        //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
+          messagesTab.push(elem,vote:0);
+          client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res) => {
+            if (err) throw err;
+            console.log(res.rows);
+            votesTab = res.rows;
+          });
         });
 
-
       });
+      /*votesTab.forEach(function(element){
+        messagesTab.forEach(function(ele){
+          if(element.id_message === ele.id_message){
+
+          }
+        });
+      });*/
+      console.log("messagesTab : "+messagesTab);
+      console.log("votesTab : "+votesTab);
+      //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
 
 });
 
