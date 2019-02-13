@@ -32,7 +32,10 @@ const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
+var fs = require('fs');
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
+
+const logs = [{timestamp: Math.round(new Date().getTime()/1000),  flag: 'server', msg: 'Lancement du serveur'}];
 
 //S'exécute toutes les 24h, supprime les room de plus de 24h
 /*setInterval(function () {
@@ -71,6 +74,26 @@ app.use('/', express.static('home'));
 http.listen(PORT, function(){
   // Ecrit dans la console sur quel port le serveur écoute
   console.log('listening on *:' + PORT);
+});
+
+// Téléchargement des logs
+app.get('/download',(req, res) => {
+  fs.unlinkSync('./logs/externalize.csv');
+  console.log('Construction du fichier ...');
+  const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+    const csvWriter = createCsvWriter({
+      path: 'logs/externalize.csv',
+      header: [
+        {id: 'timestamp', title: 'TIMESTAMP'},
+        {id: 'flag', title: 'FLAG'},
+        {id: 'psd', title: 'PSEUDO'},
+        {id: 'msg', title: 'MESSAGE'}
+      ]
+    });
+  csvWriter.writeRecords(logs).then(() => {
+    res.download('./logs/externalize.csv', 'externalize.csv');
+    console.log('... téléchargé');
+  });
 });
 
 var roomno=[];

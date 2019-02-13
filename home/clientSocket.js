@@ -8,6 +8,13 @@ var actualRoom = null;
 var pseudo = null;
 var idIntoDB = null;
 
+//-------------------------------//
+//            ONGLET 1
+//-------------------------------//
+
+$(document).on("click", "#activeOnglet1", function() {
+  document.getElementById('chatBox').style.visibility='visible';
+});
 
 //--------ROOMS -----------------------//
 
@@ -86,9 +93,9 @@ $('#quitter_room').on('click', function() {
 
 //-------------- Quizz -----------------//
 
-$('#quizz').on('click', function() {  
-  document.getElementById('card-quizz').style.display = "grid";  
-  document.getElementById('chatBox').style.display = "none";  
+$('#quizz').on('click', function() {
+  document.getElementById('card-quizz').style.display = "grid";
+  document.getElementById('chatBox').style.display = "none";
 });
 
 $(document).mouseup(function (e){  //Erreur a modifier
@@ -208,5 +215,5 @@ $(document).on("click", ".vote", function() {
 //-------------------------------//
 
 $(document).on("click", "#activeOnglet2", function() {
-  document.getElementsByClassName('chatBar').style.visibility='hidden';
+  document.getElementById('chatBox').style.visibility='hidden';
 });
