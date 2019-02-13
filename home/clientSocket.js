@@ -8,6 +8,13 @@ var actualRoom = null;
 var pseudo = null;
 var idIntoDB = null;
 
+//-------------------------------//
+//            ONGLET 1
+//-------------------------------//
+
+$(document).on("click", "#activeOnglet1", function() {
+  document.getElementById('sendingBar').style.visibility='visible';
+});
 
 //--------ROOMS -----------------------//
 
@@ -188,5 +195,5 @@ $(document).on("click", ".vote", function() {
 //-------------------------------//
 
 $(document).on("click", "#activeOnglet2", function() {
-  document.getElementsByClassName('chatBar').style.visibility='hidden';
+  document.getElementById('sendingBar').style.visibility='hidden';
 });
