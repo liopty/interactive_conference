@@ -121,8 +121,7 @@ $('#sortirDuTiroir').on('click', function() {
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind);
-  var elem = document.getElementById('contentTabs');
-  elem.scrollTop = elem.scrollHeight;
+
 });
 
 //on transmet le message et on l'affiche sur la page
@@ -190,6 +189,9 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   } else {
     $(div).append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
   }
+
+  let elem = document.getElementById('contentTabs');
+  elem.scrollTop = elem.scrollHeight;
 }
 
 socket.on('AfficherVote', function(msgId, voteValue) {
