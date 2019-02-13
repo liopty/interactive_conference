@@ -34,6 +34,19 @@ const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+  const csvWriter = createCsvWriter({
+    path: 'logs/externalize.csv',
+    header: [
+      {id: 'timestamp', title: 'TIMESTAMP'},
+      {id: 'flag', title: 'FLAG'},
+      {id: 'psd', title: 'PSEUDO'},
+      {id: 'msg', title: 'MESSAGE'}
+    ]
+  });
+
+  const logs = [{timestamp: Math.round(new Date().getTime()/1000),  flag: 'server', msg: 'Lancement du serveur'}];
+
 //S'exécute toutes les 24h, supprime les room de plus de 24h
 /*setInterval(function () {
 
@@ -76,6 +89,14 @@ app.use('/', express.static('home'));
 http.listen(PORT, function(){
   // Ecrit dans la console sur quel port le serveur écoute
   console.log('listening on *:' + PORT);
+});
+
+// define a route to download a file
+app.get('/download',(req, res) => {
+  csvWriter.writeRecords(logs).then(() => {
+    console.log('Logs enregistrés dans le fichier "externalize.csv"');
+  });
+  res.download('./logs/externalize.csv', 'externalize.csv');
 });
 
 var roomno=[];
@@ -191,7 +212,8 @@ io.on('connection', function(socket){
       client.query("SELECT id_message FROM Message ORDER BY id_message DESC LIMIT 1", (err, res2) => {
         if (err) throw err;
         console.log(res2.rows);
-        socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message});
+        socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "no"});
+        socket.emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "yes"});
       });
 
     });
