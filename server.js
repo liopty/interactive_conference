@@ -201,7 +201,7 @@ io.on('connection', function(socket){
   });
 
   //Lors de l'evenement "chat message", le socket lance la fonction
-  socket.on('chat_message', function(id, message, userId){  
+  socket.on('chat_message', function(id, message, userId){
     //Ecrit dans la console le msg
     console.log("(Room: "+id+") "+message);
     logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'message', psd: userId, msg: "(Room: "+id+") "+message});
@@ -224,15 +224,15 @@ io.on('connection', function(socket){
   });
 
     //Lors de l'evenement "chat quizz", le socket lance la fonction
-    socket.on('chat_quizz', function(id, question, userId){  
+    socket.on('chat_quizz', function(id, question, userId){
       //Ecrit dans la console le msg
       console.log("(Room: "+id+") "+ question.titre);
       logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
-  
+
       // if(question!=null){
       //   question = ent.encode(question);
       // }
-  
+
       // client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
       //   if (err) throw err;
       //   console.log(res);
@@ -244,7 +244,7 @@ io.on('connection', function(socket){
       //   });
       // });
 
-      client.query(insertTable)
+    
     });
 
   socket.on('leave_room', function(idRoom){
