@@ -35,7 +35,7 @@ const PORT = process.env.PORT || 5000;
 var fs = require('fs');
 var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP
 
-const logs = [{timestamp: Math.round(new Date().getTime()/1000),  flag: 'server', msg: 'Lancement du serveur'}];
+const logs = [{timestamp: Math.round(new Date().getTime()/1000), flag: 'admin', psd: 'server', msg: 'Lancement du serveur'}];
 
 //S'exécute toutes les 24h, supprime les room de plus de 24h
 /*setInterval(function () {
@@ -129,6 +129,7 @@ io.on('connection', function(socket){
     });
 
     console.log("Creation d'une room ID: "+tempoId);
+    logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: 'server', msg: 'Création de room'});
 
     client.query(insertTableAppUser, [pseudo, tempoId, 1], (err, res) => {
       if (err) throw err;
