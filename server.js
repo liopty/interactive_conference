@@ -70,6 +70,9 @@ console.log(res);
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
 app.use('/', express.static('home'));
 
+app.get('/statistiques',(req, res) => {
+  app.use('/', express.static('statistiques'));
+});
 //Lancer le serveur http et écoute les connection sur le port indiqué
 http.listen(PORT, function(){
   // Ecrit dans la console sur quel port le serveur écoute
@@ -227,6 +230,7 @@ io.on('connection', function(socket){
   socket.on('leave_room', function(idRoom){
     socket.leave(idRoom);
     console.log("Un utilisateur a quitté la room: "+idRoom);
+    logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: 'room', msg: "Un utilisateur  a quitté le salon "+idRoom});
   });
 
   //Sactive lors de l'appuie d'un bouton de vote
