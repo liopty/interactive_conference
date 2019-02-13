@@ -71,7 +71,7 @@ $('#rejoindre_room').on('click', function() {
       var element = document.getElementById('id01');
       element.innerHTML = "Room n°" + data;
       actualRoom = data;
-      document.title = "Room "+actualRoom + ' - ' + document.title; // met la room dans l'onglet
+      document.title = "Room "+actualRoom + ' - ' + "Interactive Conference"; // met la room dans l'onglet
       closePopup();
     });
   }
