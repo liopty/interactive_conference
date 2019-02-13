@@ -148,6 +148,8 @@ io.on('connection', function(socket){
     for(var i = 0; i<roomno.length;i++){
       if(roomno[i]==id){
         console.log("Un utilisateur a rejoint la room: "+id);
+        logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: pseudo, msg: 'Un utilisateur a rejoint le salon '+id});
+
         client.query(insertTableAppUser, [pseudo, id, 0], (err, res) => {
           if (err) throw err;
           console.log(res);
