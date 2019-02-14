@@ -165,7 +165,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     btnUP.appendChild(textUP);
     btnUP.id = buttonUPID;
     btnUP.className = "vote upvote";
-    btnUP.style.color = "green";
+    btnUP.style.color = "LightGray";
 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
@@ -173,7 +173,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
-    btnDOWN.style.color = "green";
+    btnDOWN.style.color = "LightGray";
   }
 
     var para = document.createElement("P");
@@ -227,11 +227,11 @@ $(document).on("click", ".vote", function() {
     idBtnOpp = "UP_"+numMsg[1];
   }
 
-  if (couleur == "green") {
-    document.getElementById(this.id).style.color = "red";
-    document.getElementById(idBtnOpp).style.color = "green";
+  if (couleur == "LightGray") {
+    document.getElementById(this.id).style.color = "Orchid";
+    document.getElementById(idBtnOpp).style.color = "LightGray";
   } else{
-    document.getElementById(this.id).style.color = "green";
+    document.getElementById(this.id).style.color = "LightGray";
   }
   //alert(idIntoDB + " : " + this.id);
 });
