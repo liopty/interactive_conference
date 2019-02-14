@@ -332,36 +332,40 @@ var q1 = false, q2 = false, q3 = false, q4 = false;
 $(document).on("click", "#choixQuizz1", function() {
   if(!q1){
     document.getElementById('choixQuizz1').style.backgroundColor = "white";
+    document.getElementById('choixQuizz1').color = "#8860D0";
     q1 = true;
   }else{
-    document.getElementById('choixQuizz1').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz1').style.backgroundColor = "#11ffee00";
     q1 = false;
   }
 });
 $(document).on("click", "#choixQuizz2", function() {
   if(!q2){
     document.getElementById('choixQuizz2').style.backgroundColor = "white";
+    document.getElementById('choixQuizz2').color = "#8860D0";
     q2 = true;
   }else{
-    document.getElementById('choixQuizz2').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz2').style.backgroundColor = "#11ffee00";
     q2 = false;
   }
 });
 $(document).on("click", "#choixQuizz3", function() {
   if(!q3){
     document.getElementById('choixQuizz3').style.backgroundColor = "white";
+    document.getElementById('choixQuizz3').color = "#8860D0";
     q3 = true;
   }else{
-    document.getElementById('choixQuizz3').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz3').style.backgroundColor = "#11ffee00";
     q3 = false;
   }
 });
 $(document).on("click", "#choixQuizz4", function() {
   if(!q4){
     document.getElementById('choixQuizz4').style.backgroundColor = "white";
+    document.getElementById('choixQuizz4').color = "#8860D0";
     q4 = true;
   }else{
-    document.getElementById('choixQuizz4').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz4').style.backgroundColor = "#11ffee00";
     q4 = false;
   }
 });
