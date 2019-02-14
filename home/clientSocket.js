@@ -225,11 +225,11 @@ $(document).on("click", ".vote", function() {
     idBtnOpp = "UP_"+numMsg[1];
   }
 
-  if (couleur == "green") {
-    document.getElementById(this.id).style.color = "red";
-    document.getElementById(idBtnOpp).style.color = "green";
+  if (couleur == "#747474") {
+    document.getElementById(this.id).style.color = "#8860D0";
+    document.getElementById(idBtnOpp).style.color = "#747474";
   } else{
-    document.getElementById(this.id).style.color = "green";
+    document.getElementById(this.id).style.color = "#747474";
   }
   //alert(idIntoDB + " : " + this.id);
 });
