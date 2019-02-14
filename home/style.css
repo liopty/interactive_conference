@@ -7,6 +7,16 @@ html, body {
   font: 13px Helvetica, Arial;
 }
 
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    overflow: auto;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
 }
