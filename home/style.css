@@ -4,8 +4,7 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   overflow: hidden
-  overscroll-behavior-x: none;
-  overscroll-behavior-y: none;
+  -webkit-overscroll-behavior: none;
   font: 13px Helvetica, Arial;
 }
 
