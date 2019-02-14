@@ -3,8 +3,9 @@ html, body {
   height: 100%;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden;
-  overscroll-behavior: none;
+  overflow: hidden
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
   font: 13px Helvetica, Arial;
 }
 
