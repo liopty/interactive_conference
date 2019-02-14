@@ -216,9 +216,7 @@ socket.on('quizz', function(data) {
 })  
 
 //on transmet le message et on l'affiche sur la page
-function envoieQuizz() {
-  var question = [$('#quizz-titre').val(), $('#quizz-propo1').val(), $('#quizz-propo2').val(), $('#quizz-propo3').val(), $('#quizz-propo4').val()];
-  
+function envoieQuizz() { 
   var question = { //Objet question + proposition + solution
     titre: $('#quizz-titre').val(), 
     proposition1 : $('#quizz-propo1').val(), 
