@@ -413,6 +413,9 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   background-color: white;
   border: 1px solid black;
   display: block;
+  border-radius: 25px;
+  margin-top: 20px;
+  color: black;
 }
 
 #messages .notMindBtn, #sortedMessages .notMindBtn {
