@@ -311,31 +311,44 @@ io.on('connection', function(socket){
   }
 
   socket.on("AffichageTopVote", function(idUser, idRoom){
+    const promise3 = new Promise(function(resolve, reject) {
+
     let messagesTab = [];
     let votesTab = [];
     client.query("SELECT username, content, id_message  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
         if (err) throw err;
-        console.log(res.rows);
+        //console.log(res.rows);
         res.rows.forEach(function(elem){
           elem.vote = 0;
           messagesTab.push(elem);
           client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res) => {
             if (err) throw err;
-            console.log(res.rows);
+            //console.log(res.rows);
             votesTab = res.rows;
           });
         });
-
+        resolve(votesTab, messagesTab);
+        console.log("messagesTab : "+messagesTab);
+        console.log("votesTab : "+votesTab);
       });
-      /*votesTab.forEach(function(element){
-        messagesTab.forEach(function(ele){
-          if(element.id_message === ele.id_message){
 
+    });
+    promise3.then(function(votesTab, messagesTab) {
+
+      //pour tous les votes
+      votesTab.forEach(function(element){
+        console.log("element : "+element);
+        //pour tous les msg de la room
+        messagesTab.forEach(function(ele){
+          console.log("ele : "+ele);
+          if(element.id_message === ele.id_message){
+            ele.vote += element.vote;
           }
         });
-      });*/
-      console.log("messagesTab : "+messagesTab);
-      console.log("votesTab : "+votesTab);
+      });
+
+    });
+
       //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
 
 });
