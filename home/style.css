@@ -58,7 +58,7 @@ Page connexion salon ou création d'un salon
 
 /* bouton pour rejoindre le salon */
 #rejoindre_room {
-  background-color: #5680E9;  /* couleur bleu foncé #4D6D9A, bleu clair #77A6F7*/
+  background-color: #8860D0;  /* couleur bleu foncé #4D6D9A, bleu clair #77A6F7*/
   width: 16em;
   margin-top: 6%;
 }
@@ -67,7 +67,7 @@ Page connexion salon ou création d'un salon
 #creer_room {
   height: 10em;
   width: 16em;
-  background-color: #5680E9;
+  background-color: #8860D0;
 }
 
 /* Bloc nom d'utilisateur + nouveau salon + rejoindre salon */
