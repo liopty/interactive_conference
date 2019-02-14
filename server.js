@@ -225,7 +225,6 @@ io.on('connection', function(socket){
 
     //Lors de l'evenement "chat quizz", le socket lance la fonction
     socket.on('chat_quizz', function(id, question, userId){
-      var myJSON = JSON.stringify(question); // JSON
       //Ecrit dans la console le msg
       console.log("(Room: "+id+") "+ question.titre);
       logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
@@ -234,16 +233,16 @@ io.on('connection', function(socket){
       //   question = ent.encode(question);
       // }
 
-      client.query(insertTableMessage, [null,id,userId,false,null,myJSON],(err, res) => {
-        if (err) throw err;
-        console.log(res);
-        client.query("SELECT myJSON FROM Message", (err, res2) => {
-          if (err) throw err;
-          console.log(res2.rows);
-          socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
-          socket.emit('quizz', {question : question, mind: "yes"});
-        });
-      });
+      // client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
+      //   if (err) throw err;
+      //   console.log(res);
+      //   client.query("SELECT id_message FROM Message ORDER BY id_message DESC LIMIT 1", (err, res2) => {
+      //     if (err) throw err;
+      //     console.log(res2.rows);
+      //     socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "no"});
+      //     socket.emit('quizz', {pseudo: socket.pseudo, idMessage: res2.rows[0].id_message, mind: "yes"});
+      //   });
+      // });
 
 
     });
@@ -311,35 +310,41 @@ io.on('connection', function(socket){
   }
 
   socket.on("AffichageTopVote", function(idUser, idRoom){
-    const promise3 = new Promise(function(resolve, reject) {
 
-    let messagesTab = [];
-    let votesTab = [];
-    client.query("SELECT username, content, id_message  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
+    const promise3 = new Promise(function(resolve, reject) {
+      let messagesTab = [];
+      client.query("SELECT username, content, id_message  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
         if (err) throw err;
         //console.log(res.rows);
-        res.rows.forEach(function(elem){
-          elem.vote = 0;
-          messagesTab.push(elem);
-          client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res) => {
-            if (err) throw err;
-            //console.log(res.rows);
-            votesTab = res.rows;
-          });
-        });
-        resolve(votesTab, messagesTab);
+        messagesTab = res.rows;
+        resolve(messagesTab);
         console.log("messagesTab : "+messagesTab);
-        console.log("votesTab : "+votesTab);
+
       });
 
     });
-    promise3.then(function(votesTab, messagesTab) {
+
+    promis3.then(function (messagesTab) {
+      let votesTab = [];
+      messagesTab.forEach(function(elem){
+        elem.vote = 0;
+        client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res2) => {
+          if (err) throw err;
+          //console.log(res.rows);
+          res2.rows.forEach(function (e){
+            votesTab.push(e);
+          });
+
+        });
+      });
+      return { messages: messagesTab, votes: votesTab }
+    }).then(function(datas) {
 
       //pour tous les votes
-      votesTab.forEach(function(element){
+      datas.votes.forEach(function(element){
         console.log("element : "+element);
         //pour tous les msg de la room
-        messagesTab.forEach(function(ele){
+        data.messages.forEach(function(ele){
           console.log("ele : "+ele);
           if(element.id_message === ele.id_message){
             ele.vote += element.vote;
