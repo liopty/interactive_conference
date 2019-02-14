@@ -16,10 +16,20 @@ html, body {
 }
 
 /* --------------------------------
-Joindre une room / Créer une room
+
+Page connexion salon ou création d'un salon
+
 -------------------------------- */
 
-#name {
+/* Paramètre de la section */
+#connexion {
+  background-color: white;
+  position: absolute;
+  z-index: 2; /*A Modifier*/
+}
+
+/* Nom du site */
+#name { 
   position: absolute;
   top: 0%;
   margin-left: 5px;
@@ -36,12 +46,8 @@ Joindre une room / Créer une room
   color: white;
 }
 
-#connexion {
-  background-color: white;
-  position: absolute;
-  z-index: 5;
-}
-
+/* Bloc nom d'utilisateur + nouveau salon + rejoindre salon */
+/* Bloc quizz */
 .form {
   position: absolute;
   top: 35%;
@@ -50,22 +56,21 @@ Joindre une room / Créer une room
   padding: 2%;
 }
 
+/* bouton pour rejoindre le salon */
 #rejoindre_room {
   background-color: #5680E9;  /* couleur bleu foncé #4D6D9A, bleu clair #77A6F7*/
   width: 16em;
   margin-top: 6%;
 }
 
+/* bouton pour créer un salon */
 #creer_room {
   height: 10em;
   width: 16em;
   background-color: #5680E9;
 }
 
-.mdc-card {
-  min-width: 200px;
-}
-
+/* Bloc nom d'utilisateur + nouveau salon + rejoindre salon */
 .wrapper {
   display: grid;
   width: 45%;
@@ -93,6 +98,7 @@ Joindre une room / Créer une room
   margin-bottom: 3%;
 }
 
+/* Resposive bloc nom d'utilisateur + nouveau salon + rejoindre salon */
 @media screen and (max-width: 1000px) {
   #creer_room {
     height: 3em;
@@ -123,7 +129,9 @@ Joindre une room / Créer une room
 }
 
 /* --------------------------------
-Popup nouvelle Room
+
+        Popup nouvelle Room
+
 -------------------------------- */
 
 .cd-popup {
@@ -210,9 +218,10 @@ Popup nouvelle Room
 }
 
 /* ---------------------------
-              Main
----------------------------- */
 
+              Main
+
+---------------------------- */
 
 ::-webkit-scrollbar-thumb {
     background: #8860D0;
@@ -228,6 +237,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
     display: flex;
 }
 
+/* Paramètre header */
 .header {
   overflow: hidden;
   background-color: #fafafa;
@@ -259,17 +269,25 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   font-size: 22px;
 }
 
+/* Paramètre graphique volet gauche */
 #corps_chat aside .mdc-drawer__content {
   font-size: 1.1em;
   text-transform: uppercase;
 }
 
+/* Page du salon */
 #corps_chat {
   margin: 0;
   height: 100%;
   padding: 0;
 }
 
+/* Zone affiche numéro du salon */
+.mdc-card {
+  min-width: 200px;
+}
+
+/* Paramètre graphique numéro du salon */
 #id01 {
   font-size: 1.1em;
   letter-spacing: 0.089em;
@@ -279,20 +297,24 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   background-color: #8860D0;
 }
 
+/* Paramètre graphique onglet */
 .mdc-tab{
   background-color: #fafafa;
   border-bottom: solid 1px grey;
 }
 
+/* Paramètre header */
 .mdc-top-app-bar{
   color: black;
   background-color: #fafafa;
 }
 
+/* Couleur des icons */
 .mdc-top-app-bar .material-icons{
   color: black;
 }
 
+/* Chat */
 #contentTabs {
   width: 70%; /* Test */
   overflow-y: auto;
@@ -305,6 +327,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   margin-left: calc(50% - 335px);*/
 }
 
+/* Pour ne pas afficher les 3 onglets en même temps */
 .tabcontent {
   display: none;
 }
@@ -314,22 +337,27 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   margin-top: 200px;
 }
 
-#topvote,#repondu{
-  width: 100%;
-}
+/* Titre du site */
 .mdc-top-app-bar__title {
   user-select: none;
   -webkit-user-select: none; /* For Webkit */
   -khtml-user-select: none;
   -moz-user-select: none; /* For Mozilla */
 }
+
+#topvote,#repondu{
+  width: 100%;
+}
+
 #recent{
   width: 100%;
 }
+
 #messages, #sortedMessages {
   width: 100%;
 }
 
+/* Affichage du message de l'utilisateur*/
 #messages .mindMsg, #sortedMessages .mindMsg{
   display: inline-block;
   margin-left: auto;
@@ -352,6 +380,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 	border-top-right-radius: 5px;
 }
 
+/* Affichage du message des autres utilisateurs */
 #messages .notMindMsg, #sortedMessages .notMindMsg{
   display: inline-block;
   margin-left: auto;
@@ -372,6 +401,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 	border-top-left-radius: 5px;
 }
 
+/* zone de text pour écrire les messages + bouton quizz + bouton envoyer message*/
 .chatBar {
   flex: 1;
   bottom: 0;
@@ -380,20 +410,28 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   padding-bottom: 1%;
 }
 
+/* bouton pour envoyer les messages */
 .chatBar .mdc-fab {
   position: absolute;
   margin-top: 0.5%;
   margin-left: 0.5%;
 }
 
+/* bouton pour envoyer les messages - paramètre graphique*/
 .chatBar button {
   background-color: #5680E9;
 }
 
+/* zone de text pour écrire les messages */
 .chatBar .inputMsg {
   width: 70%;
 }
+  
+/* .mindMsg div{
+  display: inline-block;
+} */
 
+/* Vote */
 .zoneDeVote{
   height: 25px;
   max-width: 70px;
@@ -409,6 +447,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   margin-bottom: -25px;
   color: #747474;
 }
+
 #zoneDeVoteMind{
   width: 30px;
 }
@@ -441,15 +480,6 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 #quizz {
   font-size: 1em;
-}
-
-.wrapper-quizz.form {
-  display: none;
-  position: absolute;
-  left: 50%;
-  top: 55%;
-  padding: 2%;
-  transform: translate(-50%, -50%);
 }
 
 .wrapper-quizz {
