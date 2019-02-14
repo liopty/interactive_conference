@@ -228,7 +228,7 @@ $(document).on("click", ".vote", function() {
   if (couleur == "green") {
     document.getElementById(this.id).style.color = "red";
     document.getElementById(idBtnOpp).style.color = "green";
-  } else if{
+  } else{
     document.getElementById(this.id).style.color = "green";
   }
   //alert(idIntoDB + " : " + this.id);
