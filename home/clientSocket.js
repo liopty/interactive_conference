@@ -151,6 +151,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
   var buttonDOWNID = "DOWN_" + idMessage;
   var msgID = "msg_" + idMessage;
   var voteID ="vote_"+idMessage;
+  var commentID ="comment_"+idMessage;
 
   //Création d'un div avec le pseudo, le message et un ID
   var text = document.createElement('div');
@@ -165,7 +166,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     btnUP.appendChild(textUP);
     btnUP.id = buttonUPID;
     btnUP.className = "vote upvote";
-    btnUP.style.color = "lightGray";
+    btnUP.style.color = "lightgray";
 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
@@ -173,14 +174,20 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
-    btnDOWN.style.color = "lightGray";
+    btnDOWN.style.color = "lightgray";
   }
 
-    var para = document.createElement("P");
-    var t = document.createTextNode(vote);
-    para.appendChild(t);
-    para.id = voteID;
-    para.style.display = "inline-block";
+  var para = document.createElement("P");
+  var t = document.createTextNode(vote);
+  para.appendChild(t);
+  para.id = voteID;
+  para.style.display = "inline-block";
+
+  var btComment = document.createElement("BUTTON");
+  var textComment = document.createTextNode("Comment");
+  btComment.appendChild(textComment);
+  btComment.id = commentID;
+  btComment.className = "vote";
 
   if (mind == "yes") {
     var divVote = document.createElement('div');
@@ -227,11 +234,11 @@ $(document).on("click", ".vote", function() {
     idBtnOpp = "UP_"+numMsg[1];
   }
 
-  if (couleur == "lightGray") {
+  if (couleur == "lightgray") {
     document.getElementById(this.id).style.color = "orchid";
-    document.getElementById(idBtnOpp).style.color = "lightGray";
+    document.getElementById(idBtnOpp).style.color = "lightgray";
   } else{
-    document.getElementById(this.id).style.color = "lightGray";
+    document.getElementById(this.id).style.color = "lightgray";
   }
   //alert(idIntoDB + " : " + this.id);
 });
@@ -290,12 +297,12 @@ function insereQuizz(question, mind) {
   if(question.proposition3 != ''){
     propo3 = '<br>' + '<button class="mdc-button" id="choixQuizz3"><span class="mdc-button__label"></span>' + question.proposition3 + '</span></button>' + " " + compteur3;
   }else{
-    propo3 = null;
+    propo3 = '';
   }
   if(question.proposition4 != ''){
     propo4 = '<br>' + '<button class="mdc-button" id="choixQuizz4"><span class="mdc-button__label"></span>' + question.proposition4 + '</span></button>' + " " + compteur4;
   }else{
-    propo4 = null;
+    propo4 = '';
   }
 
   var parent = "<div>" + '<p class="msgQuizz">' + question.titre + "</p>" + propo1 + propo2 + propo3 + propo4 + "</div>";
@@ -314,36 +321,40 @@ var q1 = false, q2 = false, q3 = false, q4 = false;
 $(document).on("click", "#choixQuizz1", function() {
   if(!q1){
     document.getElementById('choixQuizz1').style.backgroundColor = "white";
+    document.getElementById('choixQuizz1').color = "#8860D0";
     q1 = true;
   }else{
-    document.getElementById('choixQuizz1').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz1').style.backgroundColor = "#11ffee00";
     q1 = false;
   }
 });
 $(document).on("click", "#choixQuizz2", function() {
   if(!q2){
     document.getElementById('choixQuizz2').style.backgroundColor = "white";
+    document.getElementById('choixQuizz2').color = "#8860D0";
     q2 = true;
   }else{
-    document.getElementById('choixQuizz2').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz2').style.backgroundColor = "#11ffee00";
     q2 = false;
   }
 });
 $(document).on("click", "#choixQuizz3", function() {
   if(!q3){
     document.getElementById('choixQuizz3').style.backgroundColor = "white";
+    document.getElementById('choixQuizz3').color = "#8860D0";
     q3 = true;
   }else{
-    document.getElementById('choixQuizz3').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz3').style.backgroundColor = "#11ffee00";
     q3 = false;
   }
 });
 $(document).on("click", "#choixQuizz4", function() {
   if(!q4){
     document.getElementById('choixQuizz4').style.backgroundColor = "white";
+    document.getElementById('choixQuizz4').color = "#8860D0";
     q4 = true;
   }else{
-    document.getElementById('choixQuizz4').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz4').style.backgroundColor = "#11ffee00";
     q4 = false;
   }
 });
