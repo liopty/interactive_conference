@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="two"> <!-- rejoindre salon existant -->
-        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField"> <!-- Zone de text pour donner le numéro du salon -->
           <input type="text" id="r_room" class="mdc-text-field__input" maxlength="4" onKeypress="
             if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
             if(event.which < 45 || event.which > 57) return false;">
@@ -48,12 +48,12 @@
           </div>
         </div>
         <div>
-          <button class="mdc-button mdc-button--raised" id="rejoindre_room">
+          <button class="mdc-button mdc-button--raised" id="rejoindre_room"> <!-- bouton pour rejoindre le salon -->
             <span class="mdc-button__label">Rejoindre un salon</span>
           </button>
         </div>
       </div>
-      <div class="three"> <!-- créer nouveau salon -->
+      <div class="three"> <!-- bouton pour créer nouveau salon -->
         <button class="mdc-button mdc-button--raised" id="creer_room">
           <span class="mdc-button__label">Nouveau salon</span>
         </button>
@@ -62,30 +62,31 @@
   </section>
 
   <section id="corps_chat"> <!-- Page du salon -->
-      <aside class="mdc-drawer mdc-drawer--modal" id="modal"> <!-- tiroir sur le coté gauche du site -->
-          <div class="mdc-drawer__content">
-            <div class="mdc-list">
-              <a class="mdc-list-item mdc-list-item--activated" href="#" id="sortirDuTiroir" aria-selected="true"> <!-- pour sortir du tiroir -->
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_back</i>
-                <span class="mdc-list-item__text"></span>
-              </a>
-              <a class="mdc-list-item" href="#" id="statistique"> <!-- pour accéder à la page statistique (nom implémentée)-->
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">poll</i>
-                <span class="mdc-list-item__text">Statistiques</span>
-              </a>
-              <a class="mdc-list-item" href="/download" id="download"> <!-- pour accéder à la page statistique (nom implémentée)-->
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">cloud_download</i>
-                <span class="mdc-list-item__text">Exporter</span>
-              </a>
-              <a class="mdc-list-item" href="#" id="quitter_room"> <!-- pour quitter le salon -->
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true" >clear</i>
-                <span class="mdc-list-item__text">Quitter</span>
-              </a>
-            </div>
+    <aside class="mdc-drawer mdc-drawer--modal" id="modal"> <!-- tiroir sur le coté gauche du site - accessible via le burger --> 
+        <div class="mdc-drawer__content">
+          <div class="mdc-list">
+            <a class="mdc-list-item mdc-list-item--activated" href="#" id="sortirDuTiroir" aria-selected="true"> <!-- pour sortir du tiroir -->
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_back</i>
+              <span class="mdc-list-item__text"></span>
+            </a>
+            <a class="mdc-list-item" href="#" id="statistique"> <!-- pour accéder à la page statistique (nom implémentée)-->
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">poll</i>
+              <span class="mdc-list-item__text">Statistiques</span>
+            </a>
+            <a class="mdc-list-item" href="/download" id="download"> <!-- pour télécharger le fichier csv de la base de donnée -->
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">cloud_download</i>
+              <span class="mdc-list-item__text">Exporter</span>
+            </a>
+            <a class="mdc-list-item" href="#" id="quitter_room"> <!-- pour quitter le salon -->
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true" >clear</i>
+              <span class="mdc-list-item__text">Quitter</span>
+            </a>
           </div>
-      </aside>
+        </div>
+    </aside>
 
     <div class="mdc-drawer-scrim"></div>
+
     <header class="mdc-top-app-bar" id="app-bar"> <!-- header de la page-->
       <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"> <!-- titre du site -->
@@ -152,11 +153,11 @@
     </div>
 
  <!-- TEXT + BUTTON SEND -->
-    <div class="chatBar" id="chatBox"> <!-- zone de text pour écrire les messages-->
-      <button class="mdc-button" id="quizz">
+    <div class="chatBar" id="chatBox"> <!-- zone de text pour écrire les messages + bouton quizz + bouton envoyer message-->
+      <button class="mdc-button" id="quizz"> <!-- bouton pour afficher le quizz -->
         <span class="mdc-button__label">Quizz</span>
       </button>
-      <div class="inputMsg mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+      <div class="inputMsg mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField"> <!-- zone de text pour écrire les messages -->
         <input id="m" type="text" id="tf-outlined" class="mdc-text-field__input">
         <div class="mdc-notched-outline">
           <div class="mdc-notched-outline__leading"></div>
@@ -166,14 +167,14 @@
           <div class="mdc-notched-outline__trailing"></div>
         </div>
       </div>
-      <button class="mdc-fab mdc-fab--mini" id="envoyer"> <!-- pour envoyer les messages -->
+      <button class="mdc-fab mdc-fab--mini" id="envoyer"> <!-- bouton pour envoyer les messages -->
         <span class="mdc-fab__icon material-icons">send</span>
       </button>
     </div>
 
     <!-- QUIZZ -->
     <div class="mdc-card wrapper-quizz form " id="card-quizz">
-      <div class="mdc-text-field mdc-text-field--outlined q1" data-mdc-auto-init="MDCTextField">
+      <div class="mdc-text-field mdc-text-field--outlined q1" data-mdc-auto-init="MDCTextField"> <!-- Titre de la question -->
         <input type="text" id="quizz-titre" name="titre" class="mdc-text-field__input">
         <div class="mdc-notched-outline">
           <div class="mdc-notched-outline__leading"></div>
@@ -183,7 +184,7 @@
           <div class="mdc-notched-outline__trailing"></div>
         </div>
       </div>
-      <div class="mdc-text-field mdc-text-field--outlined q2" data-mdc-auto-init="MDCTextField">
+      <div class="mdc-text-field mdc-text-field--outlined q2" data-mdc-auto-init="MDCTextField"> <!-- Première proposition à la question-->
         <input type="text" id="quizz-propo1" name="proposition1" class="mdc-text-field__input">
         <div class="mdc-notched-outline">
           <div class="mdc-notched-outline__leading"></div>
@@ -193,7 +194,7 @@
           <div class="mdc-notched-outline__trailing"></div>
         </div>
       </div>
-      <div class="mdc-form-field q2-bis">
+      <div class="mdc-form-field q2-bis"> <!-- checkbox permettant de dire si c'est une solution-->
         <div class="mdc-checkbox">
           <input type="checkbox" name="check1" class="mdc-checkbox__native-control" id="checkbox-1"/>
           <div class="mdc-checkbox__background">
@@ -205,7 +206,7 @@
         </div>
         <label for="checkbox-1">Solution</label>
       </div>
-      <div class="mdc-text-field mdc-text-field--outlined q3" data-mdc-auto-init="MDCTextField">
+      <div class="mdc-text-field mdc-text-field--outlined q3" data-mdc-auto-init="MDCTextField"> <!-- Seconde proposition à la question-->
         <input type="text" id="quizz-propo2" name="proposition2" class="mdc-text-field__input">
         <div class="mdc-notched-outline">
           <div class="mdc-notched-outline__leading"></div>
@@ -215,7 +216,7 @@
           <div class="mdc-notched-outline__trailing"></div>
         </div>
       </div>
-      <div class="mdc-form-field q3-bis">
+      <div class="mdc-form-field q3-bis"> <!-- checkbox permettant de dire si c'est une solution-->
         <div class="mdc-checkbox">
           <input type="checkbox" name="check2" class="mdc-checkbox__native-control"id="checkbox-1"/>
           <div class="mdc-checkbox__background">
@@ -227,7 +228,7 @@
         </div>
         <label for="checkbox-1">Solution</label>
       </div>
-      <div class="mdc-text-field mdc-text-field--outlined q4" data-mdc-auto-init="MDCTextField">
+      <div class="mdc-text-field mdc-text-field--outlined q4" data-mdc-auto-init="MDCTextField"> <!-- Troisième proposition à la question-->
         <input type="text" id="quizz-propo3" name="proposition3" class="mdc-text-field__input">
         <div class="mdc-notched-outline">
           <div class="mdc-notched-outline__leading"></div>
@@ -237,7 +238,7 @@
           <div class="mdc-notched-outline__trailing"></div>
         </div>
       </div>
-      <div class="mdc-form-field q4-bis">
+      <div class="mdc-form-field q4-bis"> <!-- checkbox permettant de dire si c'est une solution-->
         <div class="mdc-checkbox">
           <input type="checkbox" name="check3" class="mdc-checkbox__native-control"id="checkbox-1"/>
           <div class="mdc-checkbox__background">
@@ -249,7 +250,7 @@
         </div>
         <label for="checkbox-1">Solution</label>
       </div>
-      <div class="mdc-text-field mdc-text-field--outlined q5" data-mdc-auto-init="MDCTextField">
+      <div class="mdc-text-field mdc-text-field--outlined q5" data-mdc-auto-init="MDCTextField"> <!-- Quatrième proposition à la question-->
         <input type="text" id="quizz-propo4" name="proposition4" class="mdc-text-field__input">
         <div class="mdc-notched-outline">
           <div class="mdc-notched-outline__leading"></div>
@@ -259,7 +260,7 @@
           <div class="mdc-notched-outline__trailing"></div>
         </div>
       </div>
-      <div class="mdc-form-field q5-bis">
+      <div class="mdc-form-field q5-bis"> <!-- checkbox permettant de dire si c'est une solution-->
         <div class="mdc-checkbox">
           <input type="checkbox" name="check4" class="mdc-checkbox__native-control"id="checkbox-1"/>
           <div class="mdc-checkbox__background">
@@ -271,7 +272,7 @@
         </div>
         <label for="checkbox-1">Solution</label>
       </div>
-      <button class="mdc-button q6" id="envoyer-quizz">
+      <button class="mdc-button q6" id="envoyer-quizz"> <!-- bouton pour poster le quizz sur le chat-->
         <span class="mdc-button__label">Envoyer</span>
       </button>
     </div>
