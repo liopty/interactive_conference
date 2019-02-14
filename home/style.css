@@ -7,6 +7,16 @@ html, body {
   font: 13px Helvetica, Arial;
 }
 
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    overflow: auto;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -379,6 +389,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   #contentTabs{
     width: 100%;
     margin-top: 100px;
+    padding-bottom: 30px;
   }
   .mdc-tab__text-label{
     display: none;
@@ -389,7 +400,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   .zoneDeVote{
     height: 25px;
     max-width: 70px;
-    line-height: 3px;
+    line-height: 0px;
     background-color: white;
     padding: 0;
     margin: 0;
