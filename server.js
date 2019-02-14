@@ -177,7 +177,13 @@ io.on('connection', function(socket){
       if (err) throw err;
       console.log(res.rows);
       res.rows.forEach(function(elem){
-        socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
+        if(elem.quizz === null){
+            socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
+
+        } else {
+            console.log("quizz");
+            //socket.emit('quizz', {question : question, mind: "no"});)
+        }
         actualiserVotes(elem.id_message);
       });
 
@@ -243,6 +249,9 @@ io.on('connection', function(socket){
         console.log(res);
         socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
         socket.emit('quizz', {question : question, mind: "yes"});
+        console.log("QUESSSSSSSSTION : "+question);
+        console.log("myJSSSSSSSSSSSSSSON : "+myJSON);
+
 
       });
     });
@@ -303,7 +312,7 @@ io.on('connection', function(socket){
       res.rows.forEach(function(element) {
         voteVal += element.vote;
       });
-      console.log("voteVal "+voteVal);
+      socket.emit('AfficherVote', idmessage, voteVal);
       socket.emit('AfficherVote', idmessage, voteVal);
       socket.broadcast.emit('AfficherVote', idmessage, voteVal);
     });
@@ -319,7 +328,6 @@ io.on('connection', function(socket){
           messagesTab = res.rows;
           resolve({messagesTab : messagesTab, idUser : idUser});
           console.log("messagesTab : "+messagesTab);
-          console.log("1 idUser : "+idUser);
 
         });
 
@@ -328,7 +336,6 @@ io.on('connection', function(socket){
       promise3.then(function (data) {
         let votesTab = [];
         let promises = [];
-        console.log("2 idUser : "+data.idUser);
         data.messagesTab.forEach(function(elem){
           elem.vote = 0;
           promises.push(
@@ -339,7 +346,6 @@ io.on('connection', function(socket){
 
                 res2.rows.forEach(function (e){
                   votesTab.push(e);
-                  console.log("votesTab : "+votesTab);
 
                 });
                 res();
@@ -360,10 +366,6 @@ io.on('connection', function(socket){
             data.messagesTab.sort((a, b) => a.vote - b.vote);
             //afficher les messages
             data.messagesTab.forEach(function(el){
-                //console.log(el);
-                //console.log("el.id_user : "+el.id_user);
-                console.log("3 idUser : "+data.idUser);
-
                 if (el.id_user === data.idUser){
                     socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "yes"});
                 } else {

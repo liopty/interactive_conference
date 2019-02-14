@@ -175,7 +175,6 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
   }
 
   var para = document.createElement("P");
-  console.log("vote : "+vote)
     var t = document.createTextNode(vote);
     para.appendChild(t);
     para.id = voteID;
@@ -352,6 +351,5 @@ $(document).on("click", "#activeOnglet2", function() {
 });
 
 socket.on('topMessage', function(data) {
-  console.log("data.vote : "+data.vote);
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages', data.vote, 2);
 });
