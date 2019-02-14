@@ -45,13 +45,21 @@ const logs = [{timestamp: Math.round(new Date().getTime()/1000), flag: 'admin', 
     if (err) throw err;
     console.log(res);
     res.rows.forEach(function(element) {
-      if (element.date < CurrentTime - 86400000) {
-        roomno.splice(element.id_room); // c'est pas bon
+      if (element.date <= CurrentTime - 86400000) {
+        for( var i = 0; i < roomno.length-1; i++){
+          if (roomno[i] === element.id_room) {
+            roomno.splice(i, 1);
+          }
+        }
+        client.query("DELETE FROM room WHERE id_room = 285;", (err2, res2) => {
+          if (err2) throw err2;
+          console.log(res2);
+        });
       }
     });
   });
-}, 86400000);*/
-
+}, 86400000);
+*/
 
 
   //POUR VIDER LES TABLES DE LA BD
