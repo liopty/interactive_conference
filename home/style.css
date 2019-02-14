@@ -375,7 +375,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   flex: 1;
   bottom: 0;
   position: fixed;
-  width: 100%;
+  width: 95%;
   padding-bottom: 1%;
 }
 
