@@ -4,8 +4,12 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   overflow: hidden
-  -webkit-overscroll-behavior: none;
   font: 13px Helvetica, Arial;
+}
+
+html{
+  overscroll-behavior: none;
+  -webkit-overscroll-behavior: none;
 }
 
 ::-webkit-scrollbar {
