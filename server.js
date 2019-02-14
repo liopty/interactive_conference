@@ -317,7 +317,7 @@ io.on('connection', function(socket){
           if (err) throw err;
           //console.log(res.rows);
           messagesTab = res.rows;
-          resolve(messagesTab, idUser);
+          resolve({messagesTab : messagesTab, idUser : idUser});
           console.log("messagesTab : "+messagesTab);
           console.log("1 idUser : "+idUser);
 
@@ -325,11 +325,11 @@ io.on('connection', function(socket){
 
       });
 
-      promise3.then(function (messagesTab, idUser) {
+      promise3.then(function (data) {
         let votesTab = [];
         let promises = [];
-        console.log("2 idUser : "+idUser);
-        messagesTab.forEach(function(elem){
+        console.log("2 idUser : "+data.idUser);
+        data.messagesTab.forEach(function(elem){
           elem.vote = 0;
           promises.push(
             new Promise(res => {
@@ -351,20 +351,20 @@ io.on('connection', function(socket){
             //pour tous les votes
             votesTab.forEach(function(element){
                //pour tous les msg de la room
-               messagesTab.forEach(function(ele){
+               data.messagesTab.forEach(function(ele){
                    if(element.id_message === ele.id_message){
                        ele.vote += element.vote;
                    }
                });
             });
-            messagesTab.sort((a, b) => a.vote - b.vote);
+            data.messagesTab.sort((a, b) => a.vote - b.vote);
             //afficher les messages
-            messagesTab.forEach(function(el){
+            data.messagesTab.forEach(function(el){
                 //console.log(el);
                 //console.log("el.id_user : "+el.id_user);
-                console.log("3 idUser : "+idUser);
+                console.log("3 idUser : "+data.idUser);
 
-                if (el.id_user === idUser){
+                if (el.id_user === data.idUser){
                     socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "yes"});
                 } else {
                     socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "no"});
