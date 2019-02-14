@@ -401,7 +401,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   margin: 0;
   border: 0;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.25), 0 3px 3px rgba(0,0,0,0.22);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25), 0 3px 3px rgba(0,0,0,0.22);
   display: block;
   border-radius: 25px;
   margin-bottom: -25px;
