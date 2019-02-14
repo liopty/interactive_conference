@@ -153,7 +153,6 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
   var buttonDOWNID = "DOWN_" + idMessage;
   var msgID = "msg_" + idMessage;
   var voteID ="vote_"+idMessage;
-  var commentID ="comment_"+idMessage;
 
   //Création d'un div avec le pseudo, le message et un ID
   var text = document.createElement('div');
@@ -186,12 +185,6 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
   para.id = voteID;
   para.style.display = "inline-block";
 
-  var btComment = document.createElement("BUTTON");
-  var textComment = document.createTextNode("Comment");
-  btComment.appendChild(textComment);
-  btComment.id = commentID;
-  btComment.className = "vote";
-
   if (mind == "yes") {
     var divVote = document.createElement('div');
     divVote.appendChild(para);
@@ -204,7 +197,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     if (onglet !== 1){
         divVote.append(para);
     } else {
-        divVote.append(btnUP, para, btnDOWN, btComment);
+        divVote.append(btnUP, para, btnDOWN);
     }
     divVote.className = "zoneDeVote";
     divVote.id = "zoneDeVotenotMind";
