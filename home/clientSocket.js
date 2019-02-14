@@ -216,6 +216,7 @@ socket.on('AfficherVote', function(msgId, voteValue) {
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
 $(document).on("click", ".vote", function() {
   socket.emit("votes", idIntoDB, this.id);
+  document.getElementById(this.id).style.color = black;
   //alert(idIntoDB + " : " + this.id);
 });
 
@@ -354,4 +355,3 @@ socket.on('topMessage', function(data) {
   console.log("data.vote : "+data.vote);
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages', data.vote, 2);
 });
-
