@@ -7,9 +7,10 @@ html, body {
   font: 13px Helvetica, Arial;
 }
 
-html{
-  overscroll-behavior: none;
-  -webkit-overscroll-behavior: none;
+body {
+    height: 100vh;
+    background-size: cover;
+    overflow: hidden;
 }
 
 ::-webkit-scrollbar {
