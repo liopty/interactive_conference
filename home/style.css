@@ -378,6 +378,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 {
   #contentTabs{
     width: 100%;
+    margin-top: 100px;
   }
   .mdc-tab__text-label{
     display: none;
@@ -413,7 +414,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   	clear: both;
     text-align: justify;
   	padding: 7px 13px;
-  	font-size: 14px;
+  	font-size: 15px;
   	border-radius: 15px;
   	line-height: 1.4;
     float: right;
@@ -443,7 +444,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   	clear: both;
     text-align: justify;
   	padding: 7px 13px;
-  	font-size: 14px;
+  	font-size: 15px;
   	border-radius: 15px;
   	line-height: 1.4;
     float: left;
