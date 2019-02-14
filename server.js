@@ -237,7 +237,7 @@ io.on('connection', function(socket){
       client.query(insertTableMessage, [null,id,userId,false,null,myJSON],(err, res) => {
         if (err) throw err;
         console.log(res);
-        client.query("SELECT myJSON FROM Message", (err, res2) => {
+        client.query("SELECT quizz FROM Message", (err, res2) => {
           if (err) throw err;
           console.log(res2.rows);
           socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
