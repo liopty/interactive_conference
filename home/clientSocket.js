@@ -314,7 +314,8 @@ $(document).on("click", "#choixQuizz1", function() {
     document.getElementById('choixQuizz1').style.backgroundColor = "white";
     q1 = true;
   }else{
-    document.getElementById('choixQuizz1').style.backgroundColor = "#1998e6";
+    document.getElementById('choixQuizz1').style.backgroundColor = "#8860D0";
+    q1 = false;
   }
 });
 $(document).on("click", "#choixQuizz2", function() {
@@ -322,7 +323,8 @@ $(document).on("click", "#choixQuizz2", function() {
     document.getElementById('choixQuizz2').style.backgroundColor = "white";
     q2 = true;
   }else{
-    document.getElementById('choixQuizz2').style.backgroundColor = "#1998e6";
+    document.getElementById('choixQuizz2').style.backgroundColor = "#8860D0";
+    q2 = false;
   }
 });
 $(document).on("click", "#choixQuizz3", function() {
@@ -330,7 +332,8 @@ $(document).on("click", "#choixQuizz3", function() {
     document.getElementById('choixQuizz3').style.backgroundColor = "white";
     q3 = true;
   }else{
-    document.getElementById('choixQuizz3').style.backgroundColor = "#1998e6";
+    document.getElementById('choixQuizz3').style.backgroundColor = "#8860D0";
+    q3 = false;
   }
 });
 $(document).on("click", "#choixQuizz4", function() {
@@ -338,11 +341,10 @@ $(document).on("click", "#choixQuizz4", function() {
     document.getElementById('choixQuizz4').style.backgroundColor = "white";
     q4 = true;
   }else{
-    document.getElementById('choixQuizz4').style.backgroundColor = "#1998e6";
+    document.getElementById('choixQuizz4').style.backgroundColor = "#8860D0";
+    q4 = false;
   }
 });
-
-
 
 //-------------------------------//
 //            ONGLET 2
