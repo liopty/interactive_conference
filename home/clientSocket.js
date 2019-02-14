@@ -175,7 +175,6 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
   }
 
   var para = document.createElement("P");
-  console.log("vote : "+vote)
     var t = document.createTextNode(vote);
     para.appendChild(t);
     para.id = voteID;
@@ -216,9 +215,20 @@ socket.on('AfficherVote', function(msgId, voteValue) {
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
 $(document).on("click", ".vote", function() {
   socket.emit("votes", idIntoDB, this.id);
-  if (document.getElementById(this.id).style.color == "#747474") {
+  var couleur = document.getElementById(this.id).style.color;
+  var numMsg = this.id.split("_");
+  var idBtnOpp;
+
+  if (numMsg[0] == "UP") {
+    idBtnOpp = "DOWN_"+numMsg[1];
+  } else {
+    idBtnOpp = "UP_"+numMsg[1];
+  }
+
+  if (couleur == "#747474") {
     document.getElementById(this.id).style.color = "#8860D0";
-  }else {
+    document.getElementById(idBtnOpp).style.color = "#747474";
+  } else{
     document.getElementById(this.id).style.color = "#747474";
   }
   //alert(idIntoDB + " : " + this.id);
@@ -358,6 +368,5 @@ $(document).on("click", "#activeOnglet2", function() {
 });
 
 socket.on('topMessage', function(data) {
-  console.log("data.vote : "+data.vote);
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages', data.vote, 2);
 });
