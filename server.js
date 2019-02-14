@@ -328,34 +328,41 @@ io.on('connection', function(socket){
 
       promise3.then(function (messagesTab) {
         let votesTab = [];
+        let promises = [];
         messagesTab.forEach(function(elem){
           elem.vote = 0;
-          client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res2) => {
-            if (err) throw err;
-            console.log(res2.rows);
+          promises.push(
+            new Promise(res => {
+              client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res2) => {
+                if (err) throw err;
+                console.log(res2.rows);
 
-            res2.rows.forEach(function (e){
-              votesTab.push(e);
+                res2.rows.forEach(function (e){
+                  console.log("e : "+e);
+                  votesTab.push(e);
+                  console.log("votesTab : "+votesTab);
+
+                });
+                res();
+              });
+            }));
+        });
+        //attend que toutes les promesses soient finies (res())
+        Promise.all(promises).then(function() {
+            //pour tous les votes
+            votesTab.forEach(function(element){
+                console.log("element : "+element);
+               //pour tous les msg de la room
+               messagesTab.forEach(function(ele){
+                   console.log("ele : "+ele);
+                   if(element.id_message === ele.id_message){
+                       ele.vote += element.vote;
+                   }
+               });
             });
 
-          });
         });
-        return { messages: messagesTab, votes: votesTab }
-      }).then(function(data) {
-
-        //pour tous les votes
-        data.votes.forEach(function(element){
-          console.log("element : "+element);
-          //pour tous les msg de la room
-          data.messages.forEach(function(ele){
-            console.log("ele : "+ele);
-            if(element.id_message === ele.id_message){
-              ele.vote += element.vote;
-            }
-          });
-        });
-
-      });
+      })
 
         //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
 

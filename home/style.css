@@ -221,7 +221,7 @@ Popup nouvelle Room
 
 
 ::-webkit-scrollbar-thumb {
-    background: purple;
+    background: #8860D0;
     border-radius: 10px;
 }
 
@@ -338,9 +338,12 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 #messages .mindMsg, #sortedMessages .mindMsg{
   display: inline-block;
-  overflow-x: hidden;
   text-align: justify;
-  margin-bottom: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: normal;
+  margin-right: 3px;
+  margin-bottom: 30px;
 	clear: both;
 	padding: 7px 13px;
   max-width: 400px;
@@ -348,7 +351,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 	border-radius: 15px;
 	line-height: 1.4;
   float: right;
-	background-color: #1998e6;
+	background-color: #8860D0;
 	color: #fff;
 	border-bottom-right-radius: 5px;
 	border-top-right-radius: 5px;
@@ -356,9 +359,11 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 #messages .notMindMsg, #sortedMessages .notMindMsg{
   display: inline-block;
-  overflow-x: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: normal;
   max-width: 400px;
-	margin-bottom: 2px;
+	margin-bottom: 30px;
 	clear: both;
   text-align: justify;
 	padding: 7px 13px;
@@ -386,57 +391,31 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 }
 
 .chatBar button {
-  background-color: #5680E9;
+  background-color: #8860D0;
 }
 
 .chatBar .inputMsg {
   width: 70%;
 }
 
-#messages .mindBtn, #sortedMessages .mindBtn {
-  display: inline-block;
-  overflow-x: hidden;
-  text-align: left;
-  margin-bottom: 2px;
-	clear: both;
-	padding: 7px 13px;
-  max-width: 400px;
-	font-size: 12px;
-	border-radius: 15px;
-	line-height: 1.4;
-  float: right;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
-}
-
 .zoneDeVote{
+  height: 25px;
+  max-width: 64px;
+  line-height: 3px;
   background-color: white;
   padding: 0;
   margin: 0;
   border: 0;
   text-align: center;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25), 0 3px 3px rgba(0,0,0,0.22);
   display: block;
   border-radius: 25px;
-  padding-bottom: -20px;
-  color: black;
+  margin-bottom: -25px;
+  color: #747474;
 }
-
-#messages .notMindBtn, #sortedMessages .notMindBtn {
-    display: inline-block;
-    overflow-x: hidden;
-    max-width: 400px;
-  	margin-bottom: 2px;
-  	clear: both;
-    text-align: right;
-  	padding: 7px 13px;
-  	font-size: 12px;
-  	border-radius: 15px;
-  	line-height: 1.4;
-    float: left;
-  	border-bottom-left-radius: 5px;
-  	border-top-left-radius: 5px;
-  }
+#zoneDeVoteMind{
+  width: 30px;
+}
 
   .mindMsg div{
     display: inline-block;
@@ -445,7 +424,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 .vote{
   display: inline-block;
   background-color: transparent;
-  color: darkgrey;
+  color: #747474;
   border: none;
   margin: 0;
 }
