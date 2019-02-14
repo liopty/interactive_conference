@@ -243,9 +243,9 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   display: none;
 }
 
-/* Taille affichage du chat */
-#topvote,#repondu,#recent{
-  width: 100%;
+.tabcontent h1 {
+  text-align: center;
+  margin-top: 200px;
 }
 
 /* Titre du site */
@@ -256,7 +256,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   -moz-user-select: none; /* For Mozilla */
 }
 
-#messages, #sortedMessages {
+#messages, #sortedMessages, #topvote, #repondu, #recent {
   width: 100%;
 }
 
@@ -350,6 +350,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   margin-bottom: -25px;
   color: #747474;
 }
+
 #zoneDeVoteMind{
   width: 30px;
 }
