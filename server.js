@@ -85,7 +85,7 @@ console.log(res);
 app.use('/', express.static('home'));
 
 app.get('/statistiques',(req, res) => {
-  res.send('statistiques');
+  res.redirect('statistiques');
 });
 //Lancer le serveur http et écoute les connection sur le port indiqué
 http.listen(PORT, function(){
