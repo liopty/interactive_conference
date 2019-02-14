@@ -445,7 +445,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 .vote{
   display: inline-block;
   background-color: transparent;
-  color: white;
+  color: darkgrey;
   border: none;
   margin: 0;
 }
