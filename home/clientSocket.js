@@ -151,6 +151,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
   var buttonDOWNID = "DOWN_" + idMessage;
   var msgID = "msg_" + idMessage;
   var voteID ="vote_"+idMessage;
+  var commentID ="comment_"+idMessage;
 
   //Création d'un div avec le pseudo, le message et un ID
   var text = document.createElement('div');
@@ -175,10 +176,16 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
   }
 
   var para = document.createElement("P");
-    var t = document.createTextNode(vote);
-    para.appendChild(t);
-    para.id = voteID;
-    para.style.display = "inline-block";
+  var t = document.createTextNode(vote);
+  para.appendChild(t);
+  para.id = voteID;
+  para.style.display = "inline-block";
+
+  var btComment = document.createElement("BUTTON");
+  var textComment = document.createTextNode("Comment");
+  btComment.appendChild(textComment);
+  btComment.id = commentID;
+  btComment.className = "vote";
 
   if (mind == "yes") {
     var divVote = document.createElement('div');
@@ -293,12 +300,12 @@ function insereQuizz(question, mind) {
   if(question.proposition3 != ''){
     propo3 = '<br>' + '<button class="mdc-button" id="choixQuizz3"><span class="mdc-button__label"></span>' + question.proposition3 + '</span></button>' + " " + compteur3;
   }else{
-    propo3 = null;
+    propo3 = '';
   }
   if(question.proposition4 != ''){
     propo4 = '<br>' + '<button class="mdc-button" id="choixQuizz4"><span class="mdc-button__label"></span>' + question.proposition4 + '</span></button>' + " " + compteur4;
   }else{
-    propo4 = null;
+    propo4 = '';
   }
 
   var parent = "<div>" + '<p class="msgQuizz">' + question.titre + "</p>" + propo1 + propo2 + propo3 + propo4 + "</div>";
