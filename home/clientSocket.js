@@ -204,7 +204,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     if (onglet !== 1){
         divVote.append(para);
     } else {
-        divVote.append(btnUP, para, btnDOWN);
+        divVote.append(btnUP, para, btnDOWN, btComment);
     }
     divVote.className = "zoneDeVote";
     divVote.id = "zoneDeVotenotMind";
@@ -328,6 +328,7 @@ $(document).on("click", "#choixQuizz1", function() {
     q1 = true;
   }else{
     document.getElementById('choixQuizz1').style.backgroundColor = "#11ffee00";
+    document.getElementById('choixQuizz3').color = white;
     q1 = false;
   }
 });
