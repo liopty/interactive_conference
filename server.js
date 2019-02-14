@@ -358,15 +358,15 @@ io.on('connection', function(socket){
                });
             });
             messagesTab.sort((a, b) => a.vote - b.vote);
-            //juste pour verif
+            //afficher les messages
             messagesTab.forEach(function(el){
                 console.log(el);
-
+                socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: ele.vote, mind: "no"});
             });
         });
       })
 
-        //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
+
 
   });
 
