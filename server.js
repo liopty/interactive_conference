@@ -324,7 +324,7 @@ io.on('connection', function(socket){
 
     });
 
-    promis3.then(function (messagesTab) {
+    promise3.then(function (messagesTab) {
       let votesTab = [];
       messagesTab.forEach(function(elem){
         elem.vote = 0;
