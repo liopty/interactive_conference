@@ -353,10 +353,10 @@ io.on('connection', function(socket){
         //attend que toutes les promesses soient finies (res())
         Promise.all(promises).then(function() {
             //pour tous les votes
-            data.votes.forEach(function(element){
+            votesTab.forEach(function(element){
                 console.log("element : "+element);
                //pour tous les msg de la room
-               data.messages.forEach(function(ele){
+               messagesTab.forEach(function(ele){
                    console.log("ele : "+ele);
                    if(element.id_message === ele.id_message){
                        ele.vote += element.vote;
