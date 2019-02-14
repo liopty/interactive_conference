@@ -165,6 +165,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     btnUP.appendChild(textUP);
     btnUP.id = buttonUPID;
     btnUP.className = "vote upvote";
+    btnUP.style.color = "#747474";
 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
@@ -172,9 +173,10 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
+    btnDOWN.style.color = "#747474";
   }
 
-  var para = document.createElement("P");
+    var para = document.createElement("P");
     var t = document.createTextNode(vote);
     para.appendChild(t);
     para.id = voteID;
