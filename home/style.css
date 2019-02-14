@@ -401,7 +401,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 .zoneDeVote{
   height: 25px;
-  max-width: 64px;
+  max-width: 70px;
   line-height: 3px;
   background-color: white;
   padding: 0;
