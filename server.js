@@ -325,7 +325,7 @@ io.on('connection', function(socket){
 
       const promise3 = new Promise(function(resolve, reject) {
         let messagesTab = [];
-        client.query("SELECT username, content, id_message, m.id_user  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
+        client.query("SELECT username, content, id_message, m.id_user, m.quizz  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
           if (err) throw err;
           //console.log(res.rows);
           messagesTab = res.rows;
@@ -368,12 +368,14 @@ io.on('connection', function(socket){
             data.messagesTab.sort((a, b) => a.vote - b.vote);
             //afficher les messages
             data.messagesTab.forEach(function(el){
+            if (el.quizz !== null){
                 if (el.id_user === data.idUser){
                     socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "yes"});
                 } else {
                     socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "no"});
-
                 }
+            }
+
             });
         });
       })
