@@ -357,7 +357,8 @@ io.on('connection', function(socket){
                    }
                });
             });
-            //juste pour verif 
+            messagesTab.sort((a, b) => a.vote - b.vote);
+            //juste pour verif
             messagesTab.forEach(function(el){
                 console.log(el);
 
