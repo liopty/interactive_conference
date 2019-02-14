@@ -241,22 +241,22 @@ socket.on('quizz', function(data) {
   insereQuizz(data.question, data.mind);
 })
 
-//on transmet le message et on l'affiche sur la page
+//on transmet le quizz et on l'affiche sur la page
 function envoieQuizz() {
   var question = { //Objet question + proposition + solution
     titre: $('#quizz-titre').val(),
     proposition1 : $('#quizz-propo1').val(),
-    solution1 : true,
+    solution1 : $('#checkbox1').is(":checked"),
     proposition2 : $('#quizz-propo2').val(),
-    solution2 : true,
+    solution2 : $('#checkbox2').is(":checked"),
     proposition3 : $('#quizz-propo3').val(),
-    solution3 : true,
+    solution3 : $('#checkbox3').is(":checked"),
     proposition4 : $('#quizz-propo4').val(),
-    solution4 : true,
+    solution4 : $('#checkbox4').is(":checked"),
   };
 
   if (question.titre != '' & question.proposition1 != '' & question.proposition2 != '') {
-    socket.emit('chat_quizz', actualRoom, question, idIntoDB); // Transmet le message aux autres
+    socket.emit('chat_quizz', actualRoom, question, idIntoDB); // Transmet le quizz aux autres
     $('#quizz-titre').val('').focus(); // Vide la zone de Chat et remet le focus dessus
     $('#quizz-propo1').val('').focus();
     $('#quizz-propo2').val('').focus();
@@ -266,7 +266,7 @@ function envoieQuizz() {
   }
 }
 
-// Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
+// Lorsqu'on envoie le formulaire, on transmet le quizz et on l'affiche sur la page
 $('#envoyer-quizz').on('click', function() {
   envoieQuizz();
   document.getElementById('card-quizz').style.display = "none";
@@ -274,7 +274,7 @@ $('#envoyer-quizz').on('click', function() {
 });
 
 
-// Ajoute un message dans la page
+// Ajoute un quizz dans la page
 function insereQuizz(question, mind) {
   var propo1, propo2, propo3, propo4;
   var compteur1 = 0, compteur2 = 0, compteur3 = 0, compteur4 = 0; // Compteur de vote pour chaque choix
@@ -288,20 +288,20 @@ function insereQuizz(question, mind) {
     propo1 = '<button class="mdc-button" id="choixQuizz1"><span class="mdc-button__label"></span>' + question.proposition1 + '</span></button>' + " " + compteur1;
   }
   if(question.proposition2 != ''){
-    propo2 = '<button class="mdc-button" id="choixQuizz2"><span class="mdc-button__label"></span>' + question.proposition2 + '</span></button>' + " " + compteur2;
+    propo2 = '<br>' + '<button class="mdc-button" id="choixQuizz2"><span class="mdc-button__label"></span>' + question.proposition2 + '</span></button>' + " " + compteur2;
   }
   if(question.proposition3 != ''){
-    propo3 = '<button class="mdc-button" id="choixQuizz3"><span class="mdc-button__label"></span>' + question.proposition3 + '</span></button>' + " " + compteur3;
+    propo3 = '<br>' + '<button class="mdc-button" id="choixQuizz3"><span class="mdc-button__label"></span>' + question.proposition3 + '</span></button>' + " " + compteur3;
   }else{
-    propo3 = '';
+    propo3 = null;
   }
   if(question.proposition4 != ''){
-    propo4 = '<button class="mdc-button" id="choixQuizz4"><span class="mdc-button__label"></span>' + question.proposition4 + '</span></button>' + " " + compteur4;
+    propo4 = '<br>' + '<button class="mdc-button" id="choixQuizz4"><span class="mdc-button__label"></span>' + question.proposition4 + '</span></button>' + " " + compteur4;
   }else{
-    propo4 = '';
+    propo4 = null;
   }
 
-  var parent = "<div>" + "<p style='text-align:center; text-transform: uppercase; font-weight:bold;'>" + question.titre + "</p>" + propo1 + "<br>" + propo2 + "<br>" + propo3 + "<br>" + propo4 +  "</div>";
+  var parent = "<div>" + '<p class="msgQuizz">' + question.titre + "</p>" + propo1 + propo2 + propo3 + propo4 + "</div>";
 
   if (mind == "yes") {
     $('#messages').append($('<div class="mindMsg">').append(parent));
