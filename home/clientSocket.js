@@ -81,7 +81,6 @@ $('#rejoindre_room').on('click', function() {
 $('#quitter_room').on('click', function() {
   document.getElementById('messages').innerHTML = "";
   socket.emit('leave_room', actualRoom);
-  document.getElementById('messages').innerHTML = "";
   actualRoom = null;
   idIntoDB = null;
   var element = document.getElementById('id01');
@@ -147,7 +146,7 @@ $(document).keypress(function(event) {
 });
 
 // Ajoute un message dans la page
-function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
+function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote = false) {
   var buttonUPID = "UP_" + idMessage;
   var buttonDOWNID = "DOWN_" + idMessage;
   var msgID = "msg_" + idMessage;
@@ -159,28 +158,29 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   text.appendChild(content);
   text.id = msgID;
 
-  var para = document.createElement("P");
-  var t = document.createTextNode("0");
-  para.appendChild(t);
-  //text.appendChild(para);
-  para.id = voteID;
-  para.style.display = "inline-block";
-
-  if(mind !== "yes"){
+  if(mind !== "yes" && vote === false){
     //Création du bouton UP avec un text, un id et une class
     var btnUP = document.createElement("BUTTON");
-    var textUP = document.createTextNode("➕");//⯅ ❤ ✚ ➕ ☺ ⮝
+    var textUP = document.createTextNode("✚");//⯅ ❤ ✚ ➕ ☺ ⮝
     btnUP.appendChild(textUP);
     btnUP.id = buttonUPID;
     btnUP.className = "vote upvote";
 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
-    var textDOWN = document.createTextNode("➖");//⯆ ✖ ⚊ ⮟ ☹
+    var textDOWN = document.createTextNode("⚊");//⯆ ✖ ⚊ ⮟ ☹
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
   }
+
+  var para = document.createElement("P");
+  console.log("vote : "+vote)
+    if (vote === false) vote = 0;
+    var t = document.createTextNode(vote);
+    para.appendChild(t);
+    para.id = voteID;
+    para.style.display = "inline-block";
 
   if (mind == "yes") {
     var divVote = document.createElement('div');
@@ -342,11 +342,13 @@ $(document).on("click", "#choixQuizz4", function() {
 //-------------------------------//
 
 $(document).on("click", "#activeOnglet2", function() {
+  document.getElementById('sortedMessages').innerHTML = "";
   document.getElementById('chatBox').style.visibility='hidden';
   socket.emit("AffichageTopVote", idIntoDB, actualRoom);
 });
 
 socket.on('topMessage', function(data) {
-  console.log("test");
-  insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages');
+  console.log("data.vote : "+data.vote);
+  insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages', data.vote);
 });
+

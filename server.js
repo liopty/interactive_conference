@@ -37,13 +37,21 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 const logs = [{timestamp: Math.round(new Date().getTime()/1000), flag: 'admin', psd: 'server', msg: 'Lancement du serveur'}];
 
 //S'exécute toutes les 24h, supprime les room de plus de 24h
+//il faut rajouter je pense un champs dans room genre date création
+//comparé CurrentTime avec le temps de chaque salon
 /*setInterval(function () {
-//il faut rajouter je pense un champs dans room genre date création ?
-// on fait un trigger qui se déclenche à chaque fois qu'une nouvelle room est ajouté
-CurrentTime = Math.round(new Date().getTime()/1000);
-//comparé CurrentTime avec le temps de cahque salon
-}, 86400000);
-*/
+  CurrentTime = Math.round(new Date().getTime()/1000);
+  client.query("SELECT id_room, date FROM room;", (err, res) => {
+    if (err) throw err;
+    console.log(res);
+    res.rows.forEach(function(element) {
+      if (element.date < CurrentTime - 86400000) {
+        roomno.splice(element.id_room); // c'est pas bon
+      }
+    });
+  });
+}, 86400000);*/
+
 
 
   //POUR VIDER LES TABLES DE LA BD
@@ -225,24 +233,17 @@ io.on('connection', function(socket){
 
     //Lors de l'evenement "chat quizz", le socket lance la fonction
     socket.on('chat_quizz', function(id, question, userId){
-      var myJSON = JSON.stringify(question); // JSON 
+      var myJSON = JSON.stringify(question); // JSON
       //Ecrit dans la console le msg
       console.log("(Room: "+id+") "+ question.titre);
       logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
 
-      // if(question!=null){
-      //   question = ent.encode(question);
-      // }
-
       client.query(insertTableMessage, [null,id,userId,false,null,myJSON],(err, res) => {
         if (err) throw err;
         console.log(res);
-        client.query("SELECT quizz FROM Message", (err, res2) => {
-          if (err) throw err;
-          console.log(res2.rows);
-          socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
-          socket.emit('quizz', {question : question, mind: "yes"});
-        });
+        socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
+        socket.emit('quizz', {question : question, mind: "yes"});
+
       });
     });
 
@@ -308,49 +309,65 @@ io.on('connection', function(socket){
     });
   }
 
-  socket.on("AffichageTopVote", function(idUser, idRoom){
-    const promise3 = new Promise(function(resolve, reject) {
+   socket.on("AffichageTopVote", function(idUser, idRoom){
 
-    let messagesTab = [];
-    let votesTab = [];
-    client.query("SELECT username, content, id_message  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
-        if (err) throw err;
-        //console.log(res.rows);
-        res.rows.forEach(function(elem){
+      const promise3 = new Promise(function(resolve, reject) {
+        let messagesTab = [];
+        client.query("SELECT username, content, id_message  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
+          if (err) throw err;
+          //console.log(res.rows);
+          messagesTab = res.rows;
+          resolve(messagesTab);
+          console.log("messagesTab : "+messagesTab);
+
+        });
+
+      });
+
+      promise3.then(function (messagesTab) {
+        let votesTab = [];
+        let promises = [];
+        messagesTab.forEach(function(elem){
           elem.vote = 0;
-          messagesTab.push(elem);
-          client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res) => {
-            if (err) throw err;
-            //console.log(res.rows);
-            votesTab = res.rows;
-          });
+          promises.push(
+            new Promise(res => {
+              client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res2) => {
+                if (err) throw err;
+                console.log(res2.rows);
+
+                res2.rows.forEach(function (e){
+                  votesTab.push(e);
+                  console.log("votesTab : "+votesTab);
+
+                });
+                res();
+              });
+            }));
         });
-        resolve(votesTab, messagesTab);
-        console.log("messagesTab : "+messagesTab);
-        console.log("votesTab : "+votesTab);
-      });
-
-    });
-    promise3.then(function(votesTab, messagesTab) {
-
-      //pour tous les votes
-      votesTab.forEach(function(element){
-        console.log("element : "+element);
-        //pour tous les msg de la room
-        messagesTab.forEach(function(ele){
-          console.log("ele : "+ele);
-          if(element.id_message === ele.id_message){
-            ele.vote += element.vote;
-          }
+        //attend que toutes les promesses soient finies (res())
+        Promise.all(promises).then(function() {
+            //pour tous les votes
+            votesTab.forEach(function(element){
+               //pour tous les msg de la room
+               messagesTab.forEach(function(ele){
+                   if(element.id_message === ele.id_message){
+                       ele.vote += element.vote;
+                   }
+               });
+            });
+            messagesTab.sort((a, b) => a.vote - b.vote);
+            //afficher les messages
+            messagesTab.forEach(function(el){
+                console.log(el);
+                socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "no"});
+            });
         });
-      });
-
-    });
-
-      //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
-
-});
+      })
 
 
 
-});
+  });
+
+
+
+  });
