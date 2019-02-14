@@ -342,7 +342,7 @@ $(document).on("click", "#choixQuizz4", function() {
 //-------------------------------//
 
 $(document).on("click", "#activeOnglet2", function() {
-  document.getElementById('topvote').innerHTML = "";
+  document.getElementById('sortedMessages').innerHTML = "";
   document.getElementById('chatBox').style.visibility='hidden';
   socket.emit("AffichageTopVote", idIntoDB, actualRoom);
 });
