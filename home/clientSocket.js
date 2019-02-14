@@ -158,7 +158,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
   text.appendChild(content);
   text.id = msgID;
 
-  if(mind !== "yes" || onglet !== 1){
+  if(mind !== "yes" && onglet === 1){
     //Création du bouton UP avec un text, un id et une class
     var btnUP = document.createElement("BUTTON");
     var textUP = document.createTextNode("✚");//⯅ ❤ ✚ ➕ ☺ ⮝
@@ -176,7 +176,6 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
 
   var para = document.createElement("P");
   console.log("vote : "+vote)
-    if (vote === false) vote = 0;
     var t = document.createTextNode(vote);
     para.appendChild(t);
     para.id = voteID;
