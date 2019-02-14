@@ -339,7 +339,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 #messages .mindMsg, #sortedMessages .mindMsg{
   display: inline-block;
   text-align: justify;
-  margin-right: 2px;
+  margin-right: 3px;
   margin-bottom: 30px;
 	clear: both;
 	padding: 7px 13px;
@@ -394,6 +394,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 .zoneDeVote{
   height: 25px;
+  max-width: 64px;
   line-height: 3px;
   background-color: white;
   padding: 0;
