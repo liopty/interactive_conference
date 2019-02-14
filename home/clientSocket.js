@@ -147,7 +147,7 @@ $(document).keypress(function(event) {
 });
 
 // Ajoute un message dans la page
-function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
+function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote = false {
   var buttonUPID = "UP_" + idMessage;
   var buttonDOWNID = "DOWN_" + idMessage;
   var msgID = "msg_" + idMessage;
@@ -160,7 +160,8 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   text.id = msgID;
 
   var para = document.createElement("P");
-  var t = document.createTextNode("0");
+  if (vote === false) vote = 0;
+  var t = document.createTextNode(vote);
   para.appendChild(t);
   //text.appendChild(para);
   para.id = voteID;
@@ -348,5 +349,6 @@ $(document).on("click", "#activeOnglet2", function() {
 
 socket.on('topMessage', function(data) {
   console.log("test");
-  insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages');
+  insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages', data.vote);
 });
+
