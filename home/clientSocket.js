@@ -163,7 +163,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   var para = document.createElement("P");
   var t = document.createTextNode("0");
   para.appendChild(t);
-  text.appendChild(para);
+  //text.appendChild(para);
   para.id = voteID;
 
   if(mind !== "yes"){
@@ -185,7 +185,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   if (mind == "yes") {
     $(div).append($('<div class="mindMsg">').append(text));
   } else {
-    $(div).append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
+    $(div).append($('<div class="notMindMsg">').append(text,btnDOWN, para, btnUP));
   }
 
   let elem = document.getElementById('contentTabs');
@@ -213,23 +213,23 @@ socket.on('quizz', function(data) {
   insereQuizz(data.question, data.mind);
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
-})  
+})
 
 //on transmet le message et on l'affiche sur la page
-function envoieQuizz() { 
+function envoieQuizz() {
   var question = { //Objet question + proposition + solution
-    titre: $('#quizz-titre').val(), 
-    proposition1 : $('#quizz-propo1').val(), 
+    titre: $('#quizz-titre').val(),
+    proposition1 : $('#quizz-propo1').val(),
     solution1 : true,
-    proposition2 : $('#quizz-propo2').val(), 
+    proposition2 : $('#quizz-propo2').val(),
     solution2 : true,
-    proposition3 : $('#quizz-propo3').val(), 
+    proposition3 : $('#quizz-propo3').val(),
     solution3 : true,
     proposition4 : $('#quizz-propo4').val(),
     solution4 : true,
   };
   var myJSON = JSON.stringify(question); // JSON
-  
+
   if (question.titre != '' & question.proposition1 != '' & question.proposition2 != '') {
     socket.emit('chat_quizz', actualRoom, myJSON, idIntoDB); // Transmet le message aux autres
     $('#quizz-titre').val('').focus(); // Vide la zone de Chat et remet le focus dessus
@@ -275,7 +275,7 @@ function insereQuizz(question, mind) {
   }else{
     propo4 = '';
   }
-  
+
   var parent = "<div>" + "<p style='text-align:center; text-transform: uppercase; font-weight:bold;'>" + question.titre + "</p>" + propo1 + "<br>" + propo2 + "<br>" + propo3 + "<br>" + propo4 +  "</div>";
 
   if (mind == "yes") {
