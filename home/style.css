@@ -407,7 +407,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
     margin-right: auto;
     white-space: normal !important;
     word-wrap: break-word;
-    margin-right: 3px;
+    margin-right: 5px;
     max-width: 200px;
   	margin-bottom: 30px;
   	clear: both;
@@ -434,7 +434,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   #messages .notMindMsg, #sortedMessages .notMindMsg{
     display: inline-block;
     margin-left: auto;
-    margin-left: 3px;
+    margin-left: 5px;
     margin-right: auto;
     white-space: normal !important;
     word-wrap: break-word;
