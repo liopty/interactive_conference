@@ -121,7 +121,6 @@ $('#sortirDuTiroir').on('click', function() {
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind);
-
 });
 
 //on transmet le message et on l'affiche sur la page
@@ -211,8 +210,6 @@ $(document).on("click", ".vote", function() {
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('quizz', function(data) {
   insereQuizz(data.question, data.mind);
-  var elem = document.getElementById('contentTabs');
-  elem.scrollTop = elem.scrollHeight;
 })  
 
 //on transmet le message et on l'affiche sur la page
@@ -228,10 +225,9 @@ function envoieQuizz() {
     proposition4 : $('#quizz-propo4').val(),
     solution4 : true,
   };
-  var myJSON = JSON.stringify(question); // JSON
-  
+    
   if (question.titre != '' & question.proposition1 != '' & question.proposition2 != '') {
-    socket.emit('chat_quizz', actualRoom, myJSON, idIntoDB); // Transmet le message aux autres
+    socket.emit('chat_quizz', actualRoom, question, idIntoDB); // Transmet le message aux autres
     $('#quizz-titre').val('').focus(); // Vide la zone de Chat et remet le focus dessus
     $('#quizz-propo1').val('').focus();
     $('#quizz-propo2').val('').focus();
