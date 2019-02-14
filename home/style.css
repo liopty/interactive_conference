@@ -342,6 +342,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   margin-right: auto;
   white-space: normal !important;
   word-wrap: break-word;
+  margin-right: 3px;
   max-width: 400px;
 	margin-bottom: 30px;
 	clear: both;
@@ -401,7 +402,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 .zoneDeVote{
   height: 25px;
-  max-width: 64px;
+  max-width: 70px;
   line-height: 3px;
   background-color: white;
   padding: 0;
