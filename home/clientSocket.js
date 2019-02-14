@@ -14,6 +14,8 @@ var idIntoDB = null;
 
 $(document).on("click", "#activeOnglet1", function() {
   document.getElementById('chatBox').style.visibility='visible';
+  let elem = document.getElementById('contentTabs');
+  elem.scrollTop = elem.scrollHeight;
 });
 
 //--------ROOMS -----------------------//
@@ -367,6 +369,8 @@ $(document).on("click", "#activeOnglet2", function() {
   document.getElementById('sortedMessages').innerHTML = "";
   document.getElementById('chatBox').style.visibility='hidden';
   socket.emit("AffichageTopVote", idIntoDB, actualRoom);
+  let elem = document.getElementById('contentTabs');
+  elem.scrollTop = elem.scrollHeight;
 });
 
 socket.on('topMessage', function(data) {
