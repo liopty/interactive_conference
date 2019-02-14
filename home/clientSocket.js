@@ -342,14 +342,13 @@ $(document).on("click", "#choixQuizz4", function() {
 //-------------------------------//
 
 $(document).on("click", "#activeOnglet2", function() {
-
+  document.getElementById('topvote').innerHTML = "";
   document.getElementById('chatBox').style.visibility='hidden';
   socket.emit("AffichageTopVote", idIntoDB, actualRoom);
 });
 
 socket.on('topMessage', function(data) {
   console.log("data.vote : "+data.vote);
-   document.getElementById('topvote').innerHTML = "";
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages', data.vote);
 });
 
