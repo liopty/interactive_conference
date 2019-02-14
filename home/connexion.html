@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <title>Interactive Conference</title>
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <!-- Librairi Material Theming -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+  <script defer src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <!-- Notre CSS -->
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div id="connexion" class="cd-popup"> <!-- Page connexion -->
+    <div class="mdc-card" id="name"> <!-- Nom du site -->
+        <p>Interactive Conference</p>
+    </div>
+
+    <div class="wrapper mdc-card form screen_connexion"> <!-- Groupement pour nouveau salon et rejoindre salon -->
+      <div class="one"> <!-- Zone de text pour donner son nom d'utilisateur ou rester anonyme -->
+        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+          <input type="text" id="pseudo_room" class="mdc-text-field__input" maxlength="15">
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <label for="tf-outlined" class="mdc-floating-label">Nom*</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+        <div>
+          <p>*par défaut anonyme</p>
+        </div>
+      </div>
+      <div class="two"> <!-- rejoindre salon existant -->
+        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField"> <!-- Zone de text pour donner le numéro du salon -->
+          <input type="text" id="r_room" class="mdc-text-field__input" maxlength="4" onKeypress="
+            if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+            if(event.which < 45 || event.which > 57) return false;">
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <label for="tf-outlined" class="mdc-floating-label">Numéro du salon</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+        <div>
+          <button class="mdc-button mdc-button--raised" id="rejoindre_room"> <!-- bouton pour rejoindre le salon -->
+            <span class="mdc-button__label">Rejoindre un salon</span>
+          </button>
+        </div>
+      </div>
+      <div class="three"> <!-- bouton pour créer nouveau salon -->
+        <button class="mdc-button mdc-button--raised" id="creer_room">
+          <span class="mdc-button__label">Nouveau salon</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- socket.io -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- Jquery Integration-->
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <!-- Script socket.io JS coté client-->
+  <script src="clientSocket.js"></script>
+  <!-- Script JS coté client-->
+  <script src="clientScript.js"></script>
+</body>
+</html>
