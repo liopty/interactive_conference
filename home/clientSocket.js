@@ -198,18 +198,18 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     divVote.className = "zoneDeVote";
     divVote.id = "zoneDeVoteMind";
     divVote.style.display = "block";
-    $(div).append($('<div class="mindMsg">').append(text, divVote));
+    $(div).append($('<div class="mindMsg">').append(text, divVote, btComment));
   } else {
     var divVote = document.createElement('div');
     if (onglet !== 1){
         divVote.append(para);
     } else {
-        divVote.append(btnUP, para, btnDOWN);
+        divVote.append(btnUP, para, btnDOWN, btComment);
     }
     divVote.className = "zoneDeVote";
     divVote.id = "zoneDeVotenotMind";
     divVote.style.display = "block";
-    $(div).append($('<div class="notMindMsg">').append(text, divVote));
+    $(div).append($('<div class="notMindMsg">').append(text, divVote,btComment));
   }
 
   let elem = document.getElementById('contentTabs');
