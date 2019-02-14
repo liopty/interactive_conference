@@ -341,7 +341,6 @@ io.on('connection', function(socket){
                 console.log(res2.rows);
 
                 res2.rows.forEach(function (e){
-                  console.log("e : "+e);
                   votesTab.push(e);
                   console.log("votesTab : "+votesTab);
 
@@ -354,16 +353,18 @@ io.on('connection', function(socket){
         Promise.all(promises).then(function() {
             //pour tous les votes
             votesTab.forEach(function(element){
-                console.log("element : "+element);
                //pour tous les msg de la room
                messagesTab.forEach(function(ele){
-                   console.log("ele : "+ele);
                    if(element.id_message === ele.id_message){
                        ele.vote += element.vote;
                    }
                });
             });
+            //juste pour verif 
+            messagesTab.forEach(function(el){
+                console.log(el);
 
+            });
         });
       })
 
