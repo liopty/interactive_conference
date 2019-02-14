@@ -173,7 +173,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
-    btnDOWN.style.color = "#747474";
+    btnDOWN.style.color = "rgb(116, 116, 116)";
   }
 
     var para = document.createElement("P");
@@ -227,11 +227,11 @@ $(document).on("click", ".vote", function() {
     idBtnOpp = "UP_"+numMsg[1];
   }
 
-  if (couleur == "#747474") {
-    document.getElementById(this.id).style.color = "#8860D0";
-    document.getElementById(idBtnOpp).style.color = "#747474";
+  if (couleur == "rgb(116, 116, 116)") {
+    document.getElementById(this.id).style.color = "#rgb(136, 96, 208)";
+    document.getElementById(idBtnOpp).style.color = "rgb(116, 116, 116)";
   } else{
-    document.getElementById(this.id).style.color = "#747474";
+    document.getElementById(this.id).style.color = "rgb(116, 116, 116)";
   }
   //alert(idIntoDB + " : " + this.id);
 });
