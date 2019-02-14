@@ -281,11 +281,6 @@ function insereQuizz(question, mind) {
   var propo1, propo2, propo3, propo4;
   var compteur1 = 0, compteur2 = 0, compteur3 = 0, compteur4 = 0; // Compteur de vote pour chaque choix
 
-  // var buttonUPID = "UP_" + idMessage;
-  // var buttonDOWNID = "DOWN_" + idMessage;
-  // var msgID = "msg_" + idMessage;
-  // var voteID ="vote_"+idMessage;
-
   if(question.proposition1 != ''){
     propo1 = '<button class="mdc-button" id="choixQuizz1"><span class="mdc-button__label"></span>' + question.proposition1 + '</span></button>' + " " + compteur1;
   }
@@ -310,15 +305,9 @@ function insereQuizz(question, mind) {
   } else {
     $('#messages').append($('<div class="notMindMsg">').append(parent));
   }
+  let elem = document.getElementById('contentTabs');
+  elem.scrollTop = elem.scrollHeight;
 }
-
-// socket.on('AfficherVote', function(msgId, voteValue) {
-//   try {
-//     document.getElementById('vote_'+msgId).innerHTML = voteValue;
-//   } catch (e) {
-
-//   }
-// });
 
 var q1 = false, q2 = false, q3 = false, q4 = false;
 
