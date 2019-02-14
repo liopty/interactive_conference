@@ -313,18 +313,18 @@ io.on('connection', function(socket){
 
       const promise3 = new Promise(function(resolve, reject) {
         let messagesTab = [];
-        client.query("SELECT username, content, id_message  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
+        client.query("SELECT username, content, id_message, id_user  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
           if (err) throw err;
           //console.log(res.rows);
           messagesTab = res.rows;
-          resolve(messagesTab);
+          resolve(messagesTab, idUser);
           console.log("messagesTab : "+messagesTab);
 
         });
 
       });
 
-      promise3.then(function (messagesTab) {
+      promise3.then(function (messagesTab, idUser) {
         let votesTab = [];
         let promises = [];
         messagesTab.forEach(function(elem){
@@ -359,7 +359,12 @@ io.on('connection', function(socket){
             //afficher les messages
             messagesTab.forEach(function(el){
                 console.log(el);
-                socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "no"});
+                if (el.id_user === idUser){
+                    socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "yes"});
+                } else {
+                    socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "no"});
+
+                }
             });
         });
       })
