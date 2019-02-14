@@ -262,8 +262,6 @@ io.on('connection', function(socket){
         console.log(res);
         socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
         socket.emit('quizz', {question : question, mind: "yes"});
-        console.log("QUESSSSSSSSTION : "+question);
-        console.log("myJSSSSSSSSSSSSSSON : "+myJSON);
 
 
       });
@@ -340,7 +338,6 @@ io.on('connection', function(socket){
           //console.log(res.rows);
           messagesTab = res.rows;
           resolve({messagesTab : messagesTab, idUser : idUser});
-          console.log("messagesTab : "+messagesTab);
 
         });
 
