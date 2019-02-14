@@ -330,7 +330,8 @@ io.on('connection', function(socket){
         elem.vote = 0;
         client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res2) => {
           if (err) throw err;
-          //console.log(res.rows);
+          console.log(res2.rows);
+
           res2.rows.forEach(function (e){
             votesTab.push(e);
           });
