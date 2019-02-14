@@ -184,9 +184,19 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   }
 
   if (mind == "yes") {
-    $(div).append($('<div class="mindMsg">').append(text, para));
+    var divVote = document.createElement('div');
+    divVote.appendChild(para);
+    divVote.className = zoneDeVote;
+    divVote.id = zoneDeVoteMind;
+    divVote.style.display = "block";
+    $(div).append($('<div class="mindMsg">').append(text, divVote));
   } else {
-    $(div).append($('<div class="notMindMsg">').append(text,btnDOWN, para, btnUP));
+    var divVote = document.createElement('div');
+    divVote.appendChild(btnDOWN, para, btnUP);
+    divVote.className = zoneDeVote;
+    divVote.id = zoneDeVotenotMind;
+    divVote.style.display = "block";
+    $(div).append($('<div class="notMindMsg">').append(text, divVote));
   }
 
   let elem = document.getElementById('contentTabs');
