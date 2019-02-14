@@ -217,9 +217,19 @@ socket.on('AfficherVote', function(msgId, voteValue) {
 $(document).on("click", ".vote", function() {
   socket.emit("votes", idIntoDB, this.id);
   var couleur = document.getElementById(this.id).style.color;
+  var numMsg = this.id.split("_");
+  var idBtnOpp;
+
+  if (numMsg[0] == "UP") {
+    idBtnOpp = "DOWN_"+numMsg[1];
+  } else {
+    idBtnOpp = "UP_"+numMsg[1];
+  }
+
   if (couleur == "green") {
     document.getElementById(this.id).style.color = "red";
-  } else {
+    document.getElementById(idBtnOpp).style.color = "green";
+  } else if{
     document.getElementById(this.id).style.color = "green";
   }
   //alert(idIntoDB + " : " + this.id);
