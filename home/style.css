@@ -396,7 +396,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 #messages .mindBtn, #sortedMessages .mindBtn {
   display: inline-block;
   text-align: left;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 	clear: both;
 	padding: 7px 13px;
   max-width: 400px;
@@ -414,7 +414,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   margin: 0;
   border: 0;
   text-align: center;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
   display: block;
   border-radius: 25px;
   margin-bottom: -25px;
@@ -424,7 +424,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 #messages .notMindBtn, #sortedMessages .notMindBtn {
     display: inline-block;
     max-width: 400px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   	clear: both;
     text-align: right;
   	padding: 7px 13px;
