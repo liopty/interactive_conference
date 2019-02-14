@@ -418,10 +418,6 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   width: 30px;
 }
 
-  .mindMsg div{
-    display: inline-block;
-  }
-
 .vote{
   display: inline-block;
   background-color: transparent;
