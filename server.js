@@ -331,26 +331,29 @@ io.on('connection', function(socket){
 
       promise3.then(function (messagesTab) {
         let votesTab = [];
+        let promises = [];
         messagesTab.forEach(function(elem){
           elem.vote = 0;
-          client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res2) => {
-            if (err) throw err;
-            console.log(res2.rows);
+          promises.push(
+            new Promise(res => {
+              client.query("SELECT id_message, vote FROM vote WHERE id_message = $1;", [elem.id_message], (err, res2) => {
+                if (err) throw err;
+                console.log(res2.rows);
 
-            res2.rows.forEach(function (e){
-              console.log("e : "+e);
-              votesTab.push(e);
-              console.log("votesTab : "+votesTab);
+                res2.rows.forEach(function (e){
+                  console.log("e : "+e);
+                  votesTab.push(e);
+                  console.log("votesTab : "+votesTab);
 
-            });
-
-          });
+                });
+                res();
+              });
+            })
         });
-
-      }).then(function(votesTab){
+        Promise.all(promises).then(() => {
             console.log("votesTabJusteAvantRetour : "+votesTab);
             return { messages: messagesTab, votes: votesTab }
-
+        });
       }).then(function(data) {
 
         //pour tous les votes
