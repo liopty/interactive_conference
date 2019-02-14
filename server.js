@@ -368,7 +368,7 @@ io.on('connection', function(socket){
             data.messagesTab.sort((a, b) => a.vote - b.vote);
             //afficher les messages
             data.messagesTab.forEach(function(el){
-            if (el.quizz !== null){
+            if (el.quizz === null){
                 if (el.id_user === data.idUser){
                     socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "yes"});
                 } else {
