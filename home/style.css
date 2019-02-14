@@ -25,7 +25,7 @@ Page connexion salon ou création d'un salon
 #connexion {
   background-color: white;
   position: absolute;
-  z-index: 2; /*A Modifier*/
+  z-index: 5; /*A Modifier*/
 }
 
 /* Nom du site */
