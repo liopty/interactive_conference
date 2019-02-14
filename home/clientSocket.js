@@ -165,6 +165,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   para.appendChild(t);
   //text.appendChild(para);
   para.id = voteID;
+  para.style.display = "inline-block";
 
   if(mind !== "yes"){
     //Création du bouton UP avec un text, un id et une class
@@ -183,7 +184,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   }
 
   if (mind == "yes") {
-    $(div).append($('<div class="mindMsg">').append(text));
+    $(div).append($('<div class="mindMsg">').append(text, para));
   } else {
     $(div).append($('<div class="notMindMsg">').append(text,btnDOWN, para, btnUP));
   }
