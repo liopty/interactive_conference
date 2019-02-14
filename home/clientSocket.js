@@ -172,8 +172,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
-    var textDOWN = document.createTextNode("̶");//⯆ ✖ ⚊ ⮟ ☹ ̶
-
+    var textDOWN = document.createTextNode("⚊");//⯆ ✖ ⚊ ⮟ ☹
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
