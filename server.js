@@ -37,13 +37,23 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 const logs = [{timestamp: Math.round(new Date().getTime()/1000), flag: 'admin', psd: 'server', msg: 'Lancement du serveur'}];
 
 //S'exécute toutes les 24h, supprime les room de plus de 24h
-/*setInterval(function () {
 //il faut rajouter je pense un champs dans room genre date création ?
 // on fait un trigger qui se déclenche à chaque fois qu'une nouvelle room est ajouté
-CurrentTime = Math.round(new Date().getTime()/1000);
 //comparé CurrentTime avec le temps de cahque salon
-}, 86400000);
-*/
+/*setInterval(function () {
+  CurrentTime = Math.round(new Date().getTime()/1000);
+  client.query("SELECT id_room, date FROM room;", (err, res) => {
+    if (err) throw err;
+    console.log(res);
+    res.rows.forEach(function(element) {
+      if (element.date ) {
+
+      }
+      roomno.push(element.id_room);
+    });
+  });
+}, 86400000);*/
+
 
 
   //POUR VIDER LES TABLES DE LA BD
@@ -111,6 +121,7 @@ client.query("SELECT id_room FROM room;", (err, res) => {
 io.on('connection', function(socket){
 
   socket.on('creation_room', function(pseudo) {
+    console.log(Math.round(new Date().getTime()/1000));
     var tempoId;
     var check = false;
     // On créer un nouvel identifiant unique entre 1 et 1000
@@ -327,7 +338,10 @@ io.on('connection', function(socket){
             console.log(res2.rows);
 
             res2.rows.forEach(function (e){
+              console.log("e : "+e);
               votesTab.push(e);
+              console.log("votesTab : "+votesTab);
+
             });
 
           });
