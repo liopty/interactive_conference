@@ -385,8 +385,79 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   .mdc-top-app-bar__title{
     display: none;
   }
-  .upvote{
-    margin-left: 20px;
+  .zoneDeVote{
+    height: 25px;
+    max-width: 70px;
+    line-height: 3px;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25), 0 3px 3px rgba(0,0,0,0.22);
+    display: block;
+    border-radius: 25px;
+    margin-bottom: -25px;
+    color: #747474;
+  }
+
+  #messages .mindMsg, #sortedMessages .mindMsg{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    white-space: normal !important;
+    word-wrap: break-word;
+    margin-right: 5px;
+    max-width: 200px;
+  	margin-bottom: 30px;
+  	clear: both;
+    text-align: justify;
+  	padding: 7px 13px;
+  	font-size: 14px;
+  	border-radius: 15px;
+  	line-height: 1.4;
+    float: right;
+  	background-color: #8860D0;
+  	color: #fff;
+  	border-bottom-right-radius: 5px;
+  	border-top-right-radius: 5px;
+  }
+  #zoneDeVoteMind{
+    width: 30px;
+  }
+
+  #sortedMessages #zoneDeVoteMind{
+    max-width: 70px;
+  }
+
+  /* Affichage du message des autres utilisateurs */
+  #messages .notMindMsg, #sortedMessages .notMindMsg{
+    display: inline-block;
+    margin-left: auto;
+    margin-left: 5px;
+    margin-right: auto;
+    white-space: normal !important;
+    word-wrap: break-word;
+    max-width: 200px;
+  	margin-bottom: 30px;
+  	clear: both;
+    text-align: justify;
+  	padding: 7px 13px;
+  	font-size: 14px;
+  	border-radius: 15px;
+  	line-height: 1.4;
+    float: left;
+  	background-color: #ddd;
+  	border-bottom-left-radius: 5px;
+  	border-top-left-radius: 5px;
+  }
+
+  #zoneDeVoteMind{
+    width: 30px;
+  }
+
+  #sortedMessages #zoneDeVoteMind{
+    max-width: 64px;
   }
 }
 
