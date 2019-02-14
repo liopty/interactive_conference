@@ -327,7 +327,10 @@ io.on('connection', function(socket){
             console.log(res2.rows);
 
             res2.rows.forEach(function (e){
+              console.log("e : "+e);
               votesTab.push(e);
+              console.log("votesTab : "+votesTab);
+
             });
 
           });
