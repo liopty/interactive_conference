@@ -216,7 +216,12 @@ socket.on('AfficherVote', function(msgId, voteValue) {
 //Ajout d'un event listener sur les bouton qui ont pour class : vote
 $(document).on("click", ".vote", function() {
   socket.emit("votes", idIntoDB, this.id);
-  document.getElementById(this.id).style.color = "green";
+  var couleur = document.getElementById(this.id).style.color;
+  if (couleur == "green") {
+    document.getElementById(this.id).style.color = "red";
+  } else {
+    document.getElementById(this.id).style.color = "green";
+  }
   //alert(idIntoDB + " : " + this.id);
 });
 
