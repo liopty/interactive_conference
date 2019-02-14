@@ -146,7 +146,7 @@ $(document).keypress(function(event) {
 });
 
 // Ajoute un message dans la page
-function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote = false) {
+function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote = 0, onglet = 1) {
   var buttonUPID = "UP_" + idMessage;
   var buttonDOWNID = "DOWN_" + idMessage;
   var msgID = "msg_" + idMessage;
@@ -158,7 +158,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
   text.appendChild(content);
   text.id = msgID;
 
-  if(mind !== "yes" && vote === false){
+  if(mind !== "yes" || onglet !== 1){
     //Création du bouton UP avec un text, un id et une class
     var btnUP = document.createElement("BUTTON");
     var textUP = document.createTextNode("✚");//⯅ ❤ ✚ ➕ ☺ ⮝
@@ -349,6 +349,6 @@ $(document).on("click", "#activeOnglet2", function() {
 
 socket.on('topMessage', function(data) {
   console.log("data.vote : "+data.vote);
-  insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages', data.vote);
+  insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages', data.vote, 2);
 });
 
