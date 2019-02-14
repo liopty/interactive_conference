@@ -224,7 +224,8 @@ io.on('connection', function(socket){
   });
 
     //Lors de l'evenement "chat quizz", le socket lance la fonction
-    socket.on('chat_quizz', function(id, question, userId){
+    socket.on('chat_quizz', function(id, myJSON, userId){
+      var question = JSON.parse(myJSON);
       //Ecrit dans la console le msg
       console.log("(Room: "+id+") "+ question.titre);
       logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
@@ -233,16 +234,16 @@ io.on('connection', function(socket){
       //   question = ent.encode(question);
       // }
 
-      // client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
-      //   if (err) throw err;
-      //   console.log(res);
-      //   client.query("SELECT id_message FROM Message ORDER BY id_message DESC LIMIT 1", (err, res2) => {
-      //     if (err) throw err;
-      //     console.log(res2.rows);
-      //     socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "no"});
-      //     socket.emit('quizz', {pseudo: socket.pseudo, idMessage: res2.rows[0].id_message, mind: "yes"});
-      //   });
-      // });
+      client.query(insertTableMessage, [null,id,userId,false,null,myJSON],(err, res) => {
+        if (err) throw err;
+        console.log(res);
+        // client.query("SELECT id_message FROM Message ORDER BY id_message DESC LIMIT 1", (err, res2) => {
+        //   if (err) throw err;
+        //   console.log(res2.rows);
+        //   socket.broadcast.to(id).emit('message', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "no"});
+        //   socket.emit('quizz', {pseudo: socket.pseudo, idMessage: res2.rows[0].id_message, mind: "yes"});
+        // });
+      });
 
 
     });

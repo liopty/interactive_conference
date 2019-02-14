@@ -230,10 +230,10 @@ function envoieQuizz() {
     proposition4 : $('#quizz-propo4').val(),
     solution4 : true,
   };
-  //var myJSON = JSON.stringify(question); // JSON
+  var myJSON = JSON.stringify(question); // JSON
   
   if (question.titre != '' & question.proposition1 != '' & question.proposition2 != '') {
-    socket.emit('chat_quizz', actualRoom, question, idIntoDB); // Transmet le message aux autres
+    socket.emit('chat_quizz', actualRoom, myJSON, idIntoDB); // Transmet le message aux autres
     $('#quizz-titre').val('').focus(); // Vide la zone de Chat et remet le focus dessus
     $('#quizz-propo1').val('').focus();
     $('#quizz-propo2').val('').focus();
