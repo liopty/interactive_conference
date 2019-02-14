@@ -319,6 +319,7 @@ io.on('connection', function(socket){
           messagesTab = res.rows;
           resolve(messagesTab, idUser);
           console.log("messagesTab : "+messagesTab);
+          console.log("1 idUser : "+idUser);
 
         });
 
@@ -327,6 +328,7 @@ io.on('connection', function(socket){
       promise3.then(function (messagesTab, idUser) {
         let votesTab = [];
         let promises = [];
+        console.log("2 idUser : "+idUser);
         messagesTab.forEach(function(elem){
           elem.vote = 0;
           promises.push(
@@ -358,7 +360,10 @@ io.on('connection', function(socket){
             messagesTab.sort((a, b) => a.vote - b.vote);
             //afficher les messages
             messagesTab.forEach(function(el){
-                console.log(el);
+                //console.log(el);
+                //console.log("el.id_user : "+el.id_user);
+                console.log("3 idUser : "+idUser);
+
                 if (el.id_user === idUser){
                     socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "yes"});
                 } else {
