@@ -3,18 +3,10 @@ html, body {
   height: 100%;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: hidden
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
   font: 13px Helvetica, Arial;
-}
-
-html {
-    overflow: hidden;
-    height: 100%;
-}
-
-body {
-    height: 100%;
-    overflow: auto;
 }
 
 ::-webkit-scrollbar {
