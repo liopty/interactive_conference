@@ -185,15 +185,15 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   if (mind == "yes") {
     var divVote = document.createElement('div');
     divVote.appendChild(para);
-    divVote.className = zoneDeVote;
-    divVote.id = zoneDeVoteMind;
+    divVote.className = "zoneDeVote";
+    divVote.id = "zoneDeVoteMind";
     divVote.style.display = "block";
     $(div).append($('<div class="mindMsg">').append(text, divVote));
   } else {
     var divVote = document.createElement('div');
     divVote.appendChild(btnDOWN, para, btnUP);
-    divVote.className = zoneDeVote;
-    divVote.id = zoneDeVotenotMind;
+    divVote.className = "zoneDeVote";
+    divVote.id = "zoneDeVotenotMind";
     divVote.style.display = "block";
     $(div).append($('<div class="notMindMsg">').append(text, divVote));
   }
@@ -221,7 +221,7 @@ $(document).on("click", ".vote", function() {
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('quizz', function(data) {
   insereQuizz(data.question, data.mind);
-})  
+})
 
 //on transmet le message et on l'affiche sur la page
 function envoieQuizz() {
@@ -236,7 +236,7 @@ function envoieQuizz() {
     proposition4 : $('#quizz-propo4').val(),
     solution4 : true,
   };
-    
+
   if (question.titre != '' & question.proposition1 != '' & question.proposition2 != '') {
     socket.emit('chat_quizz', actualRoom, question, idIntoDB); // Transmet le message aux autres
     $('#quizz-titre').val('').focus(); // Vide la zone de Chat et remet le focus dessus
