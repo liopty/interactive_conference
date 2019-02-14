@@ -244,8 +244,6 @@ io.on('connection', function(socket){
           socket.emit('quizz', {question : question, mind: "yes"});
         });
       });
-
-
     });
 
   socket.on('leave_room', function(idRoom){
