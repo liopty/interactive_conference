@@ -348,7 +348,7 @@ io.on('connection', function(socket){
                 });
                 res();
               });
-            });
+            }));
         });
         //attend que toutes les promesses soient finies (res())
         Promise.all(promises).then(() => {
