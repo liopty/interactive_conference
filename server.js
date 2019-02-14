@@ -313,7 +313,7 @@ io.on('connection', function(socket){
 
       const promise3 = new Promise(function(resolve, reject) {
         let messagesTab = [];
-        client.query("SELECT username, content, id_message, id_user  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
+        client.query("SELECT username, content, id_message, m.id_user  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
           if (err) throw err;
           //console.log(res.rows);
           messagesTab = res.rows;
