@@ -179,6 +179,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   padding: 20px;
   font-size: 22px;
 }
+
 /* Paramètre graphique volet gauche */
 #corps_chat aside .mdc-drawer__content {
   font-size: 1.1em;
@@ -224,7 +225,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   color: black;
 }
 
-/* chat */
+/* Chat */
 #contentTabs {
   width: 70%; /* Test */
   overflow-y: auto;
@@ -255,9 +256,9 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   -moz-user-select: none; /* For Mozilla */
 }
 
-/* #messages, #sortedMessages {
+#messages, #sortedMessages {
   width: 100%;
-} */
+}
 
 /* Affichage du message de l'utilisateur*/
 #messages .mindMsg, #sortedMessages .mindMsg{
