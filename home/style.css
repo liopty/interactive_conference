@@ -423,9 +423,8 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 #messages .notMindBtn, #sortedMessages .notMindBtn {
     display: inline-block;
-    overflow-x: hidden;
     max-width: 400px;
-  	margin-bottom: 2px;
+    margin-bottom: 50px;
   	clear: both;
     text-align: right;
   	padding: 7px 13px;
