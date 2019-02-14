@@ -310,20 +310,20 @@ function insereQuizz(question, mind) {
 
 var q1 = false, q2 = false, q3 = false, q4 = false;
 
-$(document).on("click", "#choixQuizz1", function() {
-  if(!q1){
-    document.getElementById('choixQuizz1').style.backgroundColor = "white";
-    q1 = true;
-  }else{
-    document.getElementById('choixQuizz1').style.backgroundColor = "#1998e6";
-  }
-});
+// $(document).on("click", "#choixQuizz1", function() {
+//   if(!q1){
+//     document.getElementById('choixQuizz1').style.backgroundColor = "white";
+//     q1 = true;
+//   }else{
+//     document.getElementById('choixQuizz1').style.backgroundColor = "#8860D0";
+//   }
+// });
 $(document).on("click", "#choixQuizz2", function() {
   if(!q2){
     document.getElementById('choixQuizz2').style.backgroundColor = "white";
     q2 = true;
   }else{
-    document.getElementById('choixQuizz2').style.backgroundColor = "#1998e6";
+    document.getElementById('choixQuizz2').style.backgroundColor = "#8860D0";
   }
 });
 $(document).on("click", "#choixQuizz3", function() {
@@ -331,7 +331,7 @@ $(document).on("click", "#choixQuizz3", function() {
     document.getElementById('choixQuizz3').style.backgroundColor = "white";
     q3 = true;
   }else{
-    document.getElementById('choixQuizz3').style.backgroundColor = "#1998e6";
+    document.getElementById('choixQuizz3').style.backgroundColor = "#8860D0";
   }
 });
 $(document).on("click", "#choixQuizz4", function() {
@@ -339,7 +339,7 @@ $(document).on("click", "#choixQuizz4", function() {
     document.getElementById('choixQuizz4').style.backgroundColor = "white";
     q4 = true;
   }else{
-    document.getElementById('choixQuizz4').style.backgroundColor = "#1998e6";
+    document.getElementById('choixQuizz4').style.backgroundColor = "#8860D0";
   }
 });
 
@@ -358,4 +358,9 @@ $(document).on("click", "#activeOnglet2", function() {
 socket.on('topMessage', function(data) {
   console.log("data.vote : "+data.vote);
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages', data.vote, 2);
+});
+
+
+$(document).on("click", "#choixQuizz1", function() {
+  document.getElementById('choixQuizz1').style.backgroundColor = !q1 ? document.getElementById('choixQuizz1').style.backgroundColor = "white" : document.getElementById('choixQuizz1').style.backgroundColor = "#8860D0";
 });
