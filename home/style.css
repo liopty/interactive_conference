@@ -4,19 +4,8 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
+  overscroll-behavior: none;
   font: 13px Helvetica, Arial;
-}
-
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-body > div {
-    height: 100%;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
 }
 
 ::-webkit-scrollbar {
