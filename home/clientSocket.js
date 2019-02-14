@@ -160,26 +160,32 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   text.appendChild(content);
   text.id = msgID;
 
+  var zoneDevote = document.createElement("div");
+  zoneDevote.id = zoneDevoteID;
+
   var para = document.createElement("P");
   var t = document.createTextNode("0");
   para.appendChild(t);
-  text.appendChild(para);
+  zoneDevote.appendChild(para);
   para.id = voteID;
 
   if(mind !== "yes"){
     //Création du bouton UP avec un text, un id et une class
     var btnUP = document.createElement("BUTTON");
-    var textUP = document.createTextNode("➕");//⯅ ❤ ✚ ➕ ☺ ⮝
+    var textUP = document.createTextNode("✚");//⯅ ❤ ✚ ➕ ☺ ⮝
     btnUP.appendChild(textUP);
     btnUP.id = buttonUPID;
     btnUP.className = "vote upvote";
 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
-    var textDOWN = document.createTextNode("➖");//⯆ ✖ ⚊ ⮟ ☹
+    var textDOWN = document.createTextNode("⚊");//⯆ ✖ ⚊ ➖⮟ ☹
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
+
+    zoneDevote.appendChild(btnUP);
+    zoneDevote.appendChild(btnDOWN);
   }
 
   if (mind == "yes") {
@@ -213,25 +219,25 @@ socket.on('quizz', function(data) {
   insereQuizz(data.question, data.mind);
   var elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
-})  
+})
 
 //on transmet le message et on l'affiche sur la page
 function envoieQuizz() {
   var question = [$('#quizz-titre').val(), $('#quizz-propo1').val(), $('#quizz-propo2').val(), $('#quizz-propo3').val(), $('#quizz-propo4').val()];
-  
+
   var question = { //Objet question + proposition + solution
-    titre: $('#quizz-titre').val(), 
-    proposition1 : $('#quizz-propo1').val(), 
+    titre: $('#quizz-titre').val(),
+    proposition1 : $('#quizz-propo1').val(),
     solution1 : true,
-    proposition2 : $('#quizz-propo2').val(), 
+    proposition2 : $('#quizz-propo2').val(),
     solution2 : true,
-    proposition3 : $('#quizz-propo3').val(), 
+    proposition3 : $('#quizz-propo3').val(),
     solution3 : true,
     proposition4 : $('#quizz-propo4').val(),
     solution4 : true,
   };
   //var myJSON = JSON.stringify(question); // JSON
-  
+
   if (question.titre != '' & question.proposition1 != '' & question.proposition2 != '') {
     socket.emit('chat_quizz', actualRoom, question, idIntoDB); // Transmet le message aux autres
     $('#quizz-titre').val('').focus(); // Vide la zone de Chat et remet le focus dessus
@@ -277,7 +283,7 @@ function insereQuizz(question, mind) {
   }else{
     propo4 = '';
   }
-  
+
   var parent = "<div>" + "<p style='text-align:center; text-transform: uppercase; font-weight:bold;'>" + question.titre + "</p>" + propo1 + "<br>" + propo2 + "<br>" + propo3 + "<br>" + propo4 +  "</div>";
 
   if (mind == "yes") {
