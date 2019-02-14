@@ -181,7 +181,7 @@ io.on('connection', function(socket){
 
       }
     }
-    client.query("SELECT username, content, id_message FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [id], (err, res) => {
+    client.query("SELECT username, content, id_message, m.quizz FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [id], (err, res) => {
       if (err) throw err;
       console.log(res.rows);
       res.rows.forEach(function(elem){
@@ -190,7 +190,7 @@ io.on('connection', function(socket){
 
         } else {
             console.log("quizz");
-            //socket.emit('quizz', {question : question, mind: "no"});)
+            socket.emit('quizz', {question : elem.question, mind: "no"});)
         }
         actualiserVotes(elem.id_message);
       });
