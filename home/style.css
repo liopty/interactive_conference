@@ -362,7 +362,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   width: 30px;
 }
 
-#sortedMessages .notMindMsg #zoneDeVoteMind{
+#sortedMessages #zoneDeVoteMind{
   max-width: 64px;
 }
 
