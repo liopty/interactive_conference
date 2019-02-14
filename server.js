@@ -345,10 +345,13 @@ io.on('connection', function(socket){
             });
 
           });
-        }).then(function(){
+        });
+
+      }).then(function(){
             console.log("votesTabJusteAvantRetour : "+votesTab);
             return { messages: messagesTab, votes: votesTab }
-        }).then(function(data) {
+
+      }).then(function(data) {
 
         //pour tous les votes
         data.votes.forEach(function(element){
