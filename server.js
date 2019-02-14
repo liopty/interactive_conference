@@ -240,7 +240,7 @@ io.on('connection', function(socket){
         client.query("SELECT myJSON FROM Message", (err, res2) => {
           if (err) throw err;
           console.log(res2.rows);
-          socket.broadcast.to(id).emit('quizz', {pseudo: socket.pseudo, message: message, idMessage: res2.rows[0].id_message, mind: "no"});
+          socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
           socket.emit('quizz', {question : question, mind: "yes"});
         });
       });
