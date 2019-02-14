@@ -190,7 +190,11 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     $(div).append($('<div class="mindMsg">').append(text, divVote));
   } else {
     var divVote = document.createElement('div');
-    divVote.append(btnUP, para, btnDOWN);
+    if (onglet !== 1){
+        divVote.append(para);
+    } else {
+        divVote.append(btnUP, para, btnDOWN);
+    }
     divVote.className = "zoneDeVote";
     divVote.id = "zoneDeVotenotMind";
     divVote.style.display = "block";
