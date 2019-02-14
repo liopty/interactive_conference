@@ -198,18 +198,18 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     divVote.className = "zoneDeVote";
     divVote.id = "zoneDeVoteMind";
     divVote.style.display = "block";
-    $(div).append($('<div class="mindMsg">').append(text, divVote, btComment));
+    $(div).append($('<div class="mindMsg">').append(text, divVote));
   } else {
     var divVote = document.createElement('div');
     if (onglet !== 1){
         divVote.append(para);
     } else {
-        divVote.append(btnUP, para, btnDOWN, btComment);
+        divVote.append(btnUP, para, btnDOWN);
     }
     divVote.className = "zoneDeVote";
     divVote.id = "zoneDeVotenotMind";
     divVote.style.display = "block";
-    $(div).append($('<div class="notMindMsg">').append(text, divVote,btComment));
+    $(div).append($('<div class="notMindMsg">').append(text, divVote));
   }
 
   let elem = document.getElementById('contentTabs');
@@ -338,6 +338,7 @@ $(document).on("click", "#choixQuizz2", function() {
     q2 = true;
   }else{
     document.getElementById('choixQuizz2').style.backgroundColor = "#11ffee00";
+    document.getElementById('choixQuizz3').color = white;
     q2 = false;
   }
 });
@@ -348,6 +349,7 @@ $(document).on("click", "#choixQuizz3", function() {
     q3 = true;
   }else{
     document.getElementById('choixQuizz3').style.backgroundColor = "#11ffee00";
+    document.getElementById('choixQuizz3').color = white;
     q3 = false;
   }
 });
@@ -358,6 +360,7 @@ $(document).on("click", "#choixQuizz4", function() {
     q4 = true;
   }else{
     document.getElementById('choixQuizz4').style.backgroundColor = "#11ffee00";
+    document.getElementById('choixQuizz3').color = white;
     q4 = false;
   }
 });

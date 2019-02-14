@@ -448,6 +448,10 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   grid-area: f;
 }
 
+#choixQuizz1, #choixQuizz2, #choixQuizz3, #choixQuizz4 {
+  color: white;
+}
+
 /* --------------------------------
 
         Popup nouvelle Room
