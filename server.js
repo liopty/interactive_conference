@@ -85,7 +85,7 @@ console.log(res);
 app.use('/', express.static('home'));
 
 app.get('/statistiques',(req, res) => {
-  app.use('/', express.static('statistiques'));
+  res.redirect('statistiques');
 });
 //Lancer le serveur http et écoute les connection sur le port indiqué
 http.listen(PORT, function(){
@@ -189,8 +189,7 @@ io.on('connection', function(socket){
             socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
 
         } else {
-            console.log("quizz");
-            socket.emit('quizz', {question : JSON.parse(elem.question), mind: "no"});
+           socket.emit('quizz', {question : elem.quizz, mind: "no"});
         }
         actualiserVotes(elem.id_message);
       });
@@ -257,8 +256,6 @@ io.on('connection', function(socket){
         console.log(res);
         socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
         socket.emit('quizz', {question : question, mind: "yes"});
-        console.log("QUESSSSSSSSTION : "+question);
-        console.log("myJSSSSSSSSSSSSSSON : "+myJSON);
 
 
       });
@@ -330,12 +327,11 @@ io.on('connection', function(socket){
 
       const promise3 = new Promise(function(resolve, reject) {
         let messagesTab = [];
-        client.query("SELECT username, content, id_message, m.id_user  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
+        client.query("SELECT username, content, id_message, m.id_user, m.quizz  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
           if (err) throw err;
           //console.log(res.rows);
           messagesTab = res.rows;
           resolve({messagesTab : messagesTab, idUser : idUser});
-          console.log("messagesTab : "+messagesTab);
 
         });
 
@@ -374,12 +370,14 @@ io.on('connection', function(socket){
             data.messagesTab.sort((a, b) => a.vote - b.vote);
             //afficher les messages
             data.messagesTab.forEach(function(el){
+            if (el.quizz !== null){
                 if (el.id_user === data.idUser){
                     socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "yes"});
                 } else {
                     socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "no"});
-
                 }
+            }
+
             });
         });
       })
