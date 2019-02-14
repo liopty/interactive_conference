@@ -359,6 +359,9 @@ io.on('connection', function(socket){
             //afficher les messages
             messagesTab.forEach(function(el){
                 console.log(el);
+                console.log("el.id_user : "+el.id_user);
+                console.log("idUser : "+idUser);
+
                 if (el.id_user === idUser){
                     socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "yes"});
                 } else {
