@@ -82,7 +82,8 @@ console.log(res);
 });
 */
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
-app.use('/', express.static('home'));
+app.use('/', express.static('connexion'));
+app.use('/chat', express.static('home'));
 app.use('/statistiques', express.static('statistiques'));
 
 //Lancer le serveur http et écoute les connection sur le port indiqué

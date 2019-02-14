@@ -14,6 +14,8 @@ var idIntoDB = null;
 
 $(document).on("click", "#activeOnglet1", function() {
   document.getElementById('chatBox').style.visibility='visible';
+  let elem = document.getElementById('contentTabs');
+  elem.scrollTop = elem.scrollHeight;
 });
 
 //--------ROOMS -----------------------//
@@ -288,11 +290,6 @@ function insereQuizz(question, mind) {
   var propo1, propo2, propo3, propo4;
   var compteur1 = 0, compteur2 = 0, compteur3 = 0, compteur4 = 0; // Compteur de vote pour chaque choix
 
-  // var buttonUPID = "UP_" + idMessage;
-  // var buttonDOWNID = "DOWN_" + idMessage;
-  // var msgID = "msg_" + idMessage;
-  // var voteID ="vote_"+idMessage;
-
   if(question.proposition1 != ''){
     propo1 = '<button class="mdc-button" id="choixQuizz1"><span class="mdc-button__label"></span>' + question.proposition1 + '</span></button>' + " " + compteur1;
   }
@@ -317,51 +314,49 @@ function insereQuizz(question, mind) {
   } else {
     $('#messages').append($('<div class="notMindMsg">').append(parent));
   }
+  let elem = document.getElementById('contentTabs');
+  elem.scrollTop = elem.scrollHeight;
 }
-
-// socket.on('AfficherVote', function(msgId, voteValue) {
-//   try {
-//     document.getElementById('vote_'+msgId).innerHTML = voteValue;
-//   } catch (e) {
-
-//   }
-// });
 
 var q1 = false, q2 = false, q3 = false, q4 = false;
 
 $(document).on("click", "#choixQuizz1", function() {
   if(!q1){
     document.getElementById('choixQuizz1').style.backgroundColor = "white";
+    document.getElementById('choixQuizz1').color = "#8860D0";
     q1 = true;
   }else{
-    document.getElementById('choixQuizz1').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz1').style.backgroundColor = "#11ffee00";
     q1 = false;
   }
 });
 $(document).on("click", "#choixQuizz2", function() {
   if(!q2){
     document.getElementById('choixQuizz2').style.backgroundColor = "white";
+    document.getElementById('choixQuizz2').color = "#8860D0";
     q2 = true;
   }else{
-    document.getElementById('choixQuizz2').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz2').style.backgroundColor = "#11ffee00";
     q2 = false;
   }
 });
 $(document).on("click", "#choixQuizz3", function() {
   if(!q3){
     document.getElementById('choixQuizz3').style.backgroundColor = "white";
+    document.getElementById('choixQuizz3').color = "#8860D0";
     q3 = true;
   }else{
-    document.getElementById('choixQuizz3').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz3').style.backgroundColor = "#11ffee00";
     q3 = false;
   }
 });
 $(document).on("click", "#choixQuizz4", function() {
   if(!q4){
     document.getElementById('choixQuizz4').style.backgroundColor = "white";
+    document.getElementById('choixQuizz4').color = "#8860D0";
     q4 = true;
   }else{
-    document.getElementById('choixQuizz4').style.backgroundColor = "#8860D0";
+    document.getElementById('choixQuizz4').style.backgroundColor = "#11ffee00";
     q4 = false;
   }
 });
@@ -374,6 +369,8 @@ $(document).on("click", "#activeOnglet2", function() {
   document.getElementById('sortedMessages').innerHTML = "";
   document.getElementById('chatBox').style.visibility='hidden';
   socket.emit("AffichageTopVote", idIntoDB, actualRoom);
+  let elem = document.getElementById('contentTabs');
+  elem.scrollTop = elem.scrollHeight;
 });
 
 socket.on('topMessage', function(data) {
