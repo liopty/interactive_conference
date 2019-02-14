@@ -135,7 +135,7 @@ Page connexion salon ou création d'un salon
 ---------------------------- */
 
 ::-webkit-scrollbar-thumb {
-    background: #8860D0;
+    background: purple;
     border-radius: 10px;
 }
 
@@ -179,7 +179,6 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   padding: 20px;
   font-size: 22px;
 }
-
 /* Paramètre graphique volet gauche */
 #corps_chat aside .mdc-drawer__content {
   font-size: 1.1em;
@@ -225,7 +224,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   color: black;
 }
 
-/* Chat */
+/* chat */
 #contentTabs {
   width: 70%; /* Test */
   overflow-y: auto;
@@ -243,9 +242,9 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   display: none;
 }
 
-.tabcontent h1 {
-  text-align: center;
-  margin-top: 200px;
+/* Taille affichage du chat */
+#topvote,#repondu,#recent{
+  width: 100%;
 }
 
 /* Titre du site */
@@ -256,28 +255,24 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   -moz-user-select: none; /* For Mozilla */
 }
 
-#messages, #sortedMessages, #topvote, #repondu, #recent {
+/* #messages, #sortedMessages {
   width: 100%;
-}
+} */
 
 /* Affichage du message de l'utilisateur*/
 #messages .mindMsg, #sortedMessages .mindMsg{
   display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  white-space: normal !important;
-  word-wrap: break-word;
-  margin-right: 3px;
-  max-width: 400px;
-	margin-bottom: 30px;
-	clear: both;
+  overflow-x: hidden;
   text-align: justify;
+  margin-bottom: 2px;
+	clear: both;
 	padding: 7px 13px;
+  max-width: 400px;
 	font-size: 12px;
 	border-radius: 15px;
 	line-height: 1.4;
   float: right;
-	background-color: #8860D0;
+	background-color: #1998e6;
 	color: #fff;
 	border-bottom-right-radius: 5px;
 	border-top-right-radius: 5px;
@@ -286,12 +281,9 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 /* Affichage du message des autres utilisateurs */
 #messages .notMindMsg, #sortedMessages .notMindMsg{
   display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  white-space: normal !important;
-  word-wrap: break-word;
+  overflow-x: hidden;
   max-width: 400px;
-	margin-bottom: 30px;
+	margin-bottom: 2px;
 	clear: both;
   text-align: justify;
 	padding: 7px 13px;
@@ -335,30 +327,10 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 }
 
 /* Vote */
-.zoneDeVote{
-  height: 25px;
-  max-width: 70px;
-  line-height: 3px;
-  background-color: white;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  text-align: center;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.25), 0 3px 3px rgba(0,0,0,0.22);
-  display: block;
-  border-radius: 25px;
-  margin-bottom: -25px;
-  color: #747474;
-}
-
-#zoneDeVoteMind{
-  width: 30px;
-}
-
 .vote{
   display: inline-block;
   background-color: transparent;
-  color: #747474;
+  color: white;
   border: none;
   margin: 0;
 }
