@@ -190,10 +190,10 @@ io.on('connection', function(socket){
 
         } else {
             console.log("quizz");
-            let question = JSON.parse(elem.quizz);
-            console.log(question);
+            //let question = JSON.parse(elem.quizz);
+            //console.log(question);
             console.log(elem.quizz);
-            console.log(question.titre);
+            //console.log(question.titre);
             console.log(elem.quizz.titre)
            // socket.emit('quizz', {question : , mind: "no"});
         }
