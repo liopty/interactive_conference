@@ -228,7 +228,7 @@ $(document).on("click", ".vote", function() {
   }
 
   if (couleur == "LightGray") {
-    document.getElementById(this.id).style.color = "Orchid";
+    document.getElementById(this.id).style.color = "green";
     document.getElementById(idBtnOpp).style.color = "LightGray";
   } else{
     document.getElementById(this.id).style.color = "LightGray";
