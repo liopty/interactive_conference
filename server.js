@@ -236,7 +236,7 @@ io.on('connection', function(socket){
 
     //Lors de l'evenement "chat quizz", le socket lance la fonction
     socket.on('chat_quizz', function(id, question, userId){
-      var myJSON = JSON.stringify(question); // JSON 
+      var myJSON = JSON.stringify(question); // JSON
       //Ecrit dans la console le msg
       console.log("(Room: "+id+") "+ question.titre);
       logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
@@ -351,25 +351,21 @@ io.on('connection', function(socket){
             }));
         });
         //attend que toutes les promesses soient finies (res())
-        Promise.all(promises).then(() => {
-            console.log("votesTabJusteAvantRetour : "+votesTab);
-            return { messages: messagesTab, votes: votesTab }
-        });
-      }).then(function(data) {
+        Promise.all(promises).then(function() {
+            //pour tous les votes
+            data.votes.forEach(function(element){
+                console.log("element : "+element);
+               //pour tous les msg de la room
+               data.messages.forEach(function(ele){
+                   console.log("ele : "+ele);
+                   if(element.id_message === ele.id_message){
+                       ele.vote += element.vote;
+                   }
+               });
+            });
 
-        //pour tous les votes
-        data.votes.forEach(function(element){
-          console.log("element : "+element);
-          //pour tous les msg de la room
-          data.messages.forEach(function(ele){
-            console.log("ele : "+ele);
-            if(element.id_message === ele.id_message){
-              ele.vote += element.vote;
-            }
-          });
         });
-
-      });
+      })
 
         //  socket.emit('topMessage', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
 
