@@ -203,7 +203,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     if (onglet !== 1){
         divVote.append(para);
     } else {
-        divVote.append(btnUP, para, btnDOWN);
+        divVote.append(btnUP, para, btnDOWN, btComment);
     }
     divVote.className = "zoneDeVote";
     divVote.id = "zoneDeVotenotMind";
