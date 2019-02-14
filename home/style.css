@@ -385,9 +385,6 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   .mdc-top-app-bar__title{
     display: none;
   }
-  .upvote{
-    margin-left: 20px;
-  }
   .zoneDeVote{
     height: 25px;
     max-width: 70px;
@@ -437,6 +434,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   #messages .notMindMsg, #sortedMessages .notMindMsg{
     display: inline-block;
     margin-left: auto;
+    margin-left: 3px;
     margin-right: auto;
     white-space: normal !important;
     word-wrap: break-word;
