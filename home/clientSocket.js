@@ -191,7 +191,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
     $(div).append($('<div class="mindMsg">').append(text, divVote));
   } else {
     var divVote = document.createElement('div');
-    divVote.appendChild(btnDOWN, para, btnUP);
+    divVote.appendChild(btnUP);
     divVote.className = "zoneDeVote";
     divVote.id = "zoneDeVotenotMind";
     divVote.style.display = "block";
