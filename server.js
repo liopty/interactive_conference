@@ -230,19 +230,12 @@ io.on('connection', function(socket){
       console.log("(Room: "+id+") "+ question.titre);
       logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
 
-      // if(question!=null){
-      //   question = ent.encode(question);
-      // }
-
       client.query(insertTableMessage, [null,id,userId,false,null,myJSON],(err, res) => {
         if (err) throw err;
         console.log(res);
-        client.query("SELECT quizz FROM Message", (err, res2) => {
-          if (err) throw err;
-          console.log(res2.rows);
-          socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
-          socket.emit('quizz', {question : question, mind: "yes"});
-        });
+        socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
+        socket.emit('quizz', {question : question, mind: "yes"});
+
       });
 
 
