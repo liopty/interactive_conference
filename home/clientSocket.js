@@ -162,8 +162,9 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   var para = document.createElement("P");
   var t = document.createTextNode("0");
   para.appendChild(t);
-  text.appendChild(para);
+  //text.appendChild(para);
   para.id = voteID;
+  para.style.display = "inline-block";
 
   if(mind !== "yes"){
     //Création du bouton UP avec un text, un id et une class
@@ -182,9 +183,9 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   }
 
   if (mind == "yes") {
-    $(div).append($('<div class="mindMsg">').append(text));
+    $(div).append($('<div class="mindMsg">').append(text, para));
   } else {
-    $(div).append($('<div class="notMindMsg">').append(text, btnUP, btnDOWN));
+    $(div).append($('<div class="notMindMsg">').append(text,btnDOWN, para, btnUP));
   }
 
   let elem = document.getElementById('contentTabs');
@@ -213,14 +214,14 @@ socket.on('quizz', function(data) {
 })  
 
 //on transmet le message et on l'affiche sur la page
-function envoieQuizz() { 
+function envoieQuizz() {
   var question = { //Objet question + proposition + solution
-    titre: $('#quizz-titre').val(), 
-    proposition1 : $('#quizz-propo1').val(), 
+    titre: $('#quizz-titre').val(),
+    proposition1 : $('#quizz-propo1').val(),
     solution1 : true,
-    proposition2 : $('#quizz-propo2').val(), 
+    proposition2 : $('#quizz-propo2').val(),
     solution2 : true,
-    proposition3 : $('#quizz-propo3').val(), 
+    proposition3 : $('#quizz-propo3').val(),
     solution3 : true,
     proposition4 : $('#quizz-propo4').val(),
     solution4 : true,
@@ -271,7 +272,7 @@ function insereQuizz(question, mind) {
   }else{
     propo4 = '';
   }
-  
+
   var parent = "<div>" + "<p style='text-align:center; text-transform: uppercase; font-weight:bold;'>" + question.titre + "</p>" + propo1 + "<br>" + propo2 + "<br>" + propo3 + "<br>" + propo4 +  "</div>";
 
   if (mind == "yes") {
