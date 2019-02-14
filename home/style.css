@@ -329,7 +329,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 /* bouton pour envoyer les messages - paramètre graphique*/
 .chatBar button {
-  background-color: #5680E9;
+  background-color: #8860D0;
 }
 
 /* zone de text pour écrire les messages */
