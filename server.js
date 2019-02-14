@@ -361,7 +361,7 @@ io.on('connection', function(socket){
             //afficher les messages
             messagesTab.forEach(function(el){
                 console.log(el);
-                socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: ele.vote, mind: "no"});
+                socket.emit('topMessage', {pseudo: el.username, message: el.content, idMessage: el.id_message, vote: el.vote, mind: "no"});
             });
         });
       })
