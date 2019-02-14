@@ -37,19 +37,17 @@ var ent = require('ent'); // Permet de bloquer les caractères HTML (sécurité 
 const logs = [{timestamp: Math.round(new Date().getTime()/1000), flag: 'admin', psd: 'server', msg: 'Lancement du serveur'}];
 
 //S'exécute toutes les 24h, supprime les room de plus de 24h
-//il faut rajouter je pense un champs dans room genre date création ?
-// on fait un trigger qui se déclenche à chaque fois qu'une nouvelle room est ajouté
-//comparé CurrentTime avec le temps de cahque salon
+//il faut rajouter je pense un champs dans room genre date création
+//comparé CurrentTime avec le temps de chaque salon
 /*setInterval(function () {
   CurrentTime = Math.round(new Date().getTime()/1000);
   client.query("SELECT id_room, date FROM room;", (err, res) => {
     if (err) throw err;
     console.log(res);
     res.rows.forEach(function(element) {
-      if (element.date ) {
-
+      if (element.date < CurrentTime - 86400000) {
+        roomno.splice(element.id_room); // c'est pas bon
       }
-      roomno.push(element.id_room);
     });
   });
 }, 86400000);*/
@@ -121,7 +119,6 @@ client.query("SELECT id_room FROM room;", (err, res) => {
 io.on('connection', function(socket){
 
   socket.on('creation_room', function(pseudo) {
-    console.log(Math.round(new Date().getTime()/1000));
     var tempoId;
     var check = false;
     // On créer un nouvel identifiant unique entre 1 et 1000
@@ -236,7 +233,7 @@ io.on('connection', function(socket){
 
     //Lors de l'evenement "chat quizz", le socket lance la fonction
     socket.on('chat_quizz', function(id, question, userId){
-      var myJSON = JSON.stringify(question); // JSON 
+      var myJSON = JSON.stringify(question); // JSON
       //Ecrit dans la console le msg
       console.log("(Room: "+id+") "+ question.titre);
       logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'quizz', psd: userId, msg: "(Room: "+id+") "+ question.titre});
