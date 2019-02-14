@@ -29,7 +29,7 @@ Page connexion salon ou création d'un salon
 }
 
 /* Nom du site */
-#name { 
+#name {
   position: absolute;
   top: 0%;
   margin-left: 5px;
@@ -306,8 +306,8 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 /* Affichage du quizz de l'utilisateur */
 .msgQuizz {
-  text-align: center; 
-  text-transform: uppercase; 
+  text-align: center;
+  text-transform: uppercase;
   font-weight: bold;
 }
 
@@ -336,7 +336,7 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 .chatBar .inputMsg {
   width: 70%;
 }
-  
+
 /* .mindMsg div{
   display: inline-block;
 } */
@@ -360,6 +360,10 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 #zoneDeVoteMind{
   width: 30px;
+}
+
+#sortedMessages .notMindMsg #zoneDeVoteMind{
+  max-width: 64px;
 }
 
 .vote{
