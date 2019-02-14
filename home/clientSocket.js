@@ -169,14 +169,14 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages') {
   if(mind !== "yes"){
     //Création du bouton UP avec un text, un id et une class
     var btnUP = document.createElement("BUTTON");
-    var textUP = document.createTextNode("➕");//⯅ ❤ ✚ ➕ ☺ ⮝
+    var textUP = document.createTextNode("✚");//⯅ ❤ ✚ ➕ ☺ ⮝
     btnUP.appendChild(textUP);
     btnUP.id = buttonUPID;
     btnUP.className = "vote upvote";
 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
-    var textDOWN = document.createTextNode("➖");//⯆ ✖ ⚊ ⮟ ☹
+    var textDOWN = document.createTextNode("⚊");//⯆ ✖ ⚊ ⮟ ☹
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
