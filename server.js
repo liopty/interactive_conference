@@ -190,7 +190,7 @@ io.on('connection', function(socket){
 
         } else {
             console.log("quizz");
-            socket.emit('quizz', {question : elem.question, mind: "no"});)
+            socket.emit('quizz', {question : elem.question, mind: "no"});
         }
         actualiserVotes(elem.id_message);
       });
