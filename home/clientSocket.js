@@ -217,9 +217,6 @@ socket.on('AfficherVote', function(msgId, voteValue) {
 $(document).on("click", ".vote", function() {
   socket.emit("votes", idIntoDB, this.id);
   document.getElementById(this.id).style.color = "green";
-  if ( document.getElementById(this.id).style.color == "green") {
-    document.getElementById(this.id).style.color = "blue";
-  }
   //alert(idIntoDB + " : " + this.id);
 });
 
