@@ -395,9 +395,8 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 #messages .mindBtn, #sortedMessages .mindBtn {
   display: inline-block;
-  overflow-x: hidden;
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 	clear: both;
 	padding: 7px 13px;
   max-width: 400px;
@@ -418,15 +417,14 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   display: block;
   border-radius: 25px;
-  margin-bottom: -20px;
+  margin-bottom: -25px;
   color: black;
 }
 
 #messages .notMindBtn, #sortedMessages .notMindBtn {
     display: inline-block;
-    overflow-x: hidden;
     max-width: 400px;
-  	margin-bottom: 2px;
+    margin-bottom: 50px;
   	clear: both;
     text-align: right;
   	padding: 7px 13px;
