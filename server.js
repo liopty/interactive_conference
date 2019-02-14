@@ -85,7 +85,7 @@ console.log(res);
 app.use('/', express.static('home'));
 
 app.get('/statistiques',(req, res) => {
-  return res.redirect('/statistiques');
+  res.render('statistiques');
 });
 //Lancer le serveur http et écoute les connection sur le port indiqué
 http.listen(PORT, function(){
@@ -189,13 +189,7 @@ io.on('connection', function(socket){
             socket.emit('message', {pseudo: elem.username, message: elem.content, idMessage: elem.id_message, mind: "no"});
 
         } else {
-            console.log("quizz");
-            //let question = JSON.parse(elem.quizz);
-            //console.log(question);
-            console.log(elem.quizz);
-            //console.log(question.titre);
-            console.log(elem.quizz.titre)
-           // socket.emit('quizz', {question : , mind: "no"});
+           socket.emit('quizz', {question : elem.quizz, mind: "no"});
         }
         actualiserVotes(elem.id_message);
       });
