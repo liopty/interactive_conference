@@ -347,7 +347,7 @@ io.on('connection', function(socket){
           });
         });
 
-      }).then(function(){
+      }).then(function(votesTab){
             console.log("votesTabJusteAvantRetour : "+votesTab);
             return { messages: messagesTab, votes: votesTab }
 
