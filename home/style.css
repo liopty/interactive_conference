@@ -338,16 +338,15 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 
 #messages .mindMsg, #sortedMessages .mindMsg{
   display: inline-block;
-  text-align: justify;
   margin-left: auto;
   margin-right: auto;
   white-space: normal !important;
   word-wrap: break-word;
-  margin-right: 3px;
-  margin-bottom: 30px;
-	clear: both;
-	padding: 7px 13px;
   max-width: 400px;
+	margin-bottom: 30px;
+	clear: both;
+  text-align: justify;
+	padding: 7px 13px;
 	font-size: 12px;
 	border-radius: 15px;
 	line-height: 1.4;
