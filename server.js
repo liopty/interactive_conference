@@ -82,7 +82,8 @@ console.log(res);
 });
 */
 //Routage de base (racine) qui prend le contenu html (et autres fichiers) du repertoire home
-app.use('/', express.static('home'));
+app.use('/', express.static('connexion'));
+app.use('/chat', express.static('home'));
 app.use('/statistiques', express.static('statistiques'));
 
 //Lancer le serveur http et écoute les connection sur le port indiqué
@@ -123,7 +124,7 @@ client.query("SELECT id_room FROM room;", (err, res) => {
 
 
 io.on('connection', function(socket){
-
+  //Permet de créer un nouveau salon et que le créateur rejoigne le salon qu'il a crée
   socket.on('creation_room', function(pseudo) {
     var tempoId;
     var check = false;
@@ -135,8 +136,8 @@ io.on('connection', function(socket){
         tempoId=tempo;
       }
     }
-    roomno.push(tempoId);
-    socket.join(tempoId);
+    roomno.push(tempoId); //Ajoute au tableau de salons le nouvel identifiant
+    socket.join(tempoId); //Ajoute à la liste de la room avec comme identifiant tempoID le client
 
     //insertion du tuple (id_room,anonyme) dans la TABLE room lors de la creation d'une room
     client.query(insertTableRoom, [tempoId, false], (err, res) => {
@@ -159,13 +160,16 @@ io.on('connection', function(socket){
     });
   });
 
+  //Permet de rejoindre un salon déjà existant
   socket.on('join_room', function(id, pseudo) {
     var tempoId = id;
     for(var i = 0; i<roomno.length;i++){
+      //On vérifie si l'identifiant existe dans le tableau de salon
       if(roomno[i]==id){
         console.log("Un utilisateur a rejoint la room: "+id);
         logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: pseudo, msg: 'Un utilisateur a rejoint le salon '+id});
 
+        //Insertion de la personne qui veut rejoindre (user = 0) avec son pseudo et l'id du salon
         client.query(insertTableAppUser, [pseudo, id, 0], (err, res) => {
           if (err) throw err;
           console.log(res);
@@ -259,8 +263,9 @@ io.on('connection', function(socket){
       });
     });
 
+  //Permet de quitter un salon
   socket.on('leave_room', function(idRoom){
-    socket.leave(idRoom);
+    socket.leave(idRoom); //Supprime de la liste du salon le client qui veut quitter le salon
     console.log("Un utilisateur a quitté la room: "+idRoom);
     logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'room', psd: 'server', msg: "Un utilisateur  a quitté le salon "+idRoom});
   });
