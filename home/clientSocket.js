@@ -4,23 +4,26 @@ var ID = 0;
 var socket = io();
 
 //variables temporaires concernant l'utilisateur et la room dans laquelle il se trouve
-var actualRoom = null;
+var actualRoom = null; //id de la room dans laquelle le client se trouve
 var pseudo = null;
-var idIntoDB = null;
+var idIntoDB = null; //id du client dans la bd
 
 //-------------------------------//
 //            ONGLET 1
 //-------------------------------//
 
+//lors de l'appuie sur l'onglet 1 RECENTS
 $(document).on("click", "#activeOnglet1", function() {
+  //on rend visible la boite d'envoie de messages
   document.getElementById('chatBox').style.visibility='visible';
+  //on place le scroll en bas (sur les dernier messages)
   let elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
 });
 
 //--------ROOMS -----------------------//
 
-//Si l'utilisateur n'est pas dans une room actuellement, on lui montre la page pour en rejoindre ou en creer une
+//Si l'utilisateur n'est pas dans une room actuellement, on lui montre la popup pour en rejoindre ou en creer une
 if (actualRoom == null) {
   openPopup();
 }
@@ -33,19 +36,19 @@ function closePopup() {
   $('.cd-popup').removeClass('is-visible');
 }
 
-/*Il se lance lorsque le client appuie sur "nouveau salon" et appel un évènement côté serveur
+/*Se lance lorsque le client appuie sur "nouveau salon" et appel un évènement côté serveur
 pour créer un nouveau salon*/
 $('#creer_room').on('click', function() {
   userConnected();
   socket.emit('creation_room', pseudo); // appel 'création_room' côté serveur
-  socket.on('connectToRoom', function(roomID, userId) {
+  socket.on('connectToRoom', function(roomID, userId) { //attend de reçevoir l'évenement 'connectToRoom'
     //affiche sur le html l'id de la room
     var element = document.getElementById('id01');
     actualRoom = roomID;
     element.innerHTML = "Room n°" + actualRoom;
     document.title = "Room "+actualRoom + ' - ' + "Interactive Conference"; // met la room dans l'onglet
     closePopup();
-    if(idIntoDB === null && actualRoom !== null){
+    if(idIntoDB === null && actualRoom !== null){ //si le client n'a pas d'id mais se trouve dans une room on lui donne l'id généré côté serveur
       idIntoDB = userId;
     }
   });
@@ -66,7 +69,7 @@ $('#rejoindre_room').on('click', function() {
   userConnected();
   if (id != null) {
     socket.emit('join_room', id, pseudo); //appel la fonction 'join_room' du serveur en lui passant l'id et le pseudo
-    socket.on('connectToRoom', function(data,userId) {
+    socket.on('connectToRoom', function(data,userId) { // tres surement de la duplication de code ici
       if(idIntoDB === null && actualRoom === null){
         idIntoDB = userId;
       }
@@ -74,23 +77,23 @@ $('#rejoindre_room').on('click', function() {
       element.innerHTML = "Room n°" + data;
       actualRoom = data;
       document.title = "Room "+actualRoom + ' - ' + "Interactive Conference"; // met la room dans l'onglet
-      closePopup();
+      closePopup(); // On part de la page d'accueil
     });
   }
 });
 
 //évènement click sur le bouton qui appel la fontion 'quitter_room'
 $('#quitter_room').on('click', function() {
-  document.getElementById('messages').innerHTML = "";
+  document.getElementById('messages').innerHTML = ""; // On efface les messages pour le client qui veut quitter le salon
   socket.emit('leave_room', actualRoom);
-  actualRoom = null;
-  idIntoDB = null;
+  actualRoom = null; //On dit que le client n'est plus dans un salon
+  idIntoDB = null; // On dit que le client n''a plus d'identifiant
   var element = document.getElementById('id01');
   element.innerHTML = "Accueil";
   var d = document.getElementById("modal");
   d.className += " mdc-drawer--closing";
   document.title = "Interactive Conference";
-  openPopup();
+  openPopup(); //On revient sur la page d'accueil
 });
 
 //-------------- Quizz -----------------//
@@ -160,6 +163,7 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
   text.appendChild(content);
   text.id = msgID;
 
+  // si le message n est pas le mien et u'il est dans l'onglet 1
   if(mind !== "yes" && onglet === 1){
     //Création du bouton UP avec un text, un id et une class
     var btnUP = document.createElement("BUTTON");
@@ -172,19 +176,20 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
     var textDOWN = document.createTextNode("⚊");//⯆ ✖ ⚊ ⮟ ☹ −
-
     btnDOWN.appendChild(textDOWN);
     btnDOWN.id = buttonDOWNID;
     btnDOWN.className = "vote";
     btnDOWN.style.color = "lightgray";
   }
 
+  // creation balise p avec la valeur du vote en texte
   var para = document.createElement("P");
   var t = document.createTextNode(vote);
   para.appendChild(t);
   para.id = voteID;
   para.style.display = "inline-block";
 
+  //si le message m'appartient on lui donne le visuel approprié
   if (mind == "yes") {
     var divVote = document.createElement('div');
     divVote.appendChild(para);
@@ -192,9 +197,9 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     divVote.id = "zoneDeVoteMind";
     divVote.style.display = "block";
     $(div).append($('<div class="mindMsg">').append(text, divVote));
-  } else {
+  } else { // sinon on lui donne le 2e visuel
     var divVote = document.createElement('div');
-    if (onglet !== 1){
+    if (onglet !== 1){ //si il n'est pas dans l'onglet 1 on n'ajoute pas les boutons de vote
         divVote.append(para);
     } else {
         divVote.append(btnUP, para, btnDOWN);
@@ -241,7 +246,7 @@ $(document).on("click", ".vote", function() {
 
 //------------------ QUIZZ -----------------------//
 
-// Quand on reçoit un message, on l'insère dans la page
+// Quand on reçoit un quizz, on l'insère dans la page
 socket.on('quizz', function(data) {
   insereQuizz(data.question, data.mind);
 })
@@ -314,6 +319,8 @@ function insereQuizz(question, mind) {
 
 var q1 = false, q2 = false, q3 = false, q4 = false;
 
+// Récupération des click sur les bouton dans les quizz
+// A implémenter (compte des votes pour chaque proposition de réponse à la question)
 $(document).on("click", "#choixQuizz1", function() {
   if(!q1){
     document.getElementById('choixQuizz1').style.backgroundColor = "white";
@@ -363,14 +370,21 @@ $(document).on("click", "#choixQuizz4", function() {
 //            ONGLET 2
 //-------------------------------//
 
+//lors du clique sur l'onglet 2 TOP VOTE
 $(document).on("click", "#activeOnglet2", function() {
+  //on vide les message présents dans l'onglet 2
   document.getElementById('sortedMessages').innerHTML = "";
+  //on cache la boite d'envoie de messages
   document.getElementById('chatBox').style.visibility='hidden';
+  //on envoie l'événement au serveur avec id utilisateur et id room en param
   socket.emit("AffichageTopVote", idIntoDB, actualRoom);
+
   let elem = document.getElementById('contentTabs');
   elem.scrollTop = elem.scrollHeight;
 });
 
+//lorsque l'on reçoit l'evénement 'topMessage'
 socket.on('topMessage', function(data) {
+  //on appel la fonction avec les bons parmetres pour afficher le message dans l'onglet 2 top Vote
   insereMessage(data.pseudo, data.message,data.idMessage, data.mind, '#sortedMessages', data.vote, 2);
 });
