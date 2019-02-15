@@ -148,7 +148,9 @@ io.on('connection', function(socket){
     client.query(insertTableRoom, [tempoId, false], (err, res) => { //[tempoId, false] sont les param à ajouter à la place des $ de "insertTableRoom"
       if (err) throw err;
       console.log(res);
-    });
+      logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'BD', psd: 'server', msg: "Insertion du salon d'id :"+tempoId+"dans la table ROOM"});
+
+  });
 
     //log visible sur heroku
     console.log("Creation d'une room ID: "+tempoId);
@@ -183,7 +185,8 @@ io.on('connection', function(socket){
         client.query(insertTableAppUser, [pseudo, id, 0], (err, res) => {
           if (err) throw err;
           console.log(res);
-        });
+          logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'BD', psd: 'server', msg: "Insertion de l'utilisateur : "+pseudo+" dans la room : "+id+" dans la table APPUSER"});
+      });
         socket.join(id);
         client.query("SELECT id_user FROM AppUser ORDER BY id_user DESC LIMIT 1", (err, res) => {
           if (err) throw err;
@@ -240,7 +243,9 @@ io.on('connection', function(socket){
     client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
       if (err) throw err;
       console.log(res);
-      //on récupere l'id du dernier message ajouté à la bd
+      logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'BD', psd: 'server', msg: "Insertion du message : "+message+" d'id : "+id+" par : "+userId+" dans la table MESSAGE"});
+
+    //on récupere l'id du dernier message ajouté à la bd
       client.query("SELECT id_message FROM Message ORDER BY id_message DESC LIMIT 1", (err, res2) => {
         if (err) throw err;
        // console.log(res2.rows);
@@ -264,7 +269,9 @@ io.on('connection', function(socket){
       client.query(insertTableMessage, [null,id,userId,false,null,myJSON],(err, res) => {
         if (err) throw err;
         console.log(res);
-        //on déclenche l'événement 'quizz' pour tout le monde sauf celui qui a initier la fonction
+        logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'BD', psd: 'server', msg: "Insertion du quizz : "+myJSON+" d'id : "+id+" par : "+userId+" dans la table MESSAGE"});
+
+      //on déclenche l'événement 'quizz' pour tout le monde sauf celui qui a initier la fonction
         socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
         //on déclenche l'événement 'quizz' pour celui qui a initier la fonction
         socket.emit('quizz', {question : question, mind: "yes"});
@@ -306,7 +313,9 @@ io.on('connection', function(socket){
             client.query('DELETE FROM vote WHERE id_user=$1 AND id_message=$2;', [userId,btnId[1]], (err, res2) => {
               if (err) throw err;
               console.log(res2);
-            });
+              logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'BD', psd: 'server', msg: "Delete du vote : "+vote+" par : "+userId+" sur le message d'id : "+btnId[1]});
+
+      });
             //si le vote était le même cela signifie que l'utilisateur veut juste annuler son vote
             if(res.rows[0].vote === vote){
               actualiserVotes(btnId[1]); //on exécute la fonction actualiserVotes avec l'id du message en param
@@ -326,7 +335,9 @@ io.on('connection', function(socket){
       client.query(insertTableVote, [userId, btnId[1], vote], (err, res) => {
         if (err) throw err;
         console.log(res);
-        actualiserVotes(btnId[1]);//on exécute la fonction actualiserVotes avec l'id du message en param
+        logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'BD', psd: 'server', msg: "Insertion du vote : "+vote+" par : "+userId+" sur le message d'id : "+btnId[1]+" dans la table VOTE"});
+
+      actualiserVotes(btnId[1]);//on exécute la fonction actualiserVotes avec l'id du message en param
       });
     });
 
