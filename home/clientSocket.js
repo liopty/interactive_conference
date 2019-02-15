@@ -241,7 +241,7 @@ $(document).on("click", ".vote", function() {
 
 //------------------ QUIZZ -----------------------//
 
-// Quand on reçoit un message, on l'insère dans la page
+// Quand on reçoit un quizz, on l'insère dans la page
 socket.on('quizz', function(data) {
   insereQuizz(data.question, data.mind);
 })
@@ -314,6 +314,8 @@ function insereQuizz(question, mind) {
 
 var q1 = false, q2 = false, q3 = false, q4 = false;
 
+// Récupération des click sur les bouton dans les quizz
+// A implémenter (compte des votes pour chaque proposition de réponse à la question)
 $(document).on("click", "#choixQuizz1", function() {
   if(!q1){
     document.getElementById('choixQuizz1').style.backgroundColor = "white";
