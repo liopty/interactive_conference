@@ -3,10 +3,14 @@ html, body {
   height: 100%;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden
-  overscroll-behavior-x: none;
-  overscroll-behavior-y: none;
+  overflow: hidden;
   font: 13px Helvetica, Arial;
+}
+
+body {
+    height: 100vh;
+    background-size: cover;
+    overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -380,8 +384,9 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
 {
   #contentTabs{
     width: 100%;
-    margin-top: 100px;
+    margin-top: 120px;
     padding-bottom: 30px;
+    height: calc(100% - 220px);
   }
   .mdc-tab__text-label{
     display: none;
