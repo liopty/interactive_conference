@@ -38,7 +38,7 @@ pour créer un nouveau salon*/
 $('#creer_room').on('click', function() {
   userConnected();
   socket.emit('creation_room', pseudo); // appel 'création_room' côté serveur
-  socket.on('connectToRoom', function(roomID, userId) {
+  socket.on('connectToRoom', function(roomID, userId) { //attend de reçevoir l'évenement 'connectToRoom'
     //affiche sur le html l'id de la room
     var element = document.getElementById('id01');
     actualRoom = roomID;
@@ -74,23 +74,23 @@ $('#rejoindre_room').on('click', function() {
       element.innerHTML = "Room n°" + data;
       actualRoom = data;
       document.title = "Room "+actualRoom + ' - ' + "Interactive Conference"; // met la room dans l'onglet
-      closePopup();
+      closePopup(); // On part de la page d'accueil
     });
   }
 });
 
 //évènement click sur le bouton qui appel la fontion 'quitter_room'
 $('#quitter_room').on('click', function() {
-  document.getElementById('messages').innerHTML = "";
+  document.getElementById('messages').innerHTML = ""; // On efface les messages pour le client qui veut quitter le salon
   socket.emit('leave_room', actualRoom);
-  actualRoom = null;
-  idIntoDB = null;
+  actualRoom = null; //On dit que le client n'est plus dans un salon
+  idIntoDB = null; // On dit que le client n''a plus d'identifiant
   var element = document.getElementById('id01');
   element.innerHTML = "Accueil";
   var d = document.getElementById("modal");
   d.className += " mdc-drawer--closing";
   document.title = "Interactive Conference";
-  openPopup();
+  openPopup(); //On revient sur la page d'accueil
 });
 
 //-------------- Quizz -----------------//
@@ -241,7 +241,7 @@ $(document).on("click", ".vote", function() {
 
 //------------------ QUIZZ -----------------------//
 
-// Quand on reçoit un message, on l'insère dans la page
+// Quand on reçoit un quizz, on l'insère dans la page
 socket.on('quizz', function(data) {
   insereQuizz(data.question, data.mind);
 })
@@ -314,6 +314,8 @@ function insereQuizz(question, mind) {
 
 var q1 = false, q2 = false, q3 = false, q4 = false;
 
+// Récupération des click sur les bouton dans les quizz
+// A implémenter (compte des votes pour chaque proposition de réponse à la question)
 $(document).on("click", "#choixQuizz1", function() {
   if(!q1){
     document.getElementById('choixQuizz1').style.backgroundColor = "white";
