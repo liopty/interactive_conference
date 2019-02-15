@@ -481,9 +481,14 @@ body,header,#messages li, #contentTabs, #sortedMessages li {
   position: absolute;
   left: 50%;
   top: 55%;
-  padding: 2%;
+  padding: 1.5%;
   transform: translate(-50%, -50%);
   height: calc(100% - 200px);
+}
+
+.mdc-card.wrapper-quizz {
+  min-height: 400px;
+  max-height: 420px;
 }
 
 .wrapper-quizz {
