@@ -212,9 +212,6 @@ io.on('connection', function(socket){
 
   // Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
   socket.on('nouveau_client', function(pseudo) {
-    if(pseudo!=null){
-      pseudo = ent.encode(pseudo);
-    }
     socket.pseudo = pseudo;
     socket.broadcast.emit('nouveau_client', pseudo);
   });
@@ -271,8 +268,6 @@ io.on('connection', function(socket){
         socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
         //on déclenche l'événement 'quizz' pour celui qui a initier la fonction
         socket.emit('quizz', {question : question, mind: "yes"});
-
-
       });
     });
 
@@ -371,9 +366,7 @@ io.on('connection', function(socket){
           messagesTab = res.rows;
           // la promesse est respectée on envoie un objet avec notre tableau de messages et l'id de l'utilisateur
           resolve({messagesTab : messagesTab, idUser : idUser});
-
         });
-
       });
 
       //Lorsque la promesse précédente est respectée
@@ -435,12 +428,10 @@ io.on('connection', function(socket){
 
             });
         });
-      })
+      });
 
-
-
+  //fermeture de socket.on("AffichageTopVote",...)
   });
 
-
-
+  //fermeture de io.on('connection',...)
   });
