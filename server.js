@@ -201,9 +201,6 @@ io.on('connection', function(socket){
 
   // Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes
   socket.on('nouveau_client', function(pseudo) {
-    if(pseudo!=null){
-      pseudo = ent.encode(pseudo);
-    }
     socket.pseudo = pseudo;
     socket.broadcast.emit('nouveau_client', pseudo);
   });
@@ -227,11 +224,6 @@ io.on('connection', function(socket){
     //Ecrit dans la console le msg
     console.log("(Room: "+id+") "+message);
     logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'message', psd: userId, msg: "(Room: "+id+") "+message});
-
-    // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personne
-    // if(message!=null){
-    //   message = ent.encode(message);
-    // }
 
     client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
       if (err) throw err;
