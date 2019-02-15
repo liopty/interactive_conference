@@ -229,9 +229,9 @@ io.on('connection', function(socket){
     logs.push({timestamp: Math.round(new Date().getTime()/1000), flag: 'message', psd: userId, msg: "(Room: "+id+") "+message});
 
     // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personne
-    if(message!=null){
-      message = ent.encode(message);
-    }
+    // if(message!=null){
+    //   message = ent.encode(message);
+    // }
 
     client.query(insertTableMessage, [message,id,userId,false,null,null],(err, res) => {
       if (err) throw err;
