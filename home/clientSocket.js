@@ -169,17 +169,19 @@ function insereMessage(pseudo, message,idMessage, mind, div = '#messages', vote 
     var btnUP = document.createElement("BUTTON");
     var textUP = document.createTextNode("✚");//⯅ ❤ ✚ ➕ ☺ ⮝
     btnUP.appendChild(textUP);
-    btnUP.id = buttonUPID;
-    btnUP.className = "vote upvote";
-    btnUP.style.color = "lightgray";
+    
+    btnUP.id = buttonUPID; //definition de l'identifiant
+    btnUP.className = "vote upvote"; //definition de la class
+    btnUP.style.color = "lightgray"; //definition du style couleur
 
     //Création du bouton DOWN avec un text, un id et une class
     var btnDOWN = document.createElement("BUTTON");
     var textDOWN = document.createTextNode("⚊");//⯆ ✖ ⚊ ⮟ ☹ −
     btnDOWN.appendChild(textDOWN);
-    btnDOWN.id = buttonDOWNID;
-    btnDOWN.className = "vote";
-    btnDOWN.style.color = "lightgray";
+
+    btnDOWN.id = buttonDOWNID; //definition de l'identifiant
+    btnDOWN.className = "vote"; //definition de la class
+    btnDOWN.style.color = "lightgray"; //definition du style couleur
   }
 
   // creation balise p avec la valeur du vote en texte
@@ -226,20 +228,22 @@ socket.on('AfficherVote', function(msgId, voteValue) {
 $(document).on("click", ".vote", function() {
   socket.emit("votes", idIntoDB, this.id);
   var couleur = document.getElementById(this.id).style.color;
+
+  //Restitution de l'identifiant du bouton opposé (- si on appuis sur + / + si on appuis sur -)
   var numMsg = this.id.split("_");
   var idBtnOpp;
-
   if (numMsg[0] == "UP") {
     idBtnOpp = "DOWN_"+numMsg[1];
   } else {
     idBtnOpp = "UP_"+numMsg[1];
   }
 
-  if (couleur == "lightgray") {
-    document.getElementById(this.id).style.color = "orchid";
-    document.getElementById(idBtnOpp).style.color = "lightgray";
+  //Changement de couleur
+  if (couleur == "lightgray") { //Si le bouton est gris
+    document.getElementById(this.id).style.color = "orchid"; //le bouton devient violet (orchid)
+    document.getElementById(idBtnOpp).style.color = "lightgray"; //le bouton opposé devient gris
   } else{
-    document.getElementById(this.id).style.color = "lightgray";
+    document.getElementById(this.id).style.color = "lightgray"; //sinon le bouton redevient gris
   }
   //alert(idIntoDB + " : " + this.id);
 });
