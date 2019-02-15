@@ -249,8 +249,6 @@ io.on('connection', function(socket){
         console.log(res);
         socket.broadcast.to(id).emit('quizz', {question : question, mind: "no"});
         socket.emit('quizz', {question : question, mind: "yes"});
-
-
       });
     });
 
@@ -318,7 +316,6 @@ io.on('connection', function(socket){
   }
 
    socket.on("AffichageTopVote", function(idUser, idRoom){
-
       const promise3 = new Promise(function(resolve, reject) {
         let messagesTab = [];
         client.query("SELECT username, content, id_message, m.id_user, m.quizz  FROM message m, AppUser a WHERE m.id_user = a.id_user AND m.id_room=$1 ORDER by id_message ASC", [idRoom], (err, res) => {
@@ -326,9 +323,7 @@ io.on('connection', function(socket){
           //console.log(res.rows);
           messagesTab = res.rows;
           resolve({messagesTab : messagesTab, idUser : idUser});
-
         });
-
       });
 
       promise3.then(function (data) {
@@ -375,11 +370,5 @@ io.on('connection', function(socket){
             });
         });
       })
-
-
-
   });
-
-
-
   });
