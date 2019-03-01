@@ -85,8 +85,8 @@ $('#rejoindre_room').on('click', function() {
 //évènement click sur le bouton qui appel la fontion 'quitter_room'
 $('#quitter_room').on('click', function() {
   document.getElementById('messages').innerHTML = ""; // On efface les messages pour le client qui veut quitter le salon
-  document.getElementById('activeOnglet1').addClass("mdc-tab--active active");
-  document.getElementById('activeOnglet2').removeClass("mdc-tab--active active");
+  /*document.getElementById('activeOnglet1').addClass("mdc-tab--active active");
+  document.getElementById('activeOnglet2').removeClass("mdc-tab--active active");*/ //modifier ces 2 lignes pour remettre sur le bon onglet qd room quittée
   socket.emit('leave_room', actualRoom);
   actualRoom = null; //On dit que le client n'est plus dans un salon
   idIntoDB = null; // On dit que le client n''a plus d'identifiant
