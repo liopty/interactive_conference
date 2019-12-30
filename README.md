@@ -1,7 +1,8 @@
 # Interactive Conference
 
 Projet IUT Informatique.  
-Projet réalisé sur le modèle du site SpeakUp.
+
+Augmentez la participation dans votre salle de classe en fournissant un salon de discussion ouvert pour les questions anonymes sans avoir besoin de créer un compte. Enrichir la discussion en classe en permettant à tous les élèves d'exprimer leurs opinions et d'exprimer leur accord avec d'autres opinions.
 
 ## Installation :
 
